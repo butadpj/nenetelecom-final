@@ -1,0 +1,17 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+whitenoise = "*"
+mysqlclient = "*"
+djangorestframework = "*"
+Django = "*"
+python-decouple = "*"
+
+[dev-packages]
+uvicorn = "*"
+
+[requires]
+python_version = "3.8"
