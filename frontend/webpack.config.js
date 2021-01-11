@@ -6,7 +6,7 @@ const path = require("path");
 module.exports = {
   entry: "./src/index.js",
   output: {
-    filename: "[names].js",
+    filename: "[name].js",
     path: path.resolve(__dirname, "../public/REACT/js"),
   },
   module: {
@@ -53,7 +53,6 @@ module.exports = {
       },
     ],
   },
-
   //! Uncomment OPTIMIZATION FOR PRODUCTION if you're in production
 
   // OPTIMIZATION FOR PRODUCTION -- START --

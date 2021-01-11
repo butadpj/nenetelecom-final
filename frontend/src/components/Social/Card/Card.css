@@ -1,0 +1,6 @@
+.media-card {
+  width: fit-content;
+  height: fit-content;
+  background: var(--light);
+  padding: 5em 3em;
+}

@@ -1,0 +1,35 @@
+.card {
+  background-color: var(--shadeLight);
+  width: fit-content;
+  border-radius: 20px;
+  text-align: center;
+  padding: 2.5rem 3rem;
+  height: fit-content;
+}
+
+.card .card-titlee {
+  width: 300px;
+  height: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1rem;
+}
+
+.card-titlee p {
+  color: var(--shadeDark);
+  font-weight: bold;
+  font-style: italic;
+  font-size: 34px;
+}
+
+.card .card-text {
+  width: 298px;
+  height: fit-content;
+  margin-top: 2rem;
+}
+
+.card-text p {
+  color: var(--shadeDark);
+  font-size: 24px;
+  font-weight: 600;
+}

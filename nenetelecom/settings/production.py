@@ -1,19 +1,18 @@
-from .dev import *
+from .development import *
 
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['some_domain_name.com']
+ALLOWED_HOSTS = ['localhost', '*']
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'yourusername$databasename',
-        'USER': 'yourusername',
-        'PASSWORD': 'yourpassword',
-        'HOST': 'yourusername.mysql.pythonanywhere-services.com',
-        'PORT': ''
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'yourusername$databasename',
+#         'USER': 'yourusername',
+#         'PASSWORD': 'yourpassword',
+#         'HOST': 'yourusername.mysql.pythonanywhere-services.com',
+#         'PORT': ''
+#     }
+# }
 
-
-STATIC_ROOT = '/home/yourusername/yourprojectname/static'
+STATIC_ROOT = os.path.join(BASE_DIR, "static_files")

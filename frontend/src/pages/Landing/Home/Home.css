@@ -1,0 +1,30 @@
+.home {
+  background-color: var(--dark);
+  height: 100vh;
+  background-image: url("../../../assets/images/BG.webp");
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+.home-logo {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.5);
+}
+
+.home .tagline {
+  position: absolute;
+  left: 50%;
+  top: 70%;
+  transform: translate(-50%, -50%);
+  width: 75%;
+}
+
+.tagline p {
+  text-align: center;
+  color: var(--light);
+  font-size: 0.6em;
+  font-style: italic;
+}
