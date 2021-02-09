@@ -1,0 +1,38 @@
+.cart {
+  width: 100%;
+  position: absolute;
+  top: 7.3rem;
+  padding-bottom: 5em;
+  font-size: 1rem;
+  color: var(--shadeDark);
+}
+
+.cart .back-to-store {
+  padding: 0 0 0.5em 0.5em;
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+}
+
+.back-to-store a {
+  font-size: 1.8em;
+  margin-right: 0.3em;
+  color: var(--shadeDark);
+}
+
+.back-to-store i:hover {
+  color: var(--dark);
+}
+
+.cart-items .helper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--shadeLightDark);
+  font-weight: 600;
+}
+
+.helper span {
+  margin-right: 0.5em;
+  font-size: 0.9em;
+}

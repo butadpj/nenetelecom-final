@@ -1,10 +1,9 @@
 import React, { useRef, useEffect } from "react";
-import "./NavLight.css";
+import "./Navbar.css";
 import NavbarLogic from "./NavbarLogic";
 
 const Navbar = ({ navLogoContainer, navListContainer }) => {
   const navContainer = useRef(null);
-  console.log(navLogoContainer);
 
   const {
     navToggleIcon,
@@ -23,24 +22,34 @@ const Navbar = ({ navLogoContainer, navListContainer }) => {
   //* MOBILE SCREEN - Navbar hover functionality - START
 
   useEffect(() => {
-    navContainer.current.addEventListener("mouseover", () =>
-      navDarkApply(navContainer)
-    );
-    return () => {
-      navContainer.current.removeEventListener("mouseover", () =>
+    if (navContainer.current) {
+      navContainer.current.addEventListener("mouseover", () =>
         navDarkApply(navContainer)
       );
+    }
+
+    return () => {
+      if (navContainer.current) {
+        navContainer.current.removeEventListener("mouseover", () =>
+          navDarkApply(navContainer)
+        );
+      }
     };
   });
 
   useEffect(() => {
-    navContainer.current.addEventListener("mouseleave", () =>
-      navLightApply(navContainer, navListContainer.ref.current)
-    );
-    return () => {
-      navContainer.current.removeEventListener("mouseleave", () =>
+    if (navContainer.current) {
+      navContainer.current.addEventListener("mouseleave", () =>
         navLightApply(navContainer, navListContainer.ref.current)
       );
+    }
+
+    return () => {
+      if (navContainer.current) {
+        navContainer.current.removeEventListener("mouseleave", () =>
+          navLightApply(navContainer, navListContainer.ref.current)
+        );
+      }
     };
   });
 
@@ -56,7 +65,7 @@ const Navbar = ({ navLogoContainer, navListContainer }) => {
   });
 
   useEffect(() => {
-    if (navLogoContainer.ref.current != null) {
+    if (navLogoContainer) {
       handleResize();
       if (isMobile == true) {
         navLogoContainer.ref.current.style.display = "block";
@@ -65,10 +74,9 @@ const Navbar = ({ navLogoContainer, navListContainer }) => {
   });
 
   useEffect(() => {
-    if (navContainer.current != null) {
+    if (navContainer) {
       if (offsetY >= 500 && isMobile == true) {
         navContainer.current.style.position = "fixed";
-        navContainer.current.style.opacity = "100%";
         navContainer.current.classList.add("nav-bottom");
         navContainer.current.classList.remove("nav-fade-in");
 
@@ -77,32 +85,32 @@ const Navbar = ({ navLogoContainer, navListContainer }) => {
         if (isDark == true) {
           if (offsetY <= 5) {
             navContainer.current.style.position = "relative";
-            navContainer.current.style.opacity = "70%";
             navContainer.current.classList.remove("nav-bottom");
             navContainer.current.classList.add("nav-fade-in");
+            navContainer.current.style.height = "13vh";
 
             setIsDark(false);
           }
         }
       } else if (offsetY >= 500 && isMobile == false) {
         navContainer.current.style.position = "fixed";
-        navContainer.current.style.opacity = "100%";
-        if (navLogoContainer.ref.current != null) {
+        if (navLogoContainer) {
           navLogoContainer.ref.current.style.display = "block";
         }
       } else if (offsetY <= 5 && isMobile == false) {
-        navContainer.current.style.position = "absolute";
-        navContainer.current.style.opacity = "70%";
-        if (navLogoContainer.ref.current != null) {
+        navContainer.current.style.position = "relative";
+        if (navLogoContainer) {
           navLogoContainer.ref.current.style.display = "none";
         }
       }
-      if (offsetY > lastY) {
-        //Scroll Down
-        navContainer.current.style.opacity = "70%";
-      } else {
+      if (offsetY < lastY) {
         //Scroll UP
         navContainer.current.style.opacity = "100%";
+        navContainer.current.style.height = "13vh";
+      } else {
+        //Scroll DOWN
+        navContainer.current.style.opacity = "70%";
+        navContainer.current.style.height = "8vh";
       }
     }
   }, [offsetY]);

@@ -12,6 +12,7 @@ import { Link } from "react-router-dom";
 const Store = () => {
   return (
     <section className="store" id="store">
+      <div className="circle"></div>
       <Header icon={storeIcon} text="OUR STORE" />
       <div className="cards">
         <Cards
@@ -32,7 +33,7 @@ const Store = () => {
       </div>
       <div className="storeBtn">
         <Link to="/store">
-          <Button type="button" text="GO TO STORE" />
+          <Button type="button" text="SHOP ONLINE" />
         </Link>
       </div>
     </section>

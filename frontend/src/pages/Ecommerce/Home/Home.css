@@ -1,0 +1,11 @@
+.products {
+  width: 100%;
+  position: absolute;
+  top: 8rem;
+  padding-bottom: 5em;
+}
+
+.products > * {
+  margin-bottom: 2em;
+  box-shadow: var(--box-shadow);
+}

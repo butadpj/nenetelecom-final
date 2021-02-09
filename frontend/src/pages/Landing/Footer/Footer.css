@@ -1,0 +1,55 @@
+.footer {
+  background: var(--dark);
+  color: var(--light);
+  font-size: 5rem;
+  border-top: 1px solid var(--light);
+  zoom: 20%;
+  position: relative;
+  padding-bottom: 10em;
+}
+
+.footer .logo {
+  position: absolute;
+  right: 0%;
+  top: 0%;
+}
+
+.footer main {
+  padding: 0em 1em;
+  display: flex;
+  flex-direction: column;
+}
+
+.footer main > * {
+  margin: 1em 0;
+}
+
+.footer .info-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 60%;
+  white-space: pre;
+}
+
+.info-box h5 {
+  color: var(--shadeLight);
+}
+
+.footer .info-box > * {
+  margin: 0.5em 0;
+}
+
+.footer .copyright {
+  margin: 2em auto;
+  text-align: center;
+  width: 80%;
+}
+
+.copyright u {
+  font-weight: lighter;
+}
+
+.copyright u:hover {
+  cursor: pointer;
+}

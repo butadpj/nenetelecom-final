@@ -12,11 +12,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_cleanup.apps.CleanupConfig',
     'backend.api',
     'backend.store',
     'backend.cart',
     'backend.checkout',
-    'frontend'
+    'frontend',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -47,6 +49,24 @@ TEMPLATES = [
     },
 ]
 
+DATE_INPUT_FORMATS = ['%d-%m-%Y']
+
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'nenetelecom',
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST': 'localhost',
+        'PORT': ''
+    }
+}
+
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'public')
 ]
+
+
+MEDIA_URL = '/images/uploads/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'public/REACT/images/uploads')

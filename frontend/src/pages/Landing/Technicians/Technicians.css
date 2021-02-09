@@ -3,10 +3,7 @@
   width: 100%;
   height: fit-content;
   position: relative;
-  flex-direction: column;
-  align-items: center;
   zoom: 50%;
-  padding: 2em 0;
 }
 
 .technicians header {
@@ -17,9 +14,7 @@
 
 .technicians .cards {
   display: grid;
-  gap: 2em;
-  align-items: start;
-  justify-items: center;
+  gap: 4em;
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
 }
 
@@ -32,6 +27,7 @@
 /* OVERRIDES */
 .technicians .card {
   background: white;
+  border-radius: 0;
 }
 
 .technicians .card .card-icon img {

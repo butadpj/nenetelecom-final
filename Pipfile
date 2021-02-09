@@ -9,9 +9,12 @@ mysqlclient = "*"
 djangorestframework = "*"
 Django = "*"
 python-decouple = "*"
+pillow = "*"
+django-cleanup = "*"
 
 [dev-packages]
 uvicorn = "*"
+django-sslserver = "*"
 
 [requires]
 python_version = "3.8"

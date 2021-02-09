@@ -1,14 +1,15 @@
 .btn {
-  background: var(--shadeGreen);
+  background: var(--shadeLightBlue);
   width: fit-content;
   height: fit-content;
   padding: 1.3em 1em;
-  border-radius: 20px;
+  border-radius: 0.5em;
   border: none;
-  font-size: 35px;
+  font-size: 2rem;
   font-weight: bold;
   color: var(--light);
   text-transform: uppercase;
+  box-shadow: var(--box-shadow);
 }
 
 .btn:focus {
@@ -17,12 +18,7 @@
 
 .btn:hover {
   cursor: pointer;
-  background: var(--shadeLight);
-  border: 0.1em solid var(--shadeGreen);
-  color: var(--shadeGreen);
-  transition: 0.2s ease-out;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5), inset 0 1px rgba(255, 255, 255, 0.3),
-    inset 0 10px rgba(255, 255, 255, 0.2),
-    inset 0 10px 20px rgba(255, 255, 255, 0.25),
-    inset 0 -15px 30px rgba(0, 0, 0, 0.3);
+  background: var(--light);
+  color: var(--shadeBlue);
+  transition: var(--hoverTransition);
 }

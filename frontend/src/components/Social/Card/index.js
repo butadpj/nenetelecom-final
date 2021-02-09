@@ -1,7 +1,7 @@
 import React from "react";
 import Media from "../Media";
 import "./Card.css";
-import gmail from "../../../assets/svgs/envelope-square-solid.svg";
+import phone from "../../../assets/svgs/phone-square-alt-solid.svg";
 import fb from "../../../assets/svgs/facebook-square-brands.svg";
 import twitter from "../../../assets/svgs/twitter-square-brands.svg";
 
@@ -10,25 +10,21 @@ const Card = () => {
     <div className="media-card">
       <main>
         <Media
-          mediaClass="gmail"
-          mediaIconClass="gmail-icon"
-          mediaTextClass="gmail-text"
-          mediaIcon={gmail}
-          mediaText="nenetelecom@gmail.com"
+          mediaClass="phone"
+          mediaIcon={phone}
+          mediaText={`Smart - 0920 679 6099\nGlobe - 0915 117 1197`}
         />
         <Media
           mediaClass="fb"
-          mediaIconClass="fb-icon"
-          mediaTextClass="fb-text"
           mediaIcon={fb}
           mediaText="facebook.com/nenetelecom"
+          isLink={true}
         />
         <Media
           mediaClass="twitter"
-          mediaIconClass="twitter-icon"
-          mediaTextClass="twitter-text"
           mediaIcon={twitter}
           mediaText="twitter.com/nenetelecom"
+          isLink={true}
         />
       </main>
     </div>

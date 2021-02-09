@@ -1,30 +1,3 @@
 body {
   background: var(--E-bg);
 }
-
-.ecommerce {
-  height: fit-content;
-}
-
-.ecommerce .nav-top {
-  background: var(--light);
-  width: 100%;
-  height: auto;
-  z-index: 10;
-  transition: 0.5s ease-in-out;
-  position: fixed;
-  box-shadow: 0px 10px 20px #00000033;
-  color: var(--dark);
-}
-
-.nav-top .banner {
-  height: auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 0.4em 0 0.4em;
-}
-
-.banner .banner-logo {
-  height: 68px;
-}

@@ -1,0 +1,18 @@
+.banner-profile {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: fit-content;
+  height: auto;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.banner-profile > * {
+  padding: 0 0.4em;
+}
+
+.banner-profile img {
+  width: 1.8rem;
+  border-radius: 50%;
+}

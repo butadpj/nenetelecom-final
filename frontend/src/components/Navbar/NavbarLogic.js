@@ -7,7 +7,7 @@ const NavbarLogic = () => {
   const [showSideNav, setShowSideNav] = useState(false);
   const [navToggleIcon, setNavToggleIcon] = useState(bars);
 
-  const [lastY, setLastY] = useState(0);
+  const [lastY, setLastY] = useState(window.pageYOffset);
   const [offsetY, setOffsetY] = useState(window.pageYOffset);
 
   const [width, setWidth] = useState(window.innerWidth);
@@ -35,9 +35,11 @@ const NavbarLogic = () => {
   };
   const navDarkApply = (navContainer) => {
     navContainer.current.style.opacity = "100%";
+    navContainer.current.style.height = "13vh";
   };
   const navLightApply = (navContainer, navListContainer) => {
     navContainer.current.style.opacity = "70%";
+    navContainer.current.style.height = "8vh";
 
     if (navListContainer != null) {
       navListContainer.classList.remove("show");

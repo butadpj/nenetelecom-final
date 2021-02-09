@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import "./Home.css";
 import logo from "../../../assets/images/full-word-light.webp";
 
@@ -12,6 +12,14 @@ const Home = () => {
   const { scrollToTop } = NavbarLogic();
   const navLogoContainer = useRef(null);
   const navListContainer = useRef(null);
+
+  const [width, setWidth] = useState(window.innerWidth);
+  const [height, setHeight] = useState(window.innerHeight);
+
+  window.addEventListener("resize", () => {
+    setWidth(window.innerWidth);
+    setHeight(window.innerHeight);
+  });
 
   return (
     <section className="home" id="home">
@@ -28,23 +36,23 @@ const Home = () => {
               to="store"
               spy={true}
               smooth={true}
-              offset={-200}
+              offset={-106.34}
               duration={500}
               className="list-item"
             >
-              OUR STORE
+              SHOP ONLINE
             </Link>
 
             <Link
               activeClass="active"
-              to="technicians"
+              to="visit"
               spy={true}
               smooth={true}
-              offset={-200}
+              offset={-106.34}
               duration={500}
               className="list-item"
             >
-              OUR TECHNICIANS
+              VISIT US
             </Link>
 
             <Link
@@ -52,7 +60,7 @@ const Home = () => {
               to="about"
               spy={true}
               smooth={true}
-              offset={0}
+              offset={-106.34}
               duration={500}
               className="list-item"
             >
@@ -64,7 +72,7 @@ const Home = () => {
               to="contact"
               spy={true}
               smooth={true}
-              offset={0}
+              offset={-106.34}
               duration={500}
               className="list-item"
             >
@@ -82,7 +90,7 @@ const Home = () => {
       </div> */}
 
       <div className="tagline">
-        <p>Authorized Resellers & Professional Technicians. All in one place</p>
+        <p>A tradition of trust since 2010.</p>
       </div>
     </section>
   );

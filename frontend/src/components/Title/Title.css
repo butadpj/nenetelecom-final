@@ -1,5 +1,6 @@
 .section-title h1 {
-  font-size: 7.5rem;
+  font-size: 1.3em;
+
   color: var(--dark);
   text-shadow: -0.1em 0.2em var(--darkShadow);
 }
