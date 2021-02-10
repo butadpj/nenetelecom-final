@@ -1,15 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext } from "react";
 
 import GetCurrentCustomer from "../../../hooks/GetCurrentCustomer";
 import { getOrdersData } from "../../../hooks/getOrdersData";
 import { getOrderProductData } from "../../../hooks/getOrderProductData";
 import { getProductsData } from "../../../hooks/getProductsData";
 
+import { CartItemContext } from "../../../context/CartItemContext";
+
 const CartItems = () => {
   const { djangoCurrentCustomerId } = GetCurrentCustomer();
   const { ordersData } = getOrdersData();
   const { orderProductData } = getOrderProductData();
   const { productsData } = getProductsData();
+
+  const [state] = useContext(CartItemContext);
 
   let customerOrders = [];
 
@@ -29,21 +33,7 @@ const CartItems = () => {
     });
   });
 
-  let customerProductsData = [];
-
-  productsData.forEach((data) => {
-    customerProductsData = customerOrderProduct.filter(
-      (customerProduct) => data.id === customerProduct.product
-    );
-  });
-
-  customerProductsData.forEach((product) => {
-    customerOrderProduct.forEach((data) => {
-      if (product.id === data.product) {
-        product.quantity = data.quantity;
-      }
-    });
-  });
+  let customerProductsData = state.cartProducts;
 
   return (
     <div className="cart-items">

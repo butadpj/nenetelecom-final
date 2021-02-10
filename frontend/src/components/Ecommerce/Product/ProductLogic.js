@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { getProductsData } from "../../../hooks/getProductsData";
 import { getProductImageData } from "../../../hooks/getProductImageData";
+import { CartItemContext } from "../../../context/CartItemContext";
 
 const ProductLogic = () => {
   const { productsData } = getProductsData();
@@ -8,6 +9,8 @@ const ProductLogic = () => {
   const [showDetails, setShowDetails] = useState(false);
   const [detailData, setDetailData] = useState();
   const [showAddProductModal, setShowAddProductModal] = useState(false);
+
+  const [state, dispatch] = useContext(CartItemContext);
 
   let products = productsData.map((product) => {
     let imageArray = [];
@@ -44,9 +47,52 @@ const ProductLogic = () => {
     setDetailData(product);
   };
 
-  const handleShowAddProductModal = (id, action) => {
-    setShowAddProductModal(true);
-    console.log(id, action);
+  const handleShowAddProductModal = (selectedProduct) => {
+    let cartItems = state.cartProducts;
+
+    if (cart[selectedProduct] == undefined) {
+      cart[selectedProduct] = { quantity: 1 };
+    } else {
+      cart[selectedProduct]["quantity"] += 1;
+    }
+    document.cookie = "cart=" + JSON.stringify(cart) + ";domain=;path=/";
+    console.log(cart[selectedProduct]);
+
+    let newProduct;
+    products.forEach((product) => {
+      if (product.id == selectedProduct) {
+        newProduct = product;
+      }
+    });
+
+    if (cartItems.length == 0) {
+      console.log("add");
+      newProduct.quantity = 1;
+      dispatch({
+        type: "ADD_ITEM",
+        payload: newProduct,
+      });
+    } else {
+      const existingProduct = state.cartProducts.filter(
+        (item) => item.id === selectedProduct
+      );
+      if (existingProduct.length > 0) {
+        console.log("update");
+        dispatch({
+          type: "UPDATE_ITEM",
+          payload: {
+            id: selectedProduct,
+          },
+        });
+      } else {
+        console.log("add");
+        newProduct.quantity = 1;
+        dispatch({
+          type: "ADD_ITEM",
+          payload: newProduct,
+        });
+      }
+    }
   };
 
   const handleCloseAddProductModal = () => {

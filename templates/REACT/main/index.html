@@ -6,7 +6,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/js/all.min.js"
+        integrity="sha512-UwcC/iaz5ziHX7V6LjSKaXgCuRRqbTp1QHpbOJ4l1nw2/boCfZ2KlFIqBUA/uRVF0onbREnY9do8rM/uT/ilqw=="
+        crossorigin="anonymous"></script>
     <title>Nenetelecom</title>
 </head>
 
@@ -19,7 +21,7 @@
     <!-- Bundled javascript will load here -->
     <script src="{% static 'REACT/js/main.js' %}"></script>
     <script>
-        function getToken(name) {
+        function getCookie(name) {
             let cookieValue = null;
             if (document.cookie && document.cookie !== '') {
                 const cookies = document.cookie.split(';');
@@ -34,10 +36,19 @@
             }
             return cookieValue;
         }
-        const csrftoken = getToken('csrftoken');
+        const csrftoken = getCookie('csrftoken');
         let currentUser = "{{request.user}}"
         let currentCustomer = "{{request.user.customer.first_name}}"
         let currentCustomerId = "{{request.user.customer.id}}"
+
+        //Creating cookie
+        let cart = JSON.parse(getCookie('cart'))
+
+        if (cart == undefined) {
+            cart = {}
+            document.cookie = 'cart=' + JSON.stringify(cart) + ';domain=;path=/'
+        }
+        document.cookie = 'cart=' + JSON.stringify(cart) + ';domain=;path=/'
     </script>
 </body>
 
