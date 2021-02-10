@@ -12,7 +12,7 @@ import closeIcon from "../../../assets/svgs/close.svg";
 const Product = () => {
   const {
     handleShow,
-    finalProducts,
+    products,
     showDetails,
     handleClose,
     detailData,
@@ -27,7 +27,7 @@ const Product = () => {
 
   return (
     <>
-      {finalProducts.map((product) => {
+      {products.map((product) => {
         const {
           id,
           image,

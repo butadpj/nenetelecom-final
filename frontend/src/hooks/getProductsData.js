@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import { useFetch } from "./useFetch";
 
 let productsUrl = "/api/products/";

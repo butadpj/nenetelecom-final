@@ -1,22 +1,33 @@
-import React, { useEffect } from "react";
+import React, { useState, useReducer } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import "./Ecommerce.css";
-import Home from "./Home";
-import Cart from "./Cart";
+import { CartItemContextProvider } from "../../context/CartItemContext";
 import Navtop from "../../components/Ecommerce/Navbars/Navtop";
 
+import Home from "../../pages/Ecommerce/Home";
+import Cart from "../../pages/Ecommerce/Cart";
 const Ecommerce = () => {
   return (
     <Router>
-      <main className="ecommerce">
-        <Navtop url="/store/home" />
-        <Switch>
-          <Route path="/store/" component={Home} exact />
-          <Route path="/store/home" component={Home} exact />
-          <Route path="/store/cart" component={Cart} />
-        </Switch>
-      </main>
+      <CartItemContextProvider>
+        <main className="ecommerce">
+          <Navtop url="/store/home" />
+          <Switch>
+            <Route path="/store" exact>
+              <Home />
+            </Route>
+
+            <Route path="/store/home" exact>
+              <Home />
+            </Route>
+
+            <Route path="/store/cart/">
+              <Cart />
+            </Route>
+          </Switch>
+        </main>
+      </CartItemContextProvider>
     </Router>
   );
 };

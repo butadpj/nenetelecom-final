@@ -11,32 +11,24 @@ const CartItems = () => {
   const { orderProductData } = getOrderProductData();
   const { productsData } = getProductsData();
 
-  let customerOrders = [];
-
-  ordersData.forEach((data) => {
-    if (data.customer === djangoCurrentCustomerId) {
-      customerOrders.push(data.transaction_id);
-    }
-  });
+  let customerOrders = ordersData.filter(
+    (data) => data.customer === djangoCurrentCustomerId
+  );
+  console.log(customerOrders);
 
   let customerOrderProduct = [];
-
   orderProductData.forEach((data) => {
-    customerOrders.forEach((order) => {
-      if (data.order === order) {
-        customerOrderProduct.push(data);
-      }
-    });
+    customerOrderProduct = customerOrders.filter(
+      (order) => data.order === order.transaction_id
+    );
   });
 
   let customerProductsData = [];
 
   productsData.forEach((data) => {
-    customerOrderProduct.forEach((customerProduct) => {
-      if (data.id === customerProduct.product) {
-        customerProductsData.push(data);
-      }
-    });
+    customerProductsData = customerOrderProduct.filter(
+      (customerProduct) => data.id === customerProduct.product
+    );
   });
 
   customerProductsData.forEach((product) => {

@@ -17,7 +17,6 @@ const Cart = () => {
         </div>
         <hr />
         <CartItems />
-        {/* Link index that is active - cart */}
       </section>
       <Navbottom link={2} />
     </>
