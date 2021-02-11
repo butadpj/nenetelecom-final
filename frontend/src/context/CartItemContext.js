@@ -29,13 +29,11 @@ export const CartItemContextProvider = (props) => {
   let cartItems = [];
   for (var key of Object.keys(cookieCart)) {
     let item = {};
-    console.log(key + " -> " + cookieCart[key].quantity);
     item["product"] = key;
     item["quantity"] = cookieCart[key].quantity;
     cartItems.push(item);
   }
 
-  console.log(cartItems);
   state.cartProducts = cartItems;
   state.totalCartItem = get_total_items(state.cartProducts);
 
