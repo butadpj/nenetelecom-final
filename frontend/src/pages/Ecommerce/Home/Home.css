@@ -5,7 +5,10 @@
   padding-bottom: 5em;
 }
 
-.ecommerce .products > * {
-  margin-bottom: 2em;
+.ecommerce .products .product {
+  display: block;
+  max-width: 375px;
+
+  margin: 0 auto 2em auto;
   box-shadow: var(--box-shadow);
 }

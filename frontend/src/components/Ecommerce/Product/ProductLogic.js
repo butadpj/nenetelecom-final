@@ -66,7 +66,6 @@ const ProductLogic = () => {
     });
 
     if (cartItems.length == 0) {
-      console.log("add");
       newProduct.quantity = 1;
       dispatch({
         type: "ADD_ITEM",
@@ -77,7 +76,6 @@ const ProductLogic = () => {
         (item) => item.id === selectedProduct
       );
       if (existingProduct.length > 0) {
-        console.log("update");
         dispatch({
           type: "UPDATE_ITEM",
           payload: {
@@ -85,7 +83,6 @@ const ProductLogic = () => {
           },
         });
       } else {
-        console.log("add");
         newProduct.quantity = 1;
         dispatch({
           type: "ADD_ITEM",
