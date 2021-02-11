@@ -10,14 +10,14 @@ export const reducer = (state, action) => {
   if (action.type === "UPDATE_ITEM") {
     let updatedProduct;
     state.cartProducts.forEach((item) => {
-      if (item.id === action.payload.id) {
+      if (item.product === action.payload.id) {
         updatedProduct = item;
         updatedProduct.quantity += 1;
       }
     });
 
     const withoutExistingProduct = state.cartProducts.filter(
-      (item) => item.id !== action.payload.id
+      (item) => item.product !== action.payload.id
     );
 
     return {

@@ -34,6 +34,7 @@ const ProductLogic = () => {
   };
 
   const handleShowAddProductModal = (selectedProduct) => {
+    setShowAddProductModal(true);
     // //Bake a cookie
     // if (cart[selectedProduct] == undefined) {
     //   cart[selectedProduct] = { quantity: 1 };
@@ -42,10 +43,10 @@ const ProductLogic = () => {
     // }
     // document.cookie = "cart=" + JSON.stringify(cart) + ";domain=;path=/";
 
-    let newProduct;
+    let newProduct = [];
     products.forEach((product) => {
       if (product.id == selectedProduct) {
-        newProduct = product;
+        newProduct.product = product.id;
       }
     });
 
@@ -58,8 +59,8 @@ const ProductLogic = () => {
         payload: newProduct,
       });
     } else {
-      const existingProduct = state.cartProducts.filter(
-        (item) => item.id === selectedProduct
+      const existingProduct = cartItems.filter(
+        (item) => item.product === selectedProduct
       );
       if (existingProduct.length > 0) {
         dispatch({

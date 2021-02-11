@@ -8,11 +8,13 @@ const CartItems = () => {
   const { products } = getProducts();
 
   let cartItemData = state.cartProducts;
+  let cartItems = [];
 
   cartItemData.forEach((item) => {
     products.forEach((product) => {
-      if (item.product === product.id) {
+      if (product.id === item.product) {
         product.quantity = item.quantity;
+        cartItems.push(product);
       }
     });
   });
@@ -23,8 +25,8 @@ const CartItems = () => {
         <span>Select a product to checkout</span>
         <i className="fas fa-check-circle"></i>
       </div>
-      {products.map((cartProduct) => {
-        const { id, name, brand, price, quantity } = cartProduct;
+      {cartItems.map((item) => {
+        const { id, name, brand, price, quantity } = item;
 
         return (
           <div className="item" key={id}>

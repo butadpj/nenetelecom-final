@@ -14,8 +14,8 @@ export const CartItemContextProvider = (props) => {
   const [state, dispatch] = useReducer(reducer, initalState);
   const { customerOrderProduct, total_items } = getCustomerOrderProduct();
 
-  state.cartProducts = customerOrderProduct;
-  state.totalCartItem = total_items;
+  // state.cartProducts = customerOrderProduct;
+  // state.totalCartItem = total_items;
 
   return (
     <CartItemContext.Provider value={[state, dispatch]}>
