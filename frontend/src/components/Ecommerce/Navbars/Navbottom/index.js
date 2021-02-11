@@ -8,15 +8,6 @@ const Navbottom = ({ link }) => {
   const [state] = useContext(CartItemContext);
   const links = useRef(null);
 
-  const get_total_item = (cart) => {
-    let sum = 0;
-    cart.forEach((item) => {
-      sum += item.quantity;
-    });
-    return sum;
-  };
-
-  state.totalCartItem = get_total_item(state.cartProducts);
   let cartCount = state.totalCartItem;
 
   useEffect(() => {

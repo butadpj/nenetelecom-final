@@ -1,39 +1,21 @@
 import React, { useContext } from "react";
 
-import GetCurrentCustomer from "../../../hooks/GetCurrentCustomer";
-import { getOrdersData } from "../../../hooks/getOrdersData";
-import { getOrderProductData } from "../../../hooks/getOrderProductData";
-import { getProductsData } from "../../../hooks/getProductsData";
-
 import { CartItemContext } from "../../../context/CartItemContext";
+import { getProducts } from "../../../hooks/query/getProducts";
 
 const CartItems = () => {
-  const { djangoCurrentCustomerId } = GetCurrentCustomer();
-  const { ordersData } = getOrdersData();
-  const { orderProductData } = getOrderProductData();
-  const { productsData } = getProductsData();
-
   const [state] = useContext(CartItemContext);
+  const { products } = getProducts();
 
-  let customerOrders = [];
+  let cartItemData = state.cartProducts;
 
-  ordersData.forEach((data) => {
-    if (data.customer === djangoCurrentCustomerId) {
-      customerOrders.push(data.transaction_id);
-    }
-  });
-
-  let customerOrderProduct = [];
-
-  orderProductData.forEach((data) => {
-    customerOrders.forEach((order) => {
-      if (data.order === order) {
-        customerOrderProduct.push(data);
+  cartItemData.forEach((item) => {
+    products.forEach((product) => {
+      if (item.product === product.id) {
+        product.quantity = item.quantity;
       }
     });
   });
-
-  let customerProductsData = state.cartProducts;
 
   return (
     <div className="cart-items">
@@ -41,7 +23,7 @@ const CartItems = () => {
         <span>Select a product to checkout</span>
         <i className="fas fa-check-circle"></i>
       </div>
-      {customerProductsData.map((cartProduct) => {
+      {products.map((cartProduct) => {
         const { id, name, brand, price, quantity } = cartProduct;
 
         return (

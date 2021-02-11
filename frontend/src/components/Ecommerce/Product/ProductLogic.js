@@ -1,28 +1,14 @@
 import React, { useContext, useState, useEffect } from "react";
-import { getProductsData } from "../../../hooks/getProductsData";
-import { getProductImageData } from "../../../hooks/getProductImageData";
 import { CartItemContext } from "../../../context/CartItemContext";
+import { getProducts } from "../../../hooks/query/getProducts";
 
 const ProductLogic = () => {
-  const { productsData } = getProductsData();
-  const { productImageData } = getProductImageData();
   const [showDetails, setShowDetails] = useState(false);
   const [detailData, setDetailData] = useState();
   const [showAddProductModal, setShowAddProductModal] = useState(false);
 
   const [state, dispatch] = useContext(CartItemContext);
-
-  let products = productsData.map((product) => {
-    let imageArray = [];
-
-    productImageData.forEach((image) => {
-      if (image.product == product.id) {
-        imageArray.push(image.image);
-      }
-    });
-    product.image = imageArray;
-    return product;
-  });
+  const { products } = getProducts();
 
   const handleShow = (id, name, price, brand, image, description) => {
     setShowDetails(true);
@@ -48,15 +34,13 @@ const ProductLogic = () => {
   };
 
   const handleShowAddProductModal = (selectedProduct) => {
-    let cartItems = state.cartProducts;
-
-    if (cart[selectedProduct] == undefined) {
-      cart[selectedProduct] = { quantity: 1 };
-    } else {
-      cart[selectedProduct]["quantity"] += 1;
-    }
-    document.cookie = "cart=" + JSON.stringify(cart) + ";domain=;path=/";
-    console.log(cart[selectedProduct]);
+    // //Bake a cookie
+    // if (cart[selectedProduct] == undefined) {
+    //   cart[selectedProduct] = { quantity: 1 };
+    // } else {
+    //   cart[selectedProduct]["quantity"] += 1;
+    // }
+    // document.cookie = "cart=" + JSON.stringify(cart) + ";domain=;path=/";
 
     let newProduct;
     products.forEach((product) => {
@@ -64,6 +48,8 @@ const ProductLogic = () => {
         newProduct = product;
       }
     });
+
+    let cartItems = state.cartProducts;
 
     if (cartItems.length == 0) {
       newProduct.quantity = 1;
