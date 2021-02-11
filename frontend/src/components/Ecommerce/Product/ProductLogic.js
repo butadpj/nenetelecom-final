@@ -36,27 +36,27 @@ const ProductLogic = () => {
   const handleShowAddProductModal = (selectedProduct) => {
     setShowAddProductModal(true);
     // //Bake a cookie
-    // if (cart[selectedProduct] == undefined) {
-    //   cart[selectedProduct] = { quantity: 1 };
-    // } else {
-    //   cart[selectedProduct]["quantity"] += 1;
-    // }
-    // document.cookie = "cart=" + JSON.stringify(cart) + ";domain=;path=/";
+    if (cart[selectedProduct] == undefined) {
+      cart[selectedProduct] = { quantity: 1 };
+    } else {
+      cart[selectedProduct]["quantity"] += 1;
+    }
+    document.cookie = "cart=" + JSON.stringify(cart) + ";domain=;path=/";
 
-    let newProduct = [];
+    let newCartItem = [];
     products.forEach((product) => {
       if (product.id == selectedProduct) {
-        newProduct.product = product.id;
+        newCartItem.product = product.id;
       }
     });
 
     let cartItems = state.cartProducts;
 
     if (cartItems.length == 0) {
-      newProduct.quantity = 1;
+      newCartItem.quantity = 1;
       dispatch({
         type: "ADD_ITEM",
-        payload: newProduct,
+        payload: newCartItem,
       });
     } else {
       const existingProduct = cartItems.filter(
@@ -70,10 +70,10 @@ const ProductLogic = () => {
           },
         });
       } else {
-        newProduct.quantity = 1;
+        newCartItem.quantity = 1;
         dispatch({
           type: "ADD_ITEM",
-          payload: newProduct,
+          payload: newCartItem,
         });
       }
     }

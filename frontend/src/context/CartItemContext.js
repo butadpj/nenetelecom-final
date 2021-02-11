@@ -1,6 +1,7 @@
 import React, { useReducer, createContext } from "react";
 import { reducer } from "../hooks/reducer";
 import { getCustomerOrderProduct } from "../hooks/query/getCustomerOrderProduct";
+import { getCookieCart } from "../hooks/data/getCookieCart";
 
 export const CartItemContext = createContext();
 
@@ -13,9 +14,30 @@ const initalState = {
 export const CartItemContextProvider = (props) => {
   const [state, dispatch] = useReducer(reducer, initalState);
   const { customerOrderProduct, total_items } = getCustomerOrderProduct();
+  const { cookieCart } = getCookieCart();
 
-  // state.cartProducts = customerOrderProduct;
-  // state.totalCartItem = total_items;
+  const get_total_items = (obj) => {
+    let sum = 0;
+    for (let el in obj) {
+      if (obj.hasOwnProperty(el)) {
+        sum += parseFloat(obj[el].quantity);
+      }
+    }
+    return sum;
+  };
+
+  let cartItems = [];
+  for (var key of Object.keys(cookieCart)) {
+    let item = {};
+    console.log(key + " -> " + cookieCart[key].quantity);
+    item["product"] = key;
+    item["quantity"] = cookieCart[key].quantity;
+    cartItems.push(item);
+  }
+
+  console.log(cartItems);
+  state.cartProducts = cartItems;
+  state.totalCartItem = get_total_items(state.cartProducts);
 
   return (
     <CartItemContext.Provider value={[state, dispatch]}>
