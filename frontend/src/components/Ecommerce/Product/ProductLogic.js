@@ -1,14 +1,17 @@
 import React, { useContext, useState, useEffect } from "react";
 import { CartItemContext } from "../../../context/CartItemContext";
 import { getProducts } from "../../../hooks/query/getProducts";
+import GetCurrentCustomer from "../../../hooks/GetCurrentCustomer";
 
 const ProductLogic = () => {
   const [showDetails, setShowDetails] = useState(false);
   const [detailData, setDetailData] = useState();
   const [showAddProductModal, setShowAddProductModal] = useState(false);
-
   const [state, dispatch] = useContext(CartItemContext);
+  const { djangoCurrentUser } = GetCurrentCustomer();
   const { products } = getProducts();
+
+  const cartItems = state.cartProducts;
 
   const handleShow = (id, name, price, brand, image, description) => {
     setShowDetails(true);
@@ -35,47 +38,49 @@ const ProductLogic = () => {
 
   const handleShowAddProductModal = (selectedProduct) => {
     setShowAddProductModal(true);
-    // //Bake a cookie
-    if (cart[selectedProduct] == undefined) {
-      cart[selectedProduct] = { quantity: 1 };
-    } else {
-      cart[selectedProduct]["quantity"] += 1;
-    }
-    document.cookie = "cart=" + JSON.stringify(cart) + ";domain=;path=/";
 
-    let newCartItem = [];
-    products.forEach((product) => {
-      if (product.id == selectedProduct) {
-        newCartItem.product = product.id;
-      }
-    });
-
-    let cartItems = state.cartProducts;
-
-    if (cartItems.length == 0) {
-      newCartItem.quantity = 1;
-      dispatch({
-        type: "ADD_ITEM",
-        payload: newCartItem,
-      });
-    } else {
-      const existingProduct = cartItems.filter(
-        (item) => item.product === selectedProduct
-      );
-      if (existingProduct.length > 0) {
-        dispatch({
-          type: "UPDATE_ITEM",
-          payload: {
-            id: selectedProduct,
-          },
-        });
+    if (djangoCurrentUser === "AnonymousUser") {
+      if (cart[selectedProduct] == undefined) {
+        cart[selectedProduct] = { quantity: 1 };
       } else {
+        cart[selectedProduct]["quantity"] += 1;
+      }
+      document.cookie = "cart=" + JSON.stringify(cart) + ";domain=;path=/";
+
+      let newCartItem = [];
+      products.forEach((product) => {
+        if (product.id == selectedProduct) {
+          newCartItem.product = product.id;
+        }
+      });
+
+      if (cartItems.length == 0) {
         newCartItem.quantity = 1;
         dispatch({
           type: "ADD_ITEM",
           payload: newCartItem,
         });
+      } else {
+        const existingProduct = cartItems.filter(
+          (item) => item.product === selectedProduct
+        );
+        if (existingProduct.length > 0) {
+          dispatch({
+            type: "UPDATE_ITEM",
+            payload: {
+              id: selectedProduct,
+            },
+          });
+        } else {
+          newCartItem.quantity = 1;
+          dispatch({
+            type: "ADD_ITEM",
+            payload: newCartItem,
+          });
+        }
       }
+    } else {
+      console.log("FETCH ORDER");
     }
   };
 

@@ -1,4 +1,3 @@
-import React from "react";
 import { getProductsData } from "../data/getProductsData";
 import { getProductImageData } from "../data/getProductImageData";
 

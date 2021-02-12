@@ -4,7 +4,6 @@ export const reducer = (state, action) => {
     return {
       ...state,
       cartProducts: newCartProducts,
-      showModal: true,
     };
   }
   if (action.type === "UPDATE_ITEM") {
@@ -23,7 +22,6 @@ export const reducer = (state, action) => {
     return {
       ...state,
       cartProducts: [...withoutExistingProduct, updatedProduct],
-      showModal: true,
     };
   }
   throw new Error("You didn't catch some action");
