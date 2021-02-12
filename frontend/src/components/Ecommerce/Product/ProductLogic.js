@@ -3,6 +3,7 @@ import { CartItemContext } from "../../../context/CartItemContext";
 import { getProducts } from "../../../hooks/query/getProducts";
 import { getCustomerOrderProduct } from "../../../hooks/query/getCustomerOrderProduct";
 import GetCurrentCustomer from "../../../hooks/GetCurrentCustomer";
+import { updateCart } from "../../../hooks/updateCart";
 
 const ProductLogic = () => {
   const [showDetails, setShowDetails] = useState(false);
@@ -12,6 +13,7 @@ const ProductLogic = () => {
   const { djangoCurrentUser } = GetCurrentCustomer();
   const { customerOrderProduct } = getCustomerOrderProduct();
   const { products } = getProducts();
+  const { update } = updateCart();
 
   const cartItems = state.cartProducts;
 
@@ -87,16 +89,7 @@ const ProductLogic = () => {
   };
 
   const processAuthenticatedCart = (selectedProduct) => {
-    customerOrderProduct.forEach((op) => {
-      //* Bake cookie START
-      if (cart[selectedProduct] == undefined) {
-        cart[selectedProduct] = { quantity: 1 };
-      } else {
-        cart[selectedProduct]["quantity"] += 1;
-      }
-      document.cookie = "cart=" + JSON.stringify(cart) + ";domain=;path=/";
-      //! Bake cookie END
-    });
+    update();
 
     let existingProduct = customerOrderProduct.filter(
       (data) => data.product === selectedProduct
@@ -120,6 +113,7 @@ const ProductLogic = () => {
       })
         .then((res) => res.json())
         .then((data) => {
+          console.log(data);
           dispatch({
             type: "UPDATE_ITEM_AU",
             payload: {
@@ -145,6 +139,7 @@ const ProductLogic = () => {
 
   const handleCloseAddProductModal = () => {
     setShowAddProductModal(false);
+    update();
   };
 
   useEffect(() => {

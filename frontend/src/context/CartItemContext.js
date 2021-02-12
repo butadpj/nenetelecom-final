@@ -17,8 +17,6 @@ const CartItemContextProvider = (props) => {
   const { customerOrderProduct, total_items } = getCustomerOrderProduct();
   const { cookieCart } = getCookieCart();
 
-  console.log(cookieCart);
-
   const get_total_items = (obj) => {
     let sum = 0;
     for (let el in obj) {
@@ -35,14 +33,7 @@ const CartItemContextProvider = (props) => {
     state.totalCartItem = get_total_items(state.cartProducts);
   } else {
     //If logged in
-    let cartItems = [];
-    customerOrderProduct.forEach((op) => {
-      let item = {};
-      item["product"] = op.product;
-      item["quantity"] = op.quantity;
-      cartItems.push(item);
-    });
-    state.cartProducts = cartItems;
+
     state.totalCartItem = get_total_items(state.cartProducts);
   }
 

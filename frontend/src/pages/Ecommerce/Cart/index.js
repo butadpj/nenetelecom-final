@@ -6,30 +6,34 @@ import Navbottom from "../../../components/Ecommerce/Navbars/Navbottom";
 import CartItems from "../../../components/Ecommerce/CartItems";
 import Button from "../../../components/Button";
 import { useFetch } from "../../../hooks/useFetch";
+import { updateCart } from "../../../hooks/updateCart";
 
 const Cart = () => {
-  const { data, setData } = useFetch("/api/customers/");
+  const { update } = updateCart();
+  update();
+
+  // const { data, setData } = useFetch("/api/customers/");
 
   const createCustomer = () => {
-    fetch("/api/customers/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "X-CSRFToken": csrftoken,
-      },
-      body: JSON.stringify({
-        mobile_number: "09507867559",
-        address: "dsadssada",
-        first_name: "Paul",
-        last_name: "Butad",
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setData((prevData) => {
-          return [...prevData, data];
-        });
-      });
+    // fetch("/api/customers/", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //     "X-CSRFToken": csrftoken,
+    //   },
+    //   body: JSON.stringify({
+    //     mobile_number: "09507867559",
+    //     address: "dsadssada",
+    //     first_name: "Paul",
+    //     last_name: "Butad",
+    //   }),
+    // })
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     setData((prevData) => {
+    //       return [...prevData, data];
+    //     });
+    //   });
   };
 
   const handleCheckout = () => {
