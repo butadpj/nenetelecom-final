@@ -1,9 +1,19 @@
 import { useState, useEffect } from "react";
 
 export const getCookieCart = () => {
-  const [cookieCart, setCookieCart] = useState([]);
+  const [cookie, setCookie] = useState([]);
+  let cookieCart = [];
+
+  for (let key of Object.keys(cookie)) {
+    let item = {};
+    item["product"] = key;
+    item["quantity"] = cookie[key].quantity;
+    cookieCart.push(item);
+  }
+
   useEffect(() => {
-    setCookieCart(cart);
+    setCookie(cart);
   }, []);
+
   return { cookieCart };
 };

@@ -19,9 +19,25 @@ export const reducer = (state, action) => {
       (item) => item.product !== action.payload.id
     );
 
+    const newCartProducts = [...withoutExistingProduct, updatedProduct];
+
     return {
       ...state,
-      cartProducts: [...withoutExistingProduct, updatedProduct],
+      cartProducts: newCartProducts,
+    };
+  }
+  // For authenticated users
+  if (action.type === "UPDATE_ITEM_AU") {
+    let updatedProduct = action.payload.updatedProduct;
+    const withoutExistingProduct = state.cartProducts.filter(
+      (item) => item.product !== action.payload.id
+    );
+
+    const newCartProducts = [...withoutExistingProduct, updatedProduct];
+
+    return {
+      ...state,
+      cartProducts: newCartProducts,
     };
   }
   throw new Error("You didn't catch some action");

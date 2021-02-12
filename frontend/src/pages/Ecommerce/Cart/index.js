@@ -11,7 +11,7 @@ const Cart = () => {
   const { data, setData } = useFetch("/api/customers/");
 
   const createCustomer = () => {
-    fetch("http://127.0.0.1:8000/api/customers/", {
+    fetch("/api/customers/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
