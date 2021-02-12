@@ -5,30 +5,29 @@ import "./Ecommerce.css";
 import Navtop from "../../components/Ecommerce/Navbars/Navtop";
 import Home from "../../pages/Ecommerce/Home";
 import Cart from "../../pages/Ecommerce/Cart";
-import { updateCart } from "../../hooks/updateCart";
+import CartItemContextProvider from "../../context/CartItemContext";
 
 const Ecommerce = () => {
-  const { update } = updateCart();
-  update();
-
   return (
     <Router>
-      <main className="ecommerce">
-        <Navtop url="/store/home" />
-        <Switch>
-          <Route path="/store" exact>
-            <Home />
-          </Route>
+      <CartItemContextProvider>
+        <main className="ecommerce">
+          <Navtop url="/store/home" />
+          <Switch>
+            <Route path="/store" exact>
+              <Home />
+            </Route>
 
-          <Route path="/store/home" exact>
-            <Home />
-          </Route>
+            <Route path="/store/home" exact>
+              <Home />
+            </Route>
 
-          <Route path="/store/cart/">
-            <Cart />
-          </Route>
-        </Switch>
-      </main>
+            <Route path="/store/cart/">
+              <Cart />
+            </Route>
+          </Switch>
+        </main>
+      </CartItemContextProvider>
     </Router>
   );
 };

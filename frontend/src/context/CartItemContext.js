@@ -33,7 +33,7 @@ const CartItemContextProvider = (props) => {
     state.totalCartItem = get_total_items(state.cartProducts);
   } else {
     //If logged in
-
+    state.cartProducts = customerOrderProduct;
     state.totalCartItem = get_total_items(state.cartProducts);
   }
 

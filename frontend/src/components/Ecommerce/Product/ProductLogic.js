@@ -1,9 +1,7 @@
-import React, { useContext, useState, useEffect } from "react";
+import { useContext, useState, useEffect } from "react";
 import { CartItemContext } from "../../../context/CartItemContext";
 import { getProducts } from "../../../hooks/query/getProducts";
-import { getCustomerOrderProduct } from "../../../hooks/query/getCustomerOrderProduct";
 import GetCurrentCustomer from "../../../hooks/GetCurrentCustomer";
-import { updateCart } from "../../../hooks/updateCart";
 
 const ProductLogic = () => {
   const [showDetails, setShowDetails] = useState(false);
@@ -11,11 +9,7 @@ const ProductLogic = () => {
   const [showAddProductModal, setShowAddProductModal] = useState(false);
   const [state, dispatch] = useContext(CartItemContext);
   const { djangoCurrentUser } = GetCurrentCustomer();
-  const { customerOrderProduct } = getCustomerOrderProduct();
   const { products } = getProducts();
-  const { update } = updateCart();
-
-  const cartItems = state.cartProducts;
 
   const handleShow = (id, name, price, brand, image, description) => {
     setShowDetails(true);
@@ -60,14 +54,14 @@ const ProductLogic = () => {
     //! Create cart item END
 
     //* ADDING & UPDATING of cart item START
-    if (cartItems.length == 0) {
+    if (state.cartProducts.length == 0) {
       newCartItem.quantity = 1;
       dispatch({
         type: "ADD_ITEM",
         payload: newCartItem,
       });
     } else {
-      const existingProduct = cartItems.filter(
+      const existingProduct = state.cartProducts.filter(
         (item) => item.product === selectedProduct
       );
       if (existingProduct.length > 0) {
@@ -89,14 +83,12 @@ const ProductLogic = () => {
   };
 
   const processAuthenticatedCart = (selectedProduct) => {
-    update();
-
-    let existingProduct = customerOrderProduct.filter(
+    let existingProduct = state.cartProducts.filter(
       (data) => data.product === selectedProduct
     );
     let op_id = existingProduct[0].id;
     let op_order = existingProduct[0].order;
-    let op_quantity = existingProduct[0].quantity + 1;
+    existingProduct[0].quantity += 1;
 
     if (existingProduct.length > 0) {
       fetch(`/api/order-product/${op_id}/`, {
@@ -108,12 +100,11 @@ const ProductLogic = () => {
         body: JSON.stringify({
           order: op_order,
           product: selectedProduct,
-          quantity: op_quantity,
+          quantity: existingProduct[0].quantity,
         }),
       })
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
           dispatch({
             type: "UPDATE_ITEM_AU",
             payload: {
@@ -139,7 +130,6 @@ const ProductLogic = () => {
 
   const handleCloseAddProductModal = () => {
     setShowAddProductModal(false);
-    update();
   };
 
   useEffect(() => {

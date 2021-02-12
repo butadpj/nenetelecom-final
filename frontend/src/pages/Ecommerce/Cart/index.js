@@ -5,13 +5,8 @@ import { Link } from "react-router-dom";
 import Navbottom from "../../../components/Ecommerce/Navbars/Navbottom";
 import CartItems from "../../../components/Ecommerce/CartItems";
 import Button from "../../../components/Button";
-import { useFetch } from "../../../hooks/useFetch";
-import { updateCart } from "../../../hooks/updateCart";
 
 const Cart = () => {
-  const { update } = updateCart();
-  update();
-
   // const { data, setData } = useFetch("/api/customers/");
 
   const createCustomer = () => {
