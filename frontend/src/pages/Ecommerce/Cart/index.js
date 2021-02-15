@@ -1,12 +1,19 @@
-import React from "react";
+import React, { useEffect, useContext } from "react";
 
 import "./Cart.css";
 import { Link } from "react-router-dom";
 import Navbottom from "../../../components/Ecommerce/Navbars/Navbottom";
 import CartItems from "../../../components/Ecommerce/CartItems";
 import Button from "../../../components/Button";
+import { CartItemContext } from "../../../context/CartItemContext";
 
 const Cart = () => {
+  const [state, dispatch] = useContext(CartItemContext);
+  let totalCartPrice = state.totalCartPrice;
+  let f_totalCartPrice = Number(totalCartPrice).toLocaleString();
+  useEffect(() => {
+    document.body.style.overflow = "auto";
+  }, []);
   // const { data, setData } = useFetch("/api/customers/");
 
   const createCustomer = () => {
@@ -46,11 +53,16 @@ const Cart = () => {
         </div>
         <hr />
         <CartItems />
-        <Button
-          type="button"
-          text="Checkout"
-          functionality={() => handleCheckout()}
-        />
+        <div className="checkout">
+          <div className="total-cart-price">
+            <span>Total:</span> ₱{f_totalCartPrice}.00
+          </div>
+          <Button
+            type="button"
+            text="Checkout"
+            functionality={() => handleCheckout()}
+          />
+        </div>
       </section>
       <Navbottom link={2} />
     </>

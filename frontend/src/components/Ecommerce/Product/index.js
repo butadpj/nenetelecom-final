@@ -99,7 +99,7 @@ const Product = () => {
                   }
                   cName="detail-btn"
                   functionality={() =>
-                    handleShow(id, name, f_price, brand, image, description)
+                    handleShow(id, name, price, brand, image, description)
                   }
                 />
               </div>
@@ -139,7 +139,7 @@ const Product = () => {
                   </div>
                 }
                 functionality={() =>
-                  handleShowAddProductModal(detailData.id, "add")
+                  handleShowAddProductModal(detailData.id, detailData.price)
                 }
               />
             </div>

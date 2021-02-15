@@ -9,6 +9,7 @@ export const CartItemContext = createContext();
 const initalState = {
   cartProducts: [],
   totalCartItem: 0,
+  totalCartPrice: 0,
 };
 
 const CartItemContextProvider = (props) => {
@@ -16,6 +17,7 @@ const CartItemContextProvider = (props) => {
   const { djangoCurrentUser } = GetCurrentCustomer();
   const { customerOrderProduct, total_items } = getCustomerOrderProduct();
   const { cookieCart } = getCookieCart();
+  console.log(cookieCart);
 
   const get_total_items = (obj) => {
     let sum = 0;
@@ -26,15 +28,28 @@ const CartItemContextProvider = (props) => {
     }
     return sum;
   };
+
+  const get_total_price = (obj) => {
+    let sum = 0;
+    for (let el in obj) {
+      if (obj.hasOwnProperty(el)) {
+        sum += parseFloat(obj[el].price);
+      }
+    }
+    return sum;
+  };
+
   //Set the initial source of truth
   if (djangoCurrentUser === "AnonymousUser") {
     //If guest user
     state.cartProducts = cookieCart;
     state.totalCartItem = get_total_items(state.cartProducts);
+    state.totalCartPrice = get_total_price(state.cartProducts);
   } else {
     //If logged in
     state.cartProducts = customerOrderProduct;
     state.totalCartItem = get_total_items(state.cartProducts);
+    state.totalCartPrice = get_total_price(state.cartProducts);
   }
 
   return (

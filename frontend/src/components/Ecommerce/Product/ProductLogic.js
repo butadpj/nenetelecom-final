@@ -34,12 +34,14 @@ const ProductLogic = () => {
     setDetailData(product);
   };
 
-  const processGuestCart = (selectedProduct) => {
+  const processGuestCart = (selectedProduct, price) => {
+    let price_num = parseInt(price);
     //* Bake cookie START
     if (cart[selectedProduct] == undefined) {
-      cart[selectedProduct] = { quantity: 1 };
+      cart[selectedProduct] = { quantity: 1, price: price_num };
     } else {
       cart[selectedProduct]["quantity"] += 1;
+      cart[selectedProduct]["price"] += price_num;
     }
     document.cookie = "cart=" + JSON.stringify(cart) + ";domain=;path=/";
     //! Bake cookie END
@@ -49,8 +51,10 @@ const ProductLogic = () => {
     products.forEach((product) => {
       if (product.id == selectedProduct) {
         newCartItem.product = product.id;
+        newCartItem.price = product.price;
       }
     });
+
     //! Create cart item END
 
     //* ADDING & UPDATING of cart item START
@@ -112,19 +116,20 @@ const ProductLogic = () => {
               updatedProduct: data,
             },
           });
-        });
+        })
+        .catch((error) => console.log(error));
     } else {
       console.log("ADD");
     }
   };
 
-  const handleShowAddProductModal = (selectedProduct) => {
+  const handleShowAddProductModal = (selectedProduct, price) => {
     setShowAddProductModal(true);
 
     if (djangoCurrentUser === "AnonymousUser") {
-      processGuestCart(selectedProduct);
+      processGuestCart(selectedProduct, price);
     } else {
-      processAuthenticatedCart(selectedProduct);
+      processAuthenticatedCart(selectedProduct, price);
     }
   };
 

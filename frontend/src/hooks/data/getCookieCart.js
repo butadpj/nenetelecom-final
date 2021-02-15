@@ -8,6 +8,7 @@ export const getCookieCart = () => {
     let item = {};
     item["product"] = key;
     item["quantity"] = cookie[key].quantity;
+    item["price"] = cookie[key].price;
     cookieCart.push(item);
   }
 

@@ -24,15 +24,30 @@
   color: var(--dark);
 }
 
-.cart-items .helper {
+.cart .checkout {
+  width: 100%;
+  height: 10vh;
+  background: var(--light);
+  position: fixed;
+  top: calc(100% - 18.1vh);
   display: flex;
   align-items: center;
-  justify-content: center;
-  color: var(--shadeLightDark);
-  font-weight: 600;
+  justify-content: space-around;
+  border-bottom: 1px solid black;
 }
 
-.helper span {
-  margin-right: 0.5em;
-  font-size: 0.9em;
+.checkout .total-cart-price {
+  color: var(--shadeGreen);
+  font-weight: 600;
+  font-size: 1em;
+}
+
+.total-cart-price span {
+  color: var(--shadeLightDark);
+}
+
+.checkout button {
+  background: var(--shadeBlue);
+  padding: 0.9em;
+  font-size: 0.8em;
 }
