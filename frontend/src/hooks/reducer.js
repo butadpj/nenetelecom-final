@@ -40,5 +40,6 @@ export const reducer = (state, action) => {
       cartProducts: newCartProducts,
     };
   }
+
   throw new Error("You didn't catch some action");
 };

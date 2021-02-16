@@ -15,9 +15,12 @@ const initalState = {
 const CartItemContextProvider = (props) => {
   const [state, dispatch] = useReducer(reducer, initalState);
   const { djangoCurrentUser } = GetCurrentCustomer();
-  const { customerOrderProduct, total_items } = getCustomerOrderProduct();
+  const {
+    customerOrderProduct,
+    total_items,
+    total_price,
+  } = getCustomerOrderProduct();
   const { cookieCart } = getCookieCart();
-  console.log(cookieCart);
 
   const get_total_items = (obj) => {
     let sum = 0;
@@ -33,7 +36,7 @@ const CartItemContextProvider = (props) => {
     let sum = 0;
     for (let el in obj) {
       if (obj.hasOwnProperty(el)) {
-        sum += parseFloat(obj[el].price);
+        sum += parseFloat(obj[el].total_price);
       }
     }
     return sum;

@@ -13,14 +13,16 @@ export const getCustomerOrderProduct = () => {
 
   let customerOrderProduct = [];
   let total_items;
+  let total_price;
   orderProductData.forEach((data) => {
     customerOrder.forEach((order) => {
       if (data.order === order.transaction_id) {
         customerOrderProduct.push(data);
         total_items = order.total_cart_items;
+        total_price = order.total_cart_price;
       }
     });
   });
 
-  return { customerOrder, customerOrderProduct, total_items };
+  return { customerOrder, customerOrderProduct, total_items, total_price };
 };

@@ -139,7 +139,11 @@ const Product = () => {
                   </div>
                 }
                 functionality={() =>
-                  handleShowAddProductModal(detailData.id, detailData.price)
+                  handleShowAddProductModal(
+                    detailData.id,
+                    detailData.price,
+                    "add"
+                  )
                 }
               />
             </div>

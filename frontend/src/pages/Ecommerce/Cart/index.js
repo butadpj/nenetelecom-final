@@ -8,9 +8,10 @@ import Button from "../../../components/Button";
 import { CartItemContext } from "../../../context/CartItemContext";
 
 const Cart = () => {
-  const [state, dispatch] = useContext(CartItemContext);
+  const [state] = useContext(CartItemContext);
   let totalCartPrice = state.totalCartPrice;
   let f_totalCartPrice = Number(totalCartPrice).toLocaleString();
+
   useEffect(() => {
     document.body.style.overflow = "auto";
   }, []);

@@ -3,10 +3,14 @@ import React, { useContext } from "react";
 import "./CartItems.css";
 import { CartItemContext } from "../../../context/CartItemContext";
 import { getProducts } from "../../../hooks/query/getProducts";
+import ProductLogic from "../../../components/Ecommerce/Product/ProductLogic";
+import GetCurrentCustomer from "../../../hooks/GetCurrentCustomer";
 
 const CartItems = () => {
   const [state] = useContext(CartItemContext);
   const { products } = getProducts();
+  const { processCart } = ProductLogic();
+  const { djangoCurrentUser } = GetCurrentCustomer();
 
   let cartItemData = state.cartProducts;
   let cartItems = [];
@@ -58,9 +62,21 @@ const CartItems = () => {
                 )}
               </div>
               <div className="item-quantity">
-                <i className="fas fa-minus"></i>
+                <div
+                  onClick={() =>
+                    processCart(id, price, "remove", djangoCurrentUser)
+                  }
+                >
+                  <i className="fas fa-minus"></i>
+                </div>
                 <span>{quantity}</span>
-                <i className="fas fa-plus"></i>
+                <div
+                  onClick={() =>
+                    processCart(id, price, "add", djangoCurrentUser)
+                  }
+                >
+                  <i className="fas fa-plus"></i>
+                </div>
               </div>
             </div>
           </div>

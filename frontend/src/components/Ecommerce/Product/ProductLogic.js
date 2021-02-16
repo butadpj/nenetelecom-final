@@ -11,6 +11,10 @@ const ProductLogic = () => {
   const { djangoCurrentUser } = GetCurrentCustomer();
   const { products } = getProducts();
 
+  const refreshPage = () => {
+    window.location.reload();
+  };
+
   const handleShow = (id, name, price, brand, image, description) => {
     setShowDetails(true);
     document.body.style.overflow = "hidden";
@@ -34,17 +38,29 @@ const ProductLogic = () => {
     setDetailData(product);
   };
 
-  const processGuestCart = (selectedProduct, price) => {
+  const processGuestCart = (selectedProduct, price, action) => {
     let price_num = parseInt(price);
-    //* Bake cookie START
-    if (cart[selectedProduct] == undefined) {
-      cart[selectedProduct] = { quantity: 1, price: price_num };
-    } else {
-      cart[selectedProduct]["quantity"] += 1;
-      cart[selectedProduct]["price"] += price_num;
+
+    if (action.toUpperCase() === "ADD") {
+      //* Bake cookie START
+      if (cart[selectedProduct] == undefined) {
+        cart[selectedProduct] = { quantity: 1, total_price: price_num };
+      } else {
+        cart[selectedProduct]["quantity"] += 1;
+        cart[selectedProduct]["total_price"] += price_num;
+      }
+
+      //! Bake cookie END
+    }
+
+    if (action.toUpperCase() === "REMOVE") {
+      cart[selectedProduct]["quantity"] -= 1;
+      cart[selectedProduct]["total_price"] -= price_num;
+      if (cart[selectedProduct]["quantity"] <= 0) {
+        delete cart[selectedProduct];
+      }
     }
     document.cookie = "cart=" + JSON.stringify(cart) + ";domain=;path=/";
-    //! Bake cookie END
 
     //* Create cart item START
     let newCartItem = [];
@@ -86,51 +102,112 @@ const ProductLogic = () => {
     //! ADDING & UPDATING of cart item END
   };
 
-  const processAuthenticatedCart = (selectedProduct) => {
+  const processAuthenticatedCart = (selectedProduct, price, action) => {
+    let price_num = parseInt(price);
+
     let existingProduct = state.cartProducts.filter(
       (data) => data.product === selectedProduct
     );
-    let op_id = existingProduct[0].id;
-    let op_order = existingProduct[0].order;
-    existingProduct[0].quantity += 1;
 
-    if (existingProduct.length > 0) {
-      fetch(`/api/order-product/${op_id}/`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          "X-CSRFToken": csrftoken,
-        },
-        body: JSON.stringify({
-          order: op_order,
-          product: selectedProduct,
-          quantity: existingProduct[0].quantity,
-        }),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          dispatch({
-            type: "UPDATE_ITEM_AU",
-            payload: {
-              id: selectedProduct,
-              updatedProduct: data,
-            },
-          });
+    if (action.toUpperCase() === "ADD") {
+      let op_id = existingProduct[0].id;
+      let op_order = existingProduct[0].order;
+      existingProduct[0].quantity += 1;
+      existingProduct[0].total_price += price_num;
+
+      if (existingProduct.length > 0) {
+        fetch(`/api/order-product/${op_id}/`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            "X-CSRFToken": csrftoken,
+          },
+          body: JSON.stringify({
+            order: op_order,
+            product: selectedProduct,
+            quantity: existingProduct[0].quantity,
+          }),
         })
-        .catch((error) => console.log(error));
-    } else {
-      console.log("ADD");
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            dispatch({
+              type: "UPDATE_ITEM_AU",
+              payload: {
+                id: selectedProduct,
+                updatedProduct: data,
+              },
+            });
+          })
+          .catch((error) => console.log(error));
+      } else {
+        console.log("ADD");
+      }
+    }
+
+    if (action.toUpperCase() === "REMOVE") {
+      let op_id = existingProduct[0].id;
+      let op_order = existingProduct[0].order;
+      existingProduct[0].quantity -= 1;
+      existingProduct[0].total_price -= price_num;
+
+      //If product exist
+      if (existingProduct.length > 0) {
+        //If quantity is equal to 0
+        if (existingProduct[0].quantity <= 0) {
+          fetch(`/api/order-product/${op_id}/`, {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+              "X-CSRFToken": csrftoken,
+            },
+          }).then(() => {
+            refreshPage();
+          });
+        } else {
+          fetch(`/api/order-product/${op_id}/`, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+              "X-CSRFToken": csrftoken,
+            },
+            body: JSON.stringify({
+              order: op_order,
+              product: selectedProduct,
+              quantity: existingProduct[0].quantity,
+            }),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              console.log(data);
+              dispatch({
+                type: "UPDATE_ITEM_AU",
+                payload: {
+                  id: selectedProduct,
+                  updatedProduct: data,
+                },
+              });
+            })
+            .catch((error) => console.log(error));
+        }
+      } else {
+        console.log("ADD");
+      }
     }
   };
 
-  const handleShowAddProductModal = (selectedProduct, price) => {
+  const processCart = (selectedProduct, price, action, user) => {
+    if (user === "AnonymousUser") {
+      processGuestCart(selectedProduct, price, action);
+    } else {
+      processAuthenticatedCart(selectedProduct, price, action);
+    }
+  };
+
+  const handleShowAddProductModal = (selectedProduct, price, action) => {
     setShowAddProductModal(true);
 
-    if (djangoCurrentUser === "AnonymousUser") {
-      processGuestCart(selectedProduct, price);
-    } else {
-      processAuthenticatedCart(selectedProduct, price);
-    }
+    processCart(selectedProduct, price, action, djangoCurrentUser);
   };
 
   const handleCloseAddProductModal = () => {
@@ -156,6 +233,7 @@ const ProductLogic = () => {
     handleShowAddProductModal,
     handleCloseAddProductModal,
     showAddProductModal,
+    processCart,
   };
 };
 

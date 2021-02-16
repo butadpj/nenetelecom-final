@@ -31,8 +31,8 @@ class OrderSerializer(serializers.ModelSerializer):
         # to get all fields and put it into single array
         fields = [field.name for field in model._meta.fields] 
         fields.insert(0, 'url') # push url field in index 0
-        fields.insert(5, 'total_cart_price')
-        fields.insert(6, 'total_cart_items')
+        fields.insert(5, 'total_cart_items')
+        fields.insert(6, 'total_cart_price')
         
     
 class OrderProductSerializer(serializers.ModelSerializer):
@@ -41,3 +41,4 @@ class OrderProductSerializer(serializers.ModelSerializer):
         # to get all fields and put it into single array
         fields = [field.name for field in model._meta.fields] 
         fields.insert(0, 'url') # push url field in index 0
+        fields.insert(5, 'total_price')
