@@ -15,11 +15,7 @@ const initalState = {
 const CartItemContextProvider = (props) => {
   const [state, dispatch] = useReducer(reducer, initalState);
   const { djangoCurrentUser } = GetCurrentCustomer();
-  const {
-    customerOrderProduct,
-    total_items,
-    total_price,
-  } = getCustomerOrderProduct();
+  const { customerOrder, customerOrderProduct } = getCustomerOrderProduct();
   const { cookieCart } = getCookieCart();
 
   const get_total_items = (obj) => {
@@ -41,6 +37,7 @@ const CartItemContextProvider = (props) => {
     }
     return sum;
   };
+  console.log(state.cartProducts);
 
   //Set the initial source of truth
   if (djangoCurrentUser === "AnonymousUser") {

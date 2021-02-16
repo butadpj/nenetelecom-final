@@ -2,15 +2,16 @@ import { useContext, useState, useEffect } from "react";
 import { CartItemContext } from "../../../context/CartItemContext";
 import { getProducts } from "../../../hooks/query/getProducts";
 import GetCurrentCustomer from "../../../hooks/GetCurrentCustomer";
+import { getCustomerOrderProduct } from "../../../hooks/query/getCustomerOrderProduct";
 
 const ProductLogic = () => {
   const [showDetails, setShowDetails] = useState(false);
   const [detailData, setDetailData] = useState();
   const [showAddProductModal, setShowAddProductModal] = useState(false);
   const [state, dispatch] = useContext(CartItemContext);
-  const { djangoCurrentUser } = GetCurrentCustomer();
+  const { djangoCurrentUser, djangoCurrentCustomerId } = GetCurrentCustomer();
+  const { customerOrder } = getCustomerOrderProduct();
   const { products } = getProducts();
-
   const refreshPage = () => {
     window.location.reload();
   };
@@ -49,7 +50,6 @@ const ProductLogic = () => {
         cart[selectedProduct]["quantity"] += 1;
         cart[selectedProduct]["total_price"] += price_num;
       }
-
       //! Bake cookie END
     }
 
@@ -62,42 +62,29 @@ const ProductLogic = () => {
     }
     document.cookie = "cart=" + JSON.stringify(cart) + ";domain=;path=/";
 
-    //* Create cart item START
-    let newCartItem = [];
-    products.forEach((product) => {
-      if (product.id == selectedProduct) {
-        newCartItem.product = product.id;
-        newCartItem.price = product.price;
-      }
-    });
-
-    //! Create cart item END
-
     //* ADDING & UPDATING of cart item START
-    if (state.cartProducts.length == 0) {
-      newCartItem.quantity = 1;
+    const existingProduct = state.cartProducts.filter(
+      (item) => item.product === selectedProduct
+    );
+    if (existingProduct.length > 0) {
+      dispatch({
+        type: "UPDATE_ITEM",
+        payload: {
+          id: selectedProduct,
+          action: action,
+        },
+      });
+    } else {
+      let newCartItem = {
+        product: selectedProduct,
+        total_price: price,
+        quantity: 1,
+      };
+
       dispatch({
         type: "ADD_ITEM",
         payload: newCartItem,
       });
-    } else {
-      const existingProduct = state.cartProducts.filter(
-        (item) => item.product === selectedProduct
-      );
-      if (existingProduct.length > 0) {
-        dispatch({
-          type: "UPDATE_ITEM",
-          payload: {
-            id: selectedProduct,
-          },
-        });
-      } else {
-        newCartItem.quantity = 1;
-        dispatch({
-          type: "ADD_ITEM",
-          payload: newCartItem,
-        });
-      }
     }
     //! ADDING & UPDATING of cart item END
   };
@@ -110,12 +97,13 @@ const ProductLogic = () => {
     );
 
     if (action.toUpperCase() === "ADD") {
-      let op_id = existingProduct[0].id;
-      let op_order = existingProduct[0].order;
-      existingProduct[0].quantity += 1;
-      existingProduct[0].total_price += price_num;
-
       if (existingProduct.length > 0) {
+        //UPDATING PRODUCT
+        let op_id = existingProduct[0].id;
+        let op_order = existingProduct[0].order;
+        existingProduct[0].quantity += 1;
+        existingProduct[0].total_price += price_num;
+
         fetch(`/api/order-product/${op_id}/`, {
           method: "PUT",
           headers: {
@@ -141,18 +129,79 @@ const ProductLogic = () => {
           })
           .catch((error) => console.log(error));
       } else {
-        console.log("ADD");
+        //ADDING PRODUCT
+
+        //Create order if customer has no order yet
+        if (customerOrder.length == 0) {
+          fetch(`/api/orders/`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "X-CSRFToken": csrftoken,
+            },
+            body: JSON.stringify({
+              customer: djangoCurrentCustomerId,
+              confirmed: false,
+            }),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              fetch(`/api/order-product/`, {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                  "X-CSRFToken": csrftoken,
+                },
+                body: JSON.stringify({
+                  order: data.transaction_id,
+                  product: selectedProduct,
+                  quantity: 1,
+                }),
+              })
+                .then((res) => res.json())
+                .then((data) => {
+                  dispatch({
+                    type: "ADD_ITEM_AU",
+                    payload: data,
+                  });
+                })
+                .catch((error) => console.log(error));
+            })
+            .catch((error) => console.log(error));
+        } else {
+          //If customer has already placed an Order
+          fetch(`/api/order-product/`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "X-CSRFToken": csrftoken,
+            },
+            body: JSON.stringify({
+              order: customerOrder[0].transaction_id,
+              product: selectedProduct,
+              quantity: 1,
+            }),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              dispatch({
+                type: "ADD_ITEM_AU",
+                payload: data,
+              });
+            })
+            .catch((error) => console.log(error));
+        }
       }
     }
 
     if (action.toUpperCase() === "REMOVE") {
-      let op_id = existingProduct[0].id;
-      let op_order = existingProduct[0].order;
-      existingProduct[0].quantity -= 1;
-      existingProduct[0].total_price -= price_num;
-
       //If product exist
       if (existingProduct.length > 0) {
+        let op_id = existingProduct[0].id;
+        let op_order = existingProduct[0].order;
+        existingProduct[0].quantity -= 1;
+        existingProduct[0].total_price -= price_num;
+
         //If quantity is equal to 0
         if (existingProduct[0].quantity <= 0) {
           fetch(`/api/order-product/${op_id}/`, {
@@ -190,8 +239,6 @@ const ProductLogic = () => {
             })
             .catch((error) => console.log(error));
         }
-      } else {
-        console.log("ADD");
       }
     }
   };

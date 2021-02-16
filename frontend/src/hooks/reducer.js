@@ -1,4 +1,11 @@
 export const reducer = (state, action) => {
+  if (action.type === "SUCCESS") {
+    return {
+      ...state,
+      cartProducts: action.payload,
+    };
+  }
+
   if (action.type === "ADD_ITEM") {
     const newCartProducts = [action.payload, ...state.cartProducts];
     return {
@@ -11,7 +18,11 @@ export const reducer = (state, action) => {
     state.cartProducts.forEach((item) => {
       if (item.product === action.payload.id) {
         updatedProduct = item;
-        updatedProduct.quantity += 1;
+        if (action.payload.action.toUpperCase() === "ADD") {
+          updatedProduct.quantity += 1;
+        } else if (action.payload.action.toUpperCase() === "REMOVE") {
+          updatedProduct.quantity -= 1;
+        }
       }
     });
 
@@ -26,7 +37,16 @@ export const reducer = (state, action) => {
       cartProducts: newCartProducts,
     };
   }
+
   // For authenticated users
+  if (action.type === "ADD_ITEM_AU") {
+    const newCartProducts = [action.payload, ...state.cartProducts];
+    return {
+      ...state,
+      cartProducts: newCartProducts,
+    };
+  }
+
   if (action.type === "UPDATE_ITEM_AU") {
     let updatedProduct = action.payload.updatedProduct;
     const withoutExistingProduct = state.cartProducts.filter(
