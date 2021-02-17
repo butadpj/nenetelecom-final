@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { Route, Switch } from "react-router-dom";
 
 import Navtop from "../../../components/Ecommerce/Navbars/Navtop";

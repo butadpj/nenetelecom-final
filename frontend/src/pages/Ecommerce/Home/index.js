@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import "./Home.css";
 import Navbottom from "../../../components/Ecommerce/Navbars/Navbottom";

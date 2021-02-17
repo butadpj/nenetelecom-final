@@ -6,16 +6,16 @@ import GetCurrentCustomer from "../hooks/GetCurrentCustomer";
 
 export const CartItemContext = createContext();
 
-const initalState = {
+const initialState = {
   cartProducts: [],
   totalCartItem: 0,
   totalCartPrice: 0,
 };
 
 const CartItemContextProvider = (props) => {
-  const [state, dispatch] = useReducer(reducer, initalState);
+  const [state, dispatch] = useReducer(reducer, initialState);
   const { djangoCurrentUser } = GetCurrentCustomer();
-  const { customerOrder, customerOrderProduct } = getCustomerOrderProduct();
+  const { customerOrderProduct } = getCustomerOrderProduct();
   const { cookieCart } = getCookieCart();
 
   const get_total_items = (obj) => {
@@ -37,19 +37,22 @@ const CartItemContextProvider = (props) => {
     }
     return sum;
   };
-  console.log(state.cartProducts);
 
   //Set the initial source of truth
   if (djangoCurrentUser === "AnonymousUser") {
     //If guest user
     state.cartProducts = cookieCart;
     state.totalCartItem = get_total_items(state.cartProducts);
-    state.totalCartPrice = get_total_price(state.cartProducts);
+    state.totalCartPrice = get_total_price(
+      state.cartProducts.filter((item) => item.selected === true)
+    );
   } else {
     //If logged in
-    state.cartProducts = customerOrderProduct;
+    initialState.cartProducts = customerOrderProduct;
     state.totalCartItem = get_total_items(state.cartProducts);
-    state.totalCartPrice = get_total_price(state.cartProducts);
+    state.totalCartPrice = get_total_price(
+      state.cartProducts.filter((item) => item.selected === true)
+    );
   }
 
   return (

@@ -13,28 +13,20 @@ export const reducer = (state, action) => {
       cartProducts: newCartProducts,
     };
   }
+
   if (action.type === "UPDATE_ITEM") {
-    let updatedProduct;
-    state.cartProducts.forEach((item) => {
-      if (item.product === action.payload.id) {
-        updatedProduct = item;
-        if (action.payload.action.toUpperCase() === "ADD") {
-          updatedProduct.quantity += 1;
-        } else if (action.payload.action.toUpperCase() === "REMOVE") {
-          updatedProduct.quantity -= 1;
-        }
-      }
-    });
-
-    const withoutExistingProduct = state.cartProducts.filter(
-      (item) => item.product !== action.payload.id
-    );
-
-    const newCartProducts = [...withoutExistingProduct, updatedProduct];
+    let updatedProduct = action.payload.updatedProduct;
 
     return {
       ...state,
-      cartProducts: newCartProducts,
+      cartProducts: [
+        ...state.cartProducts.map((item) => {
+          if (item.product === action.payload.id) {
+            return updatedProduct;
+          }
+          return item;
+        }),
+      ],
     };
   }
 
@@ -49,11 +41,24 @@ export const reducer = (state, action) => {
 
   if (action.type === "UPDATE_ITEM_AU") {
     let updatedProduct = action.payload.updatedProduct;
-    const withoutExistingProduct = state.cartProducts.filter(
-      (item) => item.product !== action.payload.id
-    );
 
-    const newCartProducts = [...withoutExistingProduct, updatedProduct];
+    return {
+      ...state,
+      cartProducts: [
+        ...state.cartProducts.map((item) => {
+          if (item.product === action.payload.id) {
+            return updatedProduct;
+          }
+          return item;
+        }),
+      ],
+    };
+  }
+
+  if (action.type === "REMOVE_ITEM_AU") {
+    const newCartProducts = state.cartProducts.filter(
+      (item) => item.product !== action.payload
+    );
 
     return {
       ...state,

@@ -10,8 +10,9 @@ const ProductLogic = () => {
   const [showAddProductModal, setShowAddProductModal] = useState(false);
   const [state, dispatch] = useContext(CartItemContext);
   const { djangoCurrentUser, djangoCurrentCustomerId } = GetCurrentCustomer();
-  const { customerOrder } = getCustomerOrderProduct();
+  const { customerOrder, customerOrderProduct } = getCustomerOrderProduct();
   const { products } = getProducts();
+
   const refreshPage = () => {
     window.location.reload();
   };
@@ -45,7 +46,11 @@ const ProductLogic = () => {
     if (action.toUpperCase() === "ADD") {
       //* Bake cookie START
       if (cart[selectedProduct] == undefined) {
-        cart[selectedProduct] = { quantity: 1, total_price: price_num };
+        cart[selectedProduct] = {
+          quantity: 1,
+          total_price: price_num,
+          selected: true,
+        };
       } else {
         cart[selectedProduct]["quantity"] += 1;
         cart[selectedProduct]["total_price"] += price_num;
@@ -71,7 +76,7 @@ const ProductLogic = () => {
         type: "UPDATE_ITEM",
         payload: {
           id: selectedProduct,
-          action: action,
+          updatedProduct: existingProduct[0],
         },
       });
     } else {
@@ -118,7 +123,6 @@ const ProductLogic = () => {
         })
           .then((res) => res.json())
           .then((data) => {
-            console.log(data);
             dispatch({
               type: "UPDATE_ITEM_AU",
               payload: {
@@ -204,14 +208,16 @@ const ProductLogic = () => {
 
         //If quantity is equal to 0
         if (existingProduct[0].quantity <= 0) {
+          dispatch({
+            type: "REMOVE_ITEM_AU",
+            payload: selectedProduct,
+          });
           fetch(`/api/order-product/${op_id}/`, {
             method: "DELETE",
             headers: {
               "Content-Type": "application/json",
               "X-CSRFToken": csrftoken,
             },
-          }).then(() => {
-            refreshPage();
           });
         } else {
           fetch(`/api/order-product/${op_id}/`, {
@@ -228,7 +234,6 @@ const ProductLogic = () => {
           })
             .then((res) => res.json())
             .then((data) => {
-              console.log(data);
               dispatch({
                 type: "UPDATE_ITEM_AU",
                 payload: {

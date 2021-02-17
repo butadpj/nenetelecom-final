@@ -14,7 +14,7 @@ class Order(models.Model):
 
     @property
     def total_cart_price(self):
-        order_product = self.orderproduct_set.all()
+        order_product = self.orderproduct_set.all().filter(selected=True)
         total = sum([item.total_price for item in order_product])
         return total
 
@@ -38,6 +38,7 @@ class OrderProduct(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE, blank=True, null=True)
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, blank=True, null=True)
     quantity = models.IntegerField(default=0, null=True, blank=True)
+    selected = models.BooleanField(default=True, null=False, blank=False)
 
     def __str__(self):
         return str(self.id)

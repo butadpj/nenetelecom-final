@@ -1,25 +1,29 @@
 import React, { useContext } from "react";
 
 import "./CartItems.css";
-import { CartItemContext } from "../../../context/CartItemContext";
+import "./CartItemsLogic";
 import { getProducts } from "../../../hooks/query/getProducts";
+import { getCustomerOrderProduct } from "../../../hooks/query/getCustomerOrderProduct";
 import ProductLogic from "../../../components/Ecommerce/Product/ProductLogic";
 import GetCurrentCustomer from "../../../hooks/GetCurrentCustomer";
+import CartItemsLogic from "./CartItemsLogic";
+import checkIcon from "../../../assets/svgs/check.svg";
+import uncheckIcon from "../../../assets/svgs/uncheck.svg";
 
 const CartItems = () => {
-  const [state] = useContext(CartItemContext);
+  const { selectedItemToggle, state } = CartItemsLogic();
   const { products } = getProducts();
   const { processCart } = ProductLogic();
   const { djangoCurrentUser } = GetCurrentCustomer();
 
-  let cartItemData = state.cartProducts;
-  let cartItems = [];
+  let cartDisplayProducts = [];
 
-  cartItemData.forEach((item) => {
-    products.forEach((product) => {
+  state.cartProducts.forEach((item) => {
+    products.map((product) => {
       if (product.id === item.product) {
         product.quantity = item.quantity;
-        cartItems.push(product);
+        product.selected = item.selected;
+        cartDisplayProducts.push(product);
       }
     });
   });
@@ -30,9 +34,8 @@ const CartItems = () => {
         <span>Select a product to checkout</span>
         <i className="fas fa-check-circle"></i>
       </div>
-      {cartItems.map((item) => {
-        const { id, image, name, brand, price, quantity } = item;
-        let selected = false;
+      {cartDisplayProducts.map((item) => {
+        const { id, image, name, brand, price, quantity, selected } = item;
 
         let f_price = Number(price).toLocaleString();
         return (
@@ -54,11 +57,14 @@ const CartItems = () => {
               </div>
             </div>
             <div className="item-action">
-              <div className="item-select">
+              <div
+                className="item-select"
+                onClick={() => selectedItemToggle(id)}
+              >
                 {selected ? (
-                  <i className="fas fa-check-circle"></i>
+                  <img src={checkIcon}></img>
                 ) : (
-                  <i className="far fa-circle"></i>
+                  <img src={uncheckIcon}></img>
                 )}
               </div>
               <div className="item-quantity">
