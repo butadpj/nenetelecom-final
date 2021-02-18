@@ -50,19 +50,23 @@ const Cart = () => {
           <Link to="/store/home">
             <i className="fas fa-arrow-circle-left"></i>
           </Link>
-          <span>Back to store</span>
+          <span>
+            to store <i className="fas fa-store-alt"></i>
+          </span>
         </div>
         <hr />
         <CartItems />
-        <div className="checkout">
+        <div className="checkout-action">
           <div className="total-cart-price">
             <span>Total:</span> ₱{f_totalCartPrice}.00
           </div>
-          <Button
-            type="button"
-            text="Checkout"
-            functionality={() => handleCheckout()}
-          />
+          <Link to="/store/checkout">
+            <Button
+              type="button"
+              text="Checkout"
+              functionality={() => handleCheckout()}
+            />
+          </Link>
         </div>
       </section>
       <Navbottom link={2} />

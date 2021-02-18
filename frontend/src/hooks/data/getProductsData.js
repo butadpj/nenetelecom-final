@@ -5,5 +5,6 @@ let productsUrl = "/api/products/";
 export const getProductsData = () => {
   const { loading, data } = useFetch(productsUrl);
   let productsData = data;
-  return { loading, productsData };
+  let productLoading = loading;
+  return { productsData, productLoading };
 };

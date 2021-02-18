@@ -1,5 +1,6 @@
 .cart-items {
   height: auto;
+  margin-bottom: 3em;
 }
 
 .cart-items .helper {
@@ -11,7 +12,7 @@
   margin: 0.5em 0;
 }
 
-.helper span {
+.cart-items .helper span {
   margin-right: 0.5em;
   font-size: 0.9em;
 }
@@ -22,33 +23,38 @@
   flex-direction: column;
   height: auto;
   padding: 0.5em;
-  margin-bottom: 2em;
+  margin: 0.5em 0;
 }
 
-.item-main {
+.cart-items .item-main {
   display: flex;
   justify-content: flex-start;
   margin-bottom: 1em;
 }
 
-.item-main .item-image {
+.cart-items .item-main .item-image {
   margin-right: 0.8em;
   height: 100%;
 }
 
-.item-main .item-info {
+.cart-items .item-main .item-info {
   color: var(--dark);
   font-weight: 600;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   font-size: 1rem;
+  overflow: hidden;
+  width: 100%;
 }
 
-.item-info-name {
+.cart-items .item-info-name {
   font-size: 0.9em;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  text-transform: capitalize;
 }
-.item-info-brand {
+.cart-items .item-info-brand {
   font-size: 0.7em;
   background: var(--E-bg);
   color: var(--shadeLightDark);
@@ -58,44 +64,52 @@
   padding: 0.5em;
 }
 
-.item-info-current-price {
+.cart-items .item-info-current-price {
   font-size: 0.9em;
   color: var(--shadeGreen);
 }
 
-.item-info-original-price {
+.cart-items .item-info-original-price {
   font-size: 0.7em;
   display: flex;
 }
 
-.item-info-original-price p {
+.cart-items .item-info-original-price p {
   color: var(--shadeLightDark);
   text-decoration: line-through;
   margin-right: 0.5em;
 }
 
-.item-action {
+.cart-items .item-action {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 0.5em;
+  color: var(--shadeBlue);
 }
 
-.item-action .item-select {
-  color: var(--shadeBlue);
+.cart-items .item-action .item-select {
   font-size: 1.8em;
 }
 
-.item-action .item-quantity {
+.cart-items .item-action .item-select:hover {
+  cursor: pointer;
+}
+
+.cart-items .item-action .item-quantity {
   display: flex;
   align-items: center;
 }
 
-.item-quantity span {
+.cart-items .item-quantity span {
   padding: 0.2em 1em;
   background: var(--shadeLight);
 }
 
-.item-quantity > * {
+.cart-items .item-quantity > * {
   margin: 0 0.5em;
+}
+
+.cart-items .item-quantity > *:hover {
+  cursor: pointer;
 }

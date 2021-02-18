@@ -2,8 +2,8 @@ import { getProductsData } from "../data/getProductsData";
 import { getProductImageData } from "../data/getProductImageData";
 
 export const getProducts = () => {
-  const { productsData } = getProductsData();
-  const { productImageData } = getProductImageData();
+  const { productsData, productLoading } = getProductsData();
+  const { productImageData, productImageLoading } = getProductImageData();
 
   let products = productsData.map((product) => {
     let imageArray = [];
@@ -16,5 +16,5 @@ export const getProducts = () => {
     product.image = imageArray;
     return product;
   });
-  return { products };
+  return { products, productLoading, productImageLoading };
 };

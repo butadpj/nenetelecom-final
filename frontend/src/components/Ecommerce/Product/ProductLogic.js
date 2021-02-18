@@ -11,7 +11,7 @@ const ProductLogic = () => {
   const [state, dispatch] = useContext(CartItemContext);
   const { djangoCurrentUser, djangoCurrentCustomerId } = GetCurrentCustomer();
   const { customerOrder, customerOrderProduct } = getCustomerOrderProduct();
-  const { products } = getProducts();
+  const { products, productLoading, productImageLoading } = getProducts();
 
   const refreshPage = () => {
     window.location.reload();
@@ -286,6 +286,8 @@ const ProductLogic = () => {
     handleCloseAddProductModal,
     showAddProductModal,
     processCart,
+    productLoading,
+    productImageLoading,
   };
 };
 

@@ -4,6 +4,7 @@ import { Route, Switch } from "react-router-dom";
 import Navtop from "../../../components/Ecommerce/Navbars/Navtop";
 import Home from "../../../pages/Ecommerce/Home";
 import Cart from "../../../pages/Ecommerce/Cart";
+import Checkout from "../../../pages/Ecommerce/Checkout";
 
 const EcommerceView = () => {
   return (
@@ -20,6 +21,10 @@ const EcommerceView = () => {
 
         <Route path="/store/cart/">
           <Cart />
+        </Route>
+
+        <Route path="/store/checkout/">
+          <Checkout />
         </Route>
       </Switch>
     </>

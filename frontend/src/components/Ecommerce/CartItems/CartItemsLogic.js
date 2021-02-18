@@ -1,10 +1,36 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 
 import { CartItemContext } from "../../../context/CartItemContext";
+import { getProducts } from "../../../hooks/query/getProducts";
+import ProductLogic from "../../../components/Ecommerce/Product/ProductLogic";
 import GetCurrentCustomer from "../../../hooks/GetCurrentCustomer";
+
 const CartItemsLogic = () => {
   const [state, dispatch] = useContext(CartItemContext);
+  const { products, productLoading, productImageLoading } = getProducts();
+  const { processCart } = ProductLogic();
   const { djangoCurrentUser } = GetCurrentCustomer();
+
+  let cartDisplayProducts = [];
+  state.cartProducts.forEach((item) => {
+    products.map((product) => {
+      if (product.id === item.product) {
+        product.quantity = item.quantity;
+        product.selected = item.selected;
+        cartDisplayProducts.push(product);
+      }
+    });
+  });
+  let selectedItems = cartDisplayProducts.filter(
+    (item) => item.selected === true
+  );
+
+  const noSelected = () => {
+    if (selectedItems.length <= 0) {
+      return true;
+    }
+    return false;
+  };
 
   const selectedItemToggle = (selectedItem) => {
     if (djangoCurrentUser === "AnonymousUser") {
@@ -51,7 +77,17 @@ const CartItemsLogic = () => {
     }
   };
 
-  return { selectedItemToggle, state };
+  return {
+    selectedItemToggle,
+    state,
+    cartDisplayProducts,
+    processCart,
+    djangoCurrentUser,
+    productLoading,
+    productImageLoading,
+    noSelected,
+    selectedItems,
+  };
 };
 
 export default CartItemsLogic;

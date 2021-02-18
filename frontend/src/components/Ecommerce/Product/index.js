@@ -8,6 +8,7 @@ import Button from "../../Button";
 import ProductLogic from "./ProductLogic";
 import ImageSlider from "../ImageSlider";
 import closeIcon from "../../../assets/svgs/close.svg";
+import Loader from "../../../components/Ecommerce/Loader";
 
 const Product = () => {
   const {
@@ -19,6 +20,8 @@ const Product = () => {
     handleShowAddProductModal,
     handleCloseAddProductModal,
     showAddProductModal,
+    productLoading,
+    productImageLoading,
   } = ProductLogic();
 
   useEffect(() => {
@@ -27,86 +30,90 @@ const Product = () => {
 
   return (
     <>
-      {products.map((product) => {
-        const {
-          id,
-          image,
-          category,
-          brand,
-          name,
-          price,
-          description,
-          date_posted,
-        } = product;
+      {productLoading && productImageLoading ? (
+        <Loader />
+      ) : (
+        products.map((product) => {
+          const {
+            id,
+            image,
+            category,
+            brand,
+            name,
+            price,
+            description,
+            date_posted,
+          } = product;
 
-        let f_price = Number(price).toLocaleString();
+          let f_price = Number(price).toLocaleString();
 
-        let months = [
-          "January",
-          "February",
-          "March",
-          "April",
-          "May",
-          "June",
-          "July",
-          "August",
-          "September",
-          "October",
-          "November",
-          "December",
-        ];
+          let months = [
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December",
+          ];
 
-        let d = new Date(date_posted);
-        let mm = String(months[d.getMonth()]); //January is 0!
-        let dd = String(d.getDate()).padStart(2, "0");
-        let yyyy = String(d.getFullYear());
-        let hr = String(d.getHours());
-        let min = String(d.getMinutes());
+          let d = new Date(date_posted);
+          let mm = String(months[d.getMonth()]); //January is 0!
+          let dd = String(d.getDate()).padStart(2, "0");
+          let yyyy = String(d.getFullYear());
+          let hr = String(d.getHours());
+          let min = String(d.getMinutes());
 
-        let ampm = "AM";
-        if (hr > 12) {
-          hr -= 12;
-          ampm = "PM";
-        }
+          let ampm = "AM";
+          if (hr > 12) {
+            hr -= 12;
+            ampm = "PM";
+          }
 
-        let date = `${mm} ${dd}, ${yyyy} at ${hr}:${min} ${ampm}`;
-
-        return (
-          <div key={id}>
-            <main className="product">
-              <div className="condition brand-new">Brand new</div>
-              <div className="info-top">
-                <div className="product-name">{name}</div>
-                <div className="date-posted">{date}</div>
-              </div>
-              <img
-                className="product-image"
-                src={image[0] || defaultImage}
-                alt="product-image"
-              />
-              <div className="info-bottom">
-                <div className="product-price">
-                  <div className="current">₱ {f_price}.00</div>
-                  {/* <div className="original">Php 49,000</div> */}
+          let date = `${mm} ${dd}, ${yyyy} at ${hr}:${min} ${ampm}`;
+          return (
+            <div key={id}>
+              <main className="product">
+                <div className="condition brand-new">Brand new</div>
+                <div className="info-top">
+                  <div className="product-name">{name}</div>
+                  <div className="date-posted">{date}</div>
                 </div>
-                <Button
-                  type="button"
-                  text={
-                    <div className="inner">
-                      <p>Details</p>
-                      <i className="fas fa-eye"></i>
-                    </div>
-                  }
-                  cName="detail-btn"
-                  functionality={() =>
-                    handleShow(id, name, price, brand, image, description)
-                  }
+                <img
+                  className="product-image"
+                  src={image[0] || defaultImage}
+                  alt="product-image"
                 />
-              </div>
-            </main>
-          </div>
-        );
-      })}
+                <div className="info-bottom">
+                  <div className="product-price">
+                    <div className="current">₱ {f_price}.00</div>
+                    {/* <div className="original">Php 49,000</div> */}
+                  </div>
+                  <Button
+                    type="button"
+                    text={
+                      <div className="inner">
+                        <p>Details</p>
+                        <i className="fas fa-eye"></i>
+                      </div>
+                    }
+                    cName="detail-btn"
+                    functionality={() =>
+                      handleShow(id, name, price, brand, image, description)
+                    }
+                  />
+                </div>
+              </main>
+            </div>
+          );
+        })
+      )}
+
       {showDetails && (
         <div className="modal-wrapper">
           <section className="product-view">
