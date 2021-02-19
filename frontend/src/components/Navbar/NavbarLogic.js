@@ -58,13 +58,6 @@ const NavbarLogic = () => {
     setWidth(window.innerWidth);
   };
 
-  useEffect(() => {
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, [width]);
-
   const checkOffsetY = () => {
     setOffsetY(window.pageYOffset);
     setLastY(offsetY);
@@ -84,6 +77,7 @@ const NavbarLogic = () => {
     offsetY,
     isDark,
     setIsDark,
+    width,
   };
 };
 

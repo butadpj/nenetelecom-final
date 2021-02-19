@@ -17,6 +17,7 @@ const Navbar = ({ navLogoContainer, navListContainer }) => {
     offsetY,
     isDark,
     setIsDark,
+    width,
   } = NavbarLogic();
 
   //* MOBILE SCREEN - Navbar hover functionality - START
@@ -58,11 +59,11 @@ const Navbar = ({ navLogoContainer, navListContainer }) => {
   //* ANY DEVICE - Transparent Navbar functionality - START
 
   useEffect(() => {
-    window.addEventListener("scroll", checkOffsetY);
+    window.addEventListener("resize", handleResize);
     return () => {
-      window.removeEventListener("scroll", checkOffsetY);
+      window.removeEventListener("resize", handleResize);
     };
-  });
+  }, [width]);
 
   useEffect(() => {
     if (navLogoContainer) {
@@ -113,6 +114,11 @@ const Navbar = ({ navLogoContainer, navListContainer }) => {
         navContainer.current.style.height = "8vh";
       }
     }
+
+    window.addEventListener("scroll", checkOffsetY);
+    return () => {
+      window.removeEventListener("scroll", checkOffsetY);
+    };
   }, [offsetY]);
 
   //* ANY DEVICE - Transparent Navbar functionality - END
