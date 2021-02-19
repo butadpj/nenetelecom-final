@@ -15,33 +15,6 @@ const Cart = () => {
   useEffect(() => {
     document.body.style.overflow = "auto";
   }, []);
-  // const { data, setData } = useFetch("/api/customers/");
-
-  const createCustomer = () => {
-    // fetch("/api/customers/", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     "X-CSRFToken": csrftoken,
-    //   },
-    //   body: JSON.stringify({
-    //     mobile_number: "09507867559",
-    //     address: "dsadssada",
-    //     first_name: "Paul",
-    //     last_name: "Butad",
-    //   }),
-    // })
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     setData((prevData) => {
-    //       return [...prevData, data];
-    //     });
-    //   });
-  };
-
-  const handleCheckout = () => {
-    createCustomer();
-  };
 
   return (
     <>
@@ -61,11 +34,7 @@ const Cart = () => {
             <span>Total:</span> ₱{f_totalCartPrice}.00
           </div>
           <Link to="/store/checkout">
-            <Button
-              type="button"
-              text="Checkout"
-              functionality={() => handleCheckout()}
-            />
+            <Button type="button" text="Checkout" />
           </Link>
         </div>
       </section>

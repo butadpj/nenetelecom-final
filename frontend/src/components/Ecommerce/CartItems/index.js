@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 
 import "./CartItems.css";
 import CartItemsLogic from "./CartItemsLogic";
@@ -9,7 +9,6 @@ import Loader from "../../../components/Ecommerce/Loader";
 const CartItems = () => {
   const {
     selectedItemToggle,
-    state,
     cartDisplayProducts,
     processCart,
     djangoCurrentUser,
