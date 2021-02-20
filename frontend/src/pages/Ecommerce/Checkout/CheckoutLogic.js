@@ -15,16 +15,34 @@ const CheckoutLogic = () => {
     province: "",
     zipCode: "",
   });
+  const [isFormComplete, setIsFormComplete] = useState(false);
+  const [gcashInfo, setGcashInfo] = useState(false);
+
   const { selectedItems } = CartItemsLogic();
   const [state] = useContext(CartItemContext);
 
   const { djangoCurrentUser } = GetCurrentCustomer();
 
+  const showGcashInfo = () => {
+    document.body.style.overflow = "hidden";
+    setGcashInfo(true);
+  };
+
+  const closeGcashInfo = () => {
+    document.body.style.overflow = "auto";
+    setGcashInfo(false);
+  };
+
   const handleChange = (e) => {
     let input = e.target.name;
     let value = e.target.value;
+    const guestInfo = {
+      firstName: "Paul",
+      lastName: "George",
+      mobileNumber: "13213122",
+    };
+    setCustomerInfo(guestInfo);
 
-    setCustomerInfo({ ...customerInfo, [input]: value });
     setShippingInfo({ ...shippingInfo, [input]: value });
   };
 
@@ -32,6 +50,7 @@ const CheckoutLogic = () => {
     e.preventDefault();
     console.log(customerInfo);
     console.log(shippingInfo);
+    setIsFormComplete(true);
   };
 
   return {
@@ -44,6 +63,10 @@ const CheckoutLogic = () => {
     handleChange,
     handleSubmit,
     djangoCurrentUser,
+    isFormComplete,
+    gcashInfo,
+    showGcashInfo,
+    closeGcashInfo,
   };
 };
 

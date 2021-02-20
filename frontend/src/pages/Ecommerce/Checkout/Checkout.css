@@ -117,7 +117,7 @@
   margin: 1em auto;
   width: 87%;
   border-radius: 0.625rem;
-  padding: 0.5em;
+  padding: 0.5em 1em;
 }
 
 .checkout .billing-info-form .form-field {
@@ -161,4 +161,57 @@
 .checkout .form-submit-btn button:hover {
   color: var(--shadeGreen);
   background: var(--light);
+}
+
+.checkout .payment-method {
+  background: var(--light);
+  color: var(--shadeBlue);
+  margin: 1em auto;
+  width: 87%;
+  border-radius: 0.625rem;
+  padding: 0.5em 1em;
+}
+
+.checkout .payment-method .title {
+  text-align: center;
+}
+
+.checkout .methods {
+  margin-top: 1.5em;
+}
+
+.checkout .methods > * {
+  margin-bottom: 2em;
+}
+
+.checkout .methods .cod button,
+.g-cash button {
+  width: 100%;
+  padding: 0.7em;
+  font-size: 1em;
+  border-radius: 5px;
+  text-transform: initial;
+}
+
+.checkout .methods .cod button {
+  background: var(--shadeLightGreen);
+}
+
+.checkout .methods .cod button:hover {
+  background: var(--light);
+}
+
+.checkout .modal-wrapper .gcash-info {
+  background: var(--light);
+  color: var(--shadeBlue);
+  padding: 2em;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 90%;
+  transform: translate(-50%, -50%);
+}
+
+.checkout .gcash-instructions a {
+  color: var(--shadeBlue);
 }

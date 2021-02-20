@@ -1,12 +1,17 @@
-import React, { useContext, useState } from "react";
+import React, { useRef, useEffect } from "react";
 
 import "./Checkout.css";
 import Navbottom from "../../../components/Ecommerce/Navbars/Navbottom";
 import { Link } from "react-router-dom";
 import CheckoutLogic from "./CheckoutLogic";
 import Button from "../../../components/Button";
+import handDownIcon from "../../../assets/svgs/hand-point-down-regular.svg";
+import Paypal from "../../../components/Ecommerce/PayPal";
+import closeIcon from "../../../assets/svgs/close.svg";
 
 const Checkout = () => {
+  const submitBtnContainer = useRef(null);
+
   const {
     state,
     customerInfo,
@@ -17,10 +22,18 @@ const Checkout = () => {
     handleChange,
     handleSubmit,
     djangoCurrentUser,
+    isFormComplete,
+    gcashInfo,
+    showGcashInfo,
+    closeGcashInfo,
   } = CheckoutLogic();
 
   let totalCartPrice = state.totalCartPrice;
   let f_totalCartPrice = Number(totalCartPrice).toLocaleString();
+
+  useEffect(() => {
+    document.body.style.overflow = "auto";
+  }, []);
 
   return (
     <>
@@ -173,10 +186,81 @@ const Checkout = () => {
                   </div>
                 </section>
                 <div className="form-submit-btn">
-                  <Button type="submit" text="Continue" />
+                  {isFormComplete ? (
+                    <img src={handDownIcon} alt="hand-down-icon" />
+                  ) : (
+                    <Button type="submit" text="Continue" />
+                  )}
                 </div>
               </form>
             </div>
+            {isFormComplete ? (
+              <div className="payment-method">
+                <h4 className="title">Select Payment Method:</h4>
+                <div className="methods">
+                  <div className="cod">
+                    <Button
+                      type="button"
+                      text={
+                        <>
+                          <i className="fas fa-door-open"></i> Cash On Delivery
+                        </>
+                      }
+                    />
+                  </div>
+                  <div className="g-cash">
+                    <Button
+                      type="button"
+                      text={
+                        <>
+                          <i className="fas fa-mobile-alt"></i> GCash
+                        </>
+                      }
+                      functionality={showGcashInfo}
+                    />
+                  </div>
+
+                  <div className="paypal">
+                    <Paypal total={totalCartPrice} />
+                  </div>
+                </div>
+              </div>
+            ) : null}
+            {gcashInfo ? (
+              <div className="modal-wrapper">
+                <div className="gcash-info">
+                  <h4>First name: Wilda</h4>
+                  <h4>Last name: Butad</h4>
+                  <br />
+                  <h4>Mobile number: 09206796099</h4>
+                  <br />
+                  <hr />
+                  <br />
+                  <div className="gcash-instructions">
+                    <p>
+                      After sending the total cash amount purchased. Please
+                      provide a proof of transaction and send it on our FB page,
+                      so we can confirm your order. Thank you : )
+                    </p>
+                    <br />
+                    <span>Link: </span>
+                    <a
+                      target="_blank"
+                      href="https://www.facebook.com/nenetelecom"
+                    >
+                      Nenetelecom
+                    </a>
+                  </div>
+                  <div className="modal-close-button">
+                    <img
+                      src={closeIcon}
+                      alt=""
+                      onClick={() => closeGcashInfo()}
+                    />
+                  </div>
+                </div>
+              </div>
+            ) : null}
           </>
         )}
       </section>
