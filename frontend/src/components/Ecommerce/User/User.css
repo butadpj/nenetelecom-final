@@ -4,7 +4,7 @@
   justify-content: space-between;
   width: fit-content;
   height: auto;
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   font-weight: 600;
 }
 
@@ -13,6 +13,6 @@
 }
 
 .banner-profile img {
-  width: 1.8rem;
+  width: 2.5rem;
   border-radius: 50%;
 }

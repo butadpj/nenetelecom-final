@@ -40,13 +40,13 @@
 .ecommerce .nav-bottom .cart-count {
   position: absolute;
   top: 0%;
-  right: -15%;
+  right: -16%;
   background: var(--light);
   color: var(--dark);
   width: 1em;
   height: 1em;
-  font-size: 0.8em;
-  padding: 0.1em;
+  font-size: 0.85em;
+  padding: 0.62em;
   border-radius: 50%;
   display: flex;
   align-items: center;
