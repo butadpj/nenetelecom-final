@@ -66,12 +66,18 @@ const Navbar = ({ navLogoContainer, navListContainer }) => {
   }, [width]);
 
   useEffect(() => {
-    if (navLogoContainer) {
-      handleResize();
-      if (isMobile == true) {
-        navLogoContainer.ref.current.style.display = "block";
+    let isMounted = true;
+    if (isMounted) {
+      if (navLogoContainer) {
+        handleResize();
+        if (isMobile == true) {
+          navLogoContainer.ref.current.style.display = "block";
+        }
       }
     }
+    return () => {
+      isMounted = false;
+    };
   });
 
   useEffect(() => {

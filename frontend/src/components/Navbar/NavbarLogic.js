@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import bars from "../../assets/svgs/bars-solid.svg";
 import close from "../../assets/svgs/times-solid.svg";
 import { animateScroll as scroll } from "react-scroll";
