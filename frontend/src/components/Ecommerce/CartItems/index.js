@@ -19,11 +19,17 @@ const CartItems = () => {
 
   return (
     <div className="cart-items">
-      {noSelected() && (
+      {cartDisplayProducts.length === 0 ? (
         <div className="helper">
-          <span>Select a product to checkout</span>
-          <i className="fas fa-check-circle"></i>
+          <span>Add something in your cart...</span>
         </div>
+      ) : (
+        noSelected() && (
+          <div className="helper">
+            <span>Select a product to checkout</span>
+            <i className="fas fa-check-circle"></i>
+          </div>
+        )
       )}
 
       {productLoading && productImageLoading ? (

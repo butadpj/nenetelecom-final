@@ -37,7 +37,7 @@ const Checkout = () => {
 
         {selectedItems.length === 0 ? (
           <div className="helper">
-            <span>No product/s to checkout</span>
+            <span>Select an item to checkout...</span>
           </div>
         ) : (
           <>
