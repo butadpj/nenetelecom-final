@@ -43,6 +43,20 @@ const CheckoutLogic = () => {
     setConfirmModal(false);
   };
 
+  const processOrder = (total) => {
+    fetch("/store/checkout/process_order/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRFToken": csrftoken,
+      },
+      body: JSON.stringify({ form: { total: total } }),
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data))
+      .catch((err) => console.log(err));
+  };
+
   const handleChange = (e) => {
     let input = e.target.name;
     let value = e.target.value;
@@ -80,6 +94,7 @@ const CheckoutLogic = () => {
     confirmModal,
     showConfirmModal,
     closeConfirmModal,
+    processOrder,
   };
 };
 

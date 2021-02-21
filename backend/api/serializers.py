@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from backend.store.models import *
 from backend.cart.models import *
+from backend.checkout.models import *
 
 class ProductSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
@@ -42,3 +43,11 @@ class OrderProductSerializer(serializers.ModelSerializer):
         fields = [field.name for field in model._meta.fields] 
         fields.insert(0, 'url') # push url field in index 0
         fields.insert(5, 'total_price')
+
+class ShippingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Shipping
+        # to get all fields and put it into single array
+        fields = [field.name for field in model._meta.fields] 
+        fields.insert(0, 'url') # push url field in index 0
+        fields.insert(10, 'ready_to_deliver')

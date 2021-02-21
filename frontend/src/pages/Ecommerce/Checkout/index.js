@@ -29,6 +29,7 @@ const Checkout = () => {
     confirmModal,
     showConfirmModal,
     closeConfirmModal,
+    processOrder,
   } = CheckoutLogic();
 
   let totalCartPrice = state.totalCartPrice;
@@ -270,7 +271,11 @@ const Checkout = () => {
               <div className="modal-wrapper">
                 <div className="confirm-modal">
                   <h3>Do you want to complete your order?</h3>
-                  <Button type="button" text="Ok" />
+                  <Button
+                    type="button"
+                    text="Ok"
+                    functionality={processOrder(totalCartPrice)}
+                  />
                   <div className="modal-close-button">
                     <img
                       src={closeIcon}

@@ -4,6 +4,7 @@ from rest_framework import viewsets, permissions
 
 from backend.store.models import *
 from backend.cart.models import *
+from backend.checkout.models import *
 from .serializers import *
 
 
@@ -28,3 +29,7 @@ class OrderView(viewsets.ModelViewSet):
 class OrderProductView(viewsets.ModelViewSet):
     queryset = OrderProduct.objects.all()
     serializer_class = OrderProductSerializer
+
+class ShippingView(viewsets.ModelViewSet):
+    queryset = Shipping.objects.all()
+    serializer_class = ShippingSerializer

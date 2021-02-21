@@ -28,6 +28,7 @@ urlpatterns = [
     path('store/home/', include('frontend.urls')),
     path('store/cart/', include('frontend.urls')),
     path('store/checkout/', include('frontend.urls')),
+    path('store/checkout/process_order/', include('frontend.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
