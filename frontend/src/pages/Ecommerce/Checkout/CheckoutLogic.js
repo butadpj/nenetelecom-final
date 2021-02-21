@@ -17,7 +17,7 @@ const CheckoutLogic = () => {
   });
   const [isFormComplete, setIsFormComplete] = useState(false);
   const [gcashInfo, setGcashInfo] = useState(false);
-
+  const [confirmModal, setConfirmModal] = useState(false);
   const { selectedItems } = CartItemsLogic();
   const [state] = useContext(CartItemContext);
 
@@ -31,6 +31,16 @@ const CheckoutLogic = () => {
   const closeGcashInfo = () => {
     document.body.style.overflow = "auto";
     setGcashInfo(false);
+  };
+
+  const showConfirmModal = () => {
+    document.body.style.overflow = "hidden";
+    setConfirmModal(true);
+  };
+
+  const closeConfirmModal = () => {
+    document.body.style.overflow = "auto";
+    setConfirmModal(false);
   };
 
   const handleChange = (e) => {
@@ -67,6 +77,9 @@ const CheckoutLogic = () => {
     gcashInfo,
     showGcashInfo,
     closeGcashInfo,
+    confirmModal,
+    showConfirmModal,
+    closeConfirmModal,
   };
 };
 

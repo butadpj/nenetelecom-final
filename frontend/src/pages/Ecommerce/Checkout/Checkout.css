@@ -201,7 +201,8 @@
   background: var(--light);
 }
 
-.checkout .modal-wrapper .gcash-info {
+.checkout .modal-wrapper .gcash-info,
+.confirm-modal {
   background: var(--light);
   color: var(--shadeBlue);
   padding: 2em;
@@ -214,4 +215,14 @@
 
 .checkout .gcash-instructions a {
   color: var(--shadeBlue);
+}
+
+.checkout .confirm-modal button {
+  margin-top: 1em;
+  font-size: 1em;
+  width: 70%;
+  background: var(--shadeLightGreen);
+}
+.checkout .confirm-modal button:hover {
+  background: var(--light);
 }

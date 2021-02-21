@@ -26,6 +26,9 @@ const Checkout = () => {
     gcashInfo,
     showGcashInfo,
     closeGcashInfo,
+    confirmModal,
+    showConfirmModal,
+    closeConfirmModal,
   } = CheckoutLogic();
 
   let totalCartPrice = state.totalCartPrice;
@@ -206,6 +209,7 @@ const Checkout = () => {
                           <i className="fas fa-door-open"></i> Cash On Delivery
                         </>
                       }
+                      functionality={showConfirmModal}
                     />
                   </div>
                   <div className="g-cash">
@@ -238,9 +242,10 @@ const Checkout = () => {
                   <br />
                   <div className="gcash-instructions">
                     <p>
-                      After sending the total cash amount purchased. Please
-                      provide a proof of transaction and send it on our FB page,
-                      so we can confirm your order. Thank you : )
+                      After sending the total cash amount of the product you're
+                      about to purchase. Please provide a proof of transaction
+                      and send it on our FB page for order confirmation. Thank
+                      you : )
                     </p>
                     <br />
                     <span>Link: </span>
@@ -256,6 +261,21 @@ const Checkout = () => {
                       src={closeIcon}
                       alt=""
                       onClick={() => closeGcashInfo()}
+                    />
+                  </div>
+                </div>
+              </div>
+            ) : null}
+            {confirmModal ? (
+              <div className="modal-wrapper">
+                <div className="confirm-modal">
+                  <h3>Do you want to complete your order?</h3>
+                  <Button type="button" text="Ok" />
+                  <div className="modal-close-button">
+                    <img
+                      src={closeIcon}
+                      alt=""
+                      onClick={() => closeConfirmModal()}
                     />
                   </div>
                 </div>
