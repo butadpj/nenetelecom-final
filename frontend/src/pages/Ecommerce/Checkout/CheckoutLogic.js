@@ -91,7 +91,10 @@ const CheckoutLogic = () => {
       }),
     })
       .then((res) => res.json())
-      .then((data) => console.log(data))
+      .then((data) => {
+        alert("Transaction completed");
+        window.location.replace("/store/home");
+      })
       .catch((err) => console.log(err));
   };
 
