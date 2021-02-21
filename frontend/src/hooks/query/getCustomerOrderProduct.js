@@ -11,11 +11,15 @@ export const getCustomerOrderProduct = () => {
     (data) => data.customer === djangoCurrentCustomerId
   );
 
+  let notCompletedCustomerOrder = customerOrder.filter(
+    (data) => data.complete === false
+  );
+
   let customerOrderProduct = [];
   let total_items;
   let total_price;
   orderProductData.forEach((data) => {
-    customerOrder.forEach((order) => {
+    notCompletedCustomerOrder.forEach((order) => {
       if (data.order === order.transaction_id) {
         customerOrderProduct.push(data);
         total_items = order.total_cart_items;
@@ -24,5 +28,11 @@ export const getCustomerOrderProduct = () => {
     });
   });
 
-  return { customerOrder, customerOrderProduct, total_items, total_price };
+  return {
+    customerOrder,
+    customerOrderProduct,
+    notCompletedCustomerOrder,
+    total_items,
+    total_price,
+  };
 };

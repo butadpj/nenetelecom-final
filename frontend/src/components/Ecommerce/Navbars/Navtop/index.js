@@ -8,24 +8,13 @@ import userImage from "../../../../assets/images/profile.webp";
 import guestUserImage from "../../../../assets/svgs/guest_user.svg";
 import GetCurrentCustomer from "../../../../hooks/GetCurrentCustomer";
 
-const customersUrl = "/api/customers/";
-
 import { Link } from "react-router-dom";
 
 const Navtop = ({ url }) => {
-  const [customers, setCustomers] = useState([]);
-
-  const { djangoCurrentUser, djangoCurrentCustomer } = GetCurrentCustomer();
-
-  const getCustomers = async () => {
-    const response = await fetch(customersUrl);
-    const data = await response.json();
-    setCustomers(data);
-  };
-
-  useEffect(() => {
-    getCustomers();
-  }, [customersUrl]);
+  const {
+    djangoCurrentUser,
+    djangoCurrentCustomerFirstName,
+  } = GetCurrentCustomer();
 
   return (
     <div className="nav-top">
@@ -37,7 +26,7 @@ const Navtop = ({ url }) => {
           userName={
             djangoCurrentUser === "AnonymousUser"
               ? "Guest"
-              : djangoCurrentCustomer
+              : djangoCurrentCustomerFirstName
           }
           userImage={
             djangoCurrentUser === "AnonymousUser" ? guestUserImage : userImage

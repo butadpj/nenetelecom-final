@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useEffect } from "react";
 
 import "./Checkout.css";
 import Navbottom from "../../../components/Ecommerce/Navbars/Navbottom";
@@ -10,16 +10,13 @@ import Paypal from "../../../components/Ecommerce/PayPal";
 import closeIcon from "../../../assets/svgs/close.svg";
 
 const Checkout = () => {
-  const submitBtnContainer = useRef(null);
-
   const {
     state,
-    customerInfo,
-    setCustomerInfo,
-    shippingInfo,
-    setShippingInfo,
     selectedItems,
-    handleChange,
+    customerInfo,
+    shippingInfo,
+    handleCustomerInfoChange,
+    handleShippingInfoChange,
     handleSubmit,
     djangoCurrentUser,
     isFormComplete,
@@ -113,7 +110,7 @@ const Checkout = () => {
                           placeholder="John"
                           name="firstName"
                           value={customerInfo.firstName}
-                          onChange={handleChange}
+                          onChange={handleCustomerInfoChange}
                         />
                       </div>
                       <div className="form-field">
@@ -124,7 +121,7 @@ const Checkout = () => {
                           placeholder="Doe"
                           name="lastName"
                           value={customerInfo.lastName}
-                          onChange={handleChange}
+                          onChange={handleCustomerInfoChange}
                         />
                       </div>
                       <div className="form-field">
@@ -135,7 +132,7 @@ const Checkout = () => {
                           placeholder="09xxxxxxxxx"
                           name="mobileNumber"
                           value={customerInfo.mobileNumber}
-                          onChange={handleChange}
+                          onChange={handleCustomerInfoChange}
                         />
                       </div>
                     </section>
@@ -153,7 +150,7 @@ const Checkout = () => {
                       placeholder="9100 St. Peter street..."
                       name="address"
                       value={shippingInfo.address}
-                      onChange={handleChange}
+                      onChange={handleShippingInfoChange}
                     />
                   </div>
                   <div className="form-field">
@@ -164,7 +161,7 @@ const Checkout = () => {
                       placeholder="Antipolo City"
                       name="city"
                       value={shippingInfo.city}
-                      onChange={handleChange}
+                      onChange={handleShippingInfoChange}
                     />
                   </div>
                   <div className="form-field">
@@ -175,7 +172,7 @@ const Checkout = () => {
                       placeholder="Rizal"
                       name="province"
                       value={shippingInfo.province}
-                      onChange={handleChange}
+                      onChange={handleShippingInfoChange}
                     />
                   </div>
                   <div className="form-field">
@@ -185,7 +182,7 @@ const Checkout = () => {
                       placeholder="1870"
                       name="zipCode"
                       value={shippingInfo.zipCode}
-                      onChange={handleChange}
+                      onChange={handleShippingInfoChange}
                     />
                   </div>
                 </section>
@@ -229,6 +226,11 @@ const Checkout = () => {
                     <Paypal total={totalCartPrice} />
                   </div>
                 </div>
+                <h3>What to do after you order?</h3>-
+                <h4 style={{ color: " var(--shadeDark)", fontWeight: "600" }}>
+                  Wait for our call, so we can confirm your order. Thank you : )
+                </h4>
+                <br />
               </div>
             ) : null}
             {gcashInfo ? (
@@ -274,7 +276,7 @@ const Checkout = () => {
                   <Button
                     type="button"
                     text="Ok"
-                    functionality={processOrder(totalCartPrice)}
+                    functionality={() => processOrder(totalCartPrice)}
                   />
                   <div className="modal-close-button">
                     <img

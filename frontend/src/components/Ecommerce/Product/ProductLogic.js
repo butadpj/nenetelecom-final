@@ -10,7 +10,7 @@ const ProductLogic = () => {
   const [showAddProductModal, setShowAddProductModal] = useState(false);
   const [state, dispatch] = useContext(CartItemContext);
   const { djangoCurrentUser, djangoCurrentCustomerId } = GetCurrentCustomer();
-  const { customerOrder, customerOrderProduct } = getCustomerOrderProduct();
+  const { notCompletedCustomerOrder } = getCustomerOrderProduct();
   const { products, productLoading, productImageLoading } = getProducts();
 
   const refreshPage = () => {
@@ -136,7 +136,7 @@ const ProductLogic = () => {
         //ADDING PRODUCT
 
         //Create order if customer has no order yet
-        if (customerOrder.length == 0) {
+        if (notCompletedCustomerOrder.length == 0) {
           fetch(`/api/orders/`, {
             method: "POST",
             headers: {
@@ -181,7 +181,7 @@ const ProductLogic = () => {
               "X-CSRFToken": csrftoken,
             },
             body: JSON.stringify({
-              order: customerOrder[0].transaction_id,
+              order: notCompletedCustomerOrder[0].transaction_id,
               product: selectedProduct,
               quantity: 1,
             }),

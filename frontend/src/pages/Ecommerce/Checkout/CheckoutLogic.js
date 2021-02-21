@@ -9,19 +9,26 @@ const CheckoutLogic = () => {
     lastName: "",
     mobileNumber: "",
   });
+
   const [shippingInfo, setShippingInfo] = useState({
     address: "",
     city: "",
     province: "",
     zipCode: "",
   });
+
   const [isFormComplete, setIsFormComplete] = useState(false);
   const [gcashInfo, setGcashInfo] = useState(false);
   const [confirmModal, setConfirmModal] = useState(false);
   const { selectedItems } = CartItemsLogic();
   const [state] = useContext(CartItemContext);
 
-  const { djangoCurrentUser } = GetCurrentCustomer();
+  const {
+    djangoCurrentUser,
+    djangoCurrentCustomerFirstName,
+    djangoCurrentCustomerLastName,
+    djangoCurrentCustomerMobileNumber,
+  } = GetCurrentCustomer();
 
   const showGcashInfo = () => {
     document.body.style.overflow = "hidden";
@@ -43,6 +50,33 @@ const CheckoutLogic = () => {
     setConfirmModal(false);
   };
 
+  const handleCustomerInfoChange = (e) => {
+    let input = e.target.name;
+    let value = e.target.value;
+    if (djangoCurrentUser === "AnonymousUser") {
+      setCustomerInfo({ ...customerInfo, [input]: value });
+    }
+  };
+
+  const handleShippingInfoChange = (e) => {
+    let input = e.target.name;
+    let value = e.target.value;
+    if (djangoCurrentUser !== "AnonymousUser") {
+      let userInfo = {
+        firstName: djangoCurrentCustomerFirstName,
+        lastName: djangoCurrentCustomerLastName,
+        mobileNumber: djangoCurrentCustomerMobileNumber,
+      };
+      setCustomerInfo(userInfo);
+    }
+    setShippingInfo({ ...shippingInfo, [input]: value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setIsFormComplete(true);
+  };
+
   const processOrder = (total) => {
     fetch("/store/checkout/process_order/", {
       method: "POST",
@@ -50,41 +84,24 @@ const CheckoutLogic = () => {
         "Content-Type": "application/json",
         "X-CSRFToken": csrftoken,
       },
-      body: JSON.stringify({ form: { total: total } }),
+      body: JSON.stringify({
+        customerInfo: { ...customerInfo },
+        shippingInfo: shippingInfo,
+        total: total,
+      }),
     })
       .then((res) => res.json())
       .then((data) => console.log(data))
       .catch((err) => console.log(err));
   };
 
-  const handleChange = (e) => {
-    let input = e.target.name;
-    let value = e.target.value;
-    const guestInfo = {
-      firstName: "Paul",
-      lastName: "George",
-      mobileNumber: "13213122",
-    };
-    setCustomerInfo(guestInfo);
-
-    setShippingInfo({ ...shippingInfo, [input]: value });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(customerInfo);
-    console.log(shippingInfo);
-    setIsFormComplete(true);
-  };
-
   return {
     state,
-    customerInfo,
-    setCustomerInfo,
-    shippingInfo,
-    setShippingInfo,
     selectedItems,
-    handleChange,
+    customerInfo,
+    shippingInfo,
+    handleCustomerInfoChange,
+    handleShippingInfoChange,
     handleSubmit,
     djangoCurrentUser,
     isFormComplete,
