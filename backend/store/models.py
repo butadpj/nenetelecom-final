@@ -33,7 +33,7 @@ class Product(models.Model):
         (U, 'Used'),
     )
 
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, verbose_name="product_id")
     category = models.CharField(max_length=30, null=False, choices=TYPE, default=TYPE[0][0])
     brand = models.CharField(max_length=20, null=True, blank=True)
     name = models.CharField(max_length=100, null=False)
@@ -85,7 +85,8 @@ class ProductImage(models.Model):
             rotated_img.thumbnail(new_img)
             rotated_img.save(self.image.path)
 
-
+    def __str__(self):
+        return (f'{self.product}')
 
 
 
@@ -98,4 +99,4 @@ class Customer(models.Model):
     last_name = models.CharField(max_length=30, null=True, blank=True)
 
     def __str__(self):
-        return (f'{self.first_name} {self.last_name}')
+        return (f'{self.first_name} {self.last_name} ({self.mobile_number})')

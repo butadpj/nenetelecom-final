@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import CartItemsLogic from "../../../components/Ecommerce/CartItems/CartItemsLogic";
 import { CartItemContext } from "../../../context/CartItemContext";
 import GetCurrentCustomer from "../../../hooks/GetCurrentCustomer";
@@ -20,7 +20,10 @@ const CheckoutLogic = () => {
   const [isFormComplete, setIsFormComplete] = useState(false);
   const [gcashInfo, setGcashInfo] = useState(false);
   const [confirmModal, setConfirmModal] = useState(false);
+  const [alertModal, setAlertModal] = useState(false);
+  const [time, setTime] = useState(4);
   const { selectedItems } = CartItemsLogic();
+
   const [state] = useContext(CartItemContext);
 
   const {
@@ -44,6 +47,27 @@ const CheckoutLogic = () => {
     document.body.style.overflow = "hidden";
     setConfirmModal(true);
   };
+
+  const showAlertModal = () => {
+    document.body.style.overflow = "hidden";
+    setAlertModal(true);
+  };
+
+  useEffect(() => {
+    if (alertModal) {
+      let myTimer;
+      if (time === 0) {
+        clearInterval(myTimer);
+        window.location.replace("/store/home");
+      } else {
+        const timer = () => {
+          setTime(time - 1);
+        };
+
+        myTimer = setInterval(timer, 1000);
+      }
+    }
+  }, [alertModal, time]);
 
   const closeConfirmModal = () => {
     document.body.style.overflow = "auto";
@@ -92,8 +116,8 @@ const CheckoutLogic = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        alert("Transaction completed");
-        window.location.replace("/store/home");
+        console.log(data);
+        showAlertModal();
       })
       .catch((err) => console.log(err));
   };
@@ -115,6 +139,8 @@ const CheckoutLogic = () => {
     showConfirmModal,
     closeConfirmModal,
     processOrder,
+    alertModal,
+    time,
   };
 };
 

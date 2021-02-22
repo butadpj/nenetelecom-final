@@ -226,3 +226,18 @@
 .checkout .confirm-modal button:hover {
   background: var(--light);
 }
+
+.checkout .alert-timer {
+  color: var(--light);
+  padding: 2em;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.checkout .alert-timer .redirect-message {
+  margin-top: 1em;
+}

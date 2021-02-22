@@ -25,8 +25,16 @@ class Shipping(models.Model):
             pass
 
     @property
+    def shipping_address(self):
+        return (f'{self.address}, {self.city} City, {self.province}, {self.zip_code}')
+
+    @property
+    def customer_info(self):
+        return self.customer
+
+    @property
     def info(self):
-        return (f'{self.customer}, {self.city} City')
+        return (f'{self.customer}: {self.shipping_address}')
 
     def __str__(self):
         return self.info

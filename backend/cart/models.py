@@ -31,10 +31,8 @@ class Order(models.Model):
 
     @property
     def customer_info(self):
-        try:
-            return (f'{self.customer.first_name}: {self.customer.mobile_number}')
-        except:
-            pass
+        return (f'{self.customer}')
+ 
 
 
 class OrderProduct(models.Model):

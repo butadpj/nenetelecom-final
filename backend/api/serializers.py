@@ -51,3 +51,4 @@ class ShippingSerializer(serializers.ModelSerializer):
         fields = [field.name for field in model._meta.fields] 
         fields.insert(0, 'url') # push url field in index 0
         fields.insert(10, 'ready_to_deliver')
+        fields.insert(11, 'shipping_address')

@@ -134,7 +134,6 @@ const ProductLogic = () => {
           .catch((error) => console.log(error));
       } else {
         //ADDING PRODUCT
-
         //Create order if customer has no order yet
         if (notCompletedCustomerOrder.length == 0) {
           fetch(`/api/orders/`, {
@@ -164,6 +163,7 @@ const ProductLogic = () => {
               })
                 .then((res) => res.json())
                 .then((data) => {
+                  console.log(data);
                   dispatch({
                     type: "ADD_ITEM_AU",
                     payload: data,

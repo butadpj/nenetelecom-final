@@ -27,6 +27,8 @@ const Checkout = () => {
     showConfirmModal,
     closeConfirmModal,
     processOrder,
+    alertModal,
+    time,
   } = CheckoutLogic();
 
   let totalCartPrice = state.totalCartPrice;
@@ -285,6 +287,16 @@ const Checkout = () => {
                       onClick={() => closeConfirmModal()}
                     />
                   </div>
+                </div>
+              </div>
+            ) : null}
+            {alertModal ? (
+              <div className="modal-wrapper">
+                <div className="alert-timer">
+                  <h3>Transaction completed...</h3>
+                  <h4 className="redirect-message">
+                    Redirecting to store in {time}
+                  </h4>
                 </div>
               </div>
             ) : null}
