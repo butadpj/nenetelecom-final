@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 
 import { CartItemContext } from "../../../context/CartItemContext";
 import { getProducts } from "../../../hooks/query/getProducts";
@@ -79,7 +79,6 @@ const CartItemsLogic = () => {
 
   return {
     selectedItemToggle,
-    state,
     cartDisplayProducts,
     processCart,
     djangoCurrentUser,

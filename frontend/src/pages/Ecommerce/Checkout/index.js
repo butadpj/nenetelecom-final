@@ -293,7 +293,7 @@ const Checkout = () => {
             {alertModal ? (
               <div className="modal-wrapper">
                 <div className="alert-timer">
-                  <h3>Transaction completed...</h3>
+                  <h3>Transaction complete...</h3>
                   <h4 className="redirect-message">
                     Redirecting to store in {time}
                   </h4>

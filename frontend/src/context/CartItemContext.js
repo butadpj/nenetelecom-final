@@ -8,6 +8,7 @@ export const CartItemContext = createContext();
 
 const initialState = {
   cartProducts: [],
+  completedOrders: [],
   totalCartItem: 0,
   totalCartPrice: 0,
 };
@@ -15,7 +16,10 @@ const initialState = {
 const CartItemContextProvider = (props) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const { djangoCurrentUser } = GetCurrentCustomer();
-  const { customerOrderProduct } = getCustomerOrderProduct();
+  const {
+    completedCustomerOrderDisplay,
+    customerOrderProduct,
+  } = getCustomerOrderProduct();
   const { cookieCart } = getCookieCart();
 
   const get_total_items = (obj) => {
@@ -49,6 +53,7 @@ const CartItemContextProvider = (props) => {
   } else {
     //If logged in
     initialState.cartProducts = customerOrderProduct;
+    initialState.completedOrders = completedCustomerOrderDisplay;
     state.totalCartItem = get_total_items(state.cartProducts);
     state.totalCartPrice = get_total_price(
       state.cartProducts.filter((item) => item.selected === true)

@@ -19,13 +19,22 @@ const Cart = () => {
   return (
     <>
       <section className="cart">
-        <div className="back-to-store">
-          <Link to="/store/home">
-            <i className="fas fa-arrow-circle-left"></i>
-          </Link>
-          <span>
-            to store <i className="fas fa-store-alt"></i>
-          </span>
+        <div className="cart-top-nav">
+          <div className="back-to-store">
+            <Link to="/store/home">
+              <i className="fas fa-arrow-circle-left"></i>
+            </Link>
+            <span>
+              to store <i className="fas fa-store-alt"></i>
+            </span>
+          </div>
+          {state.completedOrders.length > 0 ? (
+            <div className="view-orders-link">
+              <Link to="/store/orders">
+                <h5>View All Orders {`>`}</h5>
+              </Link>
+            </div>
+          ) : null}
         </div>
         <hr />
         <CartItems />
