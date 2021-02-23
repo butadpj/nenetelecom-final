@@ -1,20 +1,14 @@
-import React, { useEffect, useContext } from "react";
+import React from "react";
 
 import "./Cart.css";
+import CartLogic from "./CartLogic";
 import { Link } from "react-router-dom";
 import Navbottom from "../../../components/Ecommerce/Navbars/Navbottom";
 import CartItems from "../../../components/Ecommerce/CartItems";
 import Button from "../../../components/Button";
-import { CartItemContext } from "../../../context/CartItemContext";
 
 const Cart = () => {
-  const [state] = useContext(CartItemContext);
-  let totalCartPrice = state.totalCartPrice;
-  let f_totalCartPrice = Number(totalCartPrice).toLocaleString();
-
-  useEffect(() => {
-    document.body.style.overflow = "auto";
-  }, []);
+  const { state, f_totalCartPrice } = CartLogic();
 
   return (
     <>

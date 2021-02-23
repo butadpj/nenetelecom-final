@@ -4,6 +4,9 @@ import uuid
 
 # Create your models here.
 class Order(models.Model):
+    class Meta:
+        ordering = ('-transaction_date', )
+
     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True, blank=True)
     transaction_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     transaction_date = models.DateTimeField(null=True, auto_now_add=True)

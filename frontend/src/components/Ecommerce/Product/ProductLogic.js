@@ -13,10 +13,6 @@ const ProductLogic = () => {
   const { notCompletedCustomerOrder } = getCustomerOrderProduct();
   const { products, productLoading, productImageLoading } = getProducts();
 
-  const refreshPage = () => {
-    window.location.reload();
-  };
-
   const handleShow = (id, name, price, brand, image, description) => {
     setShowDetails(true);
     document.body.style.overflow = "hidden";

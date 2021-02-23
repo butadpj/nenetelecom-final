@@ -50,7 +50,7 @@ export const getCustomerOrderProduct = () => {
     products.map((product) => {
       if (product.id === item.product) {
         product.quantity = item.quantity;
-        item.product = [product];
+        item.product = product;
       }
     });
     completedCustomerOrderProductDisplay.push(item);
@@ -58,10 +58,10 @@ export const getCustomerOrderProduct = () => {
 
   let completedCustomerOrderDisplay = [];
   completedCustomerOrder.forEach((order) => {
-    order.order_product = [];
+    order.order_products = [];
     completedCustomerOrderProduct.map((item) => {
       if (item.order === order.transaction_id) {
-        order.order_product.push(item);
+        order.order_products.push(item);
       }
     });
     completedCustomerOrderDisplay.push(order);

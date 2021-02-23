@@ -4,6 +4,10 @@ from backend.cart.models import Order
 
 # Create your models here.
 class Shipping(models.Model):
+
+    class Meta:
+        ordering = ('-date_placed', )
+        
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE, blank=True, null=True)
     order = models.ForeignKey(Order, on_delete=models.CASCADE, blank=True, null=True)
     address = models.CharField(max_length=100)

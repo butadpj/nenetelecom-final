@@ -5,6 +5,7 @@ import Navtop from "../../../components/Ecommerce/Navbars/Navtop";
 import Home from "../../../pages/Ecommerce/Home";
 import Cart from "../../../pages/Ecommerce/Cart";
 import Checkout from "../../../pages/Ecommerce/Checkout";
+import Orders from "../../../pages/Ecommerce/Orders";
 
 const EcommerceView = () => {
   return (
@@ -25,6 +26,10 @@ const EcommerceView = () => {
 
         <Route path="/store/checkout/">
           <Checkout />
+        </Route>
+
+        <Route path="/store/orders/">
+          <Orders />
         </Route>
       </Switch>
     </>

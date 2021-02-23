@@ -20,6 +20,10 @@
   color: var(--shadeDark);
 }
 
+.checkout .back-to-cart a:hover {
+  color: var(--dark);
+}
+
 .checkout .helper {
   display: flex;
   align-items: center;
