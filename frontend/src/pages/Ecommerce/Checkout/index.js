@@ -105,7 +105,7 @@ const Checkout = () => {
                     <section className="customer-info">
                       <h3 className="title">Customer Info</h3>
                       <div className="form-field">
-                        <label htmlFor="lastName">First name: </label>
+                        <label htmlFor="firstName">First name: </label>
                         <input
                           required
                           type="text"
@@ -117,6 +117,7 @@ const Checkout = () => {
                       </div>
                       <div className="form-field">
                         <label htmlFor="lastName">Last name: </label>
+
                         <input
                           required
                           type="text"
@@ -127,9 +128,11 @@ const Checkout = () => {
                         />
                       </div>
                       <div className="form-field">
-                        <label htmlFor="address">Mobile number: </label>
+                        <label htmlFor="mobileNumber">Mobile number: </label>
                         <input
                           required
+                          minLength={11}
+                          maxLength={11}
                           type="text"
                           placeholder="09xxxxxxxxx"
                           name="mobileNumber"

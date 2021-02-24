@@ -77,6 +77,18 @@ const CheckoutLogic = () => {
   const handleCustomerInfoChange = (e) => {
     let input = e.target.name;
     let value = e.target.value;
+
+    if (input === "mobileNumber") {
+      let initialDigit = "09";
+      let inputInitialDigit = value.slice(0, 2);
+
+      if (inputInitialDigit != initialDigit || !value.match(/^[0-9]{11}$/)) {
+        console.log("Not valid");
+      } else {
+        console.log("Valid");
+      }
+    }
+
     if (djangoCurrentUser === "AnonymousUser") {
       setCustomerInfo({ ...customerInfo, [input]: value });
     }
