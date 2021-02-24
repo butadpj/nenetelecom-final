@@ -4,7 +4,7 @@ from .models import *
 # Register your models here.
 class OrderAdmin(admin.ModelAdmin):
     list_display = [ 'customer_info', 'complete', 'confirmed', 'transaction_date',  'total_cart_price', 'total_cart_items']
-    readonly_fields=('customer', 'complete',)
+    readonly_fields=('transaction_id', 'customer', 'complete',)
 
 
 class OrderProductAdmin(admin.ModelAdmin):

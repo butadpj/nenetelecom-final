@@ -94,7 +94,7 @@ class Customer(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     mobile_number = models.CharField(max_length=11, null=False, blank=False)
-    address = models.CharField(max_length=100, null=True, blank=True)
+    full_address = models.CharField(max_length=100, null=True, blank=True)
     first_name = models.CharField(max_length=30, null=True, blank=True)
     last_name = models.CharField(max_length=30, null=True, blank=True)
 

@@ -8,7 +8,7 @@ import CartItems from "../../../components/Ecommerce/CartItems";
 import Button from "../../../components/Button";
 
 const Cart = () => {
-  const { state, f_totalCartPrice } = CartLogic();
+  const { state, f_totalCartPrice, djangoCurrentUser } = CartLogic();
 
   return (
     <>
@@ -22,7 +22,13 @@ const Cart = () => {
               to store <i className="fas fa-store-alt"></i>
             </span>
           </div>
-          {state.completedOrders.length > 0 ? (
+          {djangoCurrentUser === "AnonymousUser" ? (
+            <div className="view-orders-link">
+              <Link to="#">
+                <h5>Login to view all orders {`>`}</h5>
+              </Link>
+            </div>
+          ) : state.completedOrders.length > 0 ? (
             <div className="view-orders-link">
               <Link to="/store/orders">
                 <h5>View All Orders {`>`}</h5>

@@ -93,6 +93,7 @@ const CheckoutLogic = () => {
       };
       setCustomerInfo(userInfo);
     }
+
     setShippingInfo({ ...shippingInfo, [input]: value });
   };
 
@@ -109,7 +110,7 @@ const CheckoutLogic = () => {
         "X-CSRFToken": csrftoken,
       },
       body: JSON.stringify({
-        customerInfo: { ...customerInfo },
+        customerInfo: customerInfo,
         shippingInfo: shippingInfo,
         total: total,
       }),
@@ -117,6 +118,8 @@ const CheckoutLogic = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
+        cart = {};
+        document.cookie = "cart=" + JSON.stringify(cart) + ";domain=;path=/";
         showAlertModal();
       })
       .catch((err) => console.log(err));
