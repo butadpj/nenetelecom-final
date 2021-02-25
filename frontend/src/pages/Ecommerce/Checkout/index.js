@@ -29,6 +29,8 @@ const Checkout = () => {
     processOrder,
     alertModal,
     time,
+    validity,
+    errorMessage,
   } = CheckoutLogic();
 
   let totalCartPrice = state.totalCartPrice;
@@ -105,8 +107,28 @@ const Checkout = () => {
                     <section className="customer-info">
                       <h3 className="title">Customer Info</h3>
                       <div className="form-field">
-                        <label htmlFor="firstName">First name: </label>
+                        <label
+                          htmlFor="firstName"
+                          className={
+                            validity.firstName === null
+                              ? "default"
+                              : validity.firstName === true
+                              ? "valid"
+                              : "not-valid"
+                          }
+                        >
+                          First name:
+                        </label>
                         <input
+                          className={
+                            validity.firstName === null
+                              ? "default"
+                              : validity.firstName === true
+                              ? "valid"
+                              : "not-valid"
+                          }
+                          minLength={2}
+                          maxLength={30}
                           required
                           type="text"
                           placeholder="John"
@@ -114,11 +136,34 @@ const Checkout = () => {
                           value={customerInfo.firstName}
                           onChange={handleCustomerInfoChange}
                         />
+                        <div className="error-message">
+                          {errorMessage.firstName}
+                        </div>
                       </div>
                       <div className="form-field">
-                        <label htmlFor="lastName">Last name: </label>
+                        <label
+                          htmlFor="lastName"
+                          className={
+                            validity.lastName === null
+                              ? "default"
+                              : validity.lastName === true
+                              ? "valid"
+                              : "not-valid"
+                          }
+                        >
+                          Last name:
+                        </label>
 
                         <input
+                          className={
+                            validity.lastName === null
+                              ? "default"
+                              : validity.lastName === true
+                              ? "valid"
+                              : "not-valid"
+                          }
+                          minLength={2}
+                          maxLength={30}
                           required
                           type="text"
                           placeholder="Doe"
@@ -126,10 +171,31 @@ const Checkout = () => {
                           value={customerInfo.lastName}
                           onChange={handleCustomerInfoChange}
                         />
+                        <div className="error-message">
+                          {errorMessage.lastName}
+                        </div>
                       </div>
                       <div className="form-field">
-                        <label htmlFor="mobileNumber">Mobile number: </label>
+                        <label
+                          htmlFor="mobileNumber"
+                          className={
+                            validity.mobileNumber === null
+                              ? "default"
+                              : validity.mobileNumber === true
+                              ? "valid"
+                              : "not-valid"
+                          }
+                        >
+                          Mobile number:
+                        </label>
                         <input
+                          className={
+                            validity.mobileNumber === null
+                              ? "default"
+                              : validity.mobileNumber === true
+                              ? "valid"
+                              : "not-valid"
+                          }
                           required
                           minLength={11}
                           maxLength={11}
@@ -139,6 +205,9 @@ const Checkout = () => {
                           value={customerInfo.mobileNumber}
                           onChange={handleCustomerInfoChange}
                         />
+                        <div className="error-message">
+                          {errorMessage.mobileNumber}
+                        </div>
                       </div>
                     </section>
                     <hr />
@@ -148,8 +217,28 @@ const Checkout = () => {
                 <section className="shipping-info">
                   <h3 className="title">Shipping Info</h3>
                   <div className="form-field">
-                    <label htmlFor="address">Address: </label>
+                    <label
+                      htmlFor="address"
+                      className={
+                        validity.address === null
+                          ? "default"
+                          : validity.address === true
+                          ? "valid"
+                          : "not-valid"
+                      }
+                    >
+                      Address:
+                    </label>
                     <input
+                      className={
+                        validity.address === null
+                          ? "default"
+                          : validity.address === true
+                          ? "valid"
+                          : "not-valid"
+                      }
+                      minLength={8}
+                      maxLength={100}
                       required
                       type="text"
                       placeholder="9100 St. Peter street..."
@@ -157,21 +246,63 @@ const Checkout = () => {
                       value={shippingInfo.address}
                       onChange={handleShippingInfoChange}
                     />
+                    <div className="error-message">{errorMessage.address}</div>
                   </div>
                   <div className="form-field">
-                    <label htmlFor="city">City: </label>
+                    <label
+                      htmlFor="city"
+                      className={
+                        validity.city === null
+                          ? "default"
+                          : validity.city === true
+                          ? "valid"
+                          : "not-valid"
+                      }
+                    >
+                      City:
+                    </label>
                     <input
+                      className={
+                        validity.city === null
+                          ? "default"
+                          : validity.city === true
+                          ? "valid"
+                          : "not-valid"
+                      }
+                      minLength={4}
+                      maxLength={50}
                       required
                       type="text"
-                      placeholder="Antipolo City"
+                      placeholder="Antipolo"
                       name="city"
                       value={shippingInfo.city}
                       onChange={handleShippingInfoChange}
                     />
+                    <div className="error-message">{errorMessage.city}</div>
                   </div>
                   <div className="form-field">
-                    <label htmlFor="province">Province: </label>
+                    <label
+                      htmlFor="province"
+                      className={
+                        validity.province === null
+                          ? "default"
+                          : validity.province === true
+                          ? "valid"
+                          : "not-valid"
+                      }
+                    >
+                      Province:
+                    </label>
                     <input
+                      className={
+                        validity.province === null
+                          ? "default"
+                          : validity.province === true
+                          ? "valid"
+                          : "not-valid"
+                      }
+                      minLength={4}
+                      maxLength={50}
                       required
                       type="text"
                       placeholder="Rizal"
@@ -179,16 +310,38 @@ const Checkout = () => {
                       value={shippingInfo.province}
                       onChange={handleShippingInfoChange}
                     />
+                    <div className="error-message">{errorMessage.province}</div>
                   </div>
                   <div className="form-field">
-                    <label htmlFor="zipCode">Zip code: </label>
+                    <label
+                      htmlFor="zipCode"
+                      className={
+                        validity.zipCode === null
+                          ? "default"
+                          : validity.zipCode === true
+                          ? "valid"
+                          : "not-valid"
+                      }
+                    >
+                      Zip code:
+                    </label>
                     <input
+                      className={
+                        validity.zipCode === null
+                          ? "default"
+                          : validity.zipCode === true
+                          ? "valid"
+                          : "not-valid"
+                      }
+                      minLength={3}
+                      maxLength={4}
                       type="text"
                       placeholder="1870"
                       name="zipCode"
                       value={shippingInfo.zipCode}
                       onChange={handleShippingInfoChange}
                     />
+                    <div className="error-message">{errorMessage.zipCode}</div>
                   </div>
                 </section>
                 <div className="form-submit-btn">

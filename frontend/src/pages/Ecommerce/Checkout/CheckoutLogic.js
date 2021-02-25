@@ -2,8 +2,16 @@ import { useState, useContext, useEffect } from "react";
 import CartItemsLogic from "../../../components/Ecommerce/CartItems/CartItemsLogic";
 import { CartItemContext } from "../../../context/CartItemContext";
 import GetCurrentCustomer from "../../../hooks/GetCurrentCustomer";
+import { getCustomersData } from "../../../hooks/data/getCustomersData";
 
 const CheckoutLogic = () => {
+  const { customersData } = getCustomersData();
+
+  let customersMobileNumber = [];
+  customersData.forEach((data) => {
+    customersMobileNumber.push(data.mobile_number);
+  });
+
   const [customerInfo, setCustomerInfo] = useState({
     firstName: "",
     lastName: "",
@@ -11,6 +19,26 @@ const CheckoutLogic = () => {
   });
 
   const [shippingInfo, setShippingInfo] = useState({
+    address: "",
+    city: "",
+    province: "",
+    zipCode: "",
+  });
+
+  const [validity, setValidity] = useState({
+    firstName: null,
+    lastName: null,
+    mobileNumber: null,
+    address: null,
+    city: null,
+    province: null,
+    zipCode: null,
+  });
+
+  const [errorMessage, setErrorMessage] = useState({
+    firstName: "",
+    lastName: "",
+    mobileNumber: "",
     address: "",
     city: "",
     province: "",
@@ -54,19 +82,27 @@ const CheckoutLogic = () => {
   };
 
   useEffect(() => {
-    if (alertModal) {
-      let myTimer;
-      if (time === 0) {
-        clearInterval(myTimer);
-        window.location.replace("/store/home");
-      } else {
-        const timer = () => {
-          setTime(time - 1);
-        };
+    let isMounted = true;
 
-        myTimer = setInterval(timer, 1000);
+    if (isMounted) {
+      if (alertModal) {
+        let myTimer;
+        if (time === 0) {
+          clearInterval(myTimer);
+          window.location.replace("/store/home");
+        } else {
+          const timer = () => {
+            setTime(time - 1);
+          };
+
+          myTimer = setInterval(timer, 1000);
+        }
       }
     }
+
+    return () => {
+      isMounted = false;
+    };
   }, [alertModal, time]);
 
   const closeConfirmModal = () => {
@@ -74,20 +110,149 @@ const CheckoutLogic = () => {
     setConfirmModal(false);
   };
 
-  const handleCustomerInfoChange = (e) => {
-    let input = e.target.name;
-    let value = e.target.value;
+  const checkValidity = (input, value) => {
+    if (input === "firstName") {
+      let regex = /^[a-zA-Z\s]{2,30}$/;
+
+      if (!value.match(regex)) {
+        setValidity({ ...validity, firstName: false });
+        setErrorMessage({
+          ...errorMessage,
+          firstName: "Please enter a valid name",
+        });
+      } else {
+        setValidity({ ...validity, firstName: true });
+        setErrorMessage({
+          ...errorMessage,
+          firstName: "",
+        });
+      }
+    }
+
+    if (input === "lastName") {
+      let regex = /^[a-zA-Z\s]{2,30}$/;
+
+      if (!value.match(regex)) {
+        setValidity({ ...validity, lastName: false });
+        setErrorMessage({
+          ...errorMessage,
+          lastName: "Please enter a valid name",
+        });
+      } else {
+        setValidity({ ...validity, lastName: true });
+        setErrorMessage({
+          ...errorMessage,
+          lastName: "",
+        });
+      }
+    }
 
     if (input === "mobileNumber") {
       let initialDigit = "09";
       let inputInitialDigit = value.slice(0, 2);
+      let regex = /^[0-9]{11}$/;
 
-      if (inputInitialDigit != initialDigit || !value.match(/^[0-9]{11}$/)) {
-        console.log("Not valid");
+      if (inputInitialDigit != initialDigit || !value.match(regex)) {
+        setValidity({ ...validity, mobileNumber: false });
+        setErrorMessage({
+          ...errorMessage,
+          mobileNumber: "Please enter a valid mobile number",
+        });
+      } else if (customersMobileNumber.includes(value)) {
+        setValidity({ ...validity, mobileNumber: false });
+        setErrorMessage({
+          ...errorMessage,
+          mobileNumber: "This mobile number already exists",
+        });
       } else {
-        console.log("Valid");
+        setValidity({ ...validity, mobileNumber: true });
+        setErrorMessage({
+          ...errorMessage,
+          mobileNumber: "",
+        });
       }
     }
+
+    if (input === "address") {
+      let regex = /^[a-zA-Z\s,@.#\d]{8,100}$/;
+
+      if (!value.match(regex)) {
+        setValidity({ ...validity, address: false });
+        setErrorMessage({
+          ...errorMessage,
+          address: "Please enter a valid address",
+        });
+      } else {
+        setValidity({ ...validity, address: true });
+        setErrorMessage({
+          ...errorMessage,
+          address: "",
+        });
+      }
+    }
+
+    if (input === "city") {
+      let regex = /^[a-zA-Z\s]{4,50}$/;
+
+      if (!value.match(regex)) {
+        setValidity({ ...validity, city: false });
+        setErrorMessage({
+          ...errorMessage,
+          city: "Please enter a valid city name",
+        });
+      } else {
+        setValidity({ ...validity, city: true });
+        setErrorMessage({
+          ...errorMessage,
+          city: "",
+        });
+      }
+    }
+
+    if (input === "province") {
+      let regex = /^[a-zA-Z\s]{4,50}$/;
+
+      if (!value.match(regex)) {
+        setValidity({ ...validity, province: false });
+        setErrorMessage({
+          ...errorMessage,
+          province: "Please enter a valid province name",
+        });
+      } else {
+        setValidity({ ...validity, province: true });
+        setErrorMessage({
+          ...errorMessage,
+          province: "",
+        });
+      }
+    }
+
+    if (input === "zipCode") {
+      let regex = /^[\d]{3,4}$/;
+
+      if (!value.match(regex)) {
+        setValidity({ ...validity, zipCode: false });
+        setErrorMessage({
+          ...errorMessage,
+          zipCode: "Please enter a valid zip code",
+        });
+      } else {
+        setValidity({ ...validity, zipCode: true });
+        setErrorMessage({
+          ...errorMessage,
+          zipCode: "",
+        });
+      }
+    }
+
+    return;
+  };
+
+  const handleCustomerInfoChange = (e) => {
+    let input = e.target.name;
+    let value = e.target.value;
+
+    checkValidity(input, value);
 
     if (djangoCurrentUser === "AnonymousUser") {
       setCustomerInfo({ ...customerInfo, [input]: value });
@@ -105,6 +270,8 @@ const CheckoutLogic = () => {
       };
       setCustomerInfo(userInfo);
     }
+
+    checkValidity(input, value);
 
     setShippingInfo({ ...shippingInfo, [input]: value });
   };
@@ -156,6 +323,8 @@ const CheckoutLogic = () => {
     processOrder,
     alertModal,
     time,
+    validity,
+    errorMessage,
   };
 };
 
