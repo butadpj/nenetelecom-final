@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.conf import settings
 import uuid
 from PIL import Image
 
@@ -91,12 +91,25 @@ class ProductImage(models.Model):
 
 
 class Customer(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True)
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    mobile_number = models.CharField(max_length=11, null=False, blank=False)
-    full_address = models.CharField(max_length=100, null=True, blank=True)
-    first_name = models.CharField(max_length=30, null=True, blank=True)
-    last_name = models.CharField(max_length=30, null=True, blank=True)
+
+
+    @property
+    def first_name(self):
+        return self.user.first_name
+
+    @property
+    def last_name(self):
+        return self.user.last_name
+
+    @property
+    def mobile_number(self):
+        return self.user.mobile_number
+
+    @property
+    def complete_address(self):
+        return self.user.complete_address
 
     def __str__(self):
         return (f'{self.first_name} {self.last_name} ({self.mobile_number})')

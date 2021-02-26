@@ -15,7 +15,7 @@ class ProductImageAdmin(admin.ModelAdmin):
     readonly_fields = ('product', 'image', )
 
 class CustomerAdmin(admin.ModelAdmin):
-    list_display = ['id', 'first_name', 'last_name', 'mobile_number', 'user']
+    list_display = ['id', 'first_name', 'last_name', 'mobile_number', 'complete_address', 'user']
 
 admin.site.register(Product, ProductAdmin)
 admin.site.register(ProductImage, ProductImageAdmin)

@@ -13,7 +13,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_cleanup.apps.CleanupConfig',
+    'backend',
     'backend.api',
+    'backend.accounts',
     'backend.store',
     'backend.cart',
     'backend.checkout',
@@ -30,6 +32,13 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware'
+]
+
+AUTH_USER_MODEL = 'accounts.CustomUser'
+
+AUTHENTICATION_BACKENDS = [
+    'backend.accounts.backends.MyMobileNumberBackend', # our custom authentication backend
+    'django.contrib.auth.backends.ModelBackend' # fallback to default authentication backend if first fails 
 ]
 
 
@@ -68,7 +77,6 @@ STATICFILES_DIRS = [
 ]
 
 
-
-
 MEDIA_URL = '/images/uploads/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'public/REACT/images/uploads')
+
