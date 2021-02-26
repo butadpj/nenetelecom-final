@@ -24,7 +24,7 @@
         </div>
         {% endfor %}
 
-        {% for error in profile_form.mobileNumber.errors %}
+        {% for error in profile_form.mobile_number.errors %}
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
             <p class="quote">{{error}}</p>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -46,9 +46,9 @@
 
             <div class="personal-info">
                 <p>Personal Info</p>
-                {{profile_form.firstName}}
-                {{profile_form.lastName}}
-                {{profile_form.mobileNumber}}
+                {{profile_form.first_name}}
+                {{profile_form.last_name}}
+                {{profile_form.mobile_number}}
             </div>
 
             <input class="register-submit" type="submit" name="Create User" value="SUBMIT">

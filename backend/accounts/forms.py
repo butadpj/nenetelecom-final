@@ -31,7 +31,7 @@ class UserProfileForm(forms.ModelForm):
         if len(mobile_number) != 11 or not mobile_number.isdigit():
             raise forms.ValidationError('Enter a valid mobile number')
         
-        for instance in Customer.objects.all():
+        for instance in Customer.objects.exclude(user__isnull=True):
             if instance.mobile_number == mobile_number:
                 raise forms.ValidationError('A user with that mobile number already exists')
 

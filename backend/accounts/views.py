@@ -26,7 +26,7 @@ def register_page(request):
                 user = authenticate(username=username, password=password)
                 login(request, user)
 
-                return redirect('login')
+                return redirect('/store/')
         
         else:
             form = UserForm()

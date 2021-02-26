@@ -24,9 +24,9 @@ const Cart = () => {
           </div>
           {djangoCurrentUser === "AnonymousUser" ? (
             <div className="view-orders-link">
-              <Link to="#">
+              <a href="/store/accounts/login">
                 <h5>Login to save orders {`>`}</h5>
-              </Link>
+              </a>
             </div>
           ) : state.completedOrders.length > 0 ? (
             <div className="view-orders-link">
