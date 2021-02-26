@@ -1,0 +1,34 @@
+{% extends 'DJANGO/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="login">
+    <h3>LOGIN</h3>
+
+    <div class="login-form">
+        <form method="POST" action="">
+            {% csrf_token %}
+            <div class="login-info">
+                <input type="text" name="username" placeholder="Username*">
+                <input type="password" name="password" placeholder="Password*">
+            </div>
+            <input class="login-submit" type="submit" name="Create User">
+        </form>
+
+        <div class="go-links">
+            <a href="/store/accounts/register">
+                <p>CREATE ACCOUNT</p>
+            </a>
+            <a href="/store/home">
+                <p>I DON'T NEED AN ACCOUNT</p>
+            </a>
+        </div>
+    </div>
+    <p class="quote info">You can still shop without creating an account</p>
+    <div class="message">
+        {% for message in messages %}
+        <p class="quote">{{message}}</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

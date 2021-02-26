@@ -1,0 +1,165 @@
+:root {
+  --dark1: rgba(112, 112, 112, 1);
+  --dark2: rgba(81, 124, 143, 1);
+  --light: rgba(255, 255, 255, 1);
+  --light1: rgb(224, 224, 224);
+  --light2: rgb(179, 179, 179);
+  --primary: rgba(60, 192, 250, 1);
+  --primary1: rgba(119, 197, 231, 1);
+  --primary2: rgba(75, 179, 225, 1);
+  --secondary: rgb(79, 165, 116);
+  --third: rgba(225, 102, 139, 1);
+  --shadow: rgba(0, 0, 0, 0.322);
+}
+
+.register {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 15rem;
+  height: 28rem;
+}
+
+.register h3 {
+  font-size: 1.5625rem;
+  margin-bottom: 0.85rem;
+  text-align: left;
+  color: var(--dark2);
+}
+
+.register .register-form {
+  width: 100%;
+  height: 100%;
+  background-color: var(--light);
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.315);
+  margin-bottom: 1rem;
+}
+
+form .user-info,
+form .personal-info {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 12rem;
+  height: 9rem;
+}
+
+form .user-info {
+  padding-top: 1.1rem;
+  margin-bottom: 2.8rem;
+}
+
+form .personal-info {
+  margin-bottom: 1.5rem;
+}
+
+.user-info p {
+  color: var(--dark2);
+  font-size: 0.875rem;
+  font-weight: bolder;
+  margin-bottom: 0.35rem;
+}
+
+.user-info input,
+.personal-info input {
+  margin-bottom: 1.25rem;
+  border: 1px solid rgba(0, 0, 0, 0.37);
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.322);
+  padding-left: 0.4rem;
+  padding-right: 0.4rem;
+  width: 100%;
+  color: var(--dark1);
+}
+
+.personal-info p {
+  color: var(--dark2);
+  font-size: 0.875rem;
+  margin-bottom: 0.35rem;
+  font-weight: bolder;
+  text-align: center;
+}
+
+.register-submit {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: var(--dark1);
+  color: var(--light);
+  border: none;
+  width: 6.75rem;
+  height: 2.5rem;
+  font-size: 1rem;
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.322);
+}
+
+.back {
+  text-align: center;
+  font-size: 0.75rem;
+  margin-top: 1rem;
+  color: var(--primary2);
+}
+
+.register .quote,
+.login .quote {
+  font-size: 0.95rem;
+  font-style: italic;
+  margin-top: 0.5rem;
+  text-align: center;
+  color: var(--dark1);
+}
+
+.login {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 15rem;
+  height: 18rem;
+  margin-top: 8rem;
+}
+
+.login h3 {
+  font-size: 1.5625rem;
+  margin-bottom: 0.85rem;
+  text-align: center;
+  color: var(--dark2);
+}
+
+.login .login-form {
+  width: 100%;
+  height: 100%;
+  background-color: var(--light);
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.315);
+}
+
+form .login-info {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 12rem;
+  height: 9rem;
+  padding-top: 2rem;
+}
+
+.login-info input {
+  margin-bottom: 1.25rem;
+  border: 1px solid rgba(0, 0, 0, 0.37);
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.322);
+  padding-left: 0.4rem;
+  padding-right: 0.4rem;
+  width: 100%;
+  color: var(--dark1);
+}
+
+.login-submit {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: -0.8rem;
+  background-color: var(--dark1);
+  color: var(--light);
+  border: none;
+  width: 6.75rem;
+  height: 2.5rem;
+  font-size: 1rem;
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.322);
+}

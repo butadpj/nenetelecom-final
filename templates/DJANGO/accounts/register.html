@@ -1,0 +1,65 @@
+{% extends 'DJANGO/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="register">
+    <h3 class="h3">REGISTER</h3>
+    <div class="message">
+        {% for error in form.username.errors %}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <p class="quote">{{error}}</p>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endfor %}
+
+        {% for error in form.password2.errors %}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <p class="quote">{{error}}</p>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endfor %}
+
+        {% for error in profile_form.mobileNumber.errors %}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <p class="quote">{{error}}</p>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="register-form">
+        <form method="POST" action="">
+            {% csrf_token %}
+
+            <div class="user-info">
+                <p>User Info</p>
+                {{form.username}}
+                {{form.password1}}
+                {{form.password2}}
+            </div>
+
+            <div class="personal-info">
+                <p>Personal Info</p>
+                {{profile_form.firstName}}
+                {{profile_form.lastName}}
+                {{profile_form.mobileNumber}}
+            </div>
+
+            <input class="register-submit" type="submit" name="Create User" value="SUBMIT">
+        </form>
+        <a href="/store/accounts/login">
+            <p class="back">Go back to login page</p>
+        </a>
+    </div>
+    <p class="quote info" style="margin-bottom: 3rem;">Save your time, save your item</p>
+</div>
+
+
+
+{% endblock %}
