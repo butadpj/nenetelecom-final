@@ -245,6 +245,21 @@ const CheckoutLogic = () => {
     }
   };
 
+  const allInputIsValid = () => {
+    let inputStatus = [];
+    Object.values(validity).forEach((value) => {
+      if (value != null) {
+        inputStatus.push(value);
+      }
+    });
+
+    let allValid = inputStatus.every((value) => {
+      return value;
+    });
+
+    return allValid;
+  };
+
   const handleCustomerInfoChange = (e) => {
     let input = e.target.name;
     let value = e.target.value;
@@ -270,14 +285,15 @@ const CheckoutLogic = () => {
     }
 
     checkValidity(input, value);
-
     setShippingInfo({ ...shippingInfo, [input]: value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(validity);
-    setIsFormComplete(true);
+    if (allInputIsValid()) {
+      setIsFormComplete(true);
+    }
+    return false;
   };
 
   const processOrder = (total) => {
