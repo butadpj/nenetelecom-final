@@ -13,14 +13,6 @@ const Home = () => {
   const navLogoContainer = useRef(null);
   const navListContainer = useRef(null);
 
-  const [width, setWidth] = useState(window.innerWidth);
-  const [height, setHeight] = useState(window.innerHeight);
-
-  window.addEventListener("resize", () => {
-    setWidth(window.innerWidth);
-    setHeight(window.innerHeight);
-  });
-
   return (
     <section className="home" id="home">
       <Navbar

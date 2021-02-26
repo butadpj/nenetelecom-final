@@ -5,12 +5,22 @@ import GetCurrentCustomer from "../../../hooks/GetCurrentCustomer";
 import { getCustomersData } from "../../../hooks/data/getCustomersData";
 
 const CheckoutLogic = () => {
+  const {
+    djangoCurrentUser,
+    djangoCurrentCustomerFirstName,
+    djangoCurrentCustomerLastName,
+    djangoCurrentCustomerMobileNumber,
+  } = GetCurrentCustomer();
   const { customersData } = getCustomersData();
+  const { selectedItems } = CartItemsLogic();
 
-  let customersMobileNumber = [];
-  customersData.forEach((data) => {
-    customersMobileNumber.push(data.mobile_number);
-  });
+  const [state] = useContext(CartItemContext);
+
+  const [isFormComplete, setIsFormComplete] = useState(false);
+  const [gcashInfo, setGcashInfo] = useState(false);
+  const [confirmModal, setConfirmModal] = useState(false);
+  const [alertModal, setAlertModal] = useState(false);
+  const [time, setTime] = useState(4);
 
   const [customerInfo, setCustomerInfo] = useState({
     firstName: "",
@@ -45,21 +55,10 @@ const CheckoutLogic = () => {
     zipCode: "",
   });
 
-  const [isFormComplete, setIsFormComplete] = useState(false);
-  const [gcashInfo, setGcashInfo] = useState(false);
-  const [confirmModal, setConfirmModal] = useState(false);
-  const [alertModal, setAlertModal] = useState(false);
-  const [time, setTime] = useState(4);
-  const { selectedItems } = CartItemsLogic();
-
-  const [state] = useContext(CartItemContext);
-
-  const {
-    djangoCurrentUser,
-    djangoCurrentCustomerFirstName,
-    djangoCurrentCustomerLastName,
-    djangoCurrentCustomerMobileNumber,
-  } = GetCurrentCustomer();
+  let customersMobileNumber = [];
+  customersData.forEach((data) => {
+    customersMobileNumber.push(data.mobile_number);
+  });
 
   const showGcashInfo = () => {
     document.body.style.overflow = "hidden";
@@ -74,6 +73,11 @@ const CheckoutLogic = () => {
   const showConfirmModal = () => {
     document.body.style.overflow = "hidden";
     setConfirmModal(true);
+  };
+
+  const closeConfirmModal = () => {
+    document.body.style.overflow = "auto";
+    setConfirmModal(false);
   };
 
   const showAlertModal = () => {
@@ -104,11 +108,6 @@ const CheckoutLogic = () => {
       isMounted = false;
     };
   }, [alertModal, time]);
-
-  const closeConfirmModal = () => {
-    document.body.style.overflow = "auto";
-    setConfirmModal(false);
-  };
 
   const checkValidity = (input, value) => {
     if (input === "firstName") {
@@ -244,8 +243,6 @@ const CheckoutLogic = () => {
         });
       }
     }
-
-    return;
   };
 
   const handleCustomerInfoChange = (e) => {
@@ -262,6 +259,7 @@ const CheckoutLogic = () => {
   const handleShippingInfoChange = (e) => {
     let input = e.target.name;
     let value = e.target.value;
+
     if (djangoCurrentUser !== "AnonymousUser") {
       let userInfo = {
         firstName: djangoCurrentCustomerFirstName,
@@ -278,6 +276,7 @@ const CheckoutLogic = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(validity);
     setIsFormComplete(true);
   };
 
