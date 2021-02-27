@@ -1,0 +1,83 @@
+.login {
+}
+
+.login .logo {
+  display: block;
+  margin: 0 auto;
+}
+
+.login main {
+  margin-top: 1em;
+}
+
+.login .login-info {
+  display: flex;
+  justify-content: center;
+}
+
+.login .login-info-form {
+  width: 80%;
+}
+
+.login .form-field {
+  text-align: center;
+}
+
+.login .form-field > * {
+  margin-bottom: 0.5em;
+}
+
+.login .input-line {
+  margin: 0;
+  height: 0.1rem;
+  background: var(--shadeLightBlue);
+}
+
+.login .or-line-wrapper {
+  width: 80%;
+  display: block;
+  margin: 0 auto;
+}
+
+.login .or-line {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--shadeLightDark);
+}
+
+.login .or-line span {
+  padding: 0 0.6em;
+  font-size: 0.6em;
+  text-transform: uppercase;
+}
+
+.login .or-line hr {
+  width: 100%;
+  height: 0.1rem;
+  background: var(--shadeLightDark);
+}
+
+.login .create-account {
+  width: 80%;
+  display: block;
+  margin: 0 auto;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.login .guest-shop {
+  text-align: center;
+  margin-top: 0.5em;
+  margin-bottom: 1.5em;
+}
+
+.login .guest-shop:hover {
+  filter: brightness(80%);
+}
+
+.login .guest-shop a {
+  font-size: 0.7em;
+  color: var(--shadeLightGreen);
+  text-decoration: underline;
+}

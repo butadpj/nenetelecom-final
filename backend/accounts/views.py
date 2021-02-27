@@ -3,6 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import redirect
 from .forms import UserForm
 from django.contrib import messages
+from django.contrib.auth import get_user_model
 
 # Create your views here.
 def register_page(request):
@@ -38,14 +39,30 @@ def login_page(request):
             username = request.POST.get('username')
             password = request.POST.get('password')
 
+            usernames = {''}
+            existed_users = get_user_model().objects.all()
+            for user in existed_users:
+                uname = user.username
+                usernames.add(uname)
+
+
+            if not username in usernames:
+                messages.info(request, 'User does not exist')
+            else:
+                messages.info(request, 'Username or password does not match')
+        
             user = authenticate(request, username=username, password=password)
 
-            if user is not None:
+            if user:
                 login(request, user)
                 return redirect('/store/')
+            
 
-            else: 
-                messages.info(request, 'Username or password does not match')
+           
+
+            
+
+            
         
         return render(request, 'DJANGO/accounts/login.html')
 

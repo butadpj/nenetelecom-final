@@ -1,18 +1,70 @@
-{% extends 'DJANGO/base.html' %}
+{% extends 'DJANGO/accounts/base.html' %}
 {% load static %}
 
 {% block content %}
 <div class="login">
-    <h3>LOGIN</h3>
+    <img class="logo" src="{% static 'DJANGO/images/Initials-light.webp' %}" alt="">
 
-    <div class="login-form">
+    <main>
+        <section class="login-info">
+            <form method="POST" class="login-info-form">
+                {% csrf_token %}
+                <div class="form-field">
+                    <div class="username">
+                        <input required class="form-input transparent" type="text" name="username"
+                            placeholder="Phone or username" />
+                        <hr class="input-line">
+                    </div>
+                    <div class="password">
+                        <input required class="form-input transparent" type="password" name="password"
+                            placeholder="Password" />
+                        <hr class="input-line">
+                    </div>
+                    <button class="submit-btn" type="submit">Log In</button>
+                    <div class="error-message">
+                        {% for message in messages %}
+                        <p>{{message}}</p>
+                        {% endfor %}
+                    </div>
+                </div>
+            </form>
+        </section>
+        <div class="or-line-wrapper">
+            <div class="or-line">
+                <hr>
+                <span>or</span>
+                <hr>
+            </div>
+        </div>
+        <section class="create-account">
+            <a href="/store/accounts/register"><button class="submit-btn light" type="submit">Create an
+                    account</button></a>
+
+        </section>
+        <div class="or-line-wrapper">
+            <div class="or-line">
+                <hr>
+                <span>or</span>
+                <hr>
+            </div>
+        </div>
+        <section class="guest-shop">
+            <a href="/store/">Shop as a guest user</a>
+        </section>
+        <section class="quote">
+            <p>You don't need an account to shop</p>
+        </section>
+
+    </main>
+
+    <!-- <main class="login-form">
         <form method="POST" action="">
             {% csrf_token %}
-            <div class="login-info">
-                <input type="text" name="username" placeholder="Username*">
-                <input type="password" name="password" placeholder="Password*">
-            </div>
-            <input class="login-submit" type="submit" name="Create User">
+            <section class="login-info">
+                <input required type="text" name="username" placeholder="Username">
+                <input required type="password" name="password" placeholder="Password">
+            </section>
+            <Button class="login-submit" type="submit" name="Create User">
         </form>
 
         <div class="go-links">
@@ -23,12 +75,12 @@
                 <p>I DON'T NEED AN ACCOUNT</p>
             </a>
         </div>
-    </div>
+    </main>
     <p class="quote info">You can still shop without creating an account</p>
     <div class="message">
         {% for message in messages %}
         <p class="quote">{{message}}</p>
         {% endfor %}
-    </div>
+    </div> -->
 </div>
 {% endblock %}

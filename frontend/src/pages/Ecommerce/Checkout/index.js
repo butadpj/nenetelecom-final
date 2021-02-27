@@ -198,7 +198,7 @@ const Checkout = () => {
                           }
                           required
                           minLength={11}
-                          maxLength={11}
+                          maxLength={15}
                           type="text"
                           placeholder="09xxxxxxxxx"
                           name="mobileNumber"

@@ -1,8 +1,8 @@
 var regQuote = document.querySelector(".register .info");
 var regErrorMessages = document.querySelectorAll(".register .message p");
 
-var logQuote = document.querySelector(".login .info");
-var logMessage = document.querySelector(".login .message p");
+var loginQuote = document.querySelector(".quote p");
+var loginErrorMessage = document.querySelector(".login .error-message p");
 
 regErrorMessages.forEach((errorMessages) => {
   if (errorMessages != null) {
@@ -13,7 +13,6 @@ regErrorMessages.forEach((errorMessages) => {
   }
 });
 
-if (logMessage != null) {
-  logQuote.innerHTML = "";
-  logMessage.style.color = "red";
+if (loginErrorMessage != null) {
+  loginQuote.innerHTML = "";
 }

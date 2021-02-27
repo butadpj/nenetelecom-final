@@ -1,0 +1,81 @@
+.submit-btn {
+  background: var(--shadeLightBlue);
+  border: none;
+  color: var(--light);
+  border-radius: 0.3rem;
+  padding: 0.3em;
+  font-size: 0.7em;
+  font-weight: 600;
+  width: 100%;
+  outline: none;
+}
+
+.submit-btn:focus {
+  outline: none;
+}
+
+.submit-btn:hover {
+  filter: brightness(85%);
+}
+
+.submit-btn.light-blue {
+  background: var(--shadeLightBlue);
+}
+
+.submit-btn.light-blue:hover {
+  filter: brightness(85%);
+}
+
+.submit-btn.dark {
+  background: var(--dark);
+}
+
+.submit-btn.light {
+  background: var(--light);
+  color: var(--dark);
+}
+
+.submit-btn.success {
+  background: var(--shadeLightGreen);
+}
+
+.form-input {
+  width: 100%;
+  border: none;
+  outline: none;
+  border-radius: 0.3rem;
+  font-size: 0.65em;
+  color: var(--light);
+  font-weight: 600;
+  padding-left: 0.4em;
+  height: 2.3rem;
+}
+
+.form-input.transparent {
+  background: transparent;
+}
+
+.form-input:hover {
+  background: rgb(77, 77, 74);
+}
+
+.error-message p {
+  font-size: 0.6em;
+  font-style: italic;
+  margin-top: 0.3em;
+  text-align: center;
+  color: var(--shadeRed);
+}
+
+.quote {
+  margin: 0 auto;
+  width: 80%;
+}
+
+.quote p {
+  text-align: center;
+  font-size: 0.7em;
+  font-weight: 600;
+  font-style: italic;
+  color: var(--shadeDark);
+}
