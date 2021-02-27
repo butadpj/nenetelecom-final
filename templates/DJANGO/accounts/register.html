@@ -3,6 +3,7 @@
 
 {% block content %}
 
+
 <div class="register">
     <h3 class="h3">REGISTER</h3>
     <div class="message">
@@ -24,7 +25,7 @@
         </div>
         {% endfor %}
 
-        {% for error in profile_form.mobile_number.errors %}
+        {% for error in form.mobile_number.errors %}
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
             <p class="quote">{{error}}</p>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -40,15 +41,9 @@
             <div class="user-info">
                 <p>User Info</p>
                 {{form.username}}
+                {{form.mobile_number}}
                 {{form.password1}}
                 {{form.password2}}
-            </div>
-
-            <div class="personal-info">
-                <p>Personal Info</p>
-                {{profile_form.first_name}}
-                {{profile_form.last_name}}
-                {{profile_form.mobile_number}}
             </div>
 
             <input class="register-submit" type="submit" name="Create User" value="SUBMIT">

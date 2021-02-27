@@ -38,9 +38,9 @@
         }
         const csrftoken = getCookie('csrftoken');
         let currentUser = "{{request.user}}"
-        let currentCustomerFirstName = "{{request.user.customer.first_name}}"
-        let currentCustomerLastName = "{{request.user.customer.last_name}}"
-        let currentCustomerMobileNumber = "{{request.user.customer.mobile_number}}"
+        let currentCustomerFirstName = "{{request.user.customer.au_first_name}}"
+        let currentCustomerLastName = "{{request.user.customer.au_last_name}}"
+        let currentCustomerMobileNumber = "{{request.user.customer.au_mobile_number}}"
         let currentCustomerId = "{{request.user.customer.id}}"
 
 

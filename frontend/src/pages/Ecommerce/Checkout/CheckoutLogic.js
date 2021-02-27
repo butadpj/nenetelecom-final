@@ -11,6 +11,7 @@ const CheckoutLogic = () => {
     djangoCurrentCustomerLastName,
     djangoCurrentCustomerMobileNumber,
   } = GetCurrentCustomer();
+
   const { customersData } = getCustomersData();
   const { selectedItems } = CartItemsLogic();
 
@@ -55,9 +56,9 @@ const CheckoutLogic = () => {
     zipCode: "",
   });
 
-  let customersMobileNumber = [];
+  let usersMobileNumber = [];
   customersData.forEach((data) => {
-    customersMobileNumber.push(data.mobile_number);
+    usersMobileNumber.push(data.au_mobile_number);
   });
 
   const showGcashInfo = () => {
@@ -157,7 +158,7 @@ const CheckoutLogic = () => {
           ...errorMessage,
           mobileNumber: "Please enter a valid mobile number",
         });
-      } else if (customersMobileNumber.includes(value)) {
+      } else if (usersMobileNumber.includes(value)) {
         setValidity({ ...validity, mobileNumber: false });
         setErrorMessage({
           ...errorMessage,

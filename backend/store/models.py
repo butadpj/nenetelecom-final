@@ -93,23 +93,34 @@ class ProductImage(models.Model):
 class Customer(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True)
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-
-
-    @property
-    def first_name(self):
-        return self.user.first_name
-
-    @property
-    def last_name(self):
-        return self.user.last_name
+    mobile_number = models.CharField(max_length=15, null=True, blank=True, unique=True)
+    first_name = models.CharField(max_length=30, null=True, blank=True)
+    last_name = models.CharField(max_length=30, null=True, blank=True)
+    complete_address = models.CharField(max_length=100, null=True, blank=True)
 
     @property
-    def mobile_number(self):
+    def au_mobile_number(self):
         return self.user.mobile_number
 
     @property
-    def complete_address(self):
+    def au_first_name(self):
+        return self.user.first_name
+
+    @property
+    def au_last_name(self):
+        return self.user.last_name
+
+    @property
+    def au_complete_address(self):
         return self.user.complete_address
 
-    def __str__(self):
+    @property
+    def customer_info(self):
+        if self.user:
+            return (f'{self.au_first_name} {self.au_last_name} ({self.au_mobile_number})')
+    
         return (f'{self.first_name} {self.last_name} ({self.mobile_number})')
+        
+
+    def __str__(self):
+        return self.customer_info

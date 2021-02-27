@@ -1,20 +1,22 @@
-from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm
 from backend.store.models import Customer
-from backend.accounts.models import CustomUser
+from django.contrib.auth import get_user_model
 from django import forms
 
 class UserForm(UserCreationForm):
     class Meta:
-        model = CustomUser
+        model = get_user_model()
         fields = ['username', 'mobile_number', 'first_name', 'last_name', 'complete_address', 'password1', 'password2']
-    
 
-    def save(self, commit=True):
-        user = super().save(commit=False)
+    def clean_mobile_number(self):
+        mobile_number = self.cleaned_data.get('mobile_number')
 
-        if commit:
-            user.save()
-        return user
+        if len(mobile_number) != 11 or not mobile_number.isdigit():
+            raise forms.ValidationError('Enter a valid mobile number')
+        
+        for instance in Customer.objects.exclude(user__isnull=True):
+            if instance.mobile_number == mobile_number:
+                raise forms.ValidationError('A user with that mobile number already exists')
 
+        return mobile_number
 

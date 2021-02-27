@@ -12,6 +12,17 @@ def index(request):
 
 def process_order(request):
     data = json.loads(request.body)
+
+    first_name = data['customerInfo']['firstName']
+    last_name = data['customerInfo']['lastName']
+    mobile_number = data['customerInfo']['mobileNumber']
+
+    address = data['shippingInfo']['address']
+    city = data['shippingInfo']['city']
+    province = data['shippingInfo']['province']
+    zip_code = data['shippingInfo']['zipCode']
+    shipping_address = (f'{address}, {city}, {province}, {zip_code}')
+
     if request.user.is_authenticated:
         customer = request.user.customer
         order, created = Order.objects.get_or_create(customer=customer, complete=False, confirmed=False, paid=False)
@@ -46,16 +57,6 @@ def process_order(request):
             }
 
             cart_items.append(item)
-
-        first_name = data['customerInfo']['firstName']
-        last_name = data['customerInfo']['lastName']
-        mobile_number = data['customerInfo']['mobileNumber']
-
-        address = data['shippingInfo']['address']
-        city = data['shippingInfo']['city']
-        province = data['shippingInfo']['province']
-        zip_code = data['shippingInfo']['zipCode']
-        shipping_address = (f'{address}, {city}, {province}, {zip_code}')
 
         customer, created = Customer.objects.get_or_create(mobile_number = mobile_number)
         customer.first_name = first_name
