@@ -1,6 +1,3 @@
-.login {
-}
-
 .login .logo {
   display: block;
   margin: 0 auto;
@@ -19,18 +16,8 @@
   width: 80%;
 }
 
-.login .form-field {
-  text-align: center;
-}
-
-.login .form-field > * {
+.login .login-info-form > * {
   margin-bottom: 0.5em;
-}
-
-.login .input-line {
-  margin: 0;
-  height: 0.1rem;
-  background: var(--shadeLightBlue);
 }
 
 .login .or-line-wrapper {

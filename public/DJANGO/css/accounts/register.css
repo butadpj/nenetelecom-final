@@ -1,0 +1,40 @@
+body {
+  line-height: 1.4;
+}
+
+.register main {
+  margin-top: 0.5em;
+}
+
+.register .register-info {
+  display: flex;
+  justify-content: center;
+}
+
+.register .register-info-form {
+  width: 80%;
+}
+
+.register .form-input {
+  font-size: 0.6em;
+  height: 2rem;
+}
+
+.register .submit-btn {
+  margin-top: 1em;
+}
+
+.register .back-to-login {
+  text-align: center;
+  margin-top: 1em;
+}
+
+.register .back-to-login:hover {
+  filter: brightness(80%);
+}
+
+.register .back-to-login a {
+  font-size: 0.7em;
+  color: var(--shadeLightGreen);
+  text-decoration: underline;
+}

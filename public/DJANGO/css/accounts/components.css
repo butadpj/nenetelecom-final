@@ -39,6 +39,13 @@
   background: var(--shadeLightGreen);
 }
 
+label {
+  font-size: 0.55em;
+  color: var(--shadeLightBlue);
+  font-weight: 600;
+  margin-bottom: 0;
+}
+
 .form-input {
   width: 100%;
   border: none;
@@ -57,6 +64,16 @@
 
 .form-input:hover {
   background: rgb(77, 77, 74);
+}
+
+.input-line {
+  margin: 0;
+  height: 0.1rem;
+  background: var(--shadeLightBlue);
+}
+
+.input-line.success {
+  background: var(--shadeLightGreen);
 }
 
 .error-message p {
@@ -78,4 +95,13 @@
   font-weight: 600;
   font-style: italic;
   color: var(--shadeDark);
+}
+
+.input-error-message p {
+  font-size: 0.5em;
+  font-weight: 500;
+  margin-top: 0.3em;
+  margin-bottom: 0;
+  text-align: left;
+  color: var(--shadeRed);
 }

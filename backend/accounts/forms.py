@@ -2,11 +2,13 @@ from django.contrib.auth.forms import UserCreationForm
 from backend.store.models import Customer
 from django.contrib.auth import get_user_model
 from django import forms
+from django.forms import PasswordInput
 
 class UserForm(UserCreationForm):
     class Meta:
         model = get_user_model()
         fields = ['username', 'mobile_number', 'first_name', 'last_name', 'complete_address', 'password1', 'password2']
+
 
     def clean_mobile_number(self):
         mobile_number = self.cleaned_data.get('mobile_number')
@@ -20,3 +22,8 @@ class UserForm(UserCreationForm):
 
         return mobile_number
 
+
+# def __init__(self, *args, **kwargs):
+#     super(UserForm, self).__init__(*args, **kwargs)
+#     self.fields['password1'].widget = PasswordInput(attrs={'class': 'form-control'})
+#     self.fields['password2'].widget = PasswordInput(attrs={'class': 'form-control'})

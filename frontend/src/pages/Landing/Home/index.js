@@ -6,8 +6,12 @@ import logo from "../../../assets/images/full-word-light.webp";
 import { Link } from "react-scroll";
 import Navbar from "../../../components/Navbar/";
 import navlogo from "../../../assets/svgs/Initials-light.svg";
+import { animateScroll as scroll } from "react-scroll";
 
 const Home = () => {
+  const scrollToTop = () => {
+    scroll.scrollToTop();
+  };
   const navLogoContainer = useRef(null);
   const navListContainer = useRef(null);
 
@@ -15,7 +19,7 @@ const Home = () => {
     <section className="home" id="home">
       <Navbar
         navLogoContainer={
-          <a className="nav-logo" ref={navLogoContainer}>
+          <a className="nav-logo" ref={navLogoContainer} onClick={scrollToTop}>
             <img src={navlogo} alt="" />
           </a>
         }
@@ -26,7 +30,8 @@ const Home = () => {
               to="store"
               spy={true}
               smooth={true}
-              duration={500}
+              offset={-200}
+              duration={1500}
               className="list-item"
             >
               SHOP ONLINE
@@ -37,7 +42,8 @@ const Home = () => {
               to="visit"
               spy={true}
               smooth={true}
-              duration={500}
+              offset={-200}
+              duration={1500}
               className="list-item"
             >
               VISIT US
@@ -48,7 +54,8 @@ const Home = () => {
               to="about"
               spy={true}
               smooth={true}
-              duration={500}
+              offset={-200}
+              duration={1500}
               className="list-item"
             >
               ABOUT US
@@ -59,7 +66,8 @@ const Home = () => {
               to="contact"
               spy={true}
               smooth={true}
-              duration={500}
+              offset={-200}
+              duration={1500}
               className="list-item"
             >
               CONTACT US

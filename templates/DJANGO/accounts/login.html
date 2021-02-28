@@ -10,22 +10,20 @@
             <form method="POST" class="login-info-form">
                 {% csrf_token %}
                 <div class="form-field">
-                    <div class="username">
-                        <input required class="form-input transparent" type="text" name="username"
-                            placeholder="Phone or username" />
-                        <hr class="input-line">
-                    </div>
-                    <div class="password">
-                        <input required class="form-input transparent" type="password" name="password"
-                            placeholder="Password" />
-                        <hr class="input-line">
-                    </div>
-                    <button class="submit-btn" type="submit">Log In</button>
-                    <div class="error-message">
-                        {% for message in messages %}
-                        <p>{{message}}</p>
-                        {% endfor %}
-                    </div>
+                    <input required class="form-input transparent" type="text" name="username"
+                        placeholder="Phone or username" />
+                    <hr class="input-line">
+                </div>
+                <div class="form-field">
+                    <input required class="form-input transparent" type="password" name="password"
+                        placeholder="Password" />
+                    <hr class="input-line">
+                </div>
+                <button class="submit-btn" type="submit">Log In</button>
+                <div class="error-message">
+                    {% for message in messages %}
+                    <p>{{message}}</p>
+                    {% endfor %}
                 </div>
             </form>
         </section>

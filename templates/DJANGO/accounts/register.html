@@ -5,7 +5,78 @@
 
 
 <div class="register">
-    <h3 class="h3">REGISTER</h3>
+    <main>
+        <section class="register-info">
+            <form method="POST" class="register-info-form">
+                {% csrf_token %}
+                <div class="form-field">
+                    <label for="username">Username (Optional)</label>
+                    {{form.username}}
+                    <!-- <input class="form-input transparent" type="text" name="username" placeholder="juan5678"
+                        value="admin" /> -->
+                    <hr class=" input-line">
+                    <div class="input-error-message">
+                        <p></p>
+                    </div>
+                </div>
+                <div class="form-field">
+                    <label for="mobile_number">Mobile number</label>
+                    {{form.mobile_number}}
+                    <hr class=" input-line">
+                    <div class="input-error-message">
+                        <p></p>
+                    </div>
+                </div>
+                <div class="form-field">
+                    <label for="first_name">First name</label>
+                    {{form.first_name}}
+                    <!-- <input required class="form-input transparent" type="text" name="first_name" placeholder="Juan"
+                        value="Juan" /> -->
+                    <hr class="input-line">
+                    <div class="input-error-message">
+                        <p></p>
+                    </div>
+                </div>
+                <div class="form-field">
+                    <label for="last_name">Last name</label>
+                    {{form.last_name}}
+                    <!-- <input required class="form-input transparent" type="text" name="last_name"
+                        placeholder="Dela Cruz" /> -->
+                    <hr class=" input-line">
+                    <div class="input-error-message">
+                        <p></p>
+                    </div>
+                </div>
+                <div class="form-field">
+                    <label for="password1">Password</label>
+                    {{form.password1}}
+                    <!-- <input required class="form-input transparent" type="password" name="password1"
+                        placeholder="********" /> -->
+                    <hr class=" input-line">
+                    <div class="input-error-message">
+                        <p></p>
+                    </div>
+                </div>
+                <div class="form-field">
+                    <label for="password2">Confirm password</label>
+                    {{form.password2}}
+                    <!-- <input required class="form-input transparent" type="password" name="password2"
+                        placeholder="********" /> -->
+                    <hr class=" input-line">
+                    <div class="input-error-message">
+                        <p></p>
+                    </div>
+                </div>
+                <button class="submit-btn" type="submit">Sign Up</button>
+            </form>
+        </section>
+        <section class="back-to-login">
+            <a href="/store/accounts/login">Go back to login page</a>
+        </section>
+    </main>
+</div>
+
+<!-- <h3 class="h3">REGISTER</h3>
     <div class="message">
         {% for error in form.username.errors %}
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -52,7 +123,7 @@
             <p class="back">Go back to login page</p>
         </a>
     </div>
-    <p class="quote info" style="margin-bottom: 3rem;">Save your time, save your item</p>
+    <p class="quote info" style="margin-bottom: 3rem;">Save your time, save your item</p> -->
 </div>
 
 

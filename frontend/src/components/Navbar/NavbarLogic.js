@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import bars from "../../assets/svgs/bars-solid.svg";
 import close from "../../assets/svgs/times-solid.svg";
-import { animateScroll as scroll } from "react-scroll";
 
 const NavbarLogic = (navContainer, navLogoContainer, navListContainer) => {
   const [showSideNav, setShowSideNav] = useState(false);
@@ -30,9 +29,7 @@ const NavbarLogic = (navContainer, navLogoContainer, navListContainer) => {
       setShowSideNav(false);
     }
   };
-  const scrollToTop = () => {
-    scroll.scrollToTop();
-  };
+
   const navDarkApply = (navContainer) => {
     navContainer.style.opacity = "100%";
     navContainer.style.height = "13vh";
@@ -173,7 +170,6 @@ const NavbarLogic = (navContainer, navLogoContainer, navListContainer) => {
     navToggle,
     navDarkApply,
     navLightApply,
-    scrollToTop,
     checkOffsetY,
     handleResize,
     isMobile,
