@@ -39,7 +39,7 @@ class CustomUserManager(BaseUserManager):
 
 
 class CustomUser(AbstractUser):
-    username = models.CharField(max_length=50, null=True, blank=True, unique=True, verbose_name='Username (optional)')
+    username = models.CharField(max_length=50, null=True, blank=True, unique=True)
     mobile_number = models.CharField(max_length=15, null=False, blank=False, unique=True, verbose_name='Mobile number (AU)')
     first_name = models.CharField(max_length=30, null=False, blank=False, verbose_name='First name (AU)')
     last_name = models.CharField(max_length=30, null=False, blank=False, verbose_name='Last name (AU)')

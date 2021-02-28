@@ -21,6 +21,10 @@
 </head>
 
 
+<script>
+    let usernames = new Set(JSON.parse('{{usernames|safe}}'))
+</script>
+
 <body>
     {% block content %}
 
@@ -28,7 +32,6 @@
 
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="{% static 'DJANGO/js/accountForms.js' %}"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>

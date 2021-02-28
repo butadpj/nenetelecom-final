@@ -72,10 +72,6 @@ label {
   background: var(--shadeLightBlue);
 }
 
-.input-line.success {
-  background: var(--shadeLightGreen);
-}
-
 .error-message p {
   font-size: 0.6em;
   font-style: italic;

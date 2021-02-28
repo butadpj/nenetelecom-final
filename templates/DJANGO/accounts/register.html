@@ -9,26 +9,30 @@
         <section class="register-info">
             <form method="POST" class="register-info-form">
                 {% csrf_token %}
-                <div class="form-field">
+                <div class="form-field username">
                     <label for="username">Username (Optional)</label>
                     {{form.username}}
                     <!-- <input class="form-input transparent" type="text" name="username" placeholder="juan5678"
                         value="admin" /> -->
                     <hr class=" input-line">
                     <div class="input-error-message">
-                        <p></p>
+                        <p>
+                            {% for error in form.username.errors %}
+                            {{error}}
+                            {% endfor %}
+                        </p>
                     </div>
                 </div>
-                <div class="form-field">
-                    <label for="mobile_number">Mobile number</label>
+                <div class="form-field mobile_number">
+                    <label for="mobile_number" class="mobile_number-label">Mobile number</label>
                     {{form.mobile_number}}
                     <hr class=" input-line">
                     <div class="input-error-message">
                         <p></p>
                     </div>
                 </div>
-                <div class="form-field">
-                    <label for="first_name">First name</label>
+                <div class="form-field first_number">
+                    <label for="first_name" class="first_name-label">First name</label>
                     {{form.first_name}}
                     <!-- <input required class="form-input transparent" type="text" name="first_name" placeholder="Juan"
                         value="Juan" /> -->
@@ -37,8 +41,8 @@
                         <p></p>
                     </div>
                 </div>
-                <div class="form-field">
-                    <label for="last_name">Last name</label>
+                <div class="form-field last_name">
+                    <label for="last_name" class="last_name-label">Last name</label>
                     {{form.last_name}}
                     <!-- <input required class="form-input transparent" type="text" name="last_name"
                         placeholder="Dela Cruz" /> -->
@@ -47,8 +51,8 @@
                         <p></p>
                     </div>
                 </div>
-                <div class="form-field">
-                    <label for="password1">Password</label>
+                <div class="form-field password1">
+                    <label for="password1" class="password1-label">Password</label>
                     {{form.password1}}
                     <!-- <input required class="form-input transparent" type="password" name="password1"
                         placeholder="********" /> -->
@@ -57,8 +61,8 @@
                         <p></p>
                     </div>
                 </div>
-                <div class="form-field">
-                    <label for="password2">Confirm password</label>
+                <div class="form-field password2">
+                    <label for="password2" class="password2-label">Confirm password</label>
                     {{form.password2}}
                     <!-- <input required class="form-input transparent" type="password" name="password2"
                         placeholder="********" /> -->
@@ -70,11 +74,34 @@
                 <button class="submit-btn" type="submit">Sign Up</button>
             </form>
         </section>
+        <div class="message">
+
+
+            {% for error in form.password2.errors %}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <p class="quote">{{error}}</p>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            {% endfor %}
+
+            {% for error in form.mobile_number.errors %}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <p class="quote">{{error}}</p>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            {% endfor %}
+        </div>
         <section class="back-to-login">
             <a href="/store/accounts/login">Go back to login page</a>
         </section>
     </main>
 </div>
+
+<script src="{% static 'DJANGO/js/accountForms.js' %}"></script>
 
 <!-- <h3 class="h3">REGISTER</h3>
     <div class="message">
