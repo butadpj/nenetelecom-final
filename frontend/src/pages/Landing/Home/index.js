@@ -5,11 +5,9 @@ import logo from "../../../assets/images/full-word-light.webp";
 //NAVBAR IMPORTS
 import { Link } from "react-scroll";
 import Navbar from "../../../components/Navbar/";
-import NavbarLogic from "../../../components/Navbar/NavbarLogic";
 import navlogo from "../../../assets/svgs/Initials-light.svg";
 
 const Home = () => {
-  const { scrollToTop } = NavbarLogic();
   const navLogoContainer = useRef(null);
   const navListContainer = useRef(null);
 
@@ -17,7 +15,7 @@ const Home = () => {
     <section className="home" id="home">
       <Navbar
         navLogoContainer={
-          <a className="nav-logo" ref={navLogoContainer} onClick={scrollToTop}>
+          <a className="nav-logo" ref={navLogoContainer}>
             <img src={navlogo} alt="" />
           </a>
         }
@@ -28,7 +26,6 @@ const Home = () => {
               to="store"
               spy={true}
               smooth={true}
-              offset={-106.34}
               duration={500}
               className="list-item"
             >
@@ -40,7 +37,6 @@ const Home = () => {
               to="visit"
               spy={true}
               smooth={true}
-              offset={-106.34}
               duration={500}
               className="list-item"
             >
@@ -52,7 +48,6 @@ const Home = () => {
               to="about"
               spy={true}
               smooth={true}
-              offset={-106.34}
               duration={500}
               className="list-item"
             >
@@ -64,7 +59,6 @@ const Home = () => {
               to="contact"
               spy={true}
               smooth={true}
-              offset={-106.34}
               duration={500}
               className="list-item"
             >

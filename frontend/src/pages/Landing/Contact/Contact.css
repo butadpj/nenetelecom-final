@@ -20,6 +20,7 @@
   letter-spacing: 2.5rem;
   width: 554px;
   height: 373px;
+  z-index: 1;
 }
 
 .contact-title .title-text-2 {

@@ -4,7 +4,7 @@ nav {
   height: 13vh;
   color: var(--light);
   font-weight: 600;
-  z-index: 10;
+  z-index: 500;
   transition: 0.5s ease-in-out;
   display: flex;
   align-items: center;
