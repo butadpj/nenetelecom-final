@@ -1,14 +1,4 @@
-// let regQuote = document.querySelector(".register .info");
-// let regErrorMessages = document.querySelectorAll(".register .message p");
-
-// regErrorMessages.forEach((errorMessages) => {
-//   if (errorMessages != null) {
-//     regQuote.innerHTML = "";
-//     setTimeout(function () {
-//       errorMessages.parentElement.style.display = "none";
-//     }, 10000); // <-- time in milliseconds
-//   }
-// });
+//Error messages in login page
 
 let loginQuote = document.querySelector(".quote p");
 let loginErrorMessage = document.querySelector(".login .error-message p");
@@ -17,12 +7,13 @@ if (loginErrorMessage != null) {
   loginQuote.innerHTML = "";
 }
 
+//Form validation in register page
+
 let usernameInput = document.querySelector("#id_username");
 let mobile_numberInput = document.querySelector("#id_mobile_number");
 let first_nameInput = document.querySelector("#id_first_name");
 let last_nameInput = document.querySelector("#id_last_name");
 let password1Input = document.querySelector("#id_password1");
-let password2Input = document.querySelector("#id_password2");
 
 let fields = new Set([]);
 fields.add(usernameInput);
@@ -30,7 +21,6 @@ fields.add(mobile_numberInput);
 fields.add(first_nameInput);
 fields.add(last_nameInput);
 fields.add(password1Input);
-fields.add(password2Input);
 
 const setFieldAttributes = (element, attributeSet) => {
   attributeSet.forEach((attribute) => {
@@ -74,22 +64,18 @@ setFieldAttributes(password1Input, [
   { class: ["form-input", "transparent"] },
 ]);
 
-setFieldAttributes(password2Input, [
-  { placeholder: "********" },
-  { class: ["form-input", "transparent"] },
-]);
-
 fields.forEach((field) => {
   field.oninput = (e) => {
     handleChange(e);
   };
 });
 
-const handleChange = (e) => {
-  let input = e.target.name;
-  let value = e.target.value;
-
-  checkValidity(input, value);
+let fieldsValidity = {
+  username: false,
+  mobile_number: false,
+  first_name: false,
+  last_name: false,
+  password: false,
 };
 
 const setValidityStyle = (
@@ -128,6 +114,7 @@ const checkValidity = (input, value) => {
         errorMessage,
         "Please enter a valid username"
       );
+      fieldsValidity = { ...fieldsValidity, username: false };
     } else if (usernames.has(value)) {
       setValidityStyle(
         label,
@@ -137,6 +124,7 @@ const checkValidity = (input, value) => {
         errorMessage,
         "User with this Username already exists"
       );
+      fieldsValidity = { ...fieldsValidity, username: false };
     } else {
       setValidityStyle(
         label,
@@ -146,6 +134,7 @@ const checkValidity = (input, value) => {
         errorMessage,
         ""
       );
+      fieldsValidity = { ...fieldsValidity, username: true };
     }
   }
 
@@ -169,11 +158,18 @@ const checkValidity = (input, value) => {
         errorMessage,
         "Please enter a valid mobile number"
       );
-    }
-    // else if (usersMobileNumber.includes(value)) {
-
-    // }
-    else {
+      fieldsValidity = { ...fieldsValidity, mobile_number: false };
+    } else if (mobile_numbers.has(value)) {
+      setValidityStyle(
+        label,
+        colors.danger,
+        inputLine,
+        colors.danger,
+        errorMessage,
+        "A User with this mobile number already exists"
+      );
+      fieldsValidity = { ...fieldsValidity, mobile_number: false };
+    } else {
       setValidityStyle(
         label,
         colors.success,
@@ -182,26 +178,159 @@ const checkValidity = (input, value) => {
         errorMessage,
         ""
       );
+      fieldsValidity = { ...fieldsValidity, mobile_number: true };
     }
   }
 
   if (input === "first_name") {
+    let label = document.querySelector(".first_name label");
+    let inputLine = document.querySelector(".first_name .input-line");
+    let errorMessage = document.querySelector(
+      ".first_name .input-error-message p"
+    );
     let regex = /^[a-zA-Z\s]{2,30}$/;
 
     if (!value.match(regex)) {
-      console.log("not valid");
+      setValidityStyle(
+        label,
+        colors.danger,
+        inputLine,
+        colors.danger,
+        errorMessage,
+        "Please enter a valid name"
+      );
+      fieldsValidity = { ...fieldsValidity, first_name: false };
     } else {
-      console.log("valid");
+      setValidityStyle(
+        label,
+        colors.success,
+        inputLine,
+        colors.success,
+        errorMessage,
+        ""
+      );
+      fieldsValidity = { ...fieldsValidity, first_name: true };
     }
   }
 
   if (input === "last_name") {
+    let label = document.querySelector(".last_name label");
+    let inputLine = document.querySelector(".last_name .input-line");
+    let errorMessage = document.querySelector(
+      ".last_name .input-error-message p"
+    );
     let regex = /^[a-zA-Z\s]{2,30}$/;
 
     if (!value.match(regex)) {
-      console.log("not valid");
+      setValidityStyle(
+        label,
+        colors.danger,
+        inputLine,
+        colors.danger,
+        errorMessage,
+        "Please enter a valid surname"
+      );
+      fieldsValidity = { ...fieldsValidity, last_name: false };
     } else {
-      console.log("valid");
+      setValidityStyle(
+        label,
+        colors.success,
+        inputLine,
+        colors.success,
+        errorMessage,
+        ""
+      );
+      fieldsValidity = { ...fieldsValidity, last_name: true };
     }
+  }
+
+  if (input === "password1") {
+    let label = document.querySelector(".password1 label");
+    let inputLine = document.querySelector(".password1 .input-line");
+    let errorMessage = document.querySelector(
+      ".password1 .input-error-message p"
+    );
+    let regex = "^[A-Za-zd_]{8,}$";
+
+    if (value.length < 8) {
+      setValidityStyle(
+        label,
+        colors.danger,
+        inputLine,
+        colors.danger,
+        errorMessage,
+        "Minimum of 8 characters is required for password"
+      );
+      fieldsValidity = { ...fieldsValidity, password: false };
+    } else if (!value.match(regex)) {
+      setValidityStyle(
+        label,
+        colors.danger,
+        inputLine,
+        colors.danger,
+        errorMessage,
+        "Please enter a valid password, only _ (underscores) are allowed as special characters"
+      );
+      fieldsValidity = { ...fieldsValidity, password: false };
+    } else {
+      setValidityStyle(
+        label,
+        colors.success,
+        inputLine,
+        colors.success,
+        errorMessage,
+        ""
+      );
+      fieldsValidity = { ...fieldsValidity, password: true };
+    }
+  }
+};
+
+const allInputIsValid = () => {
+  let inputStatus = [];
+  Object.values(fieldsValidity).forEach((value) => {
+    if (value != null || value != undefined) {
+      inputStatus.push(value);
+    }
+  });
+
+  let allValid = inputStatus.every((value) => {
+    return value;
+  });
+
+  return allValid;
+};
+
+const handleChange = (e) => {
+  let input = e.target.name;
+  let value = e.target.value;
+  checkValidity(input, value);
+  handleButtonType();
+};
+
+const handleButtonType = () => {
+  let submitBtn = document.querySelector(".submit-btn");
+  if (!allInputIsValid()) {
+    submitBtn.disabled = true;
+  } else {
+    submitBtn.disabled = false;
+  }
+};
+
+//Password toggle
+let isShown = false;
+const passwordToggle = () => {
+  let eyeIcon = document.querySelector(".field-icon").firstElementChild;
+
+  if (!isShown) {
+    eyeIcon.classList.add("fa-eye-slash");
+    eyeIcon.classList.remove("fa-eye");
+    password1Input.type = "text";
+    isShown = true;
+  } else {
+    eyeIcon.classList.add("fa-eye");
+    eyeIcon.classList.remove("fa-eye-slash");
+    password1Input.type = "password";
+    isShown = false;
   }
 };

@@ -31,7 +31,7 @@
                         <p></p>
                     </div>
                 </div>
-                <div class="form-field first_number">
+                <div class="form-field first_name">
                     <label for="first_name" class="first_name-label">First name</label>
                     {{form.first_name}}
                     <!-- <input required class="form-input transparent" type="text" name="first_name" placeholder="Juan"
@@ -54,6 +54,7 @@
                 <div class="form-field password1">
                     <label for="password1" class="password1-label">Password</label>
                     {{form.password1}}
+                    <span class="field-icon" onclick="passwordToggle()"><i class="fas fa-eye"></i></span>
                     <!-- <input required class="form-input transparent" type="password" name="password1"
                         placeholder="********" /> -->
                     <hr class=" input-line">
@@ -61,98 +62,39 @@
                         <p></p>
                     </div>
                 </div>
-                <div class="form-field password2">
-                    <label for="password2" class="password2-label">Confirm password</label>
-                    {{form.password2}}
-                    <!-- <input required class="form-input transparent" type="password" name="password2"
-                        placeholder="********" /> -->
-                    <hr class=" input-line">
-                    <div class="input-error-message">
-                        <p></p>
+                <section class="feedback-message">
+                    {% for error in form.password1.errors %}
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <p class="quote">{{error}}</p>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
-                </div>
+                    {% endfor %}
+
+                    {% for error in form.mobile_number.errors %}
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <p class="quote">{{error}}</p>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    {% endfor %}
+                </section>
                 <button class="submit-btn" type="submit">Sign Up</button>
             </form>
         </section>
-        <div class="message">
-
-
-            {% for error in form.password2.errors %}
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <p class="quote">{{error}}</p>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            {% endfor %}
-
-            {% for error in form.mobile_number.errors %}
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <p class="quote">{{error}}</p>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            {% endfor %}
-        </div>
         <section class="back-to-login">
             <a href="/store/accounts/login">Go back to login page</a>
         </section>
     </main>
 </div>
-
+<script>
+    let usernames = new Set(JSON.parse('{{usernames|safe}}'))
+    let mobile_numbers = new Set(JSON.parse('{{mobile_numbers|safe}}'))
+    console.log(mobile_numbers)
+</script>
 <script src="{% static 'DJANGO/js/accountForms.js' %}"></script>
-
-<!-- <h3 class="h3">REGISTER</h3>
-    <div class="message">
-        {% for error in form.username.errors %}
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <p class="quote">{{error}}</p>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        {% endfor %}
-
-        {% for error in form.password2.errors %}
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <p class="quote">{{error}}</p>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        {% endfor %}
-
-        {% for error in form.mobile_number.errors %}
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <p class="quote">{{error}}</p>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        {% endfor %}
-    </div>
-    <div class="register-form">
-        <form method="POST" action="">
-            {% csrf_token %}
-
-            <div class="user-info">
-                <p>User Info</p>
-                {{form.username}}
-                {{form.mobile_number}}
-                {{form.password1}}
-                {{form.password2}}
-            </div>
-
-            <input class="register-submit" type="submit" name="Create User" value="SUBMIT">
-        </form>
-        <a href="/store/accounts/login">
-            <p class="back">Go back to login page</p>
-        </a>
-    </div>
-    <p class="quote info" style="margin-bottom: 3rem;">Save your time, save your item</p> -->
-</div>
-
 
 
 {% endblock %}

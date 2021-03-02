@@ -5,9 +5,10 @@ from django import forms
 from django.forms import PasswordInput
 
 class UserForm(UserCreationForm):
+    password2 = None
     class Meta:
         model = get_user_model()
-        fields = ['username', 'mobile_number', 'first_name', 'last_name', 'complete_address', 'password1', 'password2']
+        fields = ['username', 'mobile_number', 'first_name', 'last_name', 'complete_address', 'password1']
 
 
     def clean_mobile_number(self):
@@ -21,6 +22,14 @@ class UserForm(UserCreationForm):
                 raise forms.ValidationError('A user with that mobile number already exists')
 
         return mobile_number
+    
+    def clean_password1(self):
+        password1 = self.cleaned_data.get('password1')
+
+        if len(password1) < 8:
+            raise forms.ValidationError('Your password is too short, minimum of 8 characters is allowed')
+        
+        return password1
 
 
 # def __init__(self, *args, **kwargs):

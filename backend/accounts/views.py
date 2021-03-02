@@ -32,13 +32,21 @@ def register_page(request):
             form = UserForm()
 
             
-        usernamesArr = []
+        usernames = []
         users = get_user_model().objects.all()
         for user in users:
-            usernamesArr.append(user.username)
-        json_usernamesArr = json.dumps(usernamesArr)
+            usernames.append(user.username)
 
-        context = {'form': form, 'usernames': json_usernamesArr, }
+        mobile_numbers = []
+        customers = Customer.objects.all()
+        for customer in customers:
+            try:
+                mobile_numbers.append(customer.au_mobile_number)
+            except:
+                pass
+
+
+        context = {'form': form, 'usernames': json.dumps(usernames), 'mobile_numbers': json.dumps(mobile_numbers) }
         return render(request, 'DJANGO/accounts/register.html', context)
 
 

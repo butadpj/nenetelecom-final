@@ -2,8 +2,11 @@ body {
   line-height: 1.4;
 }
 
-.register main {
-  margin-top: 0.5em;
+.register {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
 }
 
 .register .register-info {
@@ -21,12 +24,12 @@ body {
 }
 
 .register .submit-btn {
-  margin-top: 1em;
+  margin-top: 0.5em;
 }
 
 .register .back-to-login {
   text-align: center;
-  margin-top: 1em;
+  margin-top: 2em;
 }
 
 .register .back-to-login:hover {
@@ -37,4 +40,18 @@ body {
   font-size: 0.7em;
   color: var(--shadeLightGreen);
   text-decoration: underline;
+}
+
+.register .feedback-message {
+  font-size: 0.7em;
+  margin-top: 1em;
+}
+
+.register .field-icon {
+  float: right;
+  position: relative;
+  margin-top: -2.2rem;
+  margin-right: 0.5rem;
+  z-index: 2;
+  color: var(--shadeLightDark);
 }
