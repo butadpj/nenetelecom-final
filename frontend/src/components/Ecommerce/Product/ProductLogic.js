@@ -28,8 +28,14 @@ const ProductLogic = () => {
   };
 
   const handleClose = () => {
-    setShowDetails(false);
-    document.body.style.overflow = "auto";
+    let productView = document.querySelector(".product-view");
+    productView.classList.remove("product-view-show");
+    productView.classList.add("product-view-hidden");
+
+    setTimeout(() => {
+      setShowDetails(false);
+      document.body.style.overflow = "auto";
+    }, 360);
   };
 
   const createDetails = (product) => {
@@ -258,8 +264,17 @@ const ProductLogic = () => {
     processCart(selectedProduct, price, action, djangoCurrentUser);
   };
 
+  let addProductModalTimer;
   const handleCloseAddProductModal = () => {
-    setShowAddProductModal(false);
+    let addProductModal = document.querySelector(".add-product-modal");
+    if (addProductModal != null) {
+      addProductModal.classList.remove("add-product-modal-show");
+      addProductModal.classList.add("add-product-modal-hidden");
+    }
+
+    addProductModalTimer = setTimeout(() => {
+      setShowAddProductModal(false);
+    }, 360);
   };
 
   useEffect(() => {
@@ -269,6 +284,7 @@ const ProductLogic = () => {
 
     return () => {
       clearTimeout(closeTimer);
+      clearTimeout(addProductModalTimer);
     };
   }, [showAddProductModal]);
 

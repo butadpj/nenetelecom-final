@@ -116,7 +116,7 @@ const Product = () => {
 
       {showDetails && (
         <div className="modal-wrapper">
-          <section className="product-view">
+          <section className="product-view product-view-show">
             <div className="detail-header">
               <h5 className="detail-product-name">{detailData.name}</h5>
               <div className="sub-details">
@@ -159,7 +159,7 @@ const Product = () => {
       )}
       {showAddProductModal && (
         <div className="modal-wrapper">
-          <section className="add-product-modal">
+          <section className="add-product-modal add-product-modal-show">
             <h4 className="modal-text">
               <p>Added to cart </p>
               <i className="fas fa-check"></i>
