@@ -3,7 +3,7 @@
 *.pot
 *.pyc
 __pycache__/
-local_settings.py
+local.py
 db.sqlite3
 db.sqlite3-journal
 media
@@ -71,6 +71,7 @@ pytestdebug.log
 
 # Django stuff:
 
+
 # Flask stuff:
 instance/
 .webassets-cache
@@ -121,6 +122,7 @@ ENV/
 env.bak/
 venv.bak/
 pythonenv*
+
 
 # Spyder project settings
 .spyderproject
