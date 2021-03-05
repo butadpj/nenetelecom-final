@@ -26,6 +26,5 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES' : ('rest_framework.permissions.IsAuthenticatedOrReadOnly',)
 }
 
-STATIC_ROOT = os.path.join(BASE_DIR, "static_files")
-MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images/uploads')
+STATIC_ROOT = os.path.join(BASE_DIR, "public")
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
