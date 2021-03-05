@@ -75,6 +75,7 @@ DATABASES = {
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'public')
 ]
+STATIC_ROOT = os.path.join(BASE_DIR, "static_files")
 
 
 MEDIA_URL = '/images/uploads/'
