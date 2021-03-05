@@ -79,4 +79,5 @@ STATICFILES_DIRS = [
 
 MEDIA_URL = '/images/uploads/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'public/REACT/images/uploads')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
