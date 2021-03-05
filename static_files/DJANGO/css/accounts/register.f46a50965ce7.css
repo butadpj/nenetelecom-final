@@ -1,0 +1,57 @@
+body {
+  line-height: 1.4;
+}
+
+.register {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
+}
+
+.register .register-info {
+  display: flex;
+  justify-content: center;
+}
+
+.register .register-info-form {
+  width: 80%;
+}
+
+.register .form-input {
+  font-size: 0.6em;
+  height: 2rem;
+}
+
+.register .submit-btn {
+  margin-top: 0.5em;
+}
+
+.register .back-to-login {
+  text-align: center;
+  margin-top: 2em;
+}
+
+.register .back-to-login:hover {
+  filter: brightness(80%);
+}
+
+.register .back-to-login a {
+  font-size: 0.7em;
+  color: var(--shadeLightGreen);
+  text-decoration: underline;
+}
+
+.register .feedback-message {
+  font-size: 0.7em;
+  margin-top: 1em;
+}
+
+.register .field-icon {
+  float: right;
+  position: relative;
+  margin-top: -2.2rem;
+  margin-right: 0.5rem;
+  z-index: 2;
+  color: var(--shadeLightDark);
+}
