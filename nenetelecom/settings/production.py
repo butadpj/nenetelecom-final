@@ -2,7 +2,7 @@ from .development import *
 
 DEBUG = False
 
-ALLOWED_HOSTS = ['nenetelecom.pythonanywhere.com']
+ALLOWED_HOSTS = ['']
 
 DATABASES = {
     'default': {
@@ -25,5 +25,3 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_PERMISSION_CLASSES' : ('rest_framework.permissions.IsAuthenticatedOrReadOnly',)
 }
-
-STATIC_ROOT = os.path.join(BASE_DIR, "static_files")
