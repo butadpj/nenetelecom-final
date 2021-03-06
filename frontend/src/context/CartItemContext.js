@@ -11,6 +11,7 @@ const initialState = {
   completedOrders: [],
   totalCartItem: 0,
   totalCartPrice: 0,
+  cartNotif: 0,
 };
 
 const CartItemContextProvider = (props) => {
@@ -50,6 +51,7 @@ const CartItemContextProvider = (props) => {
     state.totalCartPrice = get_total_price(
       state.cartProducts.filter((item) => item.selected === true)
     );
+    state.cartNotif = state.totalCartItem;
   } else {
     //If logged in
     initialState.cartProducts = customerOrderProduct;
@@ -58,6 +60,7 @@ const CartItemContextProvider = (props) => {
     state.totalCartPrice = get_total_price(
       state.cartProducts.filter((item) => item.selected === true)
     );
+    state.cartNotif = state.totalCartItem;
   }
 
   return (
