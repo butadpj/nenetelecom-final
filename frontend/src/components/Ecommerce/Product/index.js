@@ -120,7 +120,9 @@ const Product = () => {
             <div className="detail-header">
               <h5 className="detail-product-name">{detailData.name}</h5>
               <div className="sub-details">
-                <div className="detail-price">₱ {detailData.price}.00</div>
+                <div className="detail-price">
+                  ₱ {Number(detailData.price).toLocaleString()}.00
+                </div>
                 <div className="detail-brand">
                   Brand: <span>{detailData.brand}</span>
                 </div>

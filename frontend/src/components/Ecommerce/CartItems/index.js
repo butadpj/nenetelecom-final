@@ -72,6 +72,7 @@ const CartItems = () => {
                 </div>
                 <div className="item-quantity">
                   <div
+                    className="quantity-remove"
                     onClick={() =>
                       processCart(id, price, "remove", djangoCurrentUser)
                     }
@@ -80,6 +81,7 @@ const CartItems = () => {
                   </div>
                   <span>{quantity}</span>
                   <div
+                    className="quantity-add"
                     onClick={() =>
                       processCart(id, price, "add", djangoCurrentUser)
                     }
