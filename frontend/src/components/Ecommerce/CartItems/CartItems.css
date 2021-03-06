@@ -101,6 +101,14 @@
   align-items: center;
 }
 
+.cart-items .item-quantity div {
+  transition: 0.2s ease-in;
+}
+
+.cart-items .item-quantity div:hover {
+  filter: brightness(200%);
+}
+
 .cart-items .item-quantity span {
   padding: 0.2em 1em;
   background: var(--shadeLight);

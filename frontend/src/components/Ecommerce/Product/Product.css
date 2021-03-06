@@ -119,7 +119,7 @@
 }
 
 .sub-details {
-  font-size: 0.55em;
+  font-size: 0.65em;
   display: flex;
   justify-content: space-between;
 }
@@ -138,7 +138,7 @@
 
 .detail-description {
   padding: 1em;
-  font-size: 0.6em;
+  font-size: 0.65em;
   font-weight: 600;
   color: var(--dark);
   height: auto;
