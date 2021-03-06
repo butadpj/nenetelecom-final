@@ -52,7 +52,7 @@ def register_page(request):
 
 def login_page(request):
     if request.user.is_authenticated:
-        return redirect('/')
+        return redirect('/store/')
 
     else: 
         if request.method == "POST":
