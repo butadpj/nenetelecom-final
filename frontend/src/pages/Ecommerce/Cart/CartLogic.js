@@ -10,6 +10,7 @@ const CartLogic = () => {
 
   useEffect(() => {
     document.body.style.overflow = "auto";
+    document.title = `Nenetelecom | Store`;
   }, []);
 
   return { f_totalCartPrice, state, djangoCurrentUser };

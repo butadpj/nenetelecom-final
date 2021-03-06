@@ -6,8 +6,20 @@ import Home from "../../../pages/Ecommerce/Home";
 import Cart from "../../../pages/Ecommerce/Cart";
 import Checkout from "../../../pages/Ecommerce/Checkout";
 import Orders from "../../../pages/Ecommerce/Orders";
+import { CartItemContext } from "../../../context/CartItemContext";
 
 const EcommerceView = () => {
+  const [state] = useContext(CartItemContext);
+
+  let cartNotif = state.cartNotif;
+
+  useEffect(() => {
+    if (cartNotif === 0) {
+      document.title = `Nenetelecom | Store`;
+      return;
+    }
+    document.title = `(${cartNotif}) Nenetelecom | Store`;
+  }, [cartNotif]);
   return (
     <>
       <Navtop url="/store/home" />
