@@ -3,13 +3,22 @@
 #### 1. Export an environment settings by typing the command below in your terminal.
 
 - For **development**:
+
+  ```
   export DJANGO_SETTINGS_MODULE=nenetelecom.settings.development
+  ```
 
 - For **production**
+
+  ```
   export DJANGO_SETTINGS_MODULE=nenetelecom.settings.production
+  ```
 
 - Execute from **bash script**
+
+  ```
   bash selectenv.sh
+  ```
 
 ===============================
 
