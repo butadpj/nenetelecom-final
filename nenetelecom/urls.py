@@ -33,4 +33,8 @@ urlpatterns = [
     path('store/orders/', include('frontend.urls')),
 ]
 
+admin.site.site_header = 'Nenetelecom Administration'                    # default: "Django Administration"
+admin.site.index_title = 'Nenetelecom'                 # default: "Site administration"
+admin.site.site_title = 'Admin Panel' # default: "Django site admin"
+
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
