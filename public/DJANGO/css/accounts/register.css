@@ -3,7 +3,7 @@ body {
 }
 
 .register main {
-  margin-top: 2em;
+  padding: 2em 0;
 }
 
 .register .register-info {
@@ -12,7 +12,7 @@ body {
 }
 
 .register .register-info-form {
-  width: 80%;
+  width: min(80%, 40rem);
 }
 
 .register .form-input {

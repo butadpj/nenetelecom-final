@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 const GetCurrentCustomer = () => {
   const [djangoCurrentUser, setDjangoCurrentUser] = useState();
@@ -16,6 +16,10 @@ const GetCurrentCustomer = () => {
     setDjangoCurrentCustomerMobileNumber,
   ] = useState();
   const [djangoCurrentCustomerId, setDjangoCurrentCustomerId] = useState();
+  const [
+    djangoCurrentCustomerFullName,
+    setDjangoCurrentCustomerFullName,
+  ] = useState("");
 
   useEffect(() => {
     let isMounted = true;
@@ -25,6 +29,9 @@ const GetCurrentCustomer = () => {
       setDjangoCurrentCustomerLastName(currentCustomerLastName);
       setDjangoCurrentCustomerId(currentCustomerId);
       setDjangoCurrentCustomerMobileNumber(currentCustomerMobileNumber);
+      setDjangoCurrentCustomerFullName(
+        `${currentCustomerFirstName} ${currentCustomerLastName}`
+      );
     }
 
     return () => {
@@ -38,6 +45,7 @@ const GetCurrentCustomer = () => {
     djangoCurrentCustomerMobileNumber,
     djangoCurrentCustomerId,
     djangoCurrentUser,
+    djangoCurrentCustomerFullName,
   };
 };
 
