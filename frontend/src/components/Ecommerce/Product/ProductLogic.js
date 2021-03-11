@@ -264,7 +264,6 @@ const ProductLogic = () => {
     processCart(selectedProduct, price, action, djangoCurrentUser);
   };
 
-  let addProductModalTimer;
   const handleCloseAddProductModal = () => {
     let addProductModal = document.querySelector(".add-product-modal");
     if (addProductModal != null) {
@@ -272,9 +271,7 @@ const ProductLogic = () => {
       addProductModal.classList.add("add-product-modal-hidden");
     }
 
-    addProductModalTimer = setTimeout(() => {
-      setShowAddProductModal(false);
-    }, 360);
+    setShowAddProductModal(false);
   };
 
   useEffect(() => {
@@ -284,7 +281,6 @@ const ProductLogic = () => {
 
     return () => {
       clearTimeout(closeTimer);
-      clearTimeout(addProductModalTimer);
     };
   }, [showAddProductModal]);
 
