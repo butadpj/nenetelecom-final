@@ -13,7 +13,7 @@
 }
 
 .login .login-info-form {
-  width: 80%;
+  width: min(80%, 40rem);
 }
 
 .login .login-info-form > * {
@@ -21,7 +21,7 @@
 }
 
 .login .or-line-wrapper {
-  width: 80%;
+  width: min(80%, 40rem);
   display: block;
   margin: 0 auto;
 }
@@ -46,7 +46,7 @@
 }
 
 .login .create-account {
-  width: 80%;
+  width: min(80%, 40rem);
   display: block;
   margin: 0 auto;
   margin-top: 0.5em;

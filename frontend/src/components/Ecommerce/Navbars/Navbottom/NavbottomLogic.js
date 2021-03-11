@@ -9,22 +9,27 @@ const NavbottomLogic = () => {
     document.body.style.overflow = "hidden";
     if (showSearch) {
       handleSearchClose();
+      document.body.style.overflow = "hidden";
     }
   };
 
   const handleNavClose = () => {
     setShowNav(false);
+    document.body.style.overflow = "auto";
   };
 
   const handleSearchShow = () => {
     setShowSearch(true);
+    document.body.style.overflow = "hidden";
     if (showNav) {
       handleNavClose();
+      document.body.style.overflow = "hidden";
     }
   };
 
   const handleSearchClose = () => {
     setShowSearch(false);
+    document.body.style.overflow = "auto";
   };
 
   return {

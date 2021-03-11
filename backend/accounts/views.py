@@ -60,25 +60,29 @@ def login_page(request):
             password = request.POST.get('password')
 
             usernames = {''}
+            mobile_numbers = {''}
             existed_users = get_user_model().objects.all()
             for user in existed_users:
                 uname = user.username
+                mnumber = user.mobile_number
                 usernames.add(uname)
+                mobile_numbers.add(mnumber)
 
 
-            if not username in usernames:
+            if  username not in usernames or username not in mobile_numbers:
                 messages.info(request, 'User does not exist')
             else:
                 messages.info(request, 'Username or password does not match')
         
             user = authenticate(request, username=username, password=password)
+            
 
             if user:
                 login(request, user)
                 return redirect('/store/')
             
-
-           
+        else:
+            pass
 
             
 
