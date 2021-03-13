@@ -8,6 +8,7 @@ import { CartItemContext } from "../../../../context/CartItemContext";
 
 import closeIcon from "../../../../assets/svgs/close-dark.svg";
 import profileImg from "../../../../assets/images/profile.webp";
+import guestImg from "../../../../assets/svgs/guest_user.svg";
 import Button from "../../../Button";
 
 const Navbottom = ({ link }) => {
@@ -21,6 +22,7 @@ const Navbottom = ({ link }) => {
   } = NavbottomLogic();
 
   const {
+    djangoCurrentUser,
     djangoCurrentCustomerFullName,
     djangoCurrentCustomerMobileNumber,
   } = GetCurrentCustomer();
@@ -61,30 +63,61 @@ const Navbottom = ({ link }) => {
       </div>
       {showNav ? (
         <div className="nav-content">
-          <img
-            className="close-icon"
-            src={closeIcon}
-            alt="close-dark"
-            onClick={handleNavClose}
-          />
+          <div className="icon-container">
+            <img
+              className="close-icon"
+              src={closeIcon}
+              alt="close-dark"
+              onClick={handleNavClose}
+            />
+          </div>
 
-          <div className="user-section">
-            <img src={profileImg} alt="profile-img" width="60" />
-            <div className="info">
-              <h4 className="info-name">{djangoCurrentCustomerFullName}</h4>
-              <p className="info-number">{djangoCurrentCustomerMobileNumber}</p>
-            </div>
-            <div className="action">
-              <div className="edit">
-                <Button text="edit info" />
-              </div>
-              <div className="logout">
-                <a href="accounts/logout">
-                  <Button text="logout" />
-                </a>
-              </div>
+          <div className="user-container">
+            <div className="user-section">
+              {djangoCurrentUser === "AnonymousUser" ? (
+                <>
+                  <img src={guestImg} alt="profile-img" width="60" />
+                  <div className="info">
+                    <h4 className="info-name">Guest User</h4>
+                    <p className="info-number"></p>
+                  </div>
+                  <div className="action center">
+                    <div className="login">
+                      <a href="accounts/login">
+                        <Button text="Login" />
+                      </a>
+                    </div>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <img src={profileImg} alt="profile-img" width="60" />
+                  <div className="info">
+                    <h4 className="info-name">
+                      {djangoCurrentCustomerFullName}
+                    </h4>
+                    <p className="info-number">
+                      {djangoCurrentCustomerMobileNumber}
+                    </p>
+                  </div>
+                  <div className="action">
+                    <div className="edit">
+                      <Button text="Edit Info" />
+                    </div>
+                    <div className="logout">
+                      <a href="accounts/logout">
+                        <Button text="Logout" />
+                      </a>
+                    </div>
+                  </div>
+                </>
+              )}
             </div>
           </div>
+          <div className="line-wrapper">
+            <hr />
+          </div>
+          <div className="nav-light"></div>
         </div>
       ) : null}
       {showSearch ? (
