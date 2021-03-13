@@ -78,7 +78,12 @@ const Product = () => {
           let date = `${mm} ${dd}, ${yyyy} at ${hr}:${min} ${ampm}`;
           return (
             <div key={id}>
-              <main className="product">
+              <main
+                className="product"
+                onClick={() =>
+                  handleShow(id, name, price, brand, image, description)
+                }
+              >
                 <div className="condition brand-new">Brand new</div>
                 <div className="info-top">
                   <div className="product-name">{name}</div>
