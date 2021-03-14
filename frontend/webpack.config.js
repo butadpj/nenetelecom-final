@@ -1,5 +1,6 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CompressionPlugin = require("compression-webpack-plugin");
+const webpack = require("webpack");
 
 const path = require("path");
 
@@ -9,6 +10,11 @@ module.exports = {
     filename: "[name].js",
     path: path.resolve(__dirname, "../public/REACT/js"),
   },
+  plugins: [
+    new webpack.ProvidePlugin({
+      process: "process/browser",
+    }),
+  ],
   module: {
     rules: [
       {
