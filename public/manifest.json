@@ -1,0 +1,29 @@
+{
+  "name": "Nenetelecom",
+  "short_name": "Nenetelecom",
+  "icons": [
+    {
+      "src": "android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "android-chrome-256x256.png",
+      "sizes": "256x256",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "/store",
+  "description": "Shop for Mobile phones, Tablets, gadgets,",
+  "theme_color": "#40403E",
+  "background_color": "#ffffff",
+  "display": "standalone"
+}

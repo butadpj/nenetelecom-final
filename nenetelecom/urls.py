@@ -20,6 +20,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('backend.api.urls')),
@@ -32,6 +33,7 @@ urlpatterns = [
     path('store/checkout/', include('frontend.urls')),
     path('store/checkout/process_order/', include('frontend.urls')),
     path('store/orders/', include('frontend.urls')),
+    
 ]
 
 admin.site.site_header = 'Nenetelecom Administration'                    # default: "Django Administration"
