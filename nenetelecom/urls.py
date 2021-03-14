@@ -18,7 +18,7 @@ from django.urls import path, include
 
 from django.conf import settings
 from django.conf.urls.static import static
-
+from django.views.generic import TemplateView
 
 
 urlpatterns = [
@@ -33,7 +33,10 @@ urlpatterns = [
     path('store/checkout/', include('frontend.urls')),
     path('store/checkout/process_order/', include('frontend.urls')),
     path('store/orders/', include('frontend.urls')),
-    
+    path('offline.html', (TemplateView.as_view(template_name="REACT/main/offline.html", 
+        content_type='text/html', )), name='offline.html'),
+    path('service-worker.js', (TemplateView.as_view(template_name="REACT/main/service-worker.js", 
+        content_type='application/javascript', )), name='service-worker.js'),
 ]
 
 admin.site.site_header = 'Nenetelecom Administration'                    # default: "Django Administration"
