@@ -1,0 +1,1 @@
+(self.webpackChunkfrontend=self.webpackChunkfrontend||[]).push([[996],{2177:(n,e,r)=>{"use strict";r.d(e,{Z:()=>t});const t=function(n,e){if(!n)throw new Error("Invariant failed")}}}]);
