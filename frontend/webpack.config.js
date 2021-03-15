@@ -14,10 +14,10 @@ module.exports = {
     new webpack.ProvidePlugin({
       process: "process/browser",
     }),
-    new HtmlWebpackPlugin({
-      minify: false,
-    }),
-    new CompressionPlugin(),
+    // new HtmlWebpackPlugin({
+    //   minify: false,
+    // }),
+    // new CompressionPlugin(),
   ],
   module: {
     rules: [
@@ -66,28 +66,28 @@ module.exports = {
 
   //! Uncomment OPTIMIZATION FOR PRODUCTION if you're in production
   // OPTIMIZATION FOR PRODUCTION -- START --
-  optimization: {
-    runtimeChunk: "single",
-    splitChunks: {
-      chunks: "all",
-      maxInitialRequests: Infinity,
-      minSize: 0,
-      cacheGroups: {
-        vendor: {
-          test: /[\\/]node_modules[\\/]/,
-          name(module) {
-            // get the name. E.g. node_modules/packageName/not/this/part.js
-            // or node_modules/packageName
-            const packageName = module.context.match(
-              /[\\/]node_modules[\\/](.*?)([\\/]|$)/
-            )[1];
+  // optimization: {
+  //   runtimeChunk: "single",
+  //   splitChunks: {
+  //     chunks: "all",
+  //     maxInitialRequests: Infinity,
+  //     minSize: 0,
+  //     cacheGroups: {
+  //       vendor: {
+  //         test: /[\\/]node_modules[\\/]/,
+  //         name(module) {
+  //           // get the name. E.g. node_modules/packageName/not/this/part.js
+  //           // or node_modules/packageName
+  //           const packageName = module.context.match(
+  //             /[\\/]node_modules[\\/](.*?)([\\/]|$)/
+  //           )[1];
 
-            // npm package names are URL-safe, but some servers don't like @ symbols
-            return `npm.${packageName.replace("@", "")}`;
-          },
-        },
-      },
-    },
-  },
+  //           // npm package names are URL-safe, but some servers don't like @ symbols
+  //           return `npm.${packageName.replace("@", "")}`;
+  //         },
+  //       },
+  //     },
+  //   },
+  // },
   // OPTIMIZATION FOR PRODUCTION -- END --
 };
