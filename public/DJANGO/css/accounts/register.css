@@ -15,8 +15,8 @@
 }
 
 .register .form-input {
-  font-size: 0.6em;
-  height: 2rem;
+  font-size: 0.7em;
+  height: 2.5rem;
 }
 
 .register .submit-btn {
@@ -24,7 +24,7 @@
 }
 
 .register .back-to-login {
-  font-size: 0.9em;
+  font-size: 1em;
   text-align: center;
   margin-top: 2em;
 }
