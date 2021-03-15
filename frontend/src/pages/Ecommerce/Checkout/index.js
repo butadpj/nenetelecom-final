@@ -8,6 +8,7 @@ import Button from "../../../components/Button";
 import handDownIcon from "../../../assets/svgs/hand-point-down-regular.svg";
 import Paypal from "../../../components/Ecommerce/PayPal";
 import closeIcon from "../../../assets/svgs/close.svg";
+import Loader from "../../../components/Ecommerce/Loader";
 
 const Checkout = () => {
   const {
@@ -31,6 +32,8 @@ const Checkout = () => {
     time,
     validity,
     errorMessage,
+    productLoading,
+    productImageLoading,
   } = CheckoutLogic();
 
   let totalCartPrice = state.totalCartPrice;
@@ -57,6 +60,8 @@ const Checkout = () => {
           <div className="helper">
             <span>Select an item to checkout...</span>
           </div>
+        ) : productLoading && productImageLoading ? (
+          <Loader />
         ) : (
           <>
             <div className="order-summary">
