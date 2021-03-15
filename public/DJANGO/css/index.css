@@ -31,4 +31,9 @@ body {
   background: var(--dark);
   font-size: 25px;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
+  max-height: -webkit-fill-available;
 }
