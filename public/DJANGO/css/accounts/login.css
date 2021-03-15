@@ -1,3 +1,10 @@
+.login {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+}
+
 .login .logo {
   display: block;
   margin: 0 auto;
