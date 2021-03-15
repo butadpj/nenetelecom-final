@@ -19,7 +19,9 @@ const CartItems = () => {
 
   return (
     <div className="cart-items">
-      {cartDisplayProducts.length === 0 ? (
+      {productLoading && productImageLoading ? (
+        <Loader />
+      ) : cartDisplayProducts.length === 0 ? (
         <div className="helper">
           <span>Add something in your cart...</span>
         </div>
@@ -28,8 +30,6 @@ const CartItems = () => {
           <span>Select a product to checkout</span>
           <i className="fas fa-check-circle"></i>
         </div>
-      ) : productLoading && productImageLoading ? (
-        <Loader />
       ) : (
         cartDisplayProducts.map((item) => {
           const { id, image, name, brand, price, quantity, selected } = item;
