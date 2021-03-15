@@ -1,29 +1,84 @@
 {
-  "name": "Nenetelecom",
-  "short_name": "Nenetelecom",
+  "name": "Nenetelecom Store",
+  "short_name": "NT Store ",
   "icons": [
     {
-      "src": "android-chrome-192x192.png",
+      "src": "android-chrome-192x192-store.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "android-chrome-256x256.png",
+      "src": "android-chrome-256x256-store.png",
       "sizes": "256x256",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "android-chrome-512x512.png",
+      "src": "android-chrome-512x512-store.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
     }
   ],
   "start_url": "/store",
-  "description": "Shop for Mobile phones, Tablets, gadgets,",
+  "description": "Mobile phones, Tablets, and Accessories,",
   "theme_color": "#40403E",
   "background_color": "#ffffff",
-  "display": "standalone"
+  "display_override": ["window-control-overlay", "minimal-ui"],
+  "display": "minimal-ui",
+  "shortcuts": [
+    {
+      "name": "Nenetelecom | Landing page",
+      "short_name": "Nenetelecom",
+      "description": "A tradition of trust since 2010",
+      "url": "/?source=pwa",
+      "icons": [
+        {
+          "src": "android-chrome-192x192.png",
+          "sizes": "192x192",
+          "type": "image/png",
+          "purpose": "any maskable"
+        },
+        {
+          "src": "android-chrome-256x256.png",
+          "sizes": "256x256",
+          "type": "image/png",
+          "purpose": "any maskable"
+        },
+        {
+          "src": "android-chrome-512x512.png",
+          "sizes": "512x512",
+          "type": "image/png",
+          "purpose": "any maskable"
+        }
+      ]
+    },
+    {
+      "name": "Nenetelecom | Administration page",
+      "short_name": "Nenetelecom Administration",
+      "description": "Nenetelecom's administration page",
+      "url": "/admin?source=pwa",
+      "icons": [
+        {
+          "src": "android-chrome-192x192.png",
+          "sizes": "192x192",
+          "type": "image/png",
+          "purpose": "any maskable"
+        },
+        {
+          "src": "android-chrome-256x256.png",
+          "sizes": "256x256",
+          "type": "image/png",
+          "purpose": "any maskable"
+        },
+        {
+          "src": "android-chrome-512x512.png",
+          "sizes": "512x512",
+          "type": "image/png",
+          "purpose": "any maskable"
+        }
+      ]
+    }
+  ]
 }
