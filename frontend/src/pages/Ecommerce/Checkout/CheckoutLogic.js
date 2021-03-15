@@ -3,6 +3,7 @@ import CartItemsLogic from "../../../components/Ecommerce/CartItems/CartItemsLog
 import { CartItemContext } from "../../../context/CartItemContext";
 import GetCurrentCustomer from "../../../hooks/GetCurrentCustomer";
 import { getCustomersData } from "../../../hooks/data/getCustomersData";
+import { getProducts } from "../../../hooks/query/getProducts";
 
 const CheckoutLogic = () => {
   const {
@@ -14,6 +15,7 @@ const CheckoutLogic = () => {
 
   const { customersData } = getCustomersData();
   const { selectedItems } = CartItemsLogic();
+  const { productLoading, productImageLoading } = getProducts();
 
   const [state] = useContext(CartItemContext);
 
@@ -341,6 +343,8 @@ const CheckoutLogic = () => {
     time,
     validity,
     errorMessage,
+    productLoading,
+    productImageLoading,
   };
 };
 
