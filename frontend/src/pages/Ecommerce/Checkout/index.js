@@ -56,12 +56,12 @@ const Checkout = () => {
         </div>
         <hr />
 
-        {selectedItems.length === 0 ? (
+        {productLoading && productImageLoading ? (
+          <Loader />
+        ) : selectedItems.length === 0 ? (
           <div className="helper">
             <span>Select an item to checkout...</span>
           </div>
-        ) : productLoading && productImageLoading ? (
-          <Loader />
         ) : (
           <>
             <div className="order-summary">

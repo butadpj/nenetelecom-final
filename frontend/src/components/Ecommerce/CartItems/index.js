@@ -23,16 +23,12 @@ const CartItems = () => {
         <div className="helper">
           <span>Add something in your cart...</span>
         </div>
-      ) : (
-        noSelected() && (
-          <div className="helper">
-            <span>Select a product to checkout</span>
-            <i className="fas fa-check-circle"></i>
-          </div>
-        )
-      )}
-
-      {productLoading && productImageLoading ? (
+      ) : noSelected() === true ? (
+        <div className="helper">
+          <span>Select a product to checkout</span>
+          <i className="fas fa-check-circle"></i>
+        </div>
+      ) : productLoading && productImageLoading ? (
         <Loader />
       ) : (
         cartDisplayProducts.map((item) => {
