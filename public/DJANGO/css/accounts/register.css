@@ -1,6 +1,8 @@
-body {
-  line-height: 1.4;
-  
+.register {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
 }
 
 .register .register-info {
