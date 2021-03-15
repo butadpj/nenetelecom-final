@@ -1,7 +1,0 @@
-//! ADDING & UPDATING of cart item END
-
-//! ANY DEVICE - Transparent Navbar functionality - END
-
-//! Navbar hover and dynamic resize functionality - END
-
-//! Window Resize Handler - END
