@@ -32,7 +32,6 @@ const Checkout = () => {
     time,
     validity,
     errorMessage,
-    isLoading,
     totalCartPrice,
   } = CheckoutLogic();
 
@@ -55,9 +54,7 @@ const Checkout = () => {
         </div>
         <hr />
 
-        {isLoading ? (
-          <Loader />
-        ) : selectedItems.length === 0 ? (
+        {selectedItems.length === 0 ? (
           <div className="helper">
             <span>Select an item to checkout...</span>
           </div>
