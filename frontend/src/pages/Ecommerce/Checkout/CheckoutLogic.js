@@ -17,7 +17,6 @@ const CheckoutLogic = () => {
   const { selectedItems } = CartItemsLogic();
 
   const [cartItemState] = useContext(CartItemContext);
-  const [productState] = useContext(ProductContext);
 
   const [isFormComplete, setIsFormComplete] = useState(false);
   const [gcashInfo, setGcashInfo] = useState(false);
@@ -25,7 +24,6 @@ const CheckoutLogic = () => {
   const [alertModal, setAlertModal] = useState(false);
   const [time, setTime] = useState(4);
 
-  let isLoading = productState.isLoading;
   let totalCartPrice = cartItemState.totalCartPrice;
 
   const [customerInfo, setCustomerInfo] = useState({
@@ -346,7 +344,6 @@ const CheckoutLogic = () => {
     time,
     validity,
     errorMessage,
-    isLoading,
     totalCartPrice,
   };
 };
