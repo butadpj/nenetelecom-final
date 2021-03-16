@@ -17,7 +17,7 @@ const CheckoutLogic = () => {
   const { selectedItems } = CartItemsLogic();
 
   const [cartItemState] = useContext(CartItemContext);
-  const [productState] = useContext(CartItemContext);
+  const [productState] = useContext(ProductContext);
 
   const [isFormComplete, setIsFormComplete] = useState(false);
   const [gcashInfo, setGcashInfo] = useState(false);
