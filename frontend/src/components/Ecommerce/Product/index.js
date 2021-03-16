@@ -14,14 +14,13 @@ const Product = () => {
   const {
     handleShow,
     products,
+    isLoading,
     showDetails,
     handleClose,
     detailData,
     handleShowAddProductModal,
     handleCloseAddProductModal,
     showAddProductModal,
-    productLoading,
-    productImageLoading,
   } = ProductLogic();
 
   useEffect(() => {
@@ -30,7 +29,7 @@ const Product = () => {
 
   return (
     <>
-      {productLoading && productImageLoading ? (
+      {isLoading ? (
         <Loader />
       ) : (
         products.map((product) => {

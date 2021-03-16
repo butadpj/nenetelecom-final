@@ -1,11 +1,4 @@
 export const reducer = (state, action) => {
-  if (action.type === "SUCCESS") {
-    return {
-      ...state,
-      cartProducts: action.payload,
-    };
-  }
-
   if (action.type === "ADD_ITEM") {
     const newCartProducts = [action.payload, ...state.cartProducts];
     return {

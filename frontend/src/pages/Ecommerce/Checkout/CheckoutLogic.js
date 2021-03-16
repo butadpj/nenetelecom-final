@@ -1,9 +1,9 @@
 import { useState, useContext, useEffect } from "react";
 import CartItemsLogic from "../../../components/Ecommerce/CartItems/CartItemsLogic";
 import { CartItemContext } from "../../../context/CartItemContext";
+import { ProductContext } from "../../../context/ProductContext";
 import GetCurrentCustomer from "../../../hooks/GetCurrentCustomer";
 import { getCustomersData } from "../../../hooks/data/getCustomersData";
-import { getProducts } from "../../../hooks/query/getProducts";
 
 const CheckoutLogic = () => {
   const {
@@ -15,15 +15,18 @@ const CheckoutLogic = () => {
 
   const { customersData } = getCustomersData();
   const { selectedItems } = CartItemsLogic();
-  const { productLoading, productImageLoading } = getProducts();
 
-  const [state] = useContext(CartItemContext);
+  const [cartItemState] = useContext(CartItemContext);
+  const [productState] = useContext(CartItemContext);
 
   const [isFormComplete, setIsFormComplete] = useState(false);
   const [gcashInfo, setGcashInfo] = useState(false);
   const [confirmModal, setConfirmModal] = useState(false);
   const [alertModal, setAlertModal] = useState(false);
   const [time, setTime] = useState(4);
+
+  let isLoading = productState.isLoading;
+  let totalCartPrice = cartItemState.totalCartPrice;
 
   const [customerInfo, setCustomerInfo] = useState({
     firstName: "",
@@ -323,7 +326,7 @@ const CheckoutLogic = () => {
   };
 
   return {
-    state,
+    cartItemState,
     selectedItems,
     customerInfo,
     shippingInfo,
@@ -343,8 +346,8 @@ const CheckoutLogic = () => {
     time,
     validity,
     errorMessage,
-    productLoading,
-    productImageLoading,
+    isLoading,
+    totalCartPrice,
   };
 };
 

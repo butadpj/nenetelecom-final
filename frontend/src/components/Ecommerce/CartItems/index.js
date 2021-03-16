@@ -12,14 +12,13 @@ const CartItems = () => {
     cartDisplayProducts,
     processCart,
     djangoCurrentUser,
-    productLoading,
-    productImageLoading,
+    isLoading,
     noSelected,
   } = CartItemsLogic();
 
   return (
     <div className="cart-items">
-      {productLoading && productImageLoading ? (
+      {isLoading ? (
         <Loader />
       ) : cartDisplayProducts.length === 0 ? (
         <div className="helper">

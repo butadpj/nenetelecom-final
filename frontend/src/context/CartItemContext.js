@@ -1,5 +1,5 @@
 import React, { useReducer, createContext } from "react";
-import { reducer } from "../hooks/reducer";
+import { reducer } from "../hooks/cartItemReducer";
 import { getCustomerOrderProduct } from "../hooks/query/getCustomerOrderProduct";
 import { getCookieCart } from "../hooks/data/getCookieCart";
 import GetCurrentCustomer from "../hooks/GetCurrentCustomer";
