@@ -329,9 +329,11 @@ const passwordToggle = () => {
 let registerInputs = document.querySelectorAll(
   ".register-info-form .form-input"
 );
+let initialHeight = "100vh";
 
 registerInputs.forEach((input) => {
   input.addEventListener("focus", () => {
+    document.body.style.overflow = "auto";
     document.body.style.height = "100vh";
   });
 });
