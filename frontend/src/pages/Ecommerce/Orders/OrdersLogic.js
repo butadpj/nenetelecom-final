@@ -3,9 +3,11 @@ import { useContext } from "react";
 import { CartItemContext } from "../../../context/CartItemContext";
 
 const OrdersLogic = () => {
-  const [state] = useContext(CartItemContext);
+  const [cartItemState] = useContext(CartItemContext);
 
-  return { state };
+  let orders = cartItemState.completedOrders;
+
+  return { orders };
 };
 
 export default OrdersLogic;

@@ -83,7 +83,7 @@ const Navbottom = ({ link }) => {
                   </div>
                   <div className="action center">
                     <div className="login">
-                      <a href="accounts/login">
+                      <a href="/store/accounts/login">
                         <Button text="Login" />
                       </a>
                     </div>
@@ -105,7 +105,7 @@ const Navbottom = ({ link }) => {
                       <Button text="Edit Info" />
                     </div>
                     <div className="logout">
-                      <a href="accounts/logout">
+                      <a href="/store/accounts/logout">
                         <Button text="Logout" />
                       </a>
                     </div>
@@ -117,7 +117,6 @@ const Navbottom = ({ link }) => {
           <div className="line-wrapper">
             <hr />
           </div>
-          <div className="nav-light"></div>
         </div>
       ) : null}
       {showSearch ? (

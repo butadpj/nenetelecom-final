@@ -5,10 +5,8 @@ import OrdersLogic from "./OrdersLogic";
 import { Link } from "react-router-dom";
 import Navbottom from "../../../components/Ecommerce/Navbars/Navbottom";
 const Orders = () => {
-  const { state } = OrdersLogic();
-  let orders = state.completedOrders;
+  const { orders } = OrdersLogic();
 
-  console.log(orders);
   return (
     <>
       <section className="orders">

@@ -1,18 +1,20 @@
 import { useContext } from "react";
 
 import { CartItemContext } from "../../../context/CartItemContext";
-import { getProducts } from "../../../hooks/query/getProducts";
+import { ProductContext } from "../../../context/ProductContext";
 import ProductLogic from "../../../components/Ecommerce/Product/ProductLogic";
 import GetCurrentCustomer from "../../../hooks/GetCurrentCustomer";
 
 const CartItemsLogic = () => {
-  const [state, dispatch] = useContext(CartItemContext);
-  const { products, productLoading, productImageLoading } = getProducts();
+  const [cartItemState, cartItemDispatch] = useContext(CartItemContext);
+  const [productState] = useContext(ProductContext);
   const { processCart } = ProductLogic();
   const { djangoCurrentUser } = GetCurrentCustomer();
 
+  let products = productState.products;
+  let isLoading = productState.isLoading;
   let cartDisplayProducts = [];
-  state.cartProducts.forEach((item) => {
+  cartItemState.cartProducts.forEach((item) => {
     products.map((product) => {
       if (product.id === item.product) {
         product.quantity = item.quantity;
@@ -38,12 +40,12 @@ const CartItemsLogic = () => {
       document.cookie = "cart=" + JSON.stringify(cart) + ";domain=;path=/";
 
       let updatedProduct;
-      state.cartProducts.forEach((item) => {
+      cartItemState.cartProducts.forEach((item) => {
         if (item.product === selectedItem) {
           updatedProduct = item;
         }
       });
-      dispatch({
+      cartItemDispatch({
         type: "UPDATE_ITEM",
         payload: {
           id: selectedItem,
@@ -51,7 +53,7 @@ const CartItemsLogic = () => {
         },
       });
     } else {
-      let existingProduct = state.cartProducts.filter(
+      let existingProduct = cartItemState.cartProducts.filter(
         (item) => item.product === selectedItem
       );
 
@@ -65,7 +67,7 @@ const CartItemsLogic = () => {
       })
         .then((res) => res.json())
         .then((data) => {
-          dispatch({
+          cartItemDispatch({
             type: "UPDATE_ITEM_AU",
             payload: {
               id: selectedItem,
@@ -82,8 +84,7 @@ const CartItemsLogic = () => {
     cartDisplayProducts,
     processCart,
     djangoCurrentUser,
-    productLoading,
-    productImageLoading,
+    isLoading,
     noSelected,
     selectedItems,
   };

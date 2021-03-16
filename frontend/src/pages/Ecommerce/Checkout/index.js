@@ -12,7 +12,7 @@ import Loader from "../../../components/Ecommerce/Loader";
 
 const Checkout = () => {
   const {
-    state,
+    cartItemState,
     selectedItems,
     customerInfo,
     shippingInfo,
@@ -32,11 +32,10 @@ const Checkout = () => {
     time,
     validity,
     errorMessage,
-    productLoading,
-    productImageLoading,
+    isLoading,
+    totalCartPrice,
   } = CheckoutLogic();
 
-  let totalCartPrice = state.totalCartPrice;
   let f_totalCartPrice = Number(totalCartPrice).toLocaleString();
 
   useEffect(() => {
@@ -56,7 +55,7 @@ const Checkout = () => {
         </div>
         <hr />
 
-        {productLoading && productImageLoading ? (
+        {isLoading ? (
           <Loader />
         ) : selectedItems.length === 0 ? (
           <div className="helper">

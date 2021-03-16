@@ -1,6 +1,6 @@
 import { useContext, useState, useEffect } from "react";
 import { CartItemContext } from "../../../context/CartItemContext";
-import { getProducts } from "../../../hooks/query/getProducts";
+import { ProductContext } from "../../../context/ProductContext";
 import GetCurrentCustomer from "../../../hooks/GetCurrentCustomer";
 import { getCustomerOrderProduct } from "../../../hooks/query/getCustomerOrderProduct";
 
@@ -8,11 +8,13 @@ const ProductLogic = () => {
   const [showDetails, setShowDetails] = useState(false);
   const [detailData, setDetailData] = useState();
   const [showAddProductModal, setShowAddProductModal] = useState(false);
-  const [state, dispatch] = useContext(CartItemContext);
+  const [cartItemState, cartItemDispatch] = useContext(CartItemContext);
+  const [productState] = useContext(ProductContext);
   const { djangoCurrentUser, djangoCurrentCustomerId } = GetCurrentCustomer();
   const { notCompletedCustomerOrder } = getCustomerOrderProduct();
-  const { products, productLoading, productImageLoading } = getProducts();
 
+  let products = productState.products;
+  let isLoading = productState.isLoading;
   const handleShow = (id, name, price, brand, image, description) => {
     setShowDetails(true);
     document.body.style.overflow = "hidden";
@@ -70,11 +72,11 @@ const ProductLogic = () => {
     document.cookie = "cart=" + JSON.stringify(cart) + ";domain=;path=/";
 
     //* ADDING & UPDATING of cart item START
-    const existingProduct = state.cartProducts.filter(
+    const existingProduct = cartItemState.cartProducts.filter(
       (item) => item.product === selectedProduct
     );
     if (existingProduct.length > 0) {
-      dispatch({
+      cartItemDispatch({
         type: "UPDATE_ITEM",
         payload: {
           id: selectedProduct,
@@ -88,7 +90,7 @@ const ProductLogic = () => {
         quantity: 1,
       };
 
-      dispatch({
+      cartItemDispatch({
         type: "ADD_ITEM",
         payload: newCartItem,
       });
@@ -99,7 +101,7 @@ const ProductLogic = () => {
   const processAuthenticatedCart = (selectedProduct, price, action) => {
     let price_num = parseInt(price);
 
-    let existingProduct = state.cartProducts.filter(
+    let existingProduct = cartItemState.cartProducts.filter(
       (data) => data.product === selectedProduct
     );
 
@@ -125,7 +127,7 @@ const ProductLogic = () => {
         })
           .then((res) => res.json())
           .then((data) => {
-            dispatch({
+            cartItemDispatch({
               type: "UPDATE_ITEM_AU",
               payload: {
                 id: selectedProduct,
@@ -166,7 +168,7 @@ const ProductLogic = () => {
                 .then((res) => res.json())
                 .then((data) => {
                   console.log(data);
-                  dispatch({
+                  cartItemDispatch({
                     type: "ADD_ITEM_AU",
                     payload: data,
                   });
@@ -190,7 +192,7 @@ const ProductLogic = () => {
           })
             .then((res) => res.json())
             .then((data) => {
-              dispatch({
+              cartItemDispatch({
                 type: "ADD_ITEM_AU",
                 payload: data,
               });
@@ -210,7 +212,7 @@ const ProductLogic = () => {
 
         //If quantity is equal to 0
         if (existingProduct[0].quantity <= 0) {
-          dispatch({
+          cartItemDispatch({
             type: "REMOVE_ITEM_AU",
             payload: selectedProduct,
           });
@@ -236,7 +238,7 @@ const ProductLogic = () => {
           })
             .then((res) => res.json())
             .then((data) => {
-              dispatch({
+              cartItemDispatch({
                 type: "UPDATE_ITEM_AU",
                 payload: {
                   id: selectedProduct,
@@ -288,14 +290,13 @@ const ProductLogic = () => {
     handleShow,
     handleClose,
     products,
+    isLoading,
     showDetails,
     detailData,
     handleShowAddProductModal,
     handleCloseAddProductModal,
     showAddProductModal,
     processCart,
-    productLoading,
-    productImageLoading,
   };
 };
 
