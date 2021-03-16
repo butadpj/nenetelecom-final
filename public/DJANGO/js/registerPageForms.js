@@ -1,14 +1,4 @@
-//Error messages in login page
-
-let loginQuote = document.querySelector(".quote p");
-let loginErrorMessage = document.querySelector(".login .error-message p");
-
-if (loginErrorMessage != null) {
-  loginQuote.innerHTML = "";
-}
-
-//Form validation in register page
-
+//Form validation
 let usernameInput = document.querySelector("#id_username");
 let mobile_numberInput = document.querySelector("#id_mobile_number");
 let first_nameInput = document.querySelector("#id_first_name");
@@ -334,3 +324,14 @@ const passwordToggle = () => {
     isShown = false;
   }
 };
+
+//Fix issue in mobile phones when pulling up the keyboard
+let registerInputs = document.querySelectorAll(
+  ".register-info-form .form-input"
+);
+
+registerInputs.forEach((input) => {
+  input.addEventListener("focus", () => {
+    document.body.style.height = "100vh";
+  });
+});
