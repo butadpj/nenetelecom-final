@@ -33,4 +33,7 @@ body {
   font-size: 25px;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   line-height: 1.4;
+  height: 100vh;
+  display: table;
+  width: 100%;
 }
