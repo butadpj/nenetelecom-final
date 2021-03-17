@@ -296,6 +296,7 @@ const CheckoutLogic = () => {
     e.preventDefault();
     if (allInputIsValid()) {
       setIsFormComplete(true);
+      return;
     }
     return false;
   };
