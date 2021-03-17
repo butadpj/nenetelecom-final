@@ -119,7 +119,7 @@
   background: var(--light);
   color: var(--shadeBlue);
   margin: 1em auto;
-  width: 87%;
+  width: 90%;
   border-radius: 0.625rem;
   padding: 0.5em 1em;
 }
@@ -130,7 +130,7 @@
 
 .checkout .form-field label {
   font-weight: 600;
-  font-size: 0.9em;
+  font-size: 1.3em;
 }
 
 .checkout label.default {
@@ -146,17 +146,18 @@
 }
 
 .checkout .error-message {
-  font-size: 0.8em;
+  font-size: 1em;
   color: var(--shadeRed);
-  margin-bottom: 1em;
+  margin: 0.3em 0 1em 0;
 }
 
 .checkout .form-field input {
   margin: 0.4em 0 0 0;
   width: 100%;
   border-radius: 5px;
-  height: 2rem;
+  height: 3.5rem;
   padding-left: 0.5em;
+  font-size: 1.7em;
 }
 
 .checkout input:focus {
