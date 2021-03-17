@@ -1,6 +1,8 @@
 .login {
-  display: table-cell;
-  vertical-align: middle;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  min-height: 100vh;
 }
 
 .login .logo {
@@ -9,7 +11,7 @@
 }
 
 .login main {
-  margin-top: 1em;
+  padding-bottom: 1em;
 }
 
 .login .login-info {
@@ -22,7 +24,7 @@
 }
 
 .login .login-info-form > * {
-  margin-bottom: 0.5em;
+  margin-bottom: 0.8em;
 }
 
 .login .or-line-wrapper {
@@ -53,9 +55,7 @@
 .login .create-account {
   width: min(80%, 40rem);
   display: block;
-  margin: 0 auto;
-  margin-top: 0.5em;
-  margin-bottom: 0.5em;
+  margin: 1em auto;
 }
 
 .login .guest-shop {
