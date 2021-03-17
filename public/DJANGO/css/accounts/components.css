@@ -3,7 +3,7 @@
   border: none;
   color: var(--light);
   border-radius: 0.3rem;
-  padding: 0.4em;
+  padding: 0.5em;
   font-size: 0.75em;
   font-weight: 600;
   width: 100%;
@@ -40,7 +40,7 @@
 }
 
 label {
-  font-size: 0.55em;
+  font-size: 0.6em;
   color: var(--shadeLightBlue);
   font-weight: 600;
   margin-bottom: 0;
@@ -51,11 +51,11 @@ label {
   border: none;
   outline: none;
   border-radius: 0.3rem;
-  font-size: 0.65em;
   color: var(--light);
   font-weight: 600;
   padding-left: 0.4em;
-  height: 2.3rem;
+  font-size: 0.75em;
+  height: 2.8rem;
 }
 
 .form-input.transparent {
@@ -94,7 +94,7 @@ label {
 }
 
 .input-error-message p {
-  font-size: 0.5em;
+  font-size: 0.55em;
   font-weight: 500;
   margin-top: 0.3em;
   margin-bottom: 0;
