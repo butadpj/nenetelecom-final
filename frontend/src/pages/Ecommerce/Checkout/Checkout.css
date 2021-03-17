@@ -37,7 +37,7 @@
   background: var(--light);
   color: var(--shadeBlue);
   margin: 1em auto;
-  width: 87%;
+  width: 90%;
   border-radius: 0.625rem;
   padding: 0.5em;
 }
@@ -130,7 +130,7 @@
 
 .checkout .form-field label {
   font-weight: 600;
-  font-size: 1.3em;
+  font-size: 1.1em;
 }
 
 .checkout label.default {
@@ -155,9 +155,9 @@
   margin: 0.4em 0 0 0;
   width: 100%;
   border-radius: 5px;
-  height: 3.5rem;
+  height: 2.8rem;
   padding-left: 0.5em;
-  font-size: 1.7em;
+  font-size: 1.3em;
 }
 
 .checkout input:focus {
