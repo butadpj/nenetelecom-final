@@ -240,7 +240,7 @@ const checkValidity = (input, value) => {
     let errorMessage = document.querySelector(
       ".password1 .input-error-message p"
     );
-    let regex = "^[A-Za-zd_]{8,}$";
+    let regex = "^[A-Za-z_0-9]{8,}$";
 
     if (value.length < 8) {
       setValidityStyle(

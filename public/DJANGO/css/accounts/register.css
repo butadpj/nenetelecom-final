@@ -45,7 +45,7 @@
 .register .field-icon {
   float: right;
   position: relative;
-  margin-top: -2.2rem;
+  margin-top: -2.6rem;
   margin-right: 0.5rem;
   z-index: 2;
   color: var(--shadeLightDark);
