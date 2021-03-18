@@ -1,0 +1,43 @@
+.technicians {
+  background: var(--shadeLight);
+  width: 100%;
+  height: fit-content;
+  position: relative;
+  zoom: 50%;
+}
+
+.technicians header {
+  color: var(--shadeDark);
+  margin: 0 auto 2em auto;
+  display: block;
+}
+
+.technicians .cards {
+  display: grid;
+  gap: 4em;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+}
+
+.techniciansBtn {
+  display: block;
+  margin: 2em auto;
+  width: fit-content;
+}
+
+/* OVERRIDES */
+.technicians .card {
+  background: white;
+  border-radius: 0;
+}
+
+.technicians .card .card-icon img {
+  width: 236px;
+  height: 235px;
+  object-fit: scale-down;
+  border-radius: 50%;
+}
+
+.technicians .card .card-text {
+  width: 340px;
+  height: 66px;
+}

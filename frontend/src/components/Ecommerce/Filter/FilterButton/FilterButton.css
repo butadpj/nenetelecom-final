@@ -1,0 +1,20 @@
+.filter-btn {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  width: fit-content;
+  height: auto;
+  text-transform: capitalize;
+  background: var(--E-bg);
+  padding: 0.5em;
+  border-radius: 0.4em;
+}
+
+.filter-btn > * {
+  padding: 0 0.4em;
+  font-weight: 600;
+}
+
+.filter-btn img {
+  zoom: 35%;
+}

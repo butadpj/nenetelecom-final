@@ -1,0 +1,45 @@
+.store {
+  background: var(--shadeLight);
+  width: 100%;
+  height: fit-content;
+  position: relative;
+  zoom: 55%;
+  padding-top: 5rem;
+  z-index: 4;
+}
+
+.store .circle {
+  background: var(--shadeLightGreen);
+  width: 20rem;
+  height: 20rem;
+  border-radius: 50%;
+  position: absolute;
+  top: 0%;
+  left: 5%;
+  transform: translate(-50%, -50%);
+}
+
+.store header {
+  margin: 0 auto 2em auto;
+  display: block;
+}
+
+.store .cards {
+  display: grid;
+  gap: 4em;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+}
+
+.store .card {
+  border-radius: 0;
+}
+
+.store .card-titlee {
+  color: var(--shadeGreen) !important;
+}
+
+.storeBtn {
+  display: block;
+  margin: 3em auto 0 auto;
+  width: fit-content;
+}

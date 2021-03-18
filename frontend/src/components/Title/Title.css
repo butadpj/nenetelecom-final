@@ -1,0 +1,11 @@
+.section-title h1 {
+  font-size: 1.3em;
+
+  color: var(--dark);
+  text-shadow: -0.1em 0.2em var(--darkShadow);
+}
+
+.section-title h1 span {
+  color: var(--light);
+  text-shadow: -0.1em 0.2em var(--lightShadow);
+}
