@@ -9,35 +9,26 @@ class Product(models.Model):
     T = 'Tablets/iPad'
     A = 'Accessories'
 
-    TYPE = (
+    CATEGORY = (
         (P, 'Phones'),
         (T, 'Tablets/iPad'),
         (A, 'Accessories'),
     )  
 
-    F = 'Factory'
-    G = 'Globe'
-    S = 'Smart'
-
-    UNLOCKED_TYPE = (
-        (F, 'Factory'),
-        (G, 'Globe'),
-        (S, 'Smart'),
-    )
-
     N = 'New'
     U = 'Used'
 
     CONDITION = (
-        (N, 'New'),
+        (N, 'Brand new'),
         (U, 'Used'),
     )
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, verbose_name="product_id")
-    category = models.CharField(max_length=30, null=False, choices=TYPE, default=TYPE[0][0])
+    category = models.CharField(max_length=30, null=False, choices=CATEGORY, default=CATEGORY[0][0])
     brand = models.CharField(max_length=20, null=True, blank=True)
     name = models.CharField(max_length=100, null=False)
     price = models.DecimalField(max_digits=10, null=True, decimal_places=2)
+    condition = models.CharField(max_length=20, null=False, choices=CONDITION, default=CONDITION[0][0])
     description = models.TextField(max_length=200, null=True, blank=True)
     date_posted = models.DateTimeField(auto_now_add=True, null=True)
 
