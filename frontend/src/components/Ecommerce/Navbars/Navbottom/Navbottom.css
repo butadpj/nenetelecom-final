@@ -32,7 +32,14 @@
   text-decoration: none;
 }
 
-.active {
+.ecommerce .nav-bottom ul > *:hover {
+  cursor: pointer;
+  color: var(--light) !important;
+  background: var(--shadeBlue) !important;
+  transition: 0.6s ease-out;
+}
+
+.ecommerce .nav-bottom ul > *.active {
   color: var(--light) !important;
   background: var(--shadeBlue) !important;
   transition: 0.6s ease-out;
@@ -102,6 +109,11 @@
 .search-content .close-icon {
   display: block;
   margin: 1em 0 1em auto;
+}
+.nav-content .close-icon:hover,
+.search-content .close-icon:hover {
+  cursor: pointer;
+  filter: brightness(150%);
 }
 
 .icon-container {

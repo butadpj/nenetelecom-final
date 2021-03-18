@@ -78,13 +78,16 @@ const Product = () => {
           let date = `${mm} ${dd}, ${yyyy} at ${hr}:${min} ${ampm}`;
           return (
             <div key={id}>
-              <main
-                className="product"
-                onClick={() =>
-                  handleShow(id, name, price, brand, image, description)
-                }
-              >
-                <div className="condition brand-new">{condition}</div>
+              <main className="product">
+                <div
+                  className={
+                    condition == "Brand new"
+                      ? "condition brand-new"
+                      : "condition used"
+                  }
+                >
+                  {condition}
+                </div>
                 <div className="info-top">
                   <div className="product-name">{name}</div>
                   <div className="date-posted">{date}</div>
@@ -93,6 +96,9 @@ const Product = () => {
                   className="product-image"
                   src={image[0] || defaultImage}
                   alt="product-image"
+                  onClick={() =>
+                    handleShow(id, name, price, brand, image, description)
+                  }
                 />
                 <div className="info-bottom">
                   <div className="product-price">
@@ -138,6 +144,7 @@ const Product = () => {
               image_default={defaultImage}
             />
             <div className="detail-description">
+              <span>Product description: </span>
               <p>{detailData.description || "*no description*"}</p>
             </div>
             <div className="detail-action">

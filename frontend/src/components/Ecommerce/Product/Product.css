@@ -4,16 +4,21 @@
   font-size: 1.1rem;
   color: var(--dark);
   position: relative;
+  display: block;
+  max-width: 30rem;
+  margin: 0 auto 2em auto;
+  box-shadow: var(--box-shadow);
 }
 
 .product .condition {
   position: absolute;
-  font-size: 0.7em;
+  font-size: 0.8em;
   font-weight: 600;
   top: 0;
   right: 0;
   color: var(--light);
-  padding: 0.3em 0.5em;
+  padding: 0.3em 0.5em 0.6em 1em;
+  border-bottom-left-radius: 1.5rem;
 }
 
 .brand-new {
@@ -44,7 +49,13 @@
 }
 
 .product-image {
-  width: 100%;
+  display: block;
+  margin: 0 auto;
+  width: 85%;
+}
+
+.product-image:hover {
+  cursor: pointer;
 }
 
 .info-bottom {
@@ -81,29 +92,26 @@
   margin: 0 0.3em;
 }
 
-.modal-wrapper {
-  position: fixed;
-  display: block;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.472);
-  z-index: 5000;
-  cursor: pointer;
-}
-
 .product-view {
   background: var(--light);
   position: relative;
   top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   height: auto;
   max-height: 85%;
+  width: 100%;
+  max-width: 50rem;
   overflow: scroll;
   overflow-x: hidden;
-  transform: translateY(-50%);
+}
+
+.product-view-show {
+  animation: fadeInOpacityHeight ease-in 0.45s;
+}
+
+.product-view-hidden {
+  animation: fadeOutHeight ease-out 0.4s;
 }
 
 .product-view .detail-header {
@@ -143,13 +151,20 @@
   font-weight: 600;
   color: var(--dark);
   height: auto;
-  max-height: 10rem;
+  max-height: 20rem;
   overflow-y: scroll;
   overflow-x: hidden;
-  border: solid var(--dark) 0.1rem;
+  border-bottom: solid var(--dark) 0.1rem;
+}
+
+.detail-description span {
+  color: var(--shadeLightDark);
+  font-size: 0.9em;
 }
 
 .detail-description p {
+  padding-left: 0.5em;
+  margin-top: 1em;
   white-space: pre-wrap;
   hyphens: auto;
   letter-spacing: 1.55px;
@@ -170,6 +185,7 @@
 .detail-action .close:hover {
   color: var(--dark);
   transition: var(--hoverTransition);
+  cursor: pointer;
 }
 
 .detail-action .add-btn {
@@ -196,6 +212,14 @@
   flex-direction: column;
   align-items: flex-start;
   position: relative;
+}
+
+.add-product-modal-show {
+  animation: fadeInPop ease 0.4s;
+}
+
+.add-product-modal-hidden {
+  animation: fadeOutPop ease 0.4s;
 }
 
 .modal-text {
