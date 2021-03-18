@@ -166,11 +166,3 @@ bower_components
 psd
 thumb
 sketch
-
-# Uncomment if you're in production and going to run npm build
-# /frontend/src/
-# /frontend/src/*.js
-# /frontend/src/*.css
-# /frontend/webpack.config.js
-# /frontend/.babelrc
-# /frontend/*.json
