@@ -20,6 +20,7 @@ const EcommerceView = () => {
     }
     document.title = `(${cartNotif}) Nenetelecom | Store`;
   }, [cartNotif]);
+
   return (
     <>
       <Navtop url="/store/home" />
