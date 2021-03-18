@@ -1,0 +1,19 @@
+.media-card main {
+  font-size: 1em;
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+}
+
+.media-card main > * {
+  display: flex;
+  align-items: center;
+  margin: 1em 0;
+  width: 100%;
+}
+
+.media-text {
+  margin-left: 2em;
+  color: var(--dark);
+  white-space: pre;
+}
