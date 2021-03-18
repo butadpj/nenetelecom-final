@@ -37,6 +37,7 @@ const Product = () => {
             id,
             image,
             category,
+            condition,
             brand,
             name,
             price,
@@ -83,7 +84,7 @@ const Product = () => {
                   handleShow(id, name, price, brand, image, description)
                 }
               >
-                <div className="condition brand-new">Brand new</div>
+                <div className="condition brand-new">{condition}</div>
                 <div className="info-top">
                   <div className="product-name">{name}</div>
                   <div className="date-posted">{date}</div>
