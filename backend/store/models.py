@@ -15,7 +15,7 @@ class Product(models.Model):
         (A, 'Accessories'),
     )  
 
-    N = 'New'
+    N = 'Brand new'
     U = 'Used'
 
     CONDITION = (
