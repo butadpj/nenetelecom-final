@@ -5,14 +5,6 @@
   padding-bottom: 5em;
 }
 
-.ecommerce .products .product {
-  display: block;
-  max-width: 375px;
-
-  margin: 0 auto 2em auto;
-  box-shadow: var(--box-shadow);
-}
-
 .ecommerce .install-propmt {
   position: relative;
   top: 50%;
@@ -22,7 +14,7 @@
   max-width: 360px;
   border-radius: 0.5rem;
   background: var(--shadeLightBlue);
-  padding: 0.5em 1em;
+  padding: 1em 1em;
   color: var(--light);
 }
 
@@ -33,7 +25,7 @@
 .ecommerce .buttons {
   display: flex;
   justify-content: center;
-  margin-top: 1em;
+  margin-top: 1.5em;
 }
 
 .ecommerce .buttons > * {

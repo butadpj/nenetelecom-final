@@ -13,18 +13,26 @@
   z-index: 1;
 }
 
+.slider-btn > *:hover {
+  cursor: pointer;
+  filter: brightness(50%);
+}
+
 .detail-product-image img:not(.slider-btn img) {
+  display: block;
+  margin: 0 auto;
   width: 100%;
+  max-width: 25rem;
 }
 
 .slide {
-  transition-duration: 0.6s ease;
   transform: scale(0.8);
+  transition: transform 0.45s ease;
 }
 
 .slide.active {
-  transition-duration: 0.6s;
   transform: scale(1);
+  transition: transform 0.45s ease;
 }
 
 .slider-preview-wrapper {
@@ -36,13 +44,18 @@
 }
 
 .slider-preview {
-  justify-content: space-evenly;
+  justify-content: center;
   display: flex;
   width: 100%;
 }
 
 .image-preview {
   filter: blur(1.5px);
+  margin: 0 0.5em;
+}
+
+.image-preview:hover {
+  cursor: pointer;
 }
 
 .image-preview.active {
