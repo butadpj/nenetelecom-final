@@ -1,5 +1,5 @@
 import React from "react";
-import Media from "../Media";
+import Media from "../MediaLinks";
 import "./Card.css";
 import phone from "../../../assets/svgs/phone-square-alt-solid.svg";
 import fb from "../../../assets/svgs/facebook-square-brands.svg";
@@ -13,6 +13,7 @@ const Card = () => {
           mediaClass="phone"
           mediaIcon={phone}
           mediaText={`Smart - 0920 679 6099\nGlobe - 0915 117 1197`}
+          isLink={false}
         />
         <Media
           mediaClass="fb"
