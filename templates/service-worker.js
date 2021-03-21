@@ -81,12 +81,45 @@ self.addEventListener("push", (event) => {
   const body =
     data.body ||
     "This is default content. Your notification didn't have one 🙄🙄";
-
+  const options = {
+    body: body,
+    icon: "../public/android-chrome-256x256.png",
+    badge: "../public/android-chrome-256x256.png",
+    vibrate: [
+      500,
+      110,
+      500,
+      110,
+      450,
+      110,
+      200,
+      110,
+      170,
+      40,
+      450,
+      110,
+      200,
+      110,
+      170,
+      40,
+      500,
+    ],
+    tag: "renotify",
+    renotify: true,
+  };
   // Keep the service worker alive until the notification is created.
-  event.waitUntil(
-    self.registration.showNotification(head, {
-      body: body,
-      icon: "../public/REACT/webp/0e49bddf0c250a5947f13d42a9baf374.webp",
-    })
-  );
+  event.waitUntil(self.registration.showNotification(head, options));
+});
+
+self.addEventListener("notificationclick", (event) => {
+  const clickedNotification = event.notification;
+  clickedNotification.close();
+
+  const redirect = () => {
+    clients.openWindow("/admin/cart/order/");
+  };
+
+  // Do something as the result of the notification click
+  const promiseChain = redirect();
+  event.waitUntil(promiseChain);
 });
