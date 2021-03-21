@@ -25,18 +25,14 @@
         <!-- React will load here -->
     </div>
 
-    <!-- Bundled javascript will load here START -->
+    <!-- Bundled javascript will load here -->
     <script src="{% static 'REACT/js/main.js' %}"></script>
-    <!-- Bundled javascript will load here END -->
+
+
+
+    <!-- Cookie cart and DJANGO Built-in User object will load here -->
     <script>
-        window.addEventListener("load", () => {
-            if ("serviceWorker" in navigator) {
-                navigator.serviceWorker.register("{% url 'service-worker.js' %}");
-            }
-        });
-    </script>
-    <script>
-        function getCookie(name) {
+        const getCookie = (name) => {
             let cookieValue = null;
             if (document.cookie && document.cookie !== '') {
                 const cookies = document.cookie.split(';');
@@ -53,11 +49,12 @@
         }
         const csrftoken = getCookie('csrftoken');
         let currentUser = "{{request.user}}"
+        let currentUsername = "{{request.user.username}}"
+        let isSuperUser = "{{request.user.is_superuser}}"
         let currentCustomerFirstName = "{{request.user.customer.au_first_name}}"
         let currentCustomerLastName = "{{request.user.customer.au_last_name}}"
         let currentCustomerMobileNumber = "{{request.user.customer.au_mobile_number}}"
         let currentCustomerId = "{{request.user.customer.id}}"
-
 
         //Creating cookie
         let cart = JSON.parse(getCookie('cart'))
@@ -69,6 +66,120 @@
         document.cookie = 'cart=' + JSON.stringify(cart) + ';domain=;path=/'
     </script>
 
+    <!-- Service worker will load here -->
+    <script>
+        // Convert base64String - "a public vavid key", To Uint8Array
+        const urlBase64ToUint8Array = (base64String) => {
+            const padding = '='.repeat((4 - base64String.length % 4) % 4);
+            const base64 = (base64String + padding)
+                .replace(/\-/g, '+')
+                .replace(/_/g, '/');
+
+            const rawData = window.atob(base64);
+            const outputArray = new Uint8Array(rawData.length);
+            const outputData = outputArray.map((output, index) => rawData.charCodeAt(index));
+
+            return outputData;
+        }
+
+        // Register a service worker if the browser support it
+        const registerServiceWorker = async () => {
+            const registration = await navigator.serviceWorker.register("{% url 'service-worker.js' %}")
+            askPermission()
+            subscribeUserToPush(registration)
+        }
+
+        // Show "Allow notifications" propmt
+        const askPermission = () => {
+            return new Promise((resolve, reject) => {
+                const permissionResult = Notification.requestPermission((result) => {
+                    resolve(result);
+                });
+
+                if (permissionResult) {
+                    permissionResult.then(resolve, reject);
+                }
+            })
+                .then((permissionResult) => {
+                    if (permissionResult !== 'granted') {
+                        throw new Error('We weren\'t granted permission.');
+                    }
+                });
+        }
+
+        //Subscribe user to push notification if they accept the prompt
+        const subscribeUserToPush = async (registration) => {
+            const subscription = await registration.pushManager.getSubscription()
+            if (subscription) {
+                sendSubscriptionToBackEnd(subscription);
+                return;
+            }
+            const subscribeOptions = {
+                userVisibleOnly: true,
+                applicationServerKey: urlBase64ToUint8Array(
+                    'BKKttlbqOVOO6P_kJFYtLWCPgX4Ca3i8HGEAJNoMaEB2un94nfU7IkKyg1S2qoIJ-VFjOZX3mQU1f4UQ9BM537w'
+                )
+            }
+
+
+            const sub = await registration.pushManager.subscribe(subscribeOptions)
+            sendSubscriptionToBackEnd(sub.toJSON())
+
+        }
+
+        const sendSubscriptionToBackEnd = async (subscription) => {
+            const browser = navigator.userAgent.match(/(firefox|msie|chrome|safari|trident)/ig)[0].toLowerCase();
+            const res = await fetch('/webpush/save_information', {
+                method: 'POST',
+                body: JSON.stringify({
+                    status_type: 'subscribe',
+                    subscription: subscription.toJSON(),
+                    browser: browser,
+                }),
+                headers: {
+                    'content-type': 'application/json',
+                    'X-CSRFToken': csrftoken
+                },
+                credentials: "include"
+            })
+
+            if (res.status === 201) {
+                sendPushNotif()
+            };
+        }
+        const sendPushNotif = async () => {
+            const res = await fetch('/notif/send_push/', {
+                method: 'POST',
+                body: JSON.stringify({
+                    head: "Title of the notification",
+                    body: "Notification body",
+                    username: currentUsername
+                }),
+                headers: {
+                    'content-type': 'application/json',
+                    'X-CSRFToken': csrftoken
+                }
+            }).then((res) => {
+                console.log(res)
+            }).catch((err) => {
+                console.log(err)
+            })
+
+        }
+
+
+
+
+        window.addEventListener("load", () => {
+            if ("serviceWorker" in navigator) {
+                registerServiceWorker()
+            } else {
+                console.error('Unable to register service worker.');
+            }
+        });
+    </script>
+
+    <!-- Paypal API will load here -->
     <script
         src="https://www.paypal.com/sdk/js?client-id=AYDEkxrsk4iy4e9Ka6bDLGsALPOnUdW--sFKFE2bWtFKadp0YaLObbqwkZcH1TTyZTTq0FPziTuEBN-S&currency=PHP"></script>
     </script>
