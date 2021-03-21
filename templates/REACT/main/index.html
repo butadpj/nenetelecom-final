@@ -61,9 +61,9 @@
 
         if (cart == undefined) {
             cart = {}
-            document.cookie = 'cart=' + JSON.stringify(cart) + ';domain=;path=/; Secure'
+            document.cookie = 'cart=' + JSON.stringify(cart) + ';domain=;path=/; Secure; SameSite=Lax'
         }
-        document.cookie = 'cart=' + JSON.stringify(cart) + ';domain=;path=/; Secure'
+        document.cookie = 'cart=' + JSON.stringify(cart) + ';domain=;path=/; Secure; SameSite=Lax'
     </script>
 
     <!-- Service worker will load here -->
