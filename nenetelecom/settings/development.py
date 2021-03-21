@@ -18,9 +18,17 @@ INSTALLED_APPS = [
     'backend.store',
     'backend.cart',
     'backend.checkout',
+    'backend.djangopush',
     'frontend',
     'rest_framework',
+    'webpush',
 ]
+
+WEBPUSH_SETTINGS = {
+    "VAPID_PUBLIC_KEY": "BKKttlbqOVOO6P_kJFYtLWCPgX4Ca3i8HGEAJNoMaEB2un94nfU7IkKyg1S2qoIJ-VFjOZX3mQU1f4UQ9BM537w",
+    "VAPID_PRIVATE_KEY":"gwl-6BzopVH9QLOQHQ-Q7LfmtqQdcspdi_5eE0NAZB8",
+    "VAPID_ADMIN_EMAIL": "butadpj@gmail.com"
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
