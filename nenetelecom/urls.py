@@ -33,7 +33,7 @@ urlpatterns = [
     path('store/checkout/', include('frontend.urls')),
     path('store/checkout/process_order/', include('frontend.urls')),
     path('store/orders/', include('frontend.urls')),
-    path('offline.html', (TemplateView.as_view(template_name="REACT/main/offline.html", 
+    path('offline.html', (TemplateView.as_view(template_name="offline.html", 
         content_type='text/html', )), name='offline.html'),
     path('service-worker.js', (TemplateView.as_view(template_name="service-worker.js", 
         content_type='application/javascript', )), name='service-worker.js'),
