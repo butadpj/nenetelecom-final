@@ -37,6 +37,8 @@ urlpatterns = [
         content_type='text/html', )), name='offline.html'),
     path('service-worker.js', (TemplateView.as_view(template_name="service-worker.js", 
         content_type='application/javascript', )), name='service-worker.js'),
+    path('notif/', include('backend.djangopush.urls')),
+    path('webpush/', include('webpush.urls'))
 ]
 
 admin.site.site_header = 'Nenetelecom Administration'                    # default: "Django Administration"

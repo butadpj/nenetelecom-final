@@ -25,37 +25,68 @@
         <!-- React will load here -->
     </div>
 
-    <!-- Bundled javascript will load here START -->
+    <!-- Bundled javascript will load here -->
     <script src="{% static 'REACT/js/main.js' %}"></script>
-    <!-- Bundled javascript will load here END -->
-    <script>
 
+
+
+    <!-- Cookie cart and DJANGO Built-in User object will load here -->
+    <script>
+        const getCookie = (name) => {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        const csrftoken = getCookie('csrftoken');
+        let currentUser = "{{request.user}}"
+        let currentUsername = "{{request.user.username}}"
+        let isSuperUser = "{{request.user.is_superuser}}"
+        let currentCustomerFirstName = "{{request.user.customer.au_first_name}}"
+        let currentCustomerLastName = "{{request.user.customer.au_last_name}}"
+        let currentCustomerMobileNumber = "{{request.user.customer.au_mobile_number}}"
+        let currentCustomerId = "{{request.user.customer.id}}"
+
+        //Creating cookie
+        let cart = JSON.parse(getCookie('cart'))
+
+        if (cart == undefined) {
+            cart = {}
+            document.cookie = 'cart=' + JSON.stringify(cart) + ';domain=;path=/'
+        }
+        document.cookie = 'cart=' + JSON.stringify(cart) + ';domain=;path=/'
+    </script>
+
+    <!-- Service worker will load here -->
+    <script>
         // Convert base64String - "a public vavid key", To Uint8Array
         const urlBase64ToUint8Array = (base64String) => {
-            let padding = '='.repeat((4 - base64String.length % 4) % 4);
-            let base64 = (base64String + padding)
+            const padding = '='.repeat((4 - base64String.length % 4) % 4);
+            const base64 = (base64String + padding)
                 .replace(/\-/g, '+')
                 .replace(/_/g, '/');
 
-            let rawData = window.atob(base64);
-            let outputArray = new Uint8Array(rawData.length);
+            const rawData = window.atob(base64);
+            const outputArray = new Uint8Array(rawData.length);
+            const outputData = outputArray.map((output, index) => rawData.charCodeAt(index));
 
-            for (let i = 0; i < rawData.length; ++i) {
-                outputArray[i] = rawData.charCodeAt(i);
-            }
-            return outputArray;
+            return outputData;
         }
 
         // Register a service worker if the browser support it
-        const registerServiceWorker = () => {
-            navigator.serviceWorker.register("{% url 'service-worker.js' %}")
-                .then((registration) => {
-                    console.log('Service worker successfully registered.');
-                    return registration;
-                })
-                .catch((err) => {
-                    console.error('Unable to register service worker.', err);
-                });
+        const registerServiceWorker = async () => {
+            const registration = await navigator.serviceWorker.register("{% url 'service-worker.js' %}")
+            askPermission()
+            subscribeUserToPush(registration)
         }
 
         // Show "Allow notifications" propmt
@@ -77,91 +108,78 @@
         }
 
         //Subscribe user to push notification if they accept the prompt
-        const subscribeUserToPush = () => {
-            return navigator.serviceWorker.register("{% url 'service-worker.js' %}")
-                .then((registration) => {
-                    const subscribeOptions = {
-                        userVisibleOnly: true,
-                        applicationServerKey: urlBase64ToUint8Array(
-                            'BOEUdloDXpXAFSm80apkm2fmyTmBDdXpTOwAEOo9KdSOmBSvxlSjnk3LpmKu95NB74h6alES6etn4u-6XHveRhQ'
-                        )
-                    };
+        const subscribeUserToPush = async (registration) => {
+            const subscription = await registration.pushManager.getSubscription()
+            if (subscription) {
+                sendSubscriptionToBackEnd(subscription);
+                return;
+            }
+            const subscribeOptions = {
+                userVisibleOnly: true,
+                applicationServerKey: urlBase64ToUint8Array(
+                    'BKKttlbqOVOO6P_kJFYtLWCPgX4Ca3i8HGEAJNoMaEB2un94nfU7IkKyg1S2qoIJ-VFjOZX3mQU1f4UQ9BM537w'
+                )
+            }
 
-                    return registration.pushManager.subscribe(subscribeOptions);
-                })
-                .then((pushSubscription) => {
-                    console.log('Received PushSubscription: ', JSON.stringify(pushSubscription));
-                    const subscriptionObject = JSON.stringify(pushSubscription);
-                    console.log(subscriptionObject)
-                    return pushSubscription;
-                });
+
+            const sub = await registration.pushManager.subscribe(subscribeOptions)
+            sendSubscriptionToBackEnd(sub.toJSON())
+
         }
 
-
-        const sendSubscriptionToBackEnd = (subscription) => {
-            return fetch('/api/save-subscription/', {
+        const sendSubscriptionToBackEnd = async (subscription) => {
+            const browser = navigator.userAgent.match(/(firefox|msie|chrome|safari|trident)/ig)[0].toLowerCase();
+            const res = await fetch('/webpush/save_information', {
                 method: 'POST',
+                body: JSON.stringify({
+                    status_type: 'subscribe',
+                    subscription: subscription.toJSON(),
+                    browser: browser,
+                }),
                 headers: {
-                    'Content-Type': 'application/json'
+                    'content-type': 'application/json',
+                    'X-CSRFToken': csrftoken
                 },
-                body: JSON.stringify(subscription)
+                credentials: "include"
             })
-                .then((response) => {
-                    if (!response.ok) {
-                        throw new Error('Bad status code from server.');
-                    }
 
-                    return response.json();
-                })
-                .then((responseData) => {
-                    if (!(responseData.data && responseData.data.success)) {
-                        throw new Error('Bad response from server.');
-                    }
-                });
+            if (res.status === 201) {
+                sendPushNotif()
+            };
         }
+        const sendPushNotif = async () => {
+            const res = await fetch('/notif/send_push/', {
+                method: 'POST',
+                body: JSON.stringify({
+                    head: "Title of the notification",
+                    body: "Notification body",
+                    username: currentUsername
+                }),
+                headers: {
+                    'content-type': 'application/json',
+                    'X-CSRFToken': csrftoken
+                }
+            }).then((res) => {
+                console.log(res)
+            }).catch((err) => {
+                console.log(err)
+            })
+
+        }
+
+
+
 
         window.addEventListener("load", () => {
             if ("serviceWorker" in navigator) {
                 registerServiceWorker()
-                askPermission()
-                subscribeUserToPush()
+            } else {
+                console.error('Unable to register service worker.');
             }
         });
     </script>
-    <script>
-        const getCookie = (name) => {
-            let cookieValue = null;
-            if (document.cookie && document.cookie !== '') {
-                const cookies = document.cookie.split(';');
-                for (let i = 0; i < cookies.length; i++) {
-                    const cookie = cookies[i].trim();
-                    // Does this cookie string begin with the name we want?
-                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                        break;
-                    }
-                }
-            }
-            return cookieValue;
-        }
-        const csrftoken = getCookie('csrftoken');
-        let currentUser = "{{request.user}}"
-        let currentCustomerFirstName = "{{request.user.customer.au_first_name}}"
-        let currentCustomerLastName = "{{request.user.customer.au_last_name}}"
-        let currentCustomerMobileNumber = "{{request.user.customer.au_mobile_number}}"
-        let currentCustomerId = "{{request.user.customer.id}}"
 
-
-        //Creating cookie
-        let cart = JSON.parse(getCookie('cart'))
-
-        if (cart == undefined) {
-            cart = {}
-            document.cookie = 'cart=' + JSON.stringify(cart) + ';domain=;path=/'
-        }
-        document.cookie = 'cart=' + JSON.stringify(cart) + ';domain=;path=/'
-    </script>
-
+    <!-- Paypal API will load here -->
     <script
         src="https://www.paypal.com/sdk/js?client-id=AYDEkxrsk4iy4e9Ka6bDLGsALPOnUdW--sFKFE2bWtFKadp0YaLObbqwkZcH1TTyZTTq0FPziTuEBN-S&currency=PHP"></script>
     </script>

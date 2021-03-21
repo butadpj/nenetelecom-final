@@ -69,3 +69,24 @@ self.addEventListener("fetch", (event) => {
   // event.respondWith(), the request will be handled by the browser as if there
   // were no service worker involvement.
 });
+
+// Register event listener for the 'push' event.
+self.addEventListener("push", (event) => {
+  // Retrieve the textual payload from event.data (a PushMessageData object).
+  // Other formats are supported (ArrayBuffer, Blob, JSON), check out the documentation
+  // on https://developer.mozilla.org/en-US/docs/Web/API/PushMessageData.
+  const eventInfo = event.data.text();
+  const data = JSON.parse(eventInfo);
+  const head = data.head || "New Notification 🕺🕺";
+  const body =
+    data.body ||
+    "This is default content. Your notification didn't have one 🙄🙄";
+
+  // Keep the service worker alive until the notification is created.
+  event.waitUntil(
+    self.registration.showNotification(head, {
+      body: body,
+      icon: "../public/REACT/webp/0e49bddf0c250a5947f13d42a9baf374.webp",
+    })
+  );
+});
