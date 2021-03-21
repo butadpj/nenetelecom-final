@@ -1,5 +1,6 @@
 from django.http.response import JsonResponse, HttpResponse
 from django.views.decorators.http import require_GET, require_POST
+from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import get_object_or_404
 from django.contrib.auth import get_user_model
 from webpush import send_group_notification, send_user_notification
@@ -10,6 +11,7 @@ def home(request):
     return HttpResponse('<h1>Home Page<h1>')
 
 @require_POST
+@csrf_exempt
 def send_push(request):
     try:
         body = request.body
