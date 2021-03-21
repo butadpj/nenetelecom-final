@@ -15,14 +15,14 @@ def send_push(request):
         body = request.body
         data = json.loads(body)
 
-        user = get_user_model().objects.get(username=data['username'])
-        
-        if 'head' not in data or 'body' not in data or 'username' not in data:
+        admins = get_user_model().objects.filter(groups__name='admins')
+        if 'head' not in data or 'body' not in data:
             return JsonResponse(status=400, data={"message": "Invalid data format"})
 
         payload = {'head': data['head'], 'body': data['body']}
-        send_user_notification(user=user, payload=payload, ttl=3000)
+        for user in admins:
+            send_user_notification(user=user, payload=payload, ttl=3000)
 
-        return JsonResponse(status=200, data={"message": "Web push successful"})
+        return JsonResponse(status=200, data=payload)
     except TypeError:
         return JsonResponse(status=500, data={"message": "An error occurred"})
