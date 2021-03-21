@@ -1,15 +1,19 @@
 from django.shortcuts import render
 from django.http import JsonResponse
+from django.views.decorators.http import require_POST
+from django.views.decorators.csrf import csrf_exempt
 import json
 
 from backend.cart.models import *
 from backend.store.models import *
 from backend.checkout.models import *
+
 # Create your views here.
 def index(request):
     return render(request, 'REACT/main/index.html')
 
-
+@require_POST
+@csrf_exempt
 def process_order(request):
     data = json.loads(request.body)
 
