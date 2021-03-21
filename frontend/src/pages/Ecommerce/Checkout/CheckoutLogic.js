@@ -1,9 +1,9 @@
 import { useState, useContext, useEffect } from "react";
 import CartItemsLogic from "../../../components/Ecommerce/CartItems/CartItemsLogic";
 import { CartItemContext } from "../../../context/CartItemContext";
-import { ProductContext } from "../../../context/ProductContext";
 import GetCurrentCustomer from "../../../hooks/GetCurrentCustomer";
 import { getCustomersData } from "../../../hooks/data/getCustomersData";
+import PushNotif from "../../../hooks/PushNotif";
 
 const CheckoutLogic = () => {
   const {
@@ -13,6 +13,7 @@ const CheckoutLogic = () => {
     djangoCurrentCustomerMobileNumber,
   } = GetCurrentCustomer();
 
+  const { testPush } = PushNotif();
   const { customersData } = getCustomersData();
   const { selectedItems } = CartItemsLogic();
 
@@ -320,6 +321,7 @@ const CheckoutLogic = () => {
         cart = {};
         document.cookie = "cart=" + JSON.stringify(cart) + ";domain=;path=/";
         showAlertModal();
+        testPush();
       })
       .catch((err) => console.log(err));
   };
@@ -346,6 +348,7 @@ const CheckoutLogic = () => {
     validity,
     errorMessage,
     totalCartPrice,
+    testPush,
   };
 };
 

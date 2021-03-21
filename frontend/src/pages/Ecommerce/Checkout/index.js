@@ -8,11 +8,9 @@ import Button from "../../../components/Button";
 import handDownIcon from "../../../assets/svgs/hand-point-down-regular.svg";
 import Paypal from "../../../components/Ecommerce/PayPal";
 import closeIcon from "../../../assets/svgs/close.svg";
-import Loader from "../../../components/Ecommerce/Loader";
 
 const Checkout = () => {
   const {
-    cartItemState,
     selectedItems,
     customerInfo,
     shippingInfo,
@@ -33,6 +31,7 @@ const Checkout = () => {
     validity,
     errorMessage,
     totalCartPrice,
+    testPush,
   } = CheckoutLogic();
 
   let f_totalCartPrice = Number(totalCartPrice).toLocaleString();

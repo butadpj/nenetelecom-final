@@ -143,32 +143,7 @@
                 credentials: "include"
             })
 
-            if (res.status === 201) {
-                sendPushNotif()
-            };
         }
-        const sendPushNotif = async () => {
-            const res = await fetch('/notif/send_push/', {
-                method: 'POST',
-                body: JSON.stringify({
-                    head: "Title of the notification",
-                    body: "Notification body",
-                    username: currentUsername
-                }),
-                headers: {
-                    'content-type': 'application/json',
-                    'X-CSRFToken': csrftoken
-                }
-            }).then((res) => {
-                console.log(res)
-            }).catch((err) => {
-                console.log(err)
-            })
-
-        }
-
-
-
 
         window.addEventListener("load", () => {
             if ("serviceWorker" in navigator) {
