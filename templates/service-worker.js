@@ -84,7 +84,7 @@ self.addEventListener("push", (event) => {
   const options = {
     body: body,
     icon: "../public/android-chrome-256x256.png",
-    badge: "../public/android-chrome-256x256.png",
+    badge: "../public/badge.png",
     vibrate: [
       500,
       110,
