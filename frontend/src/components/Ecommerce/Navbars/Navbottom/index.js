@@ -5,7 +5,9 @@ import NavbottomLogic from "./NavbottomLogic";
 import { Link } from "react-router-dom";
 import { CartItemContext } from "../../../../context/CartItemContext";
 import closeIcon from "../../../../assets/svgs/close-dark.svg";
-import PanelGroup from "../../PanelGroup";
+
+import PanelGroup from "../../../../components/Ecommerce/PanelGroup";
+import PanelTab from "../../../../components/Ecommerce/PanelGroup/PanelTab";
 
 const Navbottom = ({ link }) => {
   const {
@@ -69,20 +71,82 @@ const Navbottom = ({ link }) => {
           <div className="line-wrapper">
             <hr />
           </div>
-          <PanelGroup />
+          <PanelGroup>
+            <Link to="/store">
+              <PanelTab
+                cName="my-feed"
+                bg="light"
+                isSoon={true}
+                icon={<i className="fas fa-rss-square"></i>}
+                text="My Feed"
+                spanText="Soon..."
+              />
+            </Link>
+
+            <Link to="/store/my-orders">
+              <PanelTab
+                cName="my-orders"
+                bg="light"
+                txtColor="blue"
+                isSoon={false}
+                icon={<i className="fas fa-clipboard-list"></i>}
+                text="My Orders"
+              />
+            </Link>
+
+            {djangoIsSuperUser === "True" ? (
+              <a href="/admin" target="_blank">
+                <PanelTab
+                  cName="admin-panel"
+                  bg="light"
+                  txtColor="green"
+                  icon={<i className="fas fa-user-cog"></i>}
+                  text="Admin Panel"
+                />
+              </a>
+            ) : null}
+          </PanelGroup>
           <div className="line-wrapper">
             <hr />
           </div>
+          <PanelGroup>
+            <a href="https://www.facebook.com/nenetelecom" target="_blank">
+              <PanelTab
+                cName="chat-with"
+                bg="dark"
+                icon={<i className="fas fa-comments"></i>}
+                text="Chat with our customer specialist"
+              />
+            </a>
+            <a href="#">
+              <PanelTab
+                cName="faq"
+                bg="dark"
+                icon={<i className="fas fa-question-circle"></i>}
+                text="Frequently Asked Questions"
+              />
+            </a>
+            <a href="#">
+              <PanelTab
+                cName="report"
+                bg="dark"
+                icon={<i className="fas fa-bug"></i>}
+                text="Report a problem"
+              />
+            </a>
+          </PanelGroup>
         </div>
       ) : null}
       {showSearch ? (
         <div className="search-content">
-          <img
-            className="close-icon"
-            src={closeIcon}
-            alt="close-dark"
-            onClick={handleSearchClose}
-          />
+          <div className="icon-container">
+            <img
+              className="close-icon"
+              src={closeIcon}
+              alt="close-dark"
+              onClick={handleSearchClose}
+            />
+          </div>
         </div>
       ) : null}
     </>

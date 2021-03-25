@@ -12,7 +12,7 @@
 }
 
 .ecommerce .nav-bottom ul {
-  width: 85%;
+  width: min(85%, 40rem);
   display: flex;
   list-style-type: none;
   align-items: center;
@@ -77,11 +77,12 @@
 .ecommerce .search-content {
   position: fixed;
   bottom: 8vh;
-  z-index: 500;
+  z-index: 90;
   background: var(--E-bg);
   width: 100%;
   height: 92vh;
   animation: fadeInOpacityHeight ease 0.4s;
+  overflow-y: scroll;
 }
 
 @media (max-height: 580px) {
