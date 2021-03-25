@@ -1,0 +1,56 @@
+.panel-group .panel-tab {
+  display: flex;
+  align-items: center;
+  background: var(--light);
+  margin: 0.25em 0;
+  padding: 0.5em;
+  box-shadow: var(--box-shadow-light);
+  border-radius: 6px;
+  transition: 0.3s ease-in;
+}
+
+.panel-group .panel-tab:hover {
+  background: var(--dark);
+  color: var(--light) !important;
+}
+
+.panel-group .panel-tab div {
+  display: flex;
+  align-items: center;
+}
+
+.panel-group .panel-tab.soon {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--shadeLightDark);
+}
+
+.panel-group .panel-tab.soon:hover {
+  background: var(--light);
+  color: var(--shadeLightDark) !important;
+}
+
+.panel-group .icon {
+  font-size: 1.4em;
+  margin-right: 0.5em;
+  width: 50px;
+}
+
+.panel-group p,
+.panel-group span {
+  font-size: 0.7em;
+  font-weight: 600;
+}
+
+.panel-group .my-orders {
+  color: var(--shadeBlue);
+}
+
+.panel-group .admin-panel {
+  color: var(--shadeGreen);
+}
+
+.admin-panel .icon {
+  font-size: 1.2em;
+}

@@ -2,14 +2,10 @@ import React, { useContext, useEffect, useRef } from "react";
 
 import "./Navbottom.css";
 import NavbottomLogic from "./NavbottomLogic";
-import GetCurrentCustomer from "../../../../hooks/GetCurrentCustomer";
 import { Link } from "react-router-dom";
 import { CartItemContext } from "../../../../context/CartItemContext";
-
 import closeIcon from "../../../../assets/svgs/close-dark.svg";
-import profileImg from "../../../../assets/images/profile.webp";
-import guestImg from "../../../../assets/svgs/guest_user.svg";
-import Button from "../../../Button";
+import PanelGroup from "../../PanelGroup";
 
 const Navbottom = ({ link }) => {
   const {
@@ -19,13 +15,9 @@ const Navbottom = ({ link }) => {
     handleSearchClose,
     handleNavShow,
     handleNavClose,
+    djangoIsSuperUser,
+    userSectionHandler,
   } = NavbottomLogic();
-
-  const {
-    djangoCurrentUser,
-    djangoCurrentCustomerFullName,
-    djangoCurrentCustomerMobileNumber,
-  } = GetCurrentCustomer();
 
   const [state] = useContext(CartItemContext);
   const links = useRef(null);
@@ -71,49 +63,13 @@ const Navbottom = ({ link }) => {
               onClick={handleNavClose}
             />
           </div>
-
           <div className="user-container">
-            <div className="user-section">
-              {djangoCurrentUser === "AnonymousUser" ? (
-                <>
-                  <img src={guestImg} alt="profile-img" width="60" />
-                  <div className="info">
-                    <h4 className="info-name">Guest User</h4>
-                    <p className="info-number"></p>
-                  </div>
-                  <div className="action center">
-                    <div className="login">
-                      <a href="/store/accounts/login">
-                        <Button text="Login" />
-                      </a>
-                    </div>
-                  </div>
-                </>
-              ) : (
-                <>
-                  <img src={profileImg} alt="profile-img" width="60" />
-                  <div className="info">
-                    <h4 className="info-name">
-                      {djangoCurrentCustomerFullName}
-                    </h4>
-                    <p className="info-number">
-                      {djangoCurrentCustomerMobileNumber}
-                    </p>
-                  </div>
-                  <div className="action">
-                    <div className="edit">
-                      <Button text="Edit Info" />
-                    </div>
-                    <div className="logout">
-                      <a href="/store/accounts/logout">
-                        <Button text="Logout" />
-                      </a>
-                    </div>
-                  </div>
-                </>
-              )}
-            </div>
+            <div className="user-section">{userSectionHandler()}</div>
           </div>
+          <div className="line-wrapper">
+            <hr />
+          </div>
+          <PanelGroup />
           <div className="line-wrapper">
             <hr />
           </div>
