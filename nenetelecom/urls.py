@@ -32,7 +32,7 @@ urlpatterns = [
     path('store/cart/', include('frontend.urls')),
     path('store/checkout/', include('frontend.urls')),
     path('store/checkout/process_order/', include('frontend.urls')),
-    path('store/orders/', include('frontend.urls')),
+    path('store/my-orders/', include('frontend.urls')),
     path('offline.html', (TemplateView.as_view(template_name="offline.html", 
         content_type='text/html', )), name='offline.html'),
     path('service-worker.js', (TemplateView.as_view(template_name="service-worker.js", 
