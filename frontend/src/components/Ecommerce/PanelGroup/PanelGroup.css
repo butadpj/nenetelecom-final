@@ -1,0 +1,15 @@
+.panel-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0.8em 0;
+}
+
+.panel-group a {
+  text-decoration: none;
+  width: min(90%, 40rem);
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
