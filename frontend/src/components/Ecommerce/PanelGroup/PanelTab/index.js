@@ -1,10 +1,14 @@
 import React from "react";
 
 import "./PanelTab.css";
-const PanelTab = ({ cName, isSoon, icon, text, spanText }) => {
+const PanelTab = ({ cName, bg, txtColor, isSoon, icon, text, spanText }) => {
   return (
     <div
-      className={isSoon ? [cName + " soon panel-tab"] : [cName + " panel-tab"]}
+      className={
+        isSoon
+          ? [`${cName} ${bg} ${txtColor} panel-tab soon`]
+          : [`${cName} ${bg} ${txtColor} panel-tab`]
+      }
     >
       <div>
         {icon}
