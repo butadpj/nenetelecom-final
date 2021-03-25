@@ -9,6 +9,11 @@
   color: var(--dark);
 }
 
+.nav-top .header-wrapper {
+  margin: 0 auto;
+  width: min(100%, 80rem);
+}
+
 .nav-top .header {
   height: auto;
   display: flex;
@@ -18,10 +23,10 @@
   list-style: none;
 }
 
-.header .header-logo {
+.nav-top .header .header-logo {
   height: 68px;
 }
 
-.header .header-logo img {
+.nav-top .header .header-logo img {
   height: 100%;
 }

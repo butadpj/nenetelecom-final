@@ -18,21 +18,23 @@ const Navtop = ({ url }) => {
 
   return (
     <div className="nav-top">
-      <ul className="header">
-        <Link to={url} className="header-logo">
-          <img src={navLogo} alt="" />
-        </Link>
-        <User
-          userName={
-            djangoCurrentUser === "AnonymousUser"
-              ? "Guest"
-              : djangoCurrentCustomerFirstName
-          }
-          userImage={
-            djangoCurrentUser === "AnonymousUser" ? guestUserImage : userImage
-          }
-        />
-      </ul>
+      <section className="header-wrapper">
+        <div className="header">
+          <Link to={url} className="header-logo">
+            <img src={navLogo} alt="" />
+          </Link>
+          <User
+            userName={
+              djangoCurrentUser === "AnonymousUser"
+                ? "Guest"
+                : djangoCurrentCustomerFirstName
+            }
+            userImage={
+              djangoCurrentUser === "AnonymousUser" ? guestUserImage : userImage
+            }
+          />
+        </div>
+      </section>
       <Filter />
     </div>
   );

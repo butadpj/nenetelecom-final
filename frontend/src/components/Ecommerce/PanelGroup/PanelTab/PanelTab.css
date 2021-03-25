@@ -2,6 +2,7 @@
   display: flex;
   align-items: center;
   background: var(--light);
+  color: var(--dark);
   margin: 0.25em 0;
   padding: 0.5em;
   box-shadow: var(--box-shadow-light);
@@ -10,7 +11,26 @@
 }
 
 .panel-group .panel-tab:hover {
-  background: var(--dark);
+  background: var(--shadeLightBlue) !important;
+  color: var(--light) !important;
+}
+
+.panel-group .panel-tab.light {
+  background: var(--light);
+}
+
+.panel-group .panel-tab.light:hover {
+  background: var(--shadeLightBlue) !important;
+  color: var(--light) !important;
+}
+
+.panel-group .panel-tab.dark {
+  background: var(--dark) !important;
+  color: var(--light) !important;
+}
+
+.panel-group .panel-tab.dark:hover {
+  background: var(--shadeLightBlue) !important;
   color: var(--light) !important;
 }
 
@@ -26,15 +46,14 @@
   color: var(--shadeLightDark);
 }
 
-.panel-group .panel-tab.soon:hover {
-  background: var(--light);
-  color: var(--shadeLightDark) !important;
+.panel-group .panel-tab.soon {
+  pointer-events: none;
 }
 
-.panel-group .icon {
+.panel-group svg {
   font-size: 1.4em;
   margin-right: 0.5em;
-  width: 50px;
+  width: 50px !important;
 }
 
 .panel-group p,
@@ -43,14 +62,10 @@
   font-weight: 600;
 }
 
-.panel-group .my-orders {
+.panel-group .panel-tab.blue {
   color: var(--shadeBlue);
 }
 
-.panel-group .admin-panel {
+.panel-group .panel-tab.green {
   color: var(--shadeGreen);
-}
-
-.admin-panel .icon {
-  font-size: 1.2em;
 }
