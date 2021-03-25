@@ -105,20 +105,21 @@
   }
 }
 
-.nav-content .close-icon,
-.search-content .close-icon {
+.icon-container {
+  width: min(90%, 60rem);
+  margin: 0 auto;
+  padding: 1em 0;
+}
+
+.ecommerce .nav-content .close-icon,
+.ecommerce .search-content .close-icon {
   display: block;
-  margin: 1em 0 1em auto;
+  margin: 0 0 0 auto;
 }
 .nav-content .close-icon:hover,
 .search-content .close-icon:hover {
   cursor: pointer;
   filter: brightness(150%);
-}
-
-.icon-container {
-  width: min(90%, 60rem);
-  margin: 0 auto;
 }
 
 .nav-content .user-section img {

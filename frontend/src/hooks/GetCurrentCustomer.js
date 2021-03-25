@@ -19,7 +19,9 @@ const GetCurrentCustomer = () => {
   const [
     djangoCurrentCustomerFullName,
     setDjangoCurrentCustomerFullName,
-  ] = useState("");
+  ] = useState();
+
+  const [djangoIsSuperUser, setDjangoIsSuperUser] = useState(false);
 
   useEffect(() => {
     let isMounted = true;
@@ -32,6 +34,7 @@ const GetCurrentCustomer = () => {
       setDjangoCurrentCustomerFullName(
         `${currentCustomerFirstName} ${currentCustomerLastName}`
       );
+      setDjangoIsSuperUser(isSuperUser);
     }
 
     return () => {
@@ -46,6 +49,7 @@ const GetCurrentCustomer = () => {
     djangoCurrentCustomerId,
     djangoCurrentUser,
     djangoCurrentCustomerFullName,
+    djangoIsSuperUser,
   };
 };
 

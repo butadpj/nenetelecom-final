@@ -30,7 +30,7 @@ const Cart = () => {
             </div>
           ) : state.completedOrders.length > 0 ? (
             <div className="view-orders-link">
-              <Link to="/store/orders">
+              <Link to="/store/my-orders">
                 <h5>View All Orders {`>`}</h5>
               </Link>
             </div>
