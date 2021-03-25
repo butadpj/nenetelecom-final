@@ -41,7 +41,7 @@ const EcommerceView = () => {
           <Checkout />
         </Route>
 
-        <Route path="/store/orders/">
+        <Route path="/store/my-orders/">
           <Orders />
         </Route>
       </Switch>
