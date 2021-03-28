@@ -318,8 +318,6 @@ const CheckoutLogic = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        cart = {};
-        document.cookie = "cart=" + JSON.stringify(cart) + ";domain=;path=/";
         showAlertModal();
         testPush();
       })

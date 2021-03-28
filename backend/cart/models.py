@@ -23,6 +23,7 @@ class Bag(models.Model):
     def total_cart_price(self):
         bag_item = self.bagitem_set.all().filter(selected=True)
         total = sum([item.total_price for item in bag_item])
+        self.save()
         return total
 
 
@@ -30,14 +31,14 @@ class Bag(models.Model):
     def total_cart_items(self):
         bag_item = self.bagitem_set.all()
         total = sum([item.quantity for item in bag_item])
+        self.save()
         return total
 
 
     @property
     def customer_info(self):
         return (f'{self.customer}')
- 
-
+    
 
 class BagItem(models.Model):
     bag = models.ForeignKey(Bag, on_delete=models.CASCADE, blank=True, null=True)
@@ -45,10 +46,10 @@ class BagItem(models.Model):
     quantity = models.IntegerField(default=0, null=True, blank=True)
     selected = models.BooleanField(default=True, null=False, blank=False)
 
-    def save(self):
-        obj = Bag.objects.get(id=self.bag.id)
-        super().save()
-        super(type(obj), obj).save()
+    # def save(self):
+    #     obj = Bag.objects.get(id=self.bag.id)
+    #     super().save()
+    #     super(type(obj), obj).save()
 
     def __str__(self):
         return str(self.id)

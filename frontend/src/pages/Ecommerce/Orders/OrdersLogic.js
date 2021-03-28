@@ -5,7 +5,7 @@ import { CartItemContext } from "../../../context/CartItemContext";
 const OrdersLogic = () => {
   const [cartItemState] = useContext(CartItemContext);
 
-  let orders = cartItemState.completedOrders;
+  let orders = cartItemState.orders;
 
   return { orders };
 };

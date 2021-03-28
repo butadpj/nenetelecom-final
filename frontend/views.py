@@ -27,40 +27,74 @@ def process_order(request):
     zip_code = data['shippingInfo']['zipCode']
     shipping_address = (f'{address}, {city}, {province}, {zip_code}')
 
+    total = float(data['total'])
+
+    cart_items = []
+    
     if request.user.is_authenticated:
         customer = request.user.customer
-        order, created = Order.objects.get_or_create(customer=customer, complete=False, confirmed=False, paid=False)
+        bag = Bag.objects.get(customer=request.user.customer.id)
+        cart = bag.bagitem_set.all()
+        
+        total_price = 0
+
+        for i in cart:
+            if i.selected:
+                total_price += float(i.total_price)
+
+                product = Product.objects.get(id=i.product.id)
+                item = {
+                    'product': {
+                        'id': product.id,
+                    },
+                    'quantity': i.quantity,
+                    'total_price': total_price
+                }
+
+                cart_items.append(item)
+
+        if total == total_price:
+            # Create the Order
+            order = Order.objects.create(
+                customer = customer,
+                address = address,
+                city = city,
+                province = province,
+                zip_code = zip_code,
+            )
+
+            # Create the Order Product
+            for item in cart_items:
+                product = Product.objects.get(id=item['product']['id'])
+                order_product = OrderProduct.objects.create(
+                    order = order,
+                    product = product,
+                    quantity = item['quantity']
+                )
+
     else:
         cart = json.loads(request.COOKIES['cart'])
 
-        cart_items = []
-        order = {'total_cart_price': 0, 'total_cart_items': 0}
-
         total_price = 0
-        total_count = 0
         
         for i in cart:
+            # Only get the selected product in checkout
+            if cart[i]['selected']:
 
-            # total_count & total_price in cart
-            total_count += cart[i]['quantity']
-            total_price += cart[i]['total_price']
+                # Total price of each selected product
+                total_price += float(cart[i]['total_price'])
 
-            # Cart or the cart items in a whole
-            order['total_cart_price'] += total_price
-            order['total_cart_items'] += total_count
+                # Order_Product Object
+                product = Product.objects.get(id=i)
+                item = {
+                    'product': {
+                        'id': product.id,
+                    },
+                    'quantity': cart[i]['quantity'],
+                    'total_price': total_price
+                }
 
-
-            # Order_Product Object
-            product = Product.objects.get(id=i)
-            item = {
-                'product': {
-                    'id': product.id,
-                },
-                'quantity': cart[i]['quantity'],
-                'total_price': total_price
-            }
-
-            cart_items.append(item)
+                cart_items.append(item)
 
         customer, created = Customer.objects.get_or_create(mobile_number = mobile_number)
         customer.first_name = first_name
@@ -68,34 +102,24 @@ def process_order(request):
         customer.full_address = shipping_address
         customer.save()
 
-        order = Order.objects.create(
-            customer = customer,
-        )
-
-        for item in cart_items:
-            product = Product.objects.get(id=item['product']['id'])
-
-            order_product = OrderProduct.objects.create(
-                order = order,
-                product = product,
-                quantity = item['quantity']
+        if total == total_price:
+            # Create the Order
+            order = Order.objects.create(
+                customer = customer,
+                address = address,
+                city = city,
+                province = province,
+                zip_code = zip_code,
             )
 
+            # Create the Order Product
+            for item in cart_items:
+                product = Product.objects.get(id=item['product']['id'])
+                order_product = OrderProduct.objects.create(
+                    order = order,
+                    product = product,
+                    quantity = item['quantity']
+                )
         
-    total = float(data['total'])
-    
-    if total == order.total_cart_price:
-        order.complete = True
-
-    Shipping.objects.create( 
-            customer = customer,
-            order = order,
-            address = address,
-            city = city,
-            province = province,
-            zip_code = zip_code,
-        )
-        
-    order.save()
-
+ 
     return JsonResponse(data, safe=False)

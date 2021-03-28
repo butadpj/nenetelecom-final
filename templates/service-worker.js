@@ -116,7 +116,7 @@ self.addEventListener("notificationclick", (event) => {
   clickedNotification.close();
 
   const redirect = () => {
-    clients.openWindow("/admin/cart/order/");
+    clients.openWindow("/admin/checkout/order/");
   };
 
   // Do something as the result of the notification click
