@@ -30,6 +30,8 @@
   position: relative;
   color: var(--shadeBlue);
   text-decoration: none;
+  width: 2.4rem;
+  height: 2.4rem;
 }
 
 .ecommerce .nav-bottom ul > *:hover {

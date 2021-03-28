@@ -28,7 +28,7 @@ const Cart = () => {
                 <h5>Login to save orders {`>`}</h5>
               </a>
             </div>
-          ) : state.completedOrders.length > 0 ? (
+          ) : state.cartProducts.length > 0 ? (
             <div className="view-orders-link">
               <Link to="/store/my-orders">
                 <h5>View All Orders {`>`}</h5>

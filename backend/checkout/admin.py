@@ -1,10 +1,15 @@
 from django.contrib import admin
-from .models import Shipping
+from .models import Order, OrderProduct
 
 # Register your models here.
-class ShippingAdmin(admin.ModelAdmin):
-    list_display = ['shipping_address', 'customer_info', 'delivered', 'ready_to_deliver']
-    readonly_fields = ('customer', 'order', 'address', 'city', 'province', 'zip_code')
+class OrderAdmin(admin.ModelAdmin):
+    list_display = ['shipping_address', 'customer_info', 'total_cart_items', 'total_cart_price', 'confirmed', 'paid', 'delivered', 'ready_to_deliver', 'date_placed']
+    readonly_fields = ('customer', 'address', 'city', 'province', 'zip_code')
 
 
-admin.site.register(Shipping, ShippingAdmin)
+class OrderProductAdmin(admin.ModelAdmin):
+    list_display = ['order', 'product', 'quantity', 'total_price']
+    readonly_fields=('order', 'product', 'quantity')
+
+admin.site.register(Order, OrderAdmin)
+admin.site.register(OrderProduct, OrderProductAdmin)
