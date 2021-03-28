@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import Navbottom from "../../../components/Ecommerce/Navbars/Navbottom";
 const Orders = () => {
   const { orders } = OrdersLogic();
-
+  console.log(orders);
   return (
     <>
       <section className="orders">
@@ -23,12 +23,7 @@ const Orders = () => {
         <hr />
         <div className="orders-wrapper">
           {orders.map((order) => {
-            const {
-              transaction_id,
-              transaction_date,
-              paid,
-              order_products,
-            } = order;
+            const { transaction_id, date_placed, paid, order_products } = order;
 
             let months = [
               "January",
@@ -45,7 +40,7 @@ const Orders = () => {
               "December",
             ];
 
-            let d = new Date(transaction_date);
+            let d = new Date(date_placed);
             let mm = String(months[d.getMonth()]); //January is 0!
             let dd = String(d.getDate()).padStart(2, "0");
             let yyyy = String(d.getFullYear());

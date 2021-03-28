@@ -2,7 +2,7 @@ import { useContext, useState, useEffect } from "react";
 import { CartItemContext } from "../../../context/CartItemContext";
 import { ProductContext } from "../../../context/ProductContext";
 import GetCurrentCustomer from "../../../hooks/GetCurrentCustomer";
-import { getCustomerOrderProduct } from "../../../hooks/query/getCustomerOrderProduct";
+import { getCustomerBag } from "../../../hooks/query/getCustomerBag";
 
 const ProductLogic = () => {
   const [showDetails, setShowDetails] = useState(false);
@@ -11,10 +11,16 @@ const ProductLogic = () => {
   const [cartItemState, cartItemDispatch] = useContext(CartItemContext);
   const [productState] = useContext(ProductContext);
   const { djangoCurrentUser, djangoCurrentCustomerId } = GetCurrentCustomer();
-  const { notCompletedCustomerOrder } = getCustomerOrderProduct();
+  const { customerBag } = getCustomerBag();
+
+  let customerBagId;
+  customerBag.map((bag) => (customerBagId = bag.id));
 
   let products = productState.products;
   let isLoading = productState.isLoading;
+  let bagsUrl = "/api/bags/";
+  let bagItemUrl = "/api/bag-item/";
+
   const handleShow = (id, name, price, brand, image, description) => {
     setShowDetails(true);
     document.body.style.overflow = "hidden";
@@ -108,19 +114,19 @@ const ProductLogic = () => {
     if (action.toUpperCase() === "ADD") {
       if (existingProduct.length > 0) {
         //UPDATING PRODUCT
-        let op_id = existingProduct[0].id;
-        let op_order = existingProduct[0].order;
+        let bagItem = existingProduct[0].id;
+        let bagItemOrder = existingProduct[0].order;
         existingProduct[0].quantity += 1;
         existingProduct[0].total_price += price_num;
 
-        fetch(`/api/order-product/${op_id}/`, {
+        fetch(`${bagItemUrl}${bagItem}/`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
             "X-CSRFToken": csrftoken,
           },
           body: JSON.stringify({
-            order: op_order,
+            bag: bagItemOrder,
             product: selectedProduct,
             quantity: existingProduct[0].quantity,
           }),
@@ -138,9 +144,9 @@ const ProductLogic = () => {
           .catch((error) => console.log(error));
       } else {
         //ADDING PRODUCT
-        //Create order if customer has no order yet
-        if (notCompletedCustomerOrder.length == 0) {
-          fetch(`/api/orders/`, {
+        //Create bag if customer has no bag yet
+        if (customerBag.length == 0) {
+          fetch(`${bagsUrl}`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -153,14 +159,14 @@ const ProductLogic = () => {
           })
             .then((res) => res.json())
             .then((data) => {
-              fetch(`/api/order-product/`, {
+              fetch(`${bagItemUrl}`, {
                 method: "POST",
                 headers: {
                   "Content-Type": "application/json",
                   "X-CSRFToken": csrftoken,
                 },
                 body: JSON.stringify({
-                  order: data.transaction_id,
+                  bag: data.id,
                   product: selectedProduct,
                   quantity: 1,
                 }),
@@ -178,14 +184,14 @@ const ProductLogic = () => {
             .catch((error) => console.log(error));
         } else {
           //If customer has already placed an Order
-          fetch(`/api/order-product/`, {
+          fetch(`${bagItemUrl}`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
               "X-CSRFToken": csrftoken,
             },
             body: JSON.stringify({
-              order: notCompletedCustomerOrder[0].transaction_id,
+              bag: customerBagId,
               product: selectedProduct,
               quantity: 1,
             }),
@@ -205,8 +211,8 @@ const ProductLogic = () => {
     if (action.toUpperCase() === "REMOVE") {
       //If product exist
       if (existingProduct.length > 0) {
-        let op_id = existingProduct[0].id;
-        let op_order = existingProduct[0].order;
+        let bagItem = existingProduct[0].id;
+        let bagItemOrder = existingProduct[0].order;
         existingProduct[0].quantity -= 1;
         existingProduct[0].total_price -= price_num;
 
@@ -216,7 +222,7 @@ const ProductLogic = () => {
             type: "REMOVE_ITEM_AU",
             payload: selectedProduct,
           });
-          fetch(`/api/order-product/${op_id}/`, {
+          fetch(`${bagItemUrl}${bagItem}/`, {
             method: "DELETE",
             headers: {
               "Content-Type": "application/json",
@@ -224,14 +230,14 @@ const ProductLogic = () => {
             },
           });
         } else {
-          fetch(`/api/order-product/${op_id}/`, {
+          fetch(`${bagItemUrl}${bagItem}/`, {
             method: "PUT",
             headers: {
               "Content-Type": "application/json",
               "X-CSRFToken": csrftoken,
             },
             body: JSON.stringify({
-              order: op_order,
+              order: bagItemOrder,
               product: selectedProduct,
               quantity: existingProduct[0].quantity,
             }),
