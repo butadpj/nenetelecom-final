@@ -2,7 +2,6 @@ from django.shortcuts import render
 
 from rest_framework import viewsets, permissions
 
-
 from backend.store.models import *
 from backend.cart.models import *
 from backend.checkout.models import *
@@ -23,6 +22,14 @@ class CustomerView(viewsets.ModelViewSet):
     queryset = Customer.objects.all()
     serializer_class = CustomerSerializer
 
+class BagView(viewsets.ModelViewSet):
+    queryset = Bag.objects.all()
+    serializer_class = BagSerializer
+
+class BagItemView(viewsets.ModelViewSet):
+    queryset = BagItem.objects.all()
+    serializer_class = BagItemSerializer
+
 class OrderView(viewsets.ModelViewSet):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
@@ -30,7 +37,3 @@ class OrderView(viewsets.ModelViewSet):
 class OrderProductView(viewsets.ModelViewSet):
     queryset = OrderProduct.objects.all()
     serializer_class = OrderProductSerializer
-
-class ShippingView(viewsets.ModelViewSet):
-    queryset = Shipping.objects.all()
-    serializer_class = ShippingSerializer
