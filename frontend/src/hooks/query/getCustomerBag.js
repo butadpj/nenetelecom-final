@@ -18,7 +18,7 @@ export const getCustomerBag = () => {
 
   bagItemData.forEach((data) => {
     customerBag.forEach((order) => {
-      if (data.order === order.transaction_id) {
+      if (data.order === order.id) {
         customerBagItem.push(data);
         total_items = order.total_cart_items;
         total_price = order.total_cart_price;
