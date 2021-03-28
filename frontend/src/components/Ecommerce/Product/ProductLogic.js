@@ -154,7 +154,6 @@ const ProductLogic = () => {
             },
             body: JSON.stringify({
               customer: djangoCurrentCustomerId,
-              confirmed: false,
             }),
           })
             .then((res) => res.json())
