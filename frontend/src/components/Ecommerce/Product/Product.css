@@ -202,7 +202,7 @@
 
 .add-product-modal {
   background: var(--light);
-  width: 60%;
+  width: min(60%, 15rem);
   left: 50%;
   top: 60%;
   transform: translate(-50%, -50%);
@@ -246,4 +246,11 @@
   top: 100%;
   left: 97%;
   transform: translate(-50%, -50%);
+  cursor: pointer;
+  transition: 0.3s ease-out;
+  user-select: none;
+}
+
+.modal-close-button:hover {
+  filter: brightness(80%);
 }

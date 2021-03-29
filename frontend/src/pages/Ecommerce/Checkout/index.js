@@ -2,12 +2,12 @@ import React, { useEffect } from "react";
 
 import "./Checkout.css";
 import Navbottom from "../../../components/Ecommerce/Navbars/Navbottom";
-import { Link } from "react-router-dom";
 import CheckoutLogic from "./CheckoutLogic";
 import Button from "../../../components/Button";
 import handDownIcon from "../../../assets/svgs/hand-point-down-regular.svg";
 import Paypal from "../../../components/Ecommerce/PayPal";
 import closeIcon from "../../../assets/svgs/close.svg";
+import BackTo from "../../../components/Ecommerce/BackTo";
 
 const Checkout = () => {
   const {
@@ -43,14 +43,11 @@ const Checkout = () => {
   return (
     <>
       <section className="checkout">
-        <div className="back-to-cart">
-          <Link to="/store/cart">
-            <i className="fas fa-arrow-circle-left"></i>
-          </Link>
-          <span>
-            to cart <i className="fas fa-shopping-cart"></i>
-          </span>
-        </div>
+        <BackTo
+          linkText="to cart"
+          link="/store/cart"
+          icon={<i className="fas fa-shopping-cart"></i>}
+        />
         <hr />
 
         {selectedItems.length === 0 ? (
