@@ -8,7 +8,9 @@ read -p "Select an environment to export (dev or prod): " ENV
 
 if [ $ENV == 'dev' ]
 then
-    python manage.py runserver --settings=nenetelecom.settings.development
+    export DJANGO_SETTINGS_MODULE=nenetelecom.settings.development
+    python manage.py runserver
 else
-    python manage.py runserver --settings=nenetelecom.settings.production
+    export DJANGO_SETTINGS_MODULE=nenetelecom.settings.production
+    python manage.py runserver
 fi
