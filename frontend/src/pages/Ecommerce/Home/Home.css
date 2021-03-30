@@ -55,6 +55,10 @@
   cursor: pointer;
 }
 
+#fb-root .fb_dialog {
+  z-index: 0 !important;
+}
+
 #fb-root .fb_dialog .fb_dialog_content iframe {
   bottom: 45% !important;
   transform: scale(0.8) !important;
