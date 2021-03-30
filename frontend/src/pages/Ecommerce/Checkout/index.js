@@ -8,6 +8,7 @@ import handDownIcon from "../../../assets/svgs/hand-point-down-regular.svg";
 import Paypal from "../../../components/Ecommerce/PayPal";
 import closeIcon from "../../../assets/svgs/close.svg";
 import BackTo from "../../../components/Ecommerce/BackTo";
+import ModalWrapper from "../../../components/Ecommerce/ModalWrapper";
 
 const Checkout = () => {
   const {
@@ -389,7 +390,7 @@ const Checkout = () => {
               </div>
             ) : null}
             {gcashInfo ? (
-              <div className="modal-wrapper">
+              <ModalWrapper>
                 <div className="gcash-info">
                   <h4>First name: Wilda</h4>
                   <h4>Last name: Butad</h4>
@@ -422,10 +423,10 @@ const Checkout = () => {
                     />
                   </div>
                 </div>
-              </div>
+              </ModalWrapper>
             ) : null}
             {confirmModal ? (
-              <div className="modal-wrapper">
+              <ModalWrapper>
                 <div className="confirm-modal">
                   <h3>Do you want to complete your order?</h3>
                   <Button
@@ -441,17 +442,17 @@ const Checkout = () => {
                     />
                   </div>
                 </div>
-              </div>
+              </ModalWrapper>
             ) : null}
             {alertModal ? (
-              <div className="modal-wrapper">
+              <ModalWrapper>
                 <div className="alert-timer">
                   <h3>Transaction complete...</h3>
                   <h4 className="redirect-message">
                     Redirecting to store in {time}
                   </h4>
                 </div>
-              </div>
+              </ModalWrapper>
             ) : null}
           </>
         )}

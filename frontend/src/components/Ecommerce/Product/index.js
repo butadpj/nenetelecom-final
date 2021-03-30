@@ -127,7 +127,7 @@ const Product = () => {
       )}
 
       {showDetails && (
-        <ModalWrapper functionality={handleClose}>
+        <ModalWrapper>
           <section className="product-view product-view-show">
             <div className="detail-header">
               <h5 className="detail-product-name">{detailData.name}</h5>
@@ -173,7 +173,7 @@ const Product = () => {
         </ModalWrapper>
       )}
       {showAddProductModal && (
-        <div className="modal-wrapper">
+        <ModalWrapper>
           <section className="add-product-modal add-product-modal-show">
             <h4 className="modal-text">
               <p>Added to cart </p>
@@ -200,7 +200,7 @@ const Product = () => {
               />
             </div>
           </section>
-        </div>
+        </ModalWrapper>
       )}
     </>
   );
