@@ -55,13 +55,6 @@
   cursor: pointer;
 }
 
-#fb-root .fb-customerchat span iframe {
-  bottom: 45% !important;
-  transform: scale(0.8) !important;
-  right: 0 !important;
-  margin: 0 !important;
-}
-
 #fb-root .fb_dialog .fb_dialog_content iframe {
   bottom: 45% !important;
   transform: scale(0.8) !important;
