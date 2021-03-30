@@ -29,6 +29,7 @@
     "file-loader": "^6.2.0",
     "html-webpack-plugin": "^4.5.1",
     "process": "^0.11.10",
+    "react-messenger-customer-chat": "^0.8.0",
     "react-router-dom": "^5.2.0",
     "style-loader": "^2.0.0",
     "webp-loader": "^0.6.0",
