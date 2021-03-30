@@ -1,0 +1,34 @@
+.back-to-wrapper {
+  width: min(95%, 70rem);
+  padding: 0 0.5em 0.5em 0.5em;
+  margin: 0 auto;
+  font-weight: 600;
+}
+
+.back-to-wrapper .back-to {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.back-to-wrapper .link {
+  display: flex;
+  align-items: center;
+  color: var(--shadeDark);
+}
+
+.back-to-wrapper .link a {
+  font-size: 1.8em;
+  margin-right: 0.3em;
+  color: var(--shadeDark);
+}
+
+.back-to-wrapper .link a:hover {
+  color: var(--dark);
+}
+
+.back-to-wrapper .view-orders-link a {
+  color: var(--shadeLightBlue);
+  text-decoration: underline;
+}
