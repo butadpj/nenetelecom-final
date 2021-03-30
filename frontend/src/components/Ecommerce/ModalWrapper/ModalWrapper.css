@@ -1,0 +1,26 @@
+.modal-wrapper {
+  position: fixed;
+  display: block;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.472);
+  z-index: 5000;
+}
+
+.modal-close-button {
+  position: absolute;
+  top: 100%;
+  left: 99%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  transition: 0.3s ease-out;
+  user-select: none;
+}
+
+.modal-close-button:hover {
+  filter: brightness(80%);
+}

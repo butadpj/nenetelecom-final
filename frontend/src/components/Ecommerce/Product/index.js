@@ -9,6 +9,7 @@ import ProductLogic from "./ProductLogic";
 import ImageSlider from "../ImageSlider";
 import closeIcon from "../../../assets/svgs/close.svg";
 import Loader from "../../../components/Ecommerce/Loader";
+import ModalWrapper from "../../../components/Ecommerce/ModalWrapper";
 
 const Product = () => {
   const {
@@ -126,7 +127,7 @@ const Product = () => {
       )}
 
       {showDetails && (
-        <div className="modal-wrapper">
+        <ModalWrapper>
           <section className="product-view product-view-show">
             <div className="detail-header">
               <h5 className="detail-product-name">{detailData.name}</h5>
@@ -169,10 +170,10 @@ const Product = () => {
               />
             </div>
           </section>
-        </div>
+        </ModalWrapper>
       )}
       {showAddProductModal && (
-        <div className="modal-wrapper">
+        <ModalWrapper>
           <section className="add-product-modal add-product-modal-show">
             <h4 className="modal-text">
               <p>Added to cart </p>
@@ -199,7 +200,7 @@ const Product = () => {
               />
             </div>
           </section>
-        </div>
+        </ModalWrapper>
       )}
     </>
   );

@@ -202,7 +202,7 @@
 
 .add-product-modal {
   background: var(--light);
-  width: 60%;
+  width: min(60%, 15rem);
   left: 50%;
   top: 60%;
   transform: translate(-50%, -50%);
@@ -239,11 +239,4 @@
   font-size: 0.5em;
   padding: 1em 1.2em;
   margin-bottom: 1em;
-}
-
-.modal-close-button {
-  position: absolute;
-  top: 100%;
-  left: 97%;
-  transform: translate(-50%, -50%);
 }

@@ -6,24 +6,6 @@
   font-size: 1rem;
 }
 
-.checkout .back-to-cart {
-  padding: 0 0 0.5em 0.5em;
-  display: flex;
-  align-items: center;
-  font-weight: 600;
-  color: var(--shadeDark);
-}
-
-.checkout .back-to-cart a {
-  font-size: 1.8em;
-  margin-right: 0.3em;
-  color: var(--shadeDark);
-}
-
-.checkout .back-to-cart a:hover {
-  color: var(--dark);
-}
-
 .checkout .helper {
   display: flex;
   align-items: center;
@@ -37,7 +19,7 @@
   background: var(--light);
   color: var(--shadeBlue);
   margin: 1em auto;
-  width: 90%;
+  width: min(90%, 50rem);
   border-radius: 0.625rem;
   padding: 0.5em;
 }
@@ -119,7 +101,7 @@
   background: var(--light);
   color: var(--shadeBlue);
   margin: 1em auto;
-  width: 90%;
+  width: min(90%, 50rem);
   border-radius: 0.625rem;
   padding: 0.5em 1em;
 }
@@ -205,7 +187,7 @@
   background: var(--light);
   color: var(--shadeBlue);
   margin: 1em auto;
-  width: 87%;
+  width: min(90%, 50rem);
   border-radius: 0.625rem;
   padding: 0.5em 1em;
 }
@@ -216,10 +198,14 @@
 
 .checkout .methods {
   margin-top: 1.5em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .checkout .methods > * {
   margin-bottom: 2em;
+  width: min(90%, 30rem);
 }
 
 .checkout .methods .cod button,
@@ -247,7 +233,7 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 90%;
+  width: min(90%, 30rem);
   transform: translate(-50%, -50%);
 }
 

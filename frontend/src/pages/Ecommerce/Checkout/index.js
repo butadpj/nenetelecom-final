@@ -2,12 +2,13 @@ import React, { useEffect } from "react";
 
 import "./Checkout.css";
 import Navbottom from "../../../components/Ecommerce/Navbars/Navbottom";
-import { Link } from "react-router-dom";
 import CheckoutLogic from "./CheckoutLogic";
 import Button from "../../../components/Button";
 import handDownIcon from "../../../assets/svgs/hand-point-down-regular.svg";
 import Paypal from "../../../components/Ecommerce/PayPal";
 import closeIcon from "../../../assets/svgs/close.svg";
+import BackTo from "../../../components/Ecommerce/BackTo";
+import ModalWrapper from "../../../components/Ecommerce/ModalWrapper";
 
 const Checkout = () => {
   const {
@@ -43,14 +44,11 @@ const Checkout = () => {
   return (
     <>
       <section className="checkout">
-        <div className="back-to-cart">
-          <Link to="/store/cart">
-            <i className="fas fa-arrow-circle-left"></i>
-          </Link>
-          <span>
-            to cart <i className="fas fa-shopping-cart"></i>
-          </span>
-        </div>
+        <BackTo
+          linkText="to cart"
+          link="/store/cart"
+          icon={<i className="fas fa-shopping-cart"></i>}
+        />
         <hr />
 
         {selectedItems.length === 0 ? (
@@ -392,7 +390,7 @@ const Checkout = () => {
               </div>
             ) : null}
             {gcashInfo ? (
-              <div className="modal-wrapper">
+              <ModalWrapper>
                 <div className="gcash-info">
                   <h4>First name: Wilda</h4>
                   <h4>Last name: Butad</h4>
@@ -425,10 +423,10 @@ const Checkout = () => {
                     />
                   </div>
                 </div>
-              </div>
+              </ModalWrapper>
             ) : null}
             {confirmModal ? (
-              <div className="modal-wrapper">
+              <ModalWrapper>
                 <div className="confirm-modal">
                   <h3>Do you want to complete your order?</h3>
                   <Button
@@ -444,17 +442,17 @@ const Checkout = () => {
                     />
                   </div>
                 </div>
-              </div>
+              </ModalWrapper>
             ) : null}
             {alertModal ? (
-              <div className="modal-wrapper">
+              <ModalWrapper>
                 <div className="alert-timer">
                   <h3>Transaction complete...</h3>
                   <h4 className="redirect-message">
                     Redirecting to store in {time}
                   </h4>
                 </div>
-              </div>
+              </ModalWrapper>
             ) : null}
           </>
         )}
