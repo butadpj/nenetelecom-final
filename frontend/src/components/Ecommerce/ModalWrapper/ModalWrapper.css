@@ -10,3 +10,17 @@
   background-color: rgba(0, 0, 0, 0.472);
   z-index: 5000;
 }
+
+.modal-close-button {
+  position: absolute;
+  top: 100%;
+  left: 99%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  transition: 0.3s ease-out;
+  user-select: none;
+}
+
+.modal-close-button:hover {
+  filter: brightness(80%);
+}
