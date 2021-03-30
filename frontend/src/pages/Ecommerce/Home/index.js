@@ -4,6 +4,7 @@ import "./Home.css";
 import Navbottom from "../../../components/Ecommerce/Navbars/Navbottom";
 import Product from "../../../components/Ecommerce/Product";
 import Button from "../../../components/Button";
+import MessengerCustomerChat from "react-messenger-customer-chat";
 
 const Home = () => {
   const [showInstallPrompt, setshowInstallPrompt] = useState(false);
@@ -72,7 +73,10 @@ const Home = () => {
           </div>
         </div>
       )}
-
+      <MessengerCustomerChat
+        pageId="1581882548771634"
+        appId="446840523087062"
+      />
       <Navbottom />
     </>
   );
