@@ -21,9 +21,12 @@ class Order(models.Model):
 
     @property
     def total_cart_price(self):
-        order_product = self.orderproduct_set.all()
-        total = sum([item.total_price for item in order_product])
-        return total
+        try:
+            order_product = self.orderproduct_set.all()
+            total = sum([item.total_price for item in order_product])
+            return total
+        except:
+            pass
 
     @property
     def total_cart_items(self):
@@ -66,4 +69,7 @@ class OrderProduct(models.Model):
 
     @property
     def total_price(self):
-        return self.product.price * self.quantity
+        try:
+            return self.product.price * self.quantity
+        except:
+            pass
