@@ -7,12 +7,15 @@ export const ProductContext = createContext();
 const initialState = {
   products: [],
   isLoading: true,
+  productSearchInput: "",
 };
+
 const ProductContextProvider = (props) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const { products, productLoading, productImageLoading } = getProducts();
 
-  state.products = products;
+  initialState.products = products;
+  initialState.productSearchInput = "";
 
   if (!productLoading && !productImageLoading) {
     state.isLoading = false;

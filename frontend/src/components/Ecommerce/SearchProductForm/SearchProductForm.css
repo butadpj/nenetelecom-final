@@ -1,0 +1,24 @@
+.ecommerce .search-content .search-form input {
+  padding: 0.6em 0.4em 0.6em 3em;
+  font-size: 0.6em;
+  background: var(--E-bg);
+  border-radius: 0.4rem;
+  border: none;
+  color: var(--dark);
+  transition: 0.2s ease-out;
+}
+
+.ecommerce .search-form input:focus {
+  outline: none;
+  box-shadow: var(--box-shadow);
+}
+
+.ecommerce .search-icon {
+  position: absolute;
+  top: 50%;
+  margin-left: 0.5em;
+  margin-top: 0.1em;
+  font-size: 0.8em;
+  transform: translateY(-50%);
+  color: var(--shadeLightDark);
+}

@@ -18,6 +18,8 @@ const ProductLogic = () => {
 
   let products = productState.products;
   let isLoading = productState.isLoading;
+  let searchInput = productState.productSearchInput;
+
   let bagsUrl = "/api/bags/";
   let bagItemUrl = "/api/bag-item/";
 
@@ -302,6 +304,7 @@ const ProductLogic = () => {
     handleCloseAddProductModal,
     showAddProductModal,
     processCart,
+    searchInput,
   };
 };
 
