@@ -15,7 +15,7 @@ const About = () => {
       />
       <div className="about-text">
         <p>
-          <b>Nene Telecom</b> is a mobile phone retail store in Philippines,
+          <b>Nenetelecom</b> is a mobile phone retail store in the Philippines,
           owned by Nene, an authorized retailer for more than a decade.
         </p>
       </div>

@@ -31,10 +31,8 @@ const NavbottomLogic = () => {
 
   const handleSearchShow = () => {
     setShowSearch(true);
-    document.body.style.overflow = "hidden";
     if (showNav) {
       handleNavClose();
-      document.body.style.overflow = "hidden";
     }
   };
 

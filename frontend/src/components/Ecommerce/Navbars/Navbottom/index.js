@@ -8,6 +8,7 @@ import closeIcon from "../../../../assets/svgs/close-dark.svg";
 
 import PanelGroup from "../../../../components/Ecommerce/PanelGroup";
 import PanelTab from "../../../../components/Ecommerce/PanelGroup/PanelTab";
+import SearchProductForm from "../../SearchProductForm";
 
 const Navbottom = ({ link }) => {
   const {
@@ -139,7 +140,8 @@ const Navbottom = ({ link }) => {
       ) : null}
       {showSearch ? (
         <div className="search-content">
-          <div className="icon-container">
+          <div className="content-wrapper">
+            <SearchProductForm />
             <img
               className="close-icon"
               src={closeIcon}
