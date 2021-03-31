@@ -8,7 +8,7 @@ class Bag(models.Model):
     class Meta:
         ordering = ('-created_at', )
 
-    customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True, blank=True)
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE, null=True, blank=True)
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     created_at = models.DateTimeField(null=True, auto_now_add=True)
     modified = models.DateTimeField(null=True, auto_now=True)
@@ -46,7 +46,7 @@ class Bag(models.Model):
 
 class BagItem(models.Model):
     bag = models.ForeignKey(Bag, on_delete=models.CASCADE, blank=True, null=True)
-    product = models.ForeignKey(Product, on_delete=models.SET_NULL, blank=True, null=True)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, blank=True, null=True)
     quantity = models.IntegerField(default=0, null=True, blank=True)
     selected = models.BooleanField(default=True, null=False, blank=False)
 
