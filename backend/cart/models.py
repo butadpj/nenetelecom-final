@@ -21,10 +21,14 @@ class Bag(models.Model):
 
     @property
     def total_cart_price(self):
-        bag_item = self.bagitem_set.all().filter(selected=True)
-        total = sum([item.total_price for item in bag_item])
-        self.save()
-        return total
+        try:
+            bag_item = self.bagitem_set.all().filter(selected=True)
+            total = sum([item.total_price for item in bag_item])
+            self.save()
+            return total
+        except:
+            pass
+        
 
 
     @property
@@ -54,7 +58,10 @@ class BagItem(models.Model):
     def __str__(self):
         return str(self.id)
 
+    
     @property
     def total_price(self):
-        return self.product.price * self.quantity
-
+        try:
+            return self.product.price * self.quantity
+        except:
+            pass
