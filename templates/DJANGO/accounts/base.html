@@ -21,7 +21,18 @@
     <link rel="stylesheet" href="{% static 'DJANGO/css/accounts/login.css' %}">
     <link rel="stylesheet" href="{% static 'DJANGO/css/accounts/register.css' %}">
     <title>Nenetelecom - login or signup</title>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-193477953-1">
+    </script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-193477953-1');
+    </script>
 </head>
+
 
 <body>
     {% block content %}
