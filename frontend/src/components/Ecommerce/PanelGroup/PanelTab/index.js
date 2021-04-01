@@ -1,9 +1,19 @@
 import React from "react";
 
 import "./PanelTab.css";
-const PanelTab = ({ cName, bg, txtColor, isSoon, icon, text, spanText }) => {
+const PanelTab = ({
+  cName,
+  bg,
+  txtColor,
+  isSoon,
+  icon,
+  text,
+  spanText,
+  functionality,
+}) => {
   return (
     <div
+      onClick={() => functionality()}
       className={
         isSoon
           ? [`${cName} ${bg} ${txtColor} panel-tab soon`]

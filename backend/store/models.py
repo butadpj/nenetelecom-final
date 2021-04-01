@@ -2,6 +2,8 @@ from django.db import models
 from django.conf import settings
 import uuid
 from PIL import Image
+import re
+
 
 # Create your models here.
 class Product(models.Model):
@@ -29,8 +31,9 @@ class Product(models.Model):
     name = models.CharField(max_length=100, null=False)
     price = models.DecimalField(max_digits=10, null=True, decimal_places=2)
     condition = models.CharField(max_length=20, null=False, choices=CONDITION, default=CONDITION[0][0])
-    description = models.TextField(max_length=200, null=True, blank=True)
+    description = models.TextField(max_length=1024, null=True, blank=True)
     date_posted = models.DateTimeField(auto_now_add=True, null=True)
+
 
     def __str__(self):
         return self.name
@@ -81,13 +84,53 @@ class ProductImage(models.Model):
 
 
 
+
+def display_picture_path(instance, filename):
+    # file will be uploaded to MEDIA_ROOT/customer<id>/<filename>
+    return 'dp_{0}/{1}'.format(instance.id, filename)
 class Customer(models.Model):
+    
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True)
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     mobile_number = models.CharField(max_length=15, null=True, blank=True, unique=True)
     first_name = models.CharField(max_length=30, null=True, blank=True)
     last_name = models.CharField(max_length=30, null=True, blank=True)
     complete_address = models.CharField(max_length=100, null=True, blank=True)
+    display_picture = models.ImageField(upload_to=display_picture_path, null=True, blank=True)
+
+    def save(self):
+        try:
+            super().save()
+            img = Image.open(self.display_picture.path)
+            if img.width > 100:
+                new_img = (100, 100)
+                def reorient_image(im):
+                    try:
+                        image_exif = im._getexif()
+                        image_orientation = image_exif[274]
+                        if image_orientation in (2,'2'):
+                            return im.transpose(Image.FLIP_LEFT_RIGHT)
+                        elif image_orientation in (3,'3'):
+                            return im.transpose(Image.ROTATE_180)
+                        elif image_orientation in (4,'4'):
+                            return im.transpose(Image.FLIP_TOP_BOTTOM)
+                        elif image_orientation in (5,'5'):
+                            return im.transpose(Image.ROTATE_90).transpose(Image.FLIP_TOP_BOTTOM)
+                        elif image_orientation in (6,'6'):
+                            return im.transpose(Image.ROTATE_270)
+                        elif image_orientation in (7,'7'):
+                            return im.transpose(Image.ROTATE_270).transpose(Image.FLIP_TOP_BOTTOM)
+                        elif image_orientation in (8,'8'):
+                            return im.transpose(Image.ROTATE_90)
+                        else:
+                            return im
+                    except (KeyError, AttributeError, TypeError, IndexError):
+                        return im
+                rotated_img = reorient_image(img)
+                rotated_img.thumbnail(new_img)
+                rotated_img.save(self.display_picture.path)
+        except:
+            pass
 
     @property
     def au_mobile_number(self):

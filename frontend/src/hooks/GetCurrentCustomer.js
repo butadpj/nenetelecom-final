@@ -1,40 +1,15 @@
 import { useState, useEffect } from "react";
 
 const GetCurrentCustomer = () => {
-  const [djangoCurrentUser, setDjangoCurrentUser] = useState();
-  const [
-    djangoCurrentCustomerFirstName,
-    setDjangoCurrentCustomerFirstName,
-  ] = useState();
-  const [
-    djangoCurrentCustomerLastName,
-    setDjangoCurrentCustomerLastName,
-  ] = useState();
-
-  const [
-    djangoCurrentCustomerMobileNumber,
-    setDjangoCurrentCustomerMobileNumber,
-  ] = useState();
   const [djangoCurrentCustomerId, setDjangoCurrentCustomerId] = useState();
-  const [
-    djangoCurrentCustomerFullName,
-    setDjangoCurrentCustomerFullName,
-  ] = useState();
-
-  const [djangoIsSuperUser, setDjangoIsSuperUser] = useState(false);
-
+  const [djangoIsSuperUser, setDjangoIsSuperUser] = useState();
+  const [djangoIsAuthenticated, setDjangoIsAuthenticated] = useState();
   useEffect(() => {
     let isMounted = true;
     if (isMounted) {
-      setDjangoCurrentUser(currentUser);
-      setDjangoCurrentCustomerFirstName(currentCustomerFirstName);
-      setDjangoCurrentCustomerLastName(currentCustomerLastName);
       setDjangoCurrentCustomerId(currentCustomerId);
-      setDjangoCurrentCustomerMobileNumber(currentCustomerMobileNumber);
-      setDjangoCurrentCustomerFullName(
-        `${currentCustomerFirstName} ${currentCustomerLastName}`
-      );
       setDjangoIsSuperUser(isSuperUser);
+      setDjangoIsAuthenticated(isAuthenticated);
     }
 
     return () => {
@@ -43,12 +18,8 @@ const GetCurrentCustomer = () => {
   }, []);
 
   return {
-    djangoCurrentCustomerFirstName,
-    djangoCurrentCustomerLastName,
-    djangoCurrentCustomerMobileNumber,
     djangoCurrentCustomerId,
-    djangoCurrentUser,
-    djangoCurrentCustomerFullName,
+    djangoIsAuthenticated,
     djangoIsSuperUser,
   };
 };

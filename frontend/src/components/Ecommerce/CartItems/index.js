@@ -11,7 +11,7 @@ const CartItems = () => {
     selectedItemToggle,
     cartDisplayProducts,
     processCart,
-    djangoCurrentUser,
+    isAuthenticated,
     isLoading,
     noSelected,
   } = CartItemsLogic();
@@ -77,7 +77,7 @@ const CartItems = () => {
                     <div
                       className="quantity-remove ripple"
                       onClick={() =>
-                        processCart(id, price, "remove", djangoCurrentUser)
+                        processCart(id, price, "remove", isAuthenticated)
                       }
                     >
                       <i className="fas fa-minus"></i>
@@ -86,7 +86,7 @@ const CartItems = () => {
                     <div
                       className="quantity-add ripple"
                       onClick={() =>
-                        processCart(id, price, "add", djangoCurrentUser)
+                        processCart(id, price, "add", isAuthenticated)
                       }
                     >
                       <i className="fas fa-plus"></i>

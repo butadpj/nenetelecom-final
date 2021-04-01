@@ -18,7 +18,6 @@ const Checkout = () => {
     handleCustomerInfoChange,
     handleShippingInfoChange,
     handleSubmit,
-    djangoCurrentUser,
     isFormComplete,
     gcashInfo,
     showGcashInfo,
@@ -33,6 +32,7 @@ const Checkout = () => {
     errorMessage,
     totalCartPrice,
     testPush,
+    isAuthenticated,
   } = CheckoutLogic();
 
   let f_totalCartPrice = Number(totalCartPrice).toLocaleString();
@@ -100,7 +100,8 @@ const Checkout = () => {
             </div>
             <div className="billing-info">
               <form className="billing-info-form" onSubmit={handleSubmit}>
-                {djangoCurrentUser === "AnonymousUser" ? (
+                {/* Show customer info form if user is not logged in*/}
+                {!isAuthenticated ? (
                   <>
                     <section className="customer-info">
                       <h3 className="title">Customer Info</h3>
