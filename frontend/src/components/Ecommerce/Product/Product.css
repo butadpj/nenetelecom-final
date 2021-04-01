@@ -39,7 +39,6 @@
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
-  text-transform: capitalize;
   margin-bottom: 0.3em;
 }
 
