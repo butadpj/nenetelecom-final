@@ -7,6 +7,7 @@ import Button from "../../../Button";
 const NavbottomLogic = () => {
   const [showSearch, setShowSearch] = useState(false);
   const [showNav, setShowNav] = useState(false);
+  const [showTalkSellerModal, setShowTalkSellerModal] = useState(false);
 
   const {
     djangoCurrentUser,
@@ -104,6 +105,14 @@ const NavbottomLogic = () => {
     );
   };
 
+  const handleShowTalkSellerModal = () => {
+    setShowTalkSellerModal(true);
+  };
+
+  const handleCloseTalkSellerModal = () => {
+    setShowTalkSellerModal(false);
+  };
+
   return {
     showSearch,
     showNav,
@@ -113,6 +122,9 @@ const NavbottomLogic = () => {
     handleNavClose,
     djangoIsSuperUser,
     userSectionHandler,
+    showTalkSellerModal,
+    handleShowTalkSellerModal,
+    handleCloseTalkSellerModal,
   };
 };
 
