@@ -6,7 +6,7 @@
   margin: 0.8em 0;
 }
 
-.panel-group a {
+.panel-group > * {
   text-decoration: none;
   width: min(90%, 40rem);
   cursor: pointer;

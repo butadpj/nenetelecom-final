@@ -4,22 +4,26 @@ import "./Navbottom.css";
 import NavbottomLogic from "./NavbottomLogic";
 import { Link } from "react-router-dom";
 import { CartItemContext } from "../../../../context/CartItemContext";
-import closeIcon from "../../../../assets/svgs/close-dark.svg";
-
+import closeIconDark from "../../../../assets/svgs/close-dark.svg";
+import closeIconRed from "../../../../assets/svgs/close.svg";
+import ModalWrapper from "../../../../components/Ecommerce/ModalWrapper";
 import PanelGroup from "../../../../components/Ecommerce/PanelGroup";
 import PanelTab from "../../../../components/Ecommerce/PanelGroup/PanelTab";
 import SearchProductForm from "../../SearchProductForm";
 
 const Navbottom = ({ link }) => {
   const {
+    isSuperUser,
     showSearch,
     showNav,
     handleSearchShow,
     handleSearchClose,
     handleNavShow,
     handleNavClose,
-    djangoIsSuperUser,
     userSectionHandler,
+    showTalkSellerModal,
+    handleShowTalkSellerModal,
+    handleCloseTalkSellerModal,
   } = NavbottomLogic();
 
   const [state] = useContext(CartItemContext);
@@ -57,18 +61,18 @@ const Navbottom = ({ link }) => {
         </ul>
       </div>
       {showNav ? (
-        <div className="nav-content">
+        <section className="nav-content">
           <div className="icon-container">
             <img
-              className="close-icon"
-              src={closeIcon}
+              className="close-icon-dark"
+              src={closeIconDark}
               alt="close-dark"
               onClick={handleNavClose}
             />
           </div>
-          <div className="user-container">
+          <main className="user-container">
             <div className="user-section">{userSectionHandler()}</div>
-          </div>
+          </main>
           <div className="line-wrapper">
             <hr />
           </div>
@@ -83,7 +87,6 @@ const Navbottom = ({ link }) => {
                 spanText="Soon..."
               />
             </Link>
-
             <Link to="/store/my-orders">
               <PanelTab
                 cName="my-orders"
@@ -94,8 +97,7 @@ const Navbottom = ({ link }) => {
                 text="My Orders"
               />
             </Link>
-
-            {djangoIsSuperUser === "True" ? (
+            {isSuperUser ? (
               <a href="/admin" target="_blank">
                 <PanelTab
                   cName="admin-panel"
@@ -111,45 +113,66 @@ const Navbottom = ({ link }) => {
             <hr />
           </div>
           <PanelGroup>
-            <a href="https://www.facebook.com/nenetelecom" target="_blank">
-              <PanelTab
-                cName="chat-with"
-                bg="dark"
-                icon={<i className="fas fa-comments"></i>}
-                text="Chat with our customer specialist"
-              />
-            </a>
-            <a href="#">
-              <PanelTab
-                cName="faq"
-                bg="dark"
-                icon={<i className="fas fa-question-circle"></i>}
-                text="Frequently Asked Questions"
-              />
-            </a>
-            <a href="#">
-              <PanelTab
-                cName="report"
-                bg="dark"
-                icon={<i className="fas fa-bug"></i>}
-                text="Report a problem"
-              />
-            </a>
+            <PanelTab
+              cName="chat-with"
+              bg="dark"
+              icon={<i className="fas fa-phone-alt"></i>}
+              text="Talk with our seller"
+              functionality={handleShowTalkSellerModal}
+            />
+            <PanelTab
+              cName="faq"
+              bg="dark"
+              icon={<i className="fas fa-question-circle"></i>}
+              text="Frequently Asked Questions"
+            />
+            <PanelTab
+              cName="report"
+              bg="dark"
+              icon={<i className="fas fa-bug"></i>}
+              text="Report a problem"
+            />
           </PanelGroup>
-        </div>
+        </section>
       ) : null}
       {showSearch ? (
         <div className="search-content">
           <div className="content-wrapper">
             <SearchProductForm />
             <img
-              className="close-icon"
-              src={closeIcon}
+              className="close-icon-dark"
+              src={closeIconDark}
               alt="close-dark"
               onClick={handleSearchClose}
             />
           </div>
         </div>
+      ) : null}
+      {showTalkSellerModal ? (
+        <ModalWrapper>
+          <main className="talk-seller-modal">
+            <section className="info">
+              <h4>Select a number to call: </h4>
+              <div className="numbers">
+                <p>
+                  Smart: <a href="tel: +639206796099">0920 679 6099</a>
+                </p>
+
+                <p>
+                  Globe: <a href="tel: +639151171197">0915 117 1197 </a>
+                </p>
+              </div>
+            </section>
+
+            <div className="modal-close-button">
+              <img
+                src={closeIconRed}
+                alt="close-red"
+                onClick={handleCloseTalkSellerModal}
+              />
+            </div>
+          </main>
+        </ModalWrapper>
       ) : null}
     </>
   );

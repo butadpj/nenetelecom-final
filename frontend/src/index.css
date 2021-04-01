@@ -56,6 +56,17 @@ body {
   background: var(--shadeLightBlue);
 }
 
+.line-wrapper {
+  width: min(90%, 40rem);
+  display: block;
+  margin: 0 auto;
+}
+
+.line-wrapper hr {
+  height: 0.15rem;
+  background: var(--shadeLightDark);
+}
+
 @keyframes fadeInOpacityHeight {
   0% {
     max-height: 0%;

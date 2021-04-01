@@ -4,17 +4,16 @@ import "./Navtop.css";
 import User from "../../../../components/Ecommerce/User/";
 import Filter from "../../../../components/Ecommerce/Filter/";
 import navLogo from "../../../../assets/images/Initials-dark-store.webp";
-import userImage from "../../../../assets/images/profile.webp";
 import guestUserImage from "../../../../assets/svgs/guest_user.svg";
-import GetCurrentCustomer from "../../../../hooks/GetCurrentCustomer";
-
+import { getCustomerInfo } from "../../../../hooks/query/getCustomerInfo";
 import { Link } from "react-router-dom";
 
 const Navtop = ({ url }) => {
   const {
-    djangoCurrentUser,
-    djangoCurrentCustomerFirstName,
-  } = GetCurrentCustomer();
+    customerFirstName,
+    customerDisplayPicture,
+    isAuthenticated,
+  } = getCustomerInfo();
 
   return (
     <div className="nav-top">
@@ -24,13 +23,13 @@ const Navtop = ({ url }) => {
             <img src={navLogo} alt="" />
           </Link>
           <User
-            userName={
-              djangoCurrentUser === "AnonymousUser"
-                ? "Guest"
-                : djangoCurrentCustomerFirstName
-            }
+            userName={isAuthenticated ? customerFirstName : "Guest"}
             userImage={
-              djangoCurrentUser === "AnonymousUser" ? guestUserImage : userImage
+              isAuthenticated
+                ? !customerDisplayPicture
+                  ? guestUserImage
+                  : customerDisplayPicture
+                : guestUserImage
             }
           />
         </div>

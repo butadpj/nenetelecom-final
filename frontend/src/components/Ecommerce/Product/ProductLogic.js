@@ -3,6 +3,7 @@ import { CartItemContext } from "../../../context/CartItemContext";
 import { ProductContext } from "../../../context/ProductContext";
 import GetCurrentCustomer from "../../../hooks/GetCurrentCustomer";
 import { getCustomerBag } from "../../../hooks/query/getCustomerBag";
+import { getCustomerInfo } from "../../../hooks/query/getCustomerInfo";
 
 const ProductLogic = () => {
   const [showDetails, setShowDetails] = useState(false);
@@ -10,8 +11,9 @@ const ProductLogic = () => {
   const [showAddProductModal, setShowAddProductModal] = useState(false);
   const [cartItemState, cartItemDispatch] = useContext(CartItemContext);
   const [productState] = useContext(ProductContext);
-  const { djangoCurrentUser, djangoCurrentCustomerId } = GetCurrentCustomer();
+  const { djangoCurrentCustomerId } = GetCurrentCustomer();
   const { customerBag } = getCustomerBag();
+  const { isAuthenticated } = getCustomerInfo();
 
   let customerBagId;
   customerBag.map((bag) => (customerBagId = bag.id));
@@ -259,8 +261,8 @@ const ProductLogic = () => {
     }
   };
 
-  const processCart = (selectedProduct, price, action, user) => {
-    if (user === "AnonymousUser") {
+  const processCart = (selectedProduct, price, action, isAuthenticated) => {
+    if (!isAuthenticated) {
       processGuestCart(selectedProduct, price, action);
     } else {
       processAuthenticatedCart(selectedProduct, price, action);
@@ -270,7 +272,7 @@ const ProductLogic = () => {
   const handleShowAddProductModal = (selectedProduct, price, action) => {
     setShowAddProductModal(true);
 
-    processCart(selectedProduct, price, action, djangoCurrentUser);
+    processCart(selectedProduct, price, action, isAuthenticated);
   };
 
   const handleCloseAddProductModal = () => {

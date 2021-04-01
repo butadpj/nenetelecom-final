@@ -1,7 +1,7 @@
 .ecommerce .nav-bottom {
   position: fixed;
   bottom: 0;
-  z-index: 100;
+  z-index: 500;
   height: 8vh;
   width: 100%;
   background: var(--light);
@@ -9,6 +9,7 @@
   align-items: center;
   justify-content: center;
   padding: 1em 0;
+  border-top: 1px solid var(--dark);
 }
 
 .ecommerce .nav-bottom ul {
@@ -78,19 +79,18 @@
 .ecommerce .nav-content {
   position: fixed;
   bottom: 8vh;
-  z-index: 90;
+  z-index: 100;
   background: var(--E-bg);
   width: 100%;
   height: 92vh;
   animation: fadeInOpacityHeight ease 0.4s;
   overflow-y: scroll;
-  border-bottom: 1px solid var(--dark);
 }
 
 .ecommerce .search-content {
   position: fixed;
   bottom: 8vh;
-  z-index: 90;
+  z-index: 100;
   background: var(--light);
   width: 100%;
   height: 12vh;
@@ -98,7 +98,6 @@
   align-items: center;
   justify-content: center;
   animation: fadeInOpacityHeightSearch ease 0.4s;
-  border-bottom: 1px solid var(--dark);
 }
 
 .ecommerce .search-content .content-wrapper {
@@ -135,14 +134,13 @@
   padding: 1em 0;
 }
 
-.ecommerce .nav-content .close-icon,
-.ecommerce .search-content .close-icon {
+.ecommerce .close-icon-dark {
   display: block;
   margin: 0 0 0 auto;
-}
-.nav-content .close-icon:hover,
-.search-content .close-icon:hover {
   cursor: pointer;
+}
+
+.ecommerce .close-icon-dark:hover {
   filter: brightness(150%);
 }
 
@@ -216,15 +214,32 @@
   box-shadow: var(--box-shadow);
 }
 
-.line-wrapper {
-  width: min(90%, 40rem);
-  display: block;
-  margin: 0 auto;
+.ecommerce .talk-seller-modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: min(90%, 30rem);
+  transform: translate(-50%, -50%);
+  background: var(--light);
 }
 
-.line-wrapper hr {
-  height: 0.15rem;
-  background: var(--shadeLightDark);
+.talk-seller-modal .info {
+  padding: 1em;
+  text-align: center;
+  font-weight: 600;
+  color: var(--dark);
+}
+
+.talk-seller-modal .info > * {
+  margin: 1em 0;
+}
+
+.talk-seller-modal .info .numbers > * {
+  margin: 0.3em 0;
+}
+
+.info .numbers p a {
+  color: var(--shadeBlue);
 }
 
 @keyframes fadeInOpacity {
