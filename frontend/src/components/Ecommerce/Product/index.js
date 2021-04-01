@@ -45,7 +45,20 @@ const Product = () => {
               .toLowerCase()
               .replace(/\s+/g, " ")
               .trim();
-            let price = product.price.toLocaleString();
+            let price = `${Number(product.price).toLocaleString()}.00`;
+            const highlightSearchMatch = (queryClassname) => {
+              document
+                .querySelectorAll(`${queryClassname}`)
+                .forEach((element) => {
+                  let result = element.textContent.replace(
+                    new RegExp(input, "gi"),
+                    (match) => `<mark>${match}</mark>`
+                  );
+                  element.innerHTML = result;
+
+                  console.log(result);
+                });
+            };
             if (!searchInput) {
               return product;
             }
@@ -54,6 +67,9 @@ const Product = () => {
               condition.includes(input) ||
               price.includes(input)
             ) {
+              highlightSearchMatch(".product .product-name");
+              highlightSearchMatch(".product .condition");
+              highlightSearchMatch(".product .product-price .current");
               return product;
             }
           })
