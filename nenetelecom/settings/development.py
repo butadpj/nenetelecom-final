@@ -87,5 +87,5 @@ STATIC_ROOT = os.path.join(BASE_DIR, "server_public")
 
 
 MEDIA_URL = '/images/uploads/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'public/REACT/images/uploads')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'public/uploads/')
 
