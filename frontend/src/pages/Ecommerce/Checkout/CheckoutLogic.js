@@ -1,17 +1,17 @@
 import { useState, useContext, useEffect } from "react";
 import CartItemsLogic from "../../../components/Ecommerce/CartItems/CartItemsLogic";
 import { CartItemContext } from "../../../context/CartItemContext";
-import GetCurrentCustomer from "../../../hooks/GetCurrentCustomer";
 import { getCustomersData } from "../../../hooks/data/getCustomersData";
+import { getCustomerInfo } from "../../../hooks/query/getCustomerInfo";
 import PushNotif from "../../../hooks/PushNotif";
 
 const CheckoutLogic = () => {
   const {
-    djangoCurrentUser,
-    djangoCurrentCustomerFirstName,
-    djangoCurrentCustomerLastName,
-    djangoCurrentCustomerMobileNumber,
-  } = GetCurrentCustomer();
+    isAuthenticated,
+    customerFirstName,
+    customerLastName,
+    customerMobileNumber,
+  } = getCustomerInfo();
 
   const { testPush } = PushNotif();
   const { customersData } = getCustomersData();
@@ -90,6 +90,7 @@ const CheckoutLogic = () => {
     setAlertModal(true);
   };
 
+  // Alert modal timer
   useEffect(() => {
     let isMounted = true;
 
@@ -103,7 +104,6 @@ const CheckoutLogic = () => {
           const timer = () => {
             setTime(time - 1);
           };
-
           myTimer = setInterval(timer, 1000);
         }
       }
@@ -271,7 +271,8 @@ const CheckoutLogic = () => {
 
     checkValidity(input, value);
 
-    if (djangoCurrentUser === "AnonymousUser") {
+    // If user is not logged in
+    if (!isAuthenticated) {
       setCustomerInfo({ ...customerInfo, [input]: value });
     }
   };
@@ -280,11 +281,11 @@ const CheckoutLogic = () => {
     let input = e.target.name;
     let value = e.target.value;
 
-    if (djangoCurrentUser !== "AnonymousUser") {
+    if (isAuthenticated) {
       let userInfo = {
-        firstName: djangoCurrentCustomerFirstName,
-        lastName: djangoCurrentCustomerLastName,
-        mobileNumber: djangoCurrentCustomerMobileNumber,
+        firstName: customerFirstName,
+        lastName: customerLastName,
+        mobileNumber: customerMobileNumber,
       };
       setCustomerInfo(userInfo);
     }
@@ -332,7 +333,6 @@ const CheckoutLogic = () => {
     handleCustomerInfoChange,
     handleShippingInfoChange,
     handleSubmit,
-    djangoCurrentUser,
     isFormComplete,
     gcashInfo,
     showGcashInfo,
@@ -347,6 +347,7 @@ const CheckoutLogic = () => {
     errorMessage,
     totalCartPrice,
     testPush,
+    isAuthenticated,
   };
 };
 

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import GetCurrentCustomer from "../../../../hooks/GetCurrentCustomer";
-import profileImg from "../../../../assets/images/profile.webp";
+import { getCustomerInfo } from "../../../../hooks/query/getCustomerInfo";
 import guestImg from "../../../../assets/svgs/guest_user.svg";
 import Button from "../../../Button";
 
@@ -8,13 +7,13 @@ const NavbottomLogic = () => {
   const [showSearch, setShowSearch] = useState(false);
   const [showNav, setShowNav] = useState(false);
   const [showTalkSellerModal, setShowTalkSellerModal] = useState(false);
-
   const {
-    djangoCurrentUser,
-    djangoCurrentCustomerFullName,
-    djangoCurrentCustomerMobileNumber,
-    djangoIsSuperUser,
-  } = GetCurrentCustomer();
+    customerFullName,
+    customerMobileNumber,
+    customerDisplayPicture,
+    isAuthenticated,
+    isSuperUser,
+  } = getCustomerInfo();
 
   const handleNavShow = () => {
     setShowNav(true);
@@ -43,10 +42,33 @@ const NavbottomLogic = () => {
   };
 
   const userSectionHandler = () => {
-    if (djangoCurrentUser === "AnonymousUser") {
+    let authenticatedImage = (
+      <img
+        src={!customerDisplayPicture ? guestImg : customerDisplayPicture}
+        alt="profile-img"
+        width="70"
+        height="70"
+      />
+    );
+
+    let authenticatedAction = (
+      <div className="action">
+        <div className="edit">
+          <Button text="Edit Info" />
+        </div>
+        <div className="logout">
+          <a href="/store/accounts/logout">
+            <Button text="Logout" />
+          </a>
+        </div>
+      </div>
+    );
+
+    // If user is not logged in
+    if (!isAuthenticated) {
       return (
         <>
-          <img src={guestImg} alt="profile-img" width="60" />
+          <img src={guestImg} alt="profile-img" width="70" />
           <div className="info">
             <h4 className="info-name">Guest User</h4>
             <p className="info-number"></p>
@@ -62,45 +84,29 @@ const NavbottomLogic = () => {
       );
     }
 
-    if (djangoIsSuperUser === "True") {
+    // If user is an admin
+    if (isSuperUser) {
       return (
         <>
-          <img src={profileImg} alt="profile-img" width="60" />
+          {authenticatedImage}
           <div className="info">
-            <h4 className="info-name">{djangoCurrentCustomerFullName} (🔑)</h4>
-            <p className="info-number">{djangoCurrentCustomerMobileNumber}</p>
+            <h4 className="info-name">{customerFullName} (🔑)</h4>
+            <p className="info-number">{customerMobileNumber}</p>
           </div>
-          <div className="action">
-            <div className="edit">
-              <Button text="Edit Info" />
-            </div>
-            <div className="logout">
-              <a href="/store/accounts/logout">
-                <Button text="Logout" />
-              </a>
-            </div>
-          </div>
+          {authenticatedAction}
         </>
       );
     }
 
+    // If user is logged in
     return (
       <>
-        <img src={profileImg} alt="profile-img" width="60" />
+        {authenticatedImage}
         <div className="info">
-          <h4 className="info-name">{djangoCurrentCustomerFullName}</h4>
-          <p className="info-number">{djangoCurrentCustomerMobileNumber}</p>
+          <h4 className="info-name">{customerFullName}</h4>
+          <p className="info-number">{customerMobileNumber}</p>
         </div>
-        <div className="action">
-          <div className="edit">
-            <Button text="Edit Info" />
-          </div>
-          <div className="logout">
-            <a href="/store/accounts/logout">
-              <Button text="Logout" />
-            </a>
-          </div>
-        </div>
+        {authenticatedAction}
       </>
     );
   };
@@ -114,13 +120,13 @@ const NavbottomLogic = () => {
   };
 
   return {
+    isSuperUser,
     showSearch,
     showNav,
     handleSearchShow,
     handleSearchClose,
     handleNavShow,
     handleNavClose,
-    djangoIsSuperUser,
     userSectionHandler,
     showTalkSellerModal,
     handleShowTalkSellerModal,

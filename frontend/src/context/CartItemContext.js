@@ -3,7 +3,7 @@ import { reducer } from "../hooks/cartItemReducer";
 import { getCustomerBag } from "../hooks/query/getCustomerBag";
 import { getCustomerOrder } from "../hooks/query/getCustomerOrder";
 import { getCookieCart } from "../hooks/data/getCookieCart";
-import GetCurrentCustomer from "../hooks/GetCurrentCustomer";
+import { getCustomerInfo } from "../hooks/query/getCustomerInfo";
 
 export const CartItemContext = createContext();
 
@@ -17,7 +17,7 @@ const initialState = {
 
 const CartItemContextProvider = (props) => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const { djangoCurrentUser } = GetCurrentCustomer();
+  const { isAuthenticated } = getCustomerInfo();
   const { customerBagItem } = getCustomerBag();
   const { cookieCart } = getCookieCart();
   const { customerOrderDisplay } = getCustomerOrder();
@@ -43,7 +43,7 @@ const CartItemContextProvider = (props) => {
   };
 
   //Set the initial source of truth
-  if (djangoCurrentUser === "AnonymousUser") {
+  if (!isAuthenticated) {
     //If guest user
     state.cartProducts = cookieCart;
     state.totalCartItem = get_total_items(state.cartProducts);

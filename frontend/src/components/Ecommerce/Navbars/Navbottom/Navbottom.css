@@ -1,7 +1,7 @@
 .ecommerce .nav-bottom {
   position: fixed;
   bottom: 0;
-  z-index: 100;
+  z-index: 500;
   height: 8vh;
   width: 100%;
   background: var(--light);
@@ -9,6 +9,7 @@
   align-items: center;
   justify-content: center;
   padding: 1em 0;
+  border-top: 1px solid var(--dark);
 }
 
 .ecommerce .nav-bottom ul {
@@ -84,7 +85,6 @@
   height: 92vh;
   animation: fadeInOpacityHeight ease 0.4s;
   overflow-y: scroll;
-  border-bottom: 1px solid var(--dark);
 }
 
 .ecommerce .search-content {
@@ -98,7 +98,6 @@
   align-items: center;
   justify-content: center;
   animation: fadeInOpacityHeightSearch ease 0.4s;
-  border-bottom: 1px solid var(--dark);
 }
 
 .ecommerce .search-content .content-wrapper {
@@ -225,7 +224,7 @@
 }
 
 .talk-seller-modal .info {
-  padding: 1em 0;
+  padding: 1em;
   text-align: center;
   font-weight: 600;
   color: var(--dark);

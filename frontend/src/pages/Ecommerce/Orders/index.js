@@ -65,6 +65,15 @@ const Orders = () => {
                 <div className="order-products">
                   {order_products.map((item) => {
                     const { product } = item;
+                    if (!product) {
+                      return (
+                        <div className="product" key={order}>
+                          <h2 style={{ color: "var(--shadeRed)" }}>
+                            Product-deleted
+                          </h2>
+                        </div>
+                      );
+                    }
                     return (
                       <div className="product" key={product.id}>
                         <h2>{product.id}</h2>

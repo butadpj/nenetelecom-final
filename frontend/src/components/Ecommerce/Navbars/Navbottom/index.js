@@ -13,13 +13,13 @@ import SearchProductForm from "../../SearchProductForm";
 
 const Navbottom = ({ link }) => {
   const {
+    isSuperUser,
     showSearch,
     showNav,
     handleSearchShow,
     handleSearchClose,
     handleNavShow,
     handleNavClose,
-    djangoIsSuperUser,
     userSectionHandler,
     showTalkSellerModal,
     handleShowTalkSellerModal,
@@ -87,7 +87,6 @@ const Navbottom = ({ link }) => {
                 spanText="Soon..."
               />
             </Link>
-
             <Link to="/store/my-orders">
               <PanelTab
                 cName="my-orders"
@@ -98,8 +97,7 @@ const Navbottom = ({ link }) => {
                 text="My Orders"
               />
             </Link>
-
-            {djangoIsSuperUser === "True" ? (
+            {isSuperUser ? (
               <a href="/admin" target="_blank">
                 <PanelTab
                   cName="admin-panel"

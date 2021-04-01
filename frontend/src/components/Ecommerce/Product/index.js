@@ -38,24 +38,22 @@ const Product = () => {
         products
           // Search filter
           .filter((product) => {
-            let input = searchInput.toLowerCase();
-            let name = product.name.toLowerCase();
-            let brand = product.brand.toLowerCase();
-            let condition = product.condition.toLowerCase();
+            let input = searchInput.toLowerCase().replace(/\s+/g, " ").trim();
+            let name = product.name.toLowerCase().replace(/\s+/g, " ").trim();
+            let brand = product.brand.toLowerCase().replace(/\s+/g, " ").trim();
+            let condition = product.condition
+              .toLowerCase()
+              .replace(/\s+/g, " ")
+              .trim();
             let price = product.price.toLocaleString();
             if (!searchInput) {
               return product;
             }
-            if (name.includes(input)) {
-              return product;
-            }
-            if (brand.includes(input)) {
-              return product;
-            }
-            if (condition.includes(input)) {
-              return product;
-            }
-            if (price.includes(input)) {
+            if (
+              name.includes(input) ||
+              condition.includes(input) ||
+              price.includes(input)
+            ) {
               return product;
             }
           })
