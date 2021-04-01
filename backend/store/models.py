@@ -34,6 +34,13 @@ class Product(models.Model):
     description = models.TextField(max_length=1024, null=True, blank=True)
     date_posted = models.DateTimeField(auto_now_add=True, null=True)
 
+    def save(self):
+    
+        self.name = re.sub(' +', ' ', self.name)
+        self.brand = re.sub(' +', ' ', self.brand)
+        super().save()
+
+
 
     def __str__(self):
         return self.name
