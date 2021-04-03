@@ -3,6 +3,7 @@ import "./CustomerInfo.css";
 import CustomerInfoLogic from "./CustomerInfoLogic";
 import Button from "../../../Button";
 import Alert from "../../../../components/Ecommerce/Alert";
+import Loader from "../../../../components/Ecommerce/Loader";
 
 const CustomerInfo = () => {
   const {
@@ -16,6 +17,7 @@ const CustomerInfo = () => {
     saveNewCustomerInfo,
     showAlert,
     alertInfo,
+    isLoading,
   } = CustomerInfoLogic();
 
   return (
@@ -79,6 +81,7 @@ const CustomerInfo = () => {
           text={alertInfo.text}
         />
       ) : null}
+      {isLoading ? <Loader /> : null}
     </section>
   );
 };

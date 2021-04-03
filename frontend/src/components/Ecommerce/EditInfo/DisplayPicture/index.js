@@ -6,6 +6,7 @@ import GetCurrentCustomer from "../../../../hooks/GetCurrentCustomer";
 import Button from "../../../../components/Button";
 import { useHandleShowAlert } from "../../../../hooks/useHandleShowAlert";
 import Alert from "../../../../components/Ecommerce/Alert";
+import Loader from "../../../../components/Ecommerce/Loader";
 
 const DisplayPicture = () => {
   const [state, dispatch] = useContext(CustomerInfoContext);
@@ -18,6 +19,7 @@ const DisplayPicture = () => {
     name: null,
   });
   const [showImagePreviewModal, setShowImagePreviewModal] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   let customerDisplayPicture = state.customerInfo.displayPicture;
   let imagePreviewModal = useRef(null);
 
@@ -41,7 +43,7 @@ const DisplayPicture = () => {
   };
 
   const uploadNewImage = () => {
-    console.log(uploadImage.file);
+    setIsLoading(true);
     const formData = new FormData();
     formData.append("display_picture", uploadImage.file, uploadImage.name);
 
@@ -54,6 +56,7 @@ const DisplayPicture = () => {
     })
       .then((res) => res.json())
       .then((data) => {
+        setIsLoading(false);
         dispatch({
           type: "EDIT_DISPLAY_PICTURE",
           payload: {
@@ -121,6 +124,7 @@ const DisplayPicture = () => {
           text={alertInfo.text}
         />
       ) : null}
+      {isLoading ? <Loader /> : null}
     </>
   );
 };
