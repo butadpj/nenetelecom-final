@@ -212,15 +212,6 @@
   box-shadow: var(--box-shadow);
 }
 
-.ecommerce .talk-seller-modal {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: min(90%, 30rem);
-  transform: translate(-50%, -50%);
-  background: var(--light);
-}
-
 .talk-seller-modal .info {
   padding: 1em;
   text-align: center;

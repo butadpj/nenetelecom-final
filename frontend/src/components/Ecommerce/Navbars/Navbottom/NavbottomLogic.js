@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { getCustomerInfo } from "../../../../hooks/query/getCustomerInfo";
+import { CustomerInfoContext } from "../../../../context/CustomerInfoContext";
 import guestImg from "../../../../assets/svgs/guest_user.svg";
 import Button from "../../../Button";
 
@@ -7,13 +8,18 @@ const NavbottomLogic = () => {
   const [showSearch, setShowSearch] = useState(false);
   const [showNav, setShowNav] = useState(false);
   const [showTalkSellerModal, setShowTalkSellerModal] = useState(false);
-  const {
-    customerFullName,
-    customerMobileNumber,
-    customerDisplayPicture,
-    isAuthenticated,
-    isSuperUser,
-  } = getCustomerInfo();
+  const [showEditInfoModal, setShowEditInfoModal] = useState(false);
+
+  const { isAuthenticated, isSuperUser } = getCustomerInfo();
+
+  const [state] = useContext(CustomerInfoContext);
+
+  let customerFirstName = state.customerInfo.firstName;
+  let customerLastName = state.customerInfo.lastName;
+  let customerFullName = state.customerInfo.fullName;
+  let customerMobileNumber = state.customerInfo.mobileNumber;
+  let customerCompleteAddress = state.customerInfo.completeAddress;
+  let customerDisplayPicture = state.customerInfo.displayPicture;
 
   const handleNavShow = () => {
     setShowNav(true);
@@ -54,7 +60,7 @@ const NavbottomLogic = () => {
     let authenticatedAction = (
       <div className="action">
         <div className="edit">
-          <Button text="Edit Info" />
+          <Button text="Edit Info" functionality={handleShowEditInfoModal} />
         </div>
         <div className="logout">
           <a href="/store/accounts/logout">
@@ -119,7 +125,21 @@ const NavbottomLogic = () => {
     setShowTalkSellerModal(false);
   };
 
+  const handleShowEditInfoModal = () => {
+    setShowEditInfoModal(true);
+  };
+
+  const handleCloseEditInfoModal = () => {
+    setShowEditInfoModal(false);
+  };
+
   return {
+    customerFirstName,
+    customerLastName,
+    customerFullName,
+    customerMobileNumber,
+    customerDisplayPicture,
+    isAuthenticated,
     isSuperUser,
     showSearch,
     showNav,
@@ -131,6 +151,11 @@ const NavbottomLogic = () => {
     showTalkSellerModal,
     handleShowTalkSellerModal,
     handleCloseTalkSellerModal,
+    showEditInfoModal,
+    handleShowEditInfoModal,
+    handleCloseEditInfoModal,
+    guestImg,
+    Button,
   };
 };
 

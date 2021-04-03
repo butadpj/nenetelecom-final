@@ -1,0 +1,45 @@
+.modal-alert {
+  position: absolute;
+  width: min(65%, 30rem);
+  transform: translate(-50%, -50%);
+  background: var(--light);
+  padding: 0.5em;
+  box-shadow: var(--box-shadow);
+  font-size: 0.9em;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  animation: alertFadeIn 0.3s ease-in;
+}
+
+.modal-alert-center {
+  top: 50%;
+  left: 50%;
+}
+
+.modal-alert-top {
+  top: -10%;
+  left: 50%;
+}
+
+.modal-alert-bottom {
+  top: 110%;
+  left: 50%;
+}
+
+.modal-alert.success {
+  color: var(--shadeLightGreen);
+}
+
+.modal-alert.danger {
+  color: var(--shadeRed);
+}
+
+@keyframes alertFadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

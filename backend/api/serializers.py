@@ -25,6 +25,7 @@ class CustomerSerializer(serializers.ModelSerializer):
         # to get all fields and put it into single array
         fields = [field.name for field in model._meta.fields] 
         fields.insert(0, 'url') # push url field in index 0
+        fields.insert(2, 'full_name')
         fields.insert(3, 'au_mobile_number')
         fields.insert(4, 'au_first_name')
         fields.insert(5, 'au_last_name')

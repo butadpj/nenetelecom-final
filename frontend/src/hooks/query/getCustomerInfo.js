@@ -13,6 +13,7 @@ export const getCustomerInfo = () => {
   let customerLastName;
   let customerFullName;
   let customerMobileNumber;
+  let customerCompleteAddress;
   let customerDisplayPicture;
   let isAuthenticated;
   let isSuperUser;
@@ -22,10 +23,22 @@ export const getCustomerInfo = () => {
   );
 
   customer.map((data) => {
-    customerFirstName = data.au_first_name;
-    customerLastName = data.au_last_name;
-    customerMobileNumber = data.au_mobile_number;
-    customerDisplayPicture = data.display_picture;
+    if (
+      data.first_name ||
+      data.last_name ||
+      data.mobile_number ||
+      data.complete_address
+    ) {
+      customerFirstName = data.first_name;
+      customerLastName = data.last_name;
+      customerMobileNumber = data.mobile_number;
+      customerDisplayPicture = data.display_picture;
+    } else {
+      customerFirstName = data.au_first_name;
+      customerLastName = data.au_last_name;
+      customerMobileNumber = data.au_mobile_number;
+      customerDisplayPicture = data.au_display_picture;
+    }
   });
 
   customerFullName = `${customerFirstName} ${customerLastName}`;
@@ -43,6 +56,7 @@ export const getCustomerInfo = () => {
     customerLastName,
     customerFullName,
     customerMobileNumber,
+    customerCompleteAddress,
     customerDisplayPicture,
     isAuthenticated,
     isSuperUser,

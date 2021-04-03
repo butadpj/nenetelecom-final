@@ -1,0 +1,29 @@
+.edit-info-modal .customer-info button {
+  margin-top: 1em;
+}
+
+.edit-info-modal .customer-info .info {
+  margin-left: 0.5em;
+  font-size: 0.8em;
+  color: var(--shadeLightDark);
+}
+
+.edit-info-modal .customer-info .info > * {
+  margin: 0.5em 0;
+  display: flex;
+}
+
+.edit-info-modal .info .label {
+  font-weight: bold;
+}
+
+.edit-info-modal .info .complete-address .null-message {
+  font-style: italic;
+  color: var(--shadeRed);
+}
+
+.edit-info-modal .edit-action {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
