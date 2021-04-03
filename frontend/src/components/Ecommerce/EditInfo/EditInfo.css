@@ -1,0 +1,46 @@
+.edit-info-modal {
+  border-radius: 1rem;
+  padding: 0.5em;
+  padding-bottom: 1.2em;
+  height: auto;
+  max-height: 90%;
+}
+
+.edit-info-modal .modal-title {
+  text-align: center;
+  margin-bottom: 0.5em;
+  color: var(--dark);
+}
+
+.edit-info-modal .section-text {
+  color: var(--dark);
+}
+
+.edit-info-modal button {
+  padding: 0.5em 1.5em;
+  font-size: 0.7em;
+  display: block;
+  margin: 0 auto;
+  box-shadow: none;
+  border-radius: 2rem;
+}
+
+.edit-info-modal button span {
+  margin-right: 0.5em;
+}
+
+.edit-info-modal button:hover {
+  background: var(--dark);
+  color: var(--light);
+}
+
+.edit-info-modal .display-picture > *,
+.edit-info-modal .customer-info > * {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.edit-info-modal .display-picture,
+.edit-info-modal .customer-info {
+  font-size: 0.9em;
+}
