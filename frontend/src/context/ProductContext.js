@@ -1,5 +1,5 @@
 import React, { useReducer, createContext } from "react";
-import { reducer } from "../hooks/productReducer";
+import { reducer } from "../hooks/reducer/productReducer";
 import { getProducts } from "../hooks/query/getProducts";
 
 export const ProductContext = createContext();
