@@ -105,9 +105,9 @@ class Customer(models.Model):
     complete_address = models.CharField(max_length=100, null=True, blank=True)
     display_picture = models.ImageField(upload_to=display_picture_path, null=True, blank=True)
 
-    def save(self):
+    def save(self, *args, **kwargs):
+        super(Customer, self).save(*args, **kwargs)
         try:
-            super().save()
             img = Image.open(self.display_picture.path)
             if img.width > 100:
                 new_img = (100, 100)
