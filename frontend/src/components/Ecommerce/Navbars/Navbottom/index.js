@@ -10,9 +10,17 @@ import ModalWrapper from "../../../../components/Ecommerce/ModalWrapper";
 import PanelGroup from "../../../../components/Ecommerce/PanelGroup";
 import PanelTab from "../../../../components/Ecommerce/PanelGroup/PanelTab";
 import SearchProductForm from "../../SearchProductForm";
+import EditInfo from "../../../../components/Ecommerce/EditInfo";
 
 const Navbottom = ({ link }) => {
   const {
+    customerFirstName,
+    customerLastName,
+    customerFullName,
+    customerMobileNumber,
+    customerCompleteAddress,
+    customerDisplayPicture,
+    isAuthenticated,
     isSuperUser,
     showSearch,
     showNav,
@@ -24,6 +32,11 @@ const Navbottom = ({ link }) => {
     showTalkSellerModal,
     handleShowTalkSellerModal,
     handleCloseTalkSellerModal,
+    showEditInfoModal,
+    handleShowEditInfoModal,
+    handleCloseEditInfoModal,
+    guestImg,
+    Button,
   } = NavbottomLogic();
 
   const [state] = useContext(CartItemContext);
@@ -41,12 +54,14 @@ const Navbottom = ({ link }) => {
     <>
       <div className="nav-bottom">
         <ul ref={links}>
-          <li
-            className={`${showSearch ? "nav-search active" : "nav-search"}`}
-            onClick={handleSearchShow}
-          >
-            <i className="fas fa-search"></i>
-          </li>
+          <Link to="/store/home">
+            <li
+              className={`${showSearch ? "nav-search active" : "nav-search"}`}
+              onClick={handleSearchShow}
+            >
+              <i className="fas fa-search"></i>
+            </li>
+          </Link>
 
           <li
             className={`${showNav ? "nav-bars active" : "nav-bars"}`}
@@ -150,7 +165,7 @@ const Navbottom = ({ link }) => {
       ) : null}
       {showTalkSellerModal ? (
         <ModalWrapper>
-          <main className="talk-seller-modal">
+          <main className="talk-seller-modal modal-content">
             <section className="info">
               <h4>Select a number to call: </h4>
               <div className="numbers">
@@ -173,6 +188,9 @@ const Navbottom = ({ link }) => {
             </div>
           </main>
         </ModalWrapper>
+      ) : null}
+      {showEditInfoModal ? (
+        <EditInfo handleCloseEditInfoModal={handleCloseEditInfoModal} />
       ) : null}
     </>
   );
