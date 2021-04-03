@@ -20,7 +20,7 @@ const CustomerInfo = () => {
 
   return (
     <section className="customer-info">
-      <h5>Customer Info</h5>
+      <h5 className="section-text">Customer Info</h5>
       <div className="info">
         <div className="first-name">
           <span className="label">First name: </span>
