@@ -15,6 +15,7 @@
 
 .edit-info-modal .info .label {
   font-weight: bold;
+  margin-right: 0.3em;
 }
 
 .edit-info-modal .info .complete-address .null-message {
