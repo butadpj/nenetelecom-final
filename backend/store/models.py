@@ -140,6 +140,10 @@ class Customer(models.Model):
             pass
 
     @property
+    def full_name(self):
+        return (f'{self.user.first_name} {self.user.last_name}')
+
+    @property
     def au_mobile_number(self):
         return self.user.mobile_number
 
@@ -158,6 +162,8 @@ class Customer(models.Model):
     @property
     def customer_info(self):
         if self.user:
+            if self.first_name or self.last_name or self.mobile_number:
+                return (f'{self.first_name} {self.last_name} ({self.mobile_number})')
             return (f'{self.au_first_name} {self.au_last_name} ({self.au_mobile_number})')
     
         return (f'{self.first_name} {self.last_name} ({self.mobile_number})')
