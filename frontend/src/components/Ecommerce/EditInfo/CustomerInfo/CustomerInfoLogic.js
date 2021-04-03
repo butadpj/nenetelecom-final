@@ -9,6 +9,7 @@ const CustomerInfoLogic = () => {
   const { djangoCurrentCustomerId } = GetCurrentCustomer();
   const { alertInfo, showAlert, handleShowAlert } = useHandleShowAlert();
   const [state, dispatch] = useContext(CustomerInfoContext);
+  const [isLoading, setIsLoading] = useState(false);
 
   let customerFirstName = state.customerInfo.firstName;
   let customerLastName = state.customerInfo.lastName;
@@ -63,6 +64,7 @@ const CustomerInfoLogic = () => {
       }
     });
 
+    setIsLoading(true);
     fetch(`/api/customers/${djangoCurrentCustomerId}/`, {
       method: "PATCH",
       headers: {
@@ -77,6 +79,7 @@ const CustomerInfoLogic = () => {
     })
       .then((res) => res.json())
       .then((data) => {
+        setIsLoading(false);
         dispatch({
           type: "EDIT_CUSTOMER_INFO",
           payload: {
@@ -113,6 +116,7 @@ const CustomerInfoLogic = () => {
     saveNewCustomerInfo,
     showAlert,
     alertInfo,
+    isLoading,
   };
 };
 
