@@ -13,7 +13,7 @@ const CheckoutLogic = () => {
     customerMobileNumber,
   } = getCustomerInfo();
 
-  const { testPush } = PushNotif();
+  const { testPush, newOrderPush } = PushNotif();
   const { customersData } = getCustomersData();
   const { selectedItems } = CartItemsLogic();
 
@@ -320,7 +320,10 @@ const CheckoutLogic = () => {
       .then((data) => {
         console.log(data);
         showAlertModal();
-        testPush();
+        newOrderPush(
+          "New Order!!! Check it out",
+          "You've got new order from someone!"
+        );
       })
       .catch((err) => console.log(err));
   };
@@ -346,7 +349,6 @@ const CheckoutLogic = () => {
     validity,
     errorMessage,
     totalCartPrice,
-    testPush,
     isAuthenticated,
   };
 };
