@@ -39,10 +39,16 @@
 
 .edit-info-modal .upload-preview {
   text-align: center;
-  padding: 1em;
+  padding: 0.7em 0 1em 0;
   color: var(--light);
   background: var(--dark);
   border-radius: 1rem;
+}
+
+.edit-info-modal .upload-preview .name {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .edit-info-modal .upload-action {
@@ -53,6 +59,7 @@
 .edit-info-modal .upload-action button {
   background: var(--light);
   color: var(--dark);
+  font-size: 0.55em;
 }
 
 .edit-info-modal .upload-action button:hover {
