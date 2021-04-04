@@ -54,10 +54,9 @@ const Navbottom = ({ link }) => {
     <>
       <div className="nav-bottom">
         <ul ref={links}>
-          <Link to="/store/home">
+          <Link to="/store/home" onClick={handleSearchShow}>
             <li
               className={`${showSearch ? "nav-search active" : "nav-search"}`}
-              onClick={handleSearchShow}
             >
               <i className="fas fa-search"></i>
             </li>
