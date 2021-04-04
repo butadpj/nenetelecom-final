@@ -13,7 +13,7 @@ const PanelTab = ({
 }) => {
   return (
     <div
-      onClick={() => functionality()}
+      onClick={functionality ? () => functionality() : null}
       className={
         isSoon
           ? [`${cName} ${bg} ${txtColor} panel-tab soon`]
