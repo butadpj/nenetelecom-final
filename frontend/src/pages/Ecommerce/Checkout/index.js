@@ -31,7 +31,6 @@ const Checkout = () => {
     validity,
     errorMessage,
     totalCartPrice,
-    testPush,
     isAuthenticated,
   } = CheckoutLogic();
 

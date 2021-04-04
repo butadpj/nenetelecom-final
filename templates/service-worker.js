@@ -85,6 +85,7 @@ self.addEventListener("push", (event) => {
     body: body,
     icon: "../public/android-chrome-256x256.png",
     badge: "../public/badge.png",
+    sound: "../public/notification_tone.mp3",
     vibrate: [
       500,
       110,
