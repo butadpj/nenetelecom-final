@@ -59,21 +59,23 @@ const ImageSlider = ({ images, image_default }) => {
           <div className="slider-preview-wrapper">
             <div className="slider-preview">
               {images.map((image, index) => {
-                return (
-                  <img
-                    width="70"
-                    height="50"
-                    src={image}
-                    alt=""
-                    key={index}
-                    className={
-                      index === current
-                        ? "image-preview active"
-                        : "image-preview"
-                    }
-                    onClick={() => setCurrent(index)}
-                  />
-                );
+                if (image) {
+                  return (
+                    <img
+                      width="70"
+                      height="50"
+                      src={image}
+                      alt=""
+                      key={index}
+                      className={
+                        index === current
+                          ? "image-preview active"
+                          : "image-preview"
+                      }
+                      onClick={() => setCurrent(index)}
+                    />
+                  );
+                }
               })}
             </div>
           </div>
