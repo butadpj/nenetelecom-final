@@ -24,6 +24,16 @@ const Product = () => {
     searchInput,
   } = ProductLogic();
 
+  const highlightSearchMatch = (input, queryClassname) => {
+    document.querySelectorAll(`${queryClassname}`).forEach((element) => {
+      let result = element.textContent.replace(
+        new RegExp(input, "gi"),
+        (match) => `<mark>${match}</mark>`
+      );
+      element.innerHTML = result;
+    });
+  };
+
   // const { searchInput, handleSearchInput } = SearchProductFormLogic();
 
   useEffect(() => {
@@ -46,30 +56,19 @@ const Product = () => {
               .replace(/\s+/g, " ")
               .trim();
             let price = `${Number(product.price).toLocaleString()}.00`;
-            const highlightSearchMatch = (queryClassname) => {
-              document
-                .querySelectorAll(`${queryClassname}`)
-                .forEach((element) => {
-                  let result = element.textContent.replace(
-                    new RegExp(input, "gi"),
-                    (match) => `<mark>${match}</mark>`
-                  );
-                  element.innerHTML = result;
 
-                  console.log(result);
-                });
-            };
             if (!searchInput) {
               return product;
             }
             if (
               name.includes(input) ||
+              brand.includes(input) ||
               condition.includes(input) ||
               price.includes(input)
             ) {
-              highlightSearchMatch(".product .product-name");
-              highlightSearchMatch(".product .condition");
-              highlightSearchMatch(".product .product-price .current");
+              highlightSearchMatch(input, ".product .product-name");
+              highlightSearchMatch(input, ".product .condition");
+              highlightSearchMatch(input, ".product .product-price .current");
               return product;
             }
           })
