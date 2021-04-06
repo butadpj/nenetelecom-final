@@ -17,6 +17,18 @@ class Product(models.Model):
         (A, 'Accessories'),
     )  
 
+    S = 'Samsung'
+    I = 'Iphone'
+    V = 'Vivo'
+    O = 'Oppo'
+
+    BRAND = (
+        (S, 'Samsung'),
+        (I, 'Iphone'),
+        (V, 'Vivo'),
+        (O, 'Oppo')
+    )
+
     N = 'Brand new'
     U = 'Used'
 
@@ -24,10 +36,11 @@ class Product(models.Model):
         (N, 'Brand new'),
         (U, 'Used'),
     )
+    
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, verbose_name="product_id")
     category = models.CharField(max_length=30, null=False, choices=CATEGORY, default=CATEGORY[0][0])
-    brand = models.CharField(max_length=20, null=True, blank=True)
+    brand = models.CharField(max_length=20, choices=BRAND, null=True, blank=True)
     name = models.CharField(max_length=100, null=False)
     price = models.DecimalField(max_digits=10, null=True, decimal_places=2)
     condition = models.CharField(max_length=20, null=False, choices=CONDITION, default=CONDITION[0][0])
