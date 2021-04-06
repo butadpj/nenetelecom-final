@@ -2,7 +2,7 @@ from .development import *
 
 DEBUG = False
 
-ALLOWED_HOSTS = ['nenetelecom.pythonanywhere.com']
+ALLOWED_HOSTS = ['nenetelecom.pythonanywhere.com', 'www.nenetelecom.app', 'store.nenetelecom.app']
 
 DATABASES = {
     'default': {
