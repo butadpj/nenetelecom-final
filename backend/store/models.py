@@ -48,9 +48,11 @@ class Product(models.Model):
     date_posted = models.DateTimeField(auto_now_add=True, null=True)
 
     def save(self):
-    
-        self.name = re.sub(' +', ' ', self.name)
-        self.brand = re.sub(' +', ' ', self.brand)
+        try:
+            self.name = re.sub(' +', ' ', self.name)
+            self.brand = re.sub(' +', ' ', self.brand)
+        except:
+            pass
         super().save()
 
 
