@@ -56,14 +56,13 @@ class Product(models.Model):
         super().save()
 
 
-
     def __str__(self):
         return self.name
    
-
 def user_directory_path(instance, filename):
     # file will be uploaded to MEDIA_ROOT/product<id>/<filename>
     return 'phone_{0}/{1}'.format(instance.product.id, filename)
+
 class ProductImage(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, null=True, blank=True)
     image = models.ImageField(upload_to=user_directory_path, null=True, blank=True)
@@ -105,8 +104,22 @@ class ProductImage(models.Model):
     def __str__(self):
         return (f'{self.product}')
 
+class ProductVariation(models.Model):
+    S = 'Storage Size'
+    C = 'Color Family'
+
+    CATEGORY = (
+        (S, 'Storage Size'),
+        (C, 'Color Family'),
+    )  
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, null=True, blank=True)
+    category = models.CharField(max_length=30, null=False, blank=True, choices=CATEGORY, default=CATEGORY[0][0])
+    name = models.CharField(max_length=20, null=False, blank=True)
+    price = models.DecimalField(max_digits=10, null=True, blank=True, decimal_places=2)
 
 
+    def __str__(self):
+        return (f'{self.name}: {self.price}')
 
 def display_picture_path(instance, filename):
     # file will be uploaded to MEDIA_ROOT/customer<id>/<filename>

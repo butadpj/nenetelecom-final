@@ -8,7 +8,7 @@ class BagAdmin(admin.ModelAdmin):
 
 
 class BagItemAdmin(admin.ModelAdmin):
-    list_display = ['bag', 'product', 'quantity', 'total_price']
+    list_display = ['bag', 'product', 'quantity', 'total_price', 'variation_category', 'variation_name', 'variation_price',]
     readonly_fields=('bag', 'product', 'quantity', 'selected')
 
 
