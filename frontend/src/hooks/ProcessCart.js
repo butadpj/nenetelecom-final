@@ -1,15 +1,16 @@
 import { useContext } from "react";
-
+import { getCustomerBag } from "./query/getCustomerBag";
 import { CartItemContext } from "../context/CartItemContext";
 import GetCurrentCustomer from "./GetCurrentCustomer";
 
 const ProcessCart = () => {
   const [cartItemState, cartItemDispatch] = useContext(CartItemContext);
-
+  const { customerBag } = getCustomerBag();
   const { djangoCurrentCustomerId } = GetCurrentCustomer();
 
+  let customerBagId;
+  customerBag.map((bag) => (customerBagId = bag.id));
   let bagsUrl = "/api/bags/";
-
   let bagItemUrl = "/api/bag-item/";
 
   const guestCart = (selectedProduct, price, action) => {

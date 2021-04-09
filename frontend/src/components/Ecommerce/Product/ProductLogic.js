@@ -1,15 +1,10 @@
 import { useContext, useState } from "react";
 import { ProductContext } from "../../../context/ProductContext";
-import { getCustomerBag } from "../../../hooks/query/getCustomerBag";
 
 const ProductLogic = () => {
   const [showDetails, setShowDetails] = useState(false);
   const [detailData, setDetailData] = useState();
   const [productState] = useContext(ProductContext);
-  const { customerBag } = getCustomerBag();
-
-  let customerBagId;
-  customerBag.map((bag) => (customerBagId = bag.id));
 
   let products = productState.products;
   let isLoading = productState.isLoading;
