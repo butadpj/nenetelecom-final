@@ -1,0 +1,40 @@
+.ecommerce .add-product-modal {
+  background: var(--light);
+  width: min(60%, 15rem);
+  left: 50%;
+  top: 60%;
+  transform: translate(-50%, -50%);
+  padding: 0.8em 0.5em 0.5em 0.5em;
+  border-radius: 0.5em;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: relative;
+}
+
+.ecommerce .add-product-modal-show {
+  animation: fadeInPop ease 0.4s;
+}
+
+.ecommerce .add-product-modal-hidden {
+  animation: fadeOutPop ease 0.4s;
+}
+
+.ecommerce .modal-text {
+  font-size: 0.8em;
+  color: var(--shadeLightGreen);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1em;
+}
+
+.ecommerce .modal-text p {
+  margin-right: 0.5em;
+}
+
+.ecommerce .modal-go-cart-button {
+  font-size: 0.5em;
+  padding: 1em 1.2em;
+  margin-bottom: 1em;
+}

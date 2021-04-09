@@ -1,26 +1,20 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
 import "./Product.css";
 
 import defaultImage from "../../../assets/images/Default.png";
 import Button from "../../Button";
 import ProductLogic from "./ProductLogic";
-import ImageSlider from "../ImageSlider";
-import closeIcon from "../../../assets/svgs/close.svg";
 import Loader from "../../../components/Ecommerce/Loader";
-import ModalWrapper from "../../../components/Ecommerce/ModalWrapper";
+import ProductDetail from "./ProductDetail";
 
 const Product = () => {
   const {
-    handleShow,
+    handleShowProductDetails,
+    handleCloseProductDetails,
     products,
     isLoading,
     showDetails,
-    handleClose,
     detailData,
-    handleShowAddProductModal,
-    handleCloseAddProductModal,
-    showAddProductModal,
     searchInput,
   } = ProductLogic();
 
@@ -137,7 +131,14 @@ const Product = () => {
                     src={image[0] || defaultImage}
                     alt="product-image"
                     onClick={() =>
-                      handleShow(id, name, price, brand, image, description)
+                      handleShowProductDetails(
+                        id,
+                        name,
+                        price,
+                        brand,
+                        image,
+                        description
+                      )
                     }
                   />
                   <div className="info-bottom">
@@ -155,7 +156,14 @@ const Product = () => {
                       }
                       cName="detail-btn"
                       functionality={() =>
-                        handleShow(id, name, price, brand, image, description)
+                        handleShowProductDetails(
+                          id,
+                          name,
+                          price,
+                          brand,
+                          image,
+                          description
+                        )
                       }
                     />
                   </div>
@@ -164,82 +172,11 @@ const Product = () => {
             );
           })
       )}
-
       {showDetails && (
-        <ModalWrapper>
-          <section className="product-view product-view-show">
-            <div className="detail-header">
-              <h5 className="detail-product-name">{detailData.name}</h5>
-              <div className="sub-details">
-                <div className="detail-price">
-                  ₱ {Number(detailData.price).toLocaleString()}.00
-                </div>
-                <div className="detail-brand">
-                  Brand: <span>{detailData.brand}</span>
-                </div>
-              </div>
-            </div>
-            <ImageSlider
-              images={detailData.image}
-              image_default={defaultImage}
-            />
-            <div className="detail-description">
-              <span>Product description: </span>
-              <p>{detailData.description || "*no description*"}</p>
-            </div>
-            <div className="detail-action">
-              <div className="close" onClick={() => handleClose()}>
-                <i className="fas fa-arrow-circle-left"></i>
-              </div>
-              <Button
-                type="button"
-                cName="add-btn"
-                text={
-                  <div>
-                    Add <i className="fas fa-shopping-cart"></i>
-                  </div>
-                }
-                functionality={() =>
-                  handleShowAddProductModal(
-                    detailData.id,
-                    detailData.price,
-                    "add"
-                  )
-                }
-              />
-            </div>
-          </section>
-        </ModalWrapper>
-      )}
-      {showAddProductModal && (
-        <ModalWrapper>
-          <section className="add-product-modal add-product-modal-show">
-            <h4 className="modal-text">
-              <p>Added to cart </p>
-              <i className="fas fa-check"></i>
-            </h4>
-            <Link to="/store/cart">
-              <Button
-                type="button"
-                cName="modal-go-cart-button"
-                text={
-                  <div>
-                    Go to cart <i className="fas fa-shopping-cart"></i>
-                  </div>
-                }
-                functionality={() => handleCloseAddProductModal()}
-              />
-            </Link>
-
-            <div className="modal-close-button">
-              <img
-                src={closeIcon}
-                alt=""
-                onClick={() => handleCloseAddProductModal()}
-              />
-            </div>
-          </section>
-        </ModalWrapper>
+        <ProductDetail
+          detailData={detailData}
+          handleCloseProductDetails={handleCloseProductDetails}
+        />
       )}
     </>
   );
