@@ -18,6 +18,12 @@ class ProductImageSerializer(serializers.ModelSerializer):
         fields = [field.name for field in model._meta.fields] 
         fields.insert(0, 'url') # push url field in index 0
 
+class ProductVariationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProductVariation
+        # to get all fields and put it into single array
+        fields = [field.name for field in model._meta.fields] 
+        fields.insert(0, 'url') # push url field in index 0
 
 class CustomerSerializer(serializers.ModelSerializer):
     class Meta:

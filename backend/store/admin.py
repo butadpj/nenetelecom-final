@@ -5,14 +5,20 @@ from .models import *
 
 class ProductImageAdmin(admin.StackedInline):
     model = ProductImage
+
+class ProductVariationAdmin(admin.StackedInline):
+    model = ProductVariation
     
 class ProductAdmin(admin.ModelAdmin):
-    inlines = [ProductImageAdmin]
+    inlines = [ProductImageAdmin, ProductVariationAdmin]
 
-    list_display = ['id', 'brand', 'name', 'date_posted']
+    list_display = ['id', 'brand', 'name', 'date_posted', ]
 
 class ProductImageAdmin(admin.ModelAdmin):
     readonly_fields = ('product', 'image', )
+
+class ProductVariationAdmin(admin.ModelAdmin):
+    readonly_fields = ('product', 'name', )
 
 class CustomerAdmin(admin.ModelAdmin):
     list_display = ['id', 'customer_info', 'user']
@@ -20,6 +26,5 @@ class CustomerAdmin(admin.ModelAdmin):
     readonly_fields=('au_first_name', 'au_last_name', 'au_mobile_number', 'au_complete_address',)
 
 admin.site.register(Product, ProductAdmin)
-admin.site.register(ProductImage, ProductImageAdmin)
 admin.site.register(Customer, CustomerAdmin)
 
