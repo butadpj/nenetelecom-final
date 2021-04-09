@@ -2,13 +2,13 @@ import { useContext } from "react";
 
 import { CartItemContext } from "../../../context/CartItemContext";
 import { ProductContext } from "../../../context/ProductContext";
-import ProductLogic from "../../../components/Ecommerce/Product/ProductLogic";
+import ProcessCart from "../../../hooks/ProcessCart";
 import { getCustomerInfo } from "../../../hooks/query/getCustomerInfo";
 
 const CartItemsLogic = () => {
   const [cartItemState, cartItemDispatch] = useContext(CartItemContext);
   const [productState] = useContext(ProductContext);
-  const { processCart } = ProductLogic();
+  const { processCart } = ProcessCart();
   const { isAuthenticated } = getCustomerInfo();
 
   let products = productState.products;
@@ -25,6 +25,7 @@ const CartItemsLogic = () => {
       });
     }
   });
+
   let selectedItems = cartDisplayProducts.filter(
     (item) => item.selected === true
   );

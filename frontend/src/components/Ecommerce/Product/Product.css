@@ -1,4 +1,4 @@
-.product {
+.ecommerce .product {
   background: var(--light);
   height: auto;
   font-size: 1.1rem;
@@ -10,7 +10,7 @@
   box-shadow: var(--box-shadow);
 }
 
-.product .condition {
+.ecommerce .product .condition {
   position: absolute;
   font-size: 0.8em;
   font-weight: 600;
@@ -21,221 +21,72 @@
   border-bottom-left-radius: 1.5rem;
 }
 
-.brand-new {
+.ecommerce .brand-new {
   background: var(--shadeLightGreen);
 }
 
-.used {
+.ecommerce .used {
   background: var(--shadeRed);
 }
 
-.info-top {
+.ecommerce .info-top {
   padding: 0.3em 0.5em;
   width: 70%;
   font-weight: bold;
 }
 
-.info-top .product-name {
+.ecommerce .info-top .product-name {
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
   margin-bottom: 0.3em;
 }
 
-.info-top .date-posted {
+.ecommerce .info-top .date-posted {
   font-size: 0.7em;
   color: var(--shadeDark);
 }
 
-.product-image {
+.ecommerce .product-image {
   display: block;
   margin: 0 auto;
   width: 85%;
 }
 
-.product-image:hover {
+.ecommerce .product-image:hover {
   cursor: pointer;
 }
 
-.info-bottom {
+.ecommerce .info-bottom {
   padding: 0.5em 1em 1em 0.5em;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.product-price .current {
+.ecommerce .product-price .current {
   font-size: 1em;
   color: var(--shadeGreen);
   font-weight: bold;
 }
 
-.product-price .original {
+.ecommerce .product-price .original {
   font-size: 0.8em;
   color: var(--shadeDark);
   text-decoration: line-through;
 }
 
-.info-bottom .detail-btn {
+.ecommerce .info-bottom .detail-btn {
   text-transform: initial;
   font-size: 0.8em;
   padding: 0.5em;
 }
 
-.detail-btn .inner {
+.ecommerce .detail-btn .inner {
   display: flex;
   align-items: center;
 }
 
-.detail-btn .inner > * {
+.ecommerce .detail-btn .inner > * {
   margin: 0 0.3em;
-}
-
-.product-view {
-  background: var(--light);
-  position: relative;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  height: auto;
-  max-height: 85%;
-  width: 100%;
-  max-width: 50rem;
-  overflow: scroll;
-  overflow-x: hidden;
-}
-
-.product-view-show {
-  animation: fadeInOpacityHeight ease-in 0.45s;
-}
-
-.product-view-hidden {
-  animation: fadeOutHeight ease-out 0.4s;
-}
-
-.product-view .detail-header {
-  padding: 0.5em;
-  font-weight: 700;
-  text-transform: capitalize;
-}
-
-.detail-product-name {
-  color: var(--dark);
-  font-size: 0.7em;
-  margin-bottom: 0.7em;
-  width: 80%;
-}
-
-.sub-details {
-  font-size: 0.65em;
-  display: flex;
-  justify-content: space-between;
-}
-
-.detail-price {
-  color: var(--shadeGreen);
-}
-
-.detail-brand {
-  color: var(--shadeLightBlue);
-}
-
-.detail-brand span {
-  color: var(--shadeDark);
-}
-
-.detail-description {
-  padding: 1em;
-  font-size: 0.65em;
-  font-weight: 600;
-  color: var(--dark);
-  height: auto;
-  max-height: 20rem;
-  overflow-y: scroll;
-  overflow-x: hidden;
-  border-bottom: solid var(--dark) 0.1rem;
-}
-
-.detail-description span {
-  color: var(--shadeLightDark);
-  font-size: 0.9em;
-}
-
-.detail-description p {
-  padding-left: 0.5em;
-  margin-top: 1em;
-  white-space: pre-wrap;
-  hyphens: auto;
-  letter-spacing: 1.55px;
-}
-
-.detail-action {
-  padding: 0.4em;
-  font-size: 1.5em;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.detail-action .close {
-  color: var(--shadeBlue);
-}
-
-.detail-action .close:hover {
-  color: var(--dark);
-  transition: var(--hoverTransition);
-  cursor: pointer;
-}
-
-.detail-action .add-btn {
-  background: var(--shadeLightGreen);
-  font-size: 0.5em;
-  padding: 0.5em;
-  border-radius: 5px;
-}
-
-.add-btn:hover {
-  background: var(--light);
-  color: var(--shadeLightGreen);
-}
-
-.add-product-modal {
-  background: var(--light);
-  width: min(60%, 15rem);
-  left: 50%;
-  top: 60%;
-  transform: translate(-50%, -50%);
-  padding: 0.8em 0.5em 0.5em 0.5em;
-  border-radius: 0.5em;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  position: relative;
-}
-
-.add-product-modal-show {
-  animation: fadeInPop ease 0.4s;
-}
-
-.add-product-modal-hidden {
-  animation: fadeOutPop ease 0.4s;
-}
-
-.modal-text {
-  font-size: 0.8em;
-  color: var(--shadeLightGreen);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 1em;
-}
-
-.modal-text p {
-  margin-right: 0.5em;
-}
-
-.modal-go-cart-button {
-  font-size: 0.5em;
-  padding: 1em 1.2em;
-  margin-bottom: 1em;
 }
