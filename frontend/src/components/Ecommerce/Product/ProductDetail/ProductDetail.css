@@ -1,0 +1,107 @@
+.ecommerce .product-view {
+  background: var(--light);
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: auto;
+  max-height: 85%;
+  width: 100%;
+  max-width: 50rem;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+.ecommerce .product-view-show {
+  animation: fadeInOpacityHeight ease-in 0.45s;
+}
+
+.ecommerce .product-view-hidden {
+  animation: fadeOutHeight ease-out 0.4s;
+}
+
+.ecommerce .product-view .detail-header {
+  padding: 0.5em;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.ecommerce .detail-product-name {
+  color: var(--dark);
+  font-size: 0.7em;
+  margin-bottom: 0.7em;
+  width: 80%;
+}
+
+.ecommerce .sub-details {
+  font-size: 0.65em;
+  display: flex;
+  justify-content: space-between;
+}
+
+.detail-price {
+  color: var(--shadeGreen);
+}
+
+.detail-brand {
+  color: var(--shadeLightBlue);
+}
+
+.ecommerce .detail-brand span {
+  color: var(--shadeDark);
+}
+
+.ecommerce .detail-description {
+  padding: 1em;
+  font-size: 0.65em;
+  font-weight: 600;
+  color: var(--dark);
+  height: auto;
+  max-height: 20rem;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  border-bottom: solid var(--dark) 0.1rem;
+}
+
+.ecommerce .detail-description span {
+  color: var(--shadeLightDark);
+  font-size: 0.9em;
+}
+
+.ecommerce .detail-description p {
+  padding-left: 0.5em;
+  margin-top: 1em;
+  white-space: pre-wrap;
+  hyphens: auto;
+  letter-spacing: 1.55px;
+}
+
+.ecommerce .detail-action {
+  padding: 0.4em;
+  font-size: 1.5em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ecommerce .detail-action .close {
+  color: var(--shadeBlue);
+}
+
+.ecommerce .detail-action .close:hover {
+  color: var(--dark);
+  transition: var(--hoverTransition);
+  cursor: pointer;
+}
+
+.ecommerce .detail-action .add-btn {
+  background: var(--shadeLightGreen);
+  font-size: 0.5em;
+  padding: 0.5em;
+  border-radius: 5px;
+}
+
+.ecommerce .add-btn:hover {
+  background: var(--light);
+  color: var(--shadeLightGreen);
+}
