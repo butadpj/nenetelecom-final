@@ -14,17 +14,23 @@ const CartItemsLogic = () => {
   let products = productState.products;
   let isLoading = productState.isLoading;
   let cartDisplayProducts = [];
+
   cartItemState.cartProducts.forEach((item) => {
     if (item.product) {
       products.map((product) => {
         if (product.id === item.product) {
           product.quantity = item.quantity;
           product.selected = item.selected;
+          product.storage_variation_name = item.storage_variation_name;
+          product.color_variation_name = item.color_variation_name;
+          product.variation_price = item.variation_price;
           cartDisplayProducts.push(product);
         }
       });
     }
   });
+
+  console.log(cartDisplayProducts);
 
   let selectedItems = cartDisplayProducts.filter(
     (item) => item.selected === true

@@ -67,9 +67,13 @@ const ProcessCart = () => {
     //! ADDING & UPDATING of cart item END
   };
 
-  const authenticatedCart = (selectedProduct, price, action) => {
+  const authenticatedCart = (
+    selectedProduct,
+    price,
+    action,
+    variationPrice
+  ) => {
     let price_num = parseInt(price);
-
     let existingProduct = cartItemState.cartProducts.filter(
       (data) => data.product === selectedProduct
     );
@@ -79,11 +83,11 @@ const ProcessCart = () => {
         //UPDATING PRODUCT
         let bagItem = existingProduct[0].id;
         let bagItemOrder = existingProduct[0].order;
+
         existingProduct[0].quantity += 1;
-        existingProduct[0].total_price += price_num;
 
         fetch(`${bagItemUrl}${bagItem}/`, {
-          method: "PUT",
+          method: "PATCH",
           headers: {
             "Content-Type": "application/json",
             "X-CSRFToken": csrftoken,
@@ -92,6 +96,7 @@ const ProcessCart = () => {
             bag: bagItemOrder,
             product: selectedProduct,
             quantity: existingProduct[0].quantity,
+            variation_price: variationPrice,
           }),
         })
           .then((res) => res.json())
@@ -145,7 +150,7 @@ const ProcessCart = () => {
             })
             .catch((error) => console.log(error));
         } else {
-          //If customer has already placed an Order
+          //If customer has bag already
           fetch(`${bagItemUrl}`, {
             method: "POST",
             headers: {
@@ -156,6 +161,7 @@ const ProcessCart = () => {
               bag: customerBagId,
               product: selectedProduct,
               quantity: 1,
+              variation_price: variationPrice,
             }),
           })
             .then((res) => res.json())
@@ -220,11 +226,17 @@ const ProcessCart = () => {
     }
   };
 
-  const processCart = (selectedProduct, price, action, isAuthenticated) => {
+  const processCart = (
+    selectedProduct,
+    price,
+    action,
+    isAuthenticated,
+    variationPrice
+  ) => {
     if (!isAuthenticated) {
-      guestCart(selectedProduct, price, action);
+      guestCart(selectedProduct, price, action, variationPrice);
     } else {
-      authenticatedCart(selectedProduct, price, action);
+      authenticatedCart(selectedProduct, price, action, variationPrice);
     }
   };
   return { processCart };
