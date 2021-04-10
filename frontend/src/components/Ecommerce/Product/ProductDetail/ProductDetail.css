@@ -68,6 +68,8 @@
 
 .ecommerce .variation-price {
   color: var(--shadeGreen);
+  font-weight: bold;
+  font-size: 1.1em;
 }
 
 .ecommerce .options {
@@ -79,10 +81,17 @@
   margin: 0.5em 0.8em 0.5em 0;
   padding: 0.3em;
   border: 1.5px solid var(--shadeLightDark);
+  cursor: pointer;
+  transition: 0.3s ease-out;
+}
+
+.ecommerce .options > *:hover {
+  box-shadow: var(--box-shadow);
 }
 
 .options > *.active {
   border: 3px solid var(--shadeLightBlue);
+  box-shadow: var(--box-shadow);
 }
 
 .ecommerce .detail-description {

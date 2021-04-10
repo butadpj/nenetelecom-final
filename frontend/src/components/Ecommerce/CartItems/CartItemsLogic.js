@@ -1,8 +1,9 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 
 import { CartItemContext } from "../../../context/CartItemContext";
 import { ProductContext } from "../../../context/ProductContext";
 import ProcessCart from "../../../hooks/ProcessCart";
+import ProductDetailLogic from "../../../components/Ecommerce/Product/ProductDetail/ProductDetailLogic";
 import { getCustomerInfo } from "../../../hooks/query/getCustomerInfo";
 
 const CartItemsLogic = () => {
@@ -10,7 +11,6 @@ const CartItemsLogic = () => {
   const [productState] = useContext(ProductContext);
   const { processCart } = ProcessCart();
   const { isAuthenticated } = getCustomerInfo();
-
   let products = productState.products;
   let isLoading = productState.isLoading;
   let cartDisplayProducts = [];
@@ -29,8 +29,6 @@ const CartItemsLogic = () => {
       });
     }
   });
-
-  console.log(cartDisplayProducts);
 
   let selectedItems = cartDisplayProducts.filter(
     (item) => item.selected === true
