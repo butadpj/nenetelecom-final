@@ -10,6 +10,7 @@ export const getCookieCart = () => {
     item["quantity"] = cookie[key].quantity;
     item["total_price"] = cookie[key].total_price;
     item["selected"] = cookie[key].selected;
+    item["variation_price"] = cookie[key].variation_price;
     cookieCart.push(item);
   }
 

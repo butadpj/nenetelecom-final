@@ -13,34 +13,43 @@ const ProcessCart = () => {
   let bagsUrl = "/api/bags/";
   let bagItemUrl = "/api/bag-item/";
 
-  const guestCart = (selectedProduct, price, action) => {
-    let price_num = parseInt(price);
+  const guestCart = (selectedProduct, price, action, variationPrice) => {
+    let price_num = parseInt(variationPrice ? variationPrice : price);
 
     if (action.toUpperCase() === "ADD") {
-      //* Bake cookie START
+      // Adding product in cookie cart
       if (cart[selectedProduct] == undefined) {
         cart[selectedProduct] = {
           quantity: 1,
           total_price: price_num,
           selected: true,
+          variation_price: variationPrice,
         };
       } else {
+        // Updating product in cookie cart
         cart[selectedProduct]["quantity"] += 1;
-        cart[selectedProduct]["total_price"] += price_num;
+        cart[selectedProduct]["variation_price"] = price_num;
+        cart[selectedProduct]["total_price"] =
+          price_num * cart[selectedProduct]["quantity"];
       }
-      //! Bake cookie END
     }
 
+    // Removing product in cookie cart
     if (action.toUpperCase() === "REMOVE") {
       cart[selectedProduct]["quantity"] -= 1;
-      cart[selectedProduct]["total_price"] -= price_num;
+      cart[selectedProduct]["total_price"] =
+        price_num * cart[selectedProduct]["quantity"];
+      cart[selectedProduct]["variation_price"] = price_num;
+
       if (cart[selectedProduct]["quantity"] <= 0) {
         delete cart[selectedProduct];
       }
     }
+
+    // Save changes in cookie cart
     document.cookie = "cart=" + JSON.stringify(cart) + ";domain=;path=/";
 
-    //* ADDING & UPDATING of cart item START
+    // Updating products in CartItem State
     const existingProduct = cartItemState.cartProducts.filter(
       (item) => item.product === selectedProduct
     );
@@ -53,9 +62,10 @@ const ProcessCart = () => {
         },
       });
     } else {
+      // Adding product in CartItem State
       let newCartItem = {
         product: selectedProduct,
-        total_price: price,
+        total_price: price_num,
         quantity: 1,
       };
 
