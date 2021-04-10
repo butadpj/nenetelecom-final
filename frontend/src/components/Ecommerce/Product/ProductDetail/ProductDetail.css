@@ -51,6 +51,40 @@
   color: var(--shadeDark);
 }
 
+.ecommerce .detail-variation {
+  font-size: 0.7em;
+  font-weight: 600;
+  padding: 0.5em;
+  background: var(--shadeLight);
+}
+
+.ecommerce .category-name {
+  color: var(--shadeDark);
+}
+
+.ecommerce .variation-value {
+  font-size: 0.9em;
+}
+
+.ecommerce .variation-price {
+  color: var(--shadeGreen);
+}
+
+.ecommerce .options {
+  display: flex;
+  font-size: 0.9em;
+}
+
+.ecommerce .options > * {
+  margin: 0.5em 0.8em 0.5em 0;
+  padding: 0.3em;
+  border: 1.5px solid var(--shadeLightDark);
+}
+
+.options > *.active {
+  border: 3px solid var(--shadeLightBlue);
+}
+
 .ecommerce .detail-description {
   padding: 1em;
   font-size: 0.65em;
