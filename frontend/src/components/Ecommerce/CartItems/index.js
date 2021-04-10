@@ -88,7 +88,13 @@ const CartItems = () => {
                     <div
                       className="quantity-remove ripple"
                       onClick={() =>
-                        processCart(id, price, "remove", isAuthenticated)
+                        processCart(
+                          id,
+                          price,
+                          "remove",
+                          isAuthenticated,
+                          variation_price ? variation_price : null
+                        )
                       }
                     >
                       <i className="fas fa-minus"></i>
@@ -97,7 +103,13 @@ const CartItems = () => {
                     <div
                       className="quantity-add ripple"
                       onClick={() =>
-                        processCart(id, price, "add", isAuthenticated)
+                        processCart(
+                          id,
+                          price,
+                          "add",
+                          isAuthenticated,
+                          variation_price ? variation_price : null
+                        )
                       }
                     >
                       <i className="fas fa-plus"></i>
