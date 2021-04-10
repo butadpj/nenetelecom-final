@@ -34,9 +34,20 @@ const CartItems = () => {
           )}
 
           {cartDisplayProducts.map((item) => {
-            const { id, image, name, brand, price, quantity, selected } = item;
+            const {
+              id,
+              image,
+              name,
+              brand,
+              price,
+              quantity,
+              selected,
+              variation_price,
+            } = item;
 
-            let f_price = Number(price).toLocaleString();
+            let f_price = Number(
+              variation_price ? variation_price : price
+            ).toLocaleString();
             return (
               <div className="item" key={id}>
                 <div className="item-main">
@@ -49,7 +60,7 @@ const CartItems = () => {
                   <div className="item-info">
                     <div className="item-info-name">{name}</div>
                     <div className="item-info-brand">
-                      <p>Brand: {brand}</p>{" "}
+                      <p>Brand: {brand}</p>
                     </div>
                     <div className="item-info-price">
                       <div className="item-info-current-price">

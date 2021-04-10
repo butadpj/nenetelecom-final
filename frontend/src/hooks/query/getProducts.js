@@ -28,6 +28,5 @@ export const getProducts = () => {
     product.variation = variationArray;
     return product;
   });
-  console.log(products);
   return { products, productLoading, productImageLoading };
 };

@@ -16,7 +16,8 @@ const ProductLogic = () => {
     price,
     brand,
     image,
-    description
+    description,
+    variation
   ) => {
     setShowDetails(true);
     document.body.style.overflow = "hidden";
@@ -28,6 +29,7 @@ const ProductLogic = () => {
       brand: brand,
       image: image,
       description: description,
+      variation: variation,
     });
   };
 

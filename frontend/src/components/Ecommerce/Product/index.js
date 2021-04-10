@@ -77,6 +77,7 @@ const Product = () => {
               price,
               description,
               date_posted,
+              variation,
             } = product;
 
             let f_price = Number(price).toLocaleString();
@@ -137,7 +138,8 @@ const Product = () => {
                         price,
                         brand,
                         image,
-                        description
+                        description,
+                        variation
                       )
                     }
                   />
