@@ -68,8 +68,11 @@ const Checkout = () => {
                   price,
                   quantity,
                   selected,
+                  variation_price,
                 } = item;
-                let f_price = Number(price).toLocaleString();
+                let f_price = Number(
+                  variation_price ? variation_price : price
+                ).toLocaleString();
                 return (
                   <div className="item" key={id}>
                     <div className="item-main">
