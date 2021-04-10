@@ -3,7 +3,7 @@ from .models import Order, OrderProduct
 
 # Register your models here.
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ['shipping_address', 'customer_info', 'total_cart_items', 'total_cart_price', 'confirmed', 'paid', 'delivered', 'ready_to_deliver', 'date_placed']
+    list_display = ['transaction_id', 'info',  'total_cart_items', 'total_cart_price', 'confirmed', 'paid', 'delivered', 'ready_to_deliver', 'date_placed']
     readonly_fields = ('customer', 'address', 'city', 'province', 'zip_code')
 
 

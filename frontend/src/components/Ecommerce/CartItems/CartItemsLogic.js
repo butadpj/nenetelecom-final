@@ -58,7 +58,7 @@ const CartItemsLogic = () => {
         .then((res) => res.json())
         .then((data) => {
           cartItemDispatch({
-            type: "UPDATE_ITEM_AU",
+            type: "UPDATE_ITEM",
             payload: {
               id: selectedItem,
               updatedProduct: data,
