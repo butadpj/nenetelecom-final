@@ -15,7 +15,9 @@ const CartItems = () => {
     isLoading,
     noSelected,
   } = CartItemsLogic();
-  //TODO: IMPLEMENT PRODUCT VARIATION FEATURE
+
+  console.log(cartDisplayProducts);
+
   return (
     <div className="cart-items">
       {isLoading ? (
