@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { getCustomerInfo } from "../../../../hooks/query/getCustomerInfo";
 import ProcessCart from "../../../../hooks/ProcessCart";
 
-const ProdctDetailLogic = (options) => {
+const ProdctDetailLogic = () => {
   const [showAddProductModal, setShowAddProductModal] = useState(false);
   const { processCart } = ProcessCart();
   const { isAuthenticated } = getCustomerInfo();
@@ -14,16 +14,19 @@ const ProdctDetailLogic = (options) => {
     selectedProduct,
     price,
     action,
-    variationPrice
+    variationPrice,
+    selectedStorageVariation,
+    selectedColorVariation
   ) => {
     setShowAddProductModal(true);
-
     processCart(
       selectedProduct,
       price,
       action,
       isAuthenticated,
-      variationPrice
+      variationPrice,
+      selectedStorageVariation,
+      selectedColorVariation
     );
   };
 
@@ -54,15 +57,17 @@ const ProdctDetailLogic = (options) => {
     let detailPrice = document.querySelector(".ecommerce .detail-price");
     detailPrice.style.color = "var(--shadeLightDark)";
 
-    let actives = document.querySelectorAll(".option-name.active");
+    let actives = document.querySelectorAll(
+      ".storage-size .option-name.active"
+    );
     if (actives.length > 0) {
       actives[0].classList.remove("active");
     }
     e.target.classList.add("active");
   };
 
-  const handleSelectedColorVariation = (selected) => {
-    setSelectedColorVariation(selected);
+  const handleSelectedColorVariation = (e, optionName) => {
+    setSelectedColorVariation(optionName);
   };
 
   return {

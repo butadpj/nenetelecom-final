@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import "./ProductDetail.css";
 import defaultImage from "../../../../assets/images/Default.png";
 import Button from "../../../Button";
@@ -9,10 +9,13 @@ import AddProductModal from "../AddProductModal";
 
 const ProductDetail = ({ detailData, handleCloseProductDetails }) => {
   const { id, name, price, brand, image, description, variation } = detailData;
+
   let storageSizeOption = variation.filter(
     (option) => option.category == "Storage Size"
   );
-  const options = useRef(null);
+  let colorFamilyOption = variation.filter(
+    (option) => option.category == "Color Family"
+  );
 
   const {
     showAddProductModal,
@@ -23,7 +26,7 @@ const ProductDetail = ({ detailData, handleCloseProductDetails }) => {
     handleSelectedStorageVariation,
     handleSelectedColorVariation,
     variationPrice,
-  } = ProductDetailLogic(options.current);
+  } = ProductDetailLogic();
 
   let f_price = `₱ ${Number(variationPrice).toLocaleString()}.00`;
 
@@ -61,8 +64,7 @@ const ProductDetail = ({ detailData, handleCloseProductDetails }) => {
                       </span>
                     )}
                   </span>
-
-                  <div className="options" ref={options}>
+                  <div className="options">
                     {storageSizeOption.map((option) => {
                       return (
                         <div
@@ -74,6 +76,41 @@ const ProductDetail = ({ detailData, handleCloseProductDetails }) => {
                               option.name,
                               option.price
                             )
+                          }
+                        >
+                          {option.name}
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              ) : null
+            ) : null}
+            {variation.length ? (
+              colorFamilyOption.length ? (
+                <div className="category color-family">
+                  <span className="category-name">Color Family: </span>
+                  <span className="variation-value">
+                    {selectedColorVariation ? (
+                      <>
+                        <span className="variation-name">
+                          {selectedColorVariation}
+                        </span>
+                      </>
+                    ) : (
+                      <span style={{ color: "var(--shadeLightDark)" }}>
+                        Please select an option
+                      </span>
+                    )}
+                  </span>
+                  <div className="options">
+                    {colorFamilyOption.map((option) => {
+                      return (
+                        <div
+                          className="option-name"
+                          key={option.id}
+                          onClick={(e) =>
+                            handleSelectedColorVariation(e, option.name)
                           }
                         >
                           {option.name}
@@ -107,7 +144,9 @@ const ProductDetail = ({ detailData, handleCloseProductDetails }) => {
                   id,
                   price,
                   "add",
-                  variationPrice ? variationPrice : null
+                  variationPrice ? variationPrice : null,
+                  selectedStorageVariation,
+                  selectedColorVariation
                 )
               }
             />
