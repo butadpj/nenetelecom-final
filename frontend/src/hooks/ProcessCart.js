@@ -13,6 +13,7 @@ const ProcessCart = () => {
   let bagsUrl = "/api/bags/";
   let bagItemUrl = "/api/bag-item/";
 
+  // Process Guest's Cart
   const guestCart = (selectedProduct, price, action, variationPrice) => {
     let price_num = parseInt(variationPrice ? variationPrice : price);
 
@@ -77,25 +78,27 @@ const ProcessCart = () => {
     //! ADDING & UPDATING of cart item END
   };
 
+  // Process Logged in User's Cart
   const authenticatedCart = (
     selectedProduct,
-    price,
     action,
-    variationPrice
+    variationPrice,
+    selectedStorageVariation,
+    selectedColorVariation
   ) => {
-    let price_num = parseInt(price);
+    // Get any existing product using selected product ID
     let existingProduct = cartItemState.cartProducts.filter(
       (data) => data.product === selectedProduct
     );
 
     if (action.toUpperCase() === "ADD") {
+      // If product already in exist in bag, do an UPDATE
       if (existingProduct.length > 0) {
-        //UPDATING PRODUCT
+        // UPDATING EXISTING PRODUCT
         let bagItem = existingProduct[0].id;
-        let bagItemOrder = existingProduct[0].order;
-
         existingProduct[0].quantity += 1;
 
+        // Fetch to database
         fetch(`${bagItemUrl}${bagItem}/`, {
           method: "PATCH",
           headers: {
@@ -103,16 +106,14 @@ const ProcessCart = () => {
             "X-CSRFToken": csrftoken,
           },
           body: JSON.stringify({
-            bag: bagItemOrder,
-            product: selectedProduct,
             quantity: existingProduct[0].quantity,
-            variation_price: variationPrice,
           }),
         })
           .then((res) => res.json())
           .then((data) => {
+            // Update the state
             cartItemDispatch({
-              type: "UPDATE_ITEM_AU",
+              type: "UPDATE_ITEM",
               payload: {
                 id: selectedProduct,
                 updatedProduct: data,
@@ -120,10 +121,14 @@ const ProcessCart = () => {
             });
           })
           .catch((error) => console.log(error));
-      } else {
-        //ADDING PRODUCT
-        //Create bag if customer has no bag yet
+      }
+      // If product doesn't exist yet, ADD it to bag
+      else {
+        // ADDING PRODUCT
+
+        // Create a bag if customer has no bag yet, and then add the product item into it
         if (customerBag.length == 0) {
+          // Fetch to database
           fetch(`${bagsUrl}`, {
             method: "POST",
             headers: {
@@ -136,6 +141,7 @@ const ProcessCart = () => {
           })
             .then((res) => res.json())
             .then((data) => {
+              // Fetch to database
               fetch(`${bagItemUrl}`, {
                 method: "POST",
                 headers: {
@@ -146,21 +152,26 @@ const ProcessCart = () => {
                   bag: data.id,
                   product: selectedProduct,
                   quantity: 1,
+                  variation_price: variationPrice,
+                  storage_variation_name: selectedStorageVariation,
+                  color_variation_name: selectedColorVariation,
                 }),
               })
                 .then((res) => res.json())
                 .then((data) => {
-                  console.log(data);
+                  // Update the state
                   cartItemDispatch({
-                    type: "ADD_ITEM_AU",
+                    type: "ADD_ITEM",
                     payload: data,
                   });
                 })
                 .catch((error) => console.log(error));
             })
             .catch((error) => console.log(error));
-        } else {
-          //If customer has bag already
+        }
+        // If customer has bag already, just ADD the product item into it
+        else {
+          // Fetch to database
           fetch(`${bagItemUrl}`, {
             method: "POST",
             headers: {
@@ -172,12 +183,15 @@ const ProcessCart = () => {
               product: selectedProduct,
               quantity: 1,
               variation_price: variationPrice,
+              storage_variation_name: selectedStorageVariation,
+              color_variation_name: selectedColorVariation,
             }),
           })
             .then((res) => res.json())
             .then((data) => {
+              // Update the state
               cartItemDispatch({
-                type: "ADD_ITEM_AU",
+                type: "ADD_ITEM",
                 payload: data,
               });
             })
@@ -185,19 +199,43 @@ const ProcessCart = () => {
         }
       }
     }
-
     if (action.toUpperCase() === "REMOVE") {
-      //If product exist
+      //REMOVING PRODUCT
+
+      // Double check if product exist
       if (existingProduct.length > 0) {
         let bagItem = existingProduct[0].id;
         let bagItemOrder = existingProduct[0].order;
         existingProduct[0].quantity -= 1;
-        existingProduct[0].total_price -= price_num;
 
-        //If quantity is equal to 0
-        if (existingProduct[0].quantity <= 0) {
+        // Reduce the product quantity by 1
+        if (existingProduct[0].quantity > 0) {
+          fetch(`${bagItemUrl}${bagItem}/`, {
+            method: "PATCH",
+            headers: {
+              "Content-Type": "application/json",
+              "X-CSRFToken": csrftoken,
+            },
+            body: JSON.stringify({
+              quantity: existingProduct[0].quantity,
+            }),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              cartItemDispatch({
+                type: "UPDATE_ITEM",
+                payload: {
+                  id: selectedProduct,
+                  updatedProduct: data,
+                },
+              });
+            })
+            .catch((error) => console.log(error));
+        }
+        // If product quantity reaches 0, delete it from database
+        else {
           cartItemDispatch({
-            type: "REMOVE_ITEM_AU",
+            type: "REMOVE_ITEM",
             payload: selectedProduct,
           });
           fetch(`${bagItemUrl}${bagItem}/`, {
@@ -207,46 +245,39 @@ const ProcessCart = () => {
               "X-CSRFToken": csrftoken,
             },
           });
-        } else {
-          fetch(`${bagItemUrl}${bagItem}/`, {
-            method: "PUT",
-            headers: {
-              "Content-Type": "application/json",
-              "X-CSRFToken": csrftoken,
-            },
-            body: JSON.stringify({
-              order: bagItemOrder,
-              product: selectedProduct,
-              quantity: existingProduct[0].quantity,
-            }),
-          })
-            .then((res) => res.json())
-            .then((data) => {
-              cartItemDispatch({
-                type: "UPDATE_ITEM_AU",
-                payload: {
-                  id: selectedProduct,
-                  updatedProduct: data,
-                },
-              });
-            })
-            .catch((error) => console.log(error));
         }
+      }
+      // Show an error if product doesn't exist
+      else {
+        console.log(
+          "There's something wrong, it might be your selected product doesn't exist "
+        );
       }
     }
   };
 
+  // Cart's process selector:
+  //* If user is logged in, call authenticatedCart
+  //* If user is guest, call guestCart
   const processCart = (
     selectedProduct,
     price,
     action,
     isAuthenticated,
-    variationPrice
+    variationPrice,
+    selectedStorageVariation,
+    selectedColorVariation
   ) => {
     if (!isAuthenticated) {
       guestCart(selectedProduct, price, action, variationPrice);
     } else {
-      authenticatedCart(selectedProduct, price, action, variationPrice);
+      authenticatedCart(
+        selectedProduct,
+        action,
+        variationPrice,
+        selectedStorageVariation,
+        selectedColorVariation
+      );
     }
   };
   return { processCart };
