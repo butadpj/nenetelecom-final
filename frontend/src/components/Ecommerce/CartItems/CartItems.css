@@ -6,20 +6,6 @@
   margin-bottom: 3em;
 }
 
-.cart-items .helper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--shadeLightDark);
-  font-weight: 600;
-  margin: 0.5em 0;
-}
-
-.cart-items .helper span {
-  margin-right: 0.5em;
-  font-size: 0.9em;
-}
-
 .cart-items .item {
   background: var(--light);
   display: flex;

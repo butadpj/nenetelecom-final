@@ -9,6 +9,7 @@ import Paypal from "../../../components/Ecommerce/PayPal";
 import closeIcon from "../../../assets/svgs/close.svg";
 import BackTo from "../../../components/Ecommerce/BackTo";
 import ModalWrapper from "../../../components/Ecommerce/ModalWrapper";
+import HelpText from "../../../components/Ecommerce/HelpText";
 
 const Checkout = () => {
   const {
@@ -49,11 +50,8 @@ const Checkout = () => {
           icon={<i className="fas fa-shopping-cart"></i>}
         />
         <hr />
-
         {selectedItems.length === 0 ? (
-          <div className="helper">
-            <span>Select an item to checkout...</span>
-          </div>
+          <HelpText text="Select an item to checkout..." />
         ) : (
           <>
             <div className="order-summary">
