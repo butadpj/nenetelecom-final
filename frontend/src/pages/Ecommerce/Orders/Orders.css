@@ -1,25 +1,84 @@
-.orders {
+.orders-page {
   width: 100%;
   position: absolute;
   top: 7.3rem;
   padding-bottom: 5em;
   font-size: 1rem;
-}
-
-.orders .back-to-cart {
-  padding: 0 0 0.5em 0.5em;
-  display: flex;
-  align-items: center;
   font-weight: 600;
   color: var(--shadeDark);
 }
 
-.orders .back-to-cart a {
-  font-size: 1.8em;
-  margin-right: 0.3em;
+.orders-page .orders-wrapper {
+  margin-top: 1em;
+}
+
+.orders-page .order {
+  margin: 1em auto;
+  width: min(50rem, 100%);
+  background: var(--light);
+}
+
+.orders-page .order-info {
+  padding: 1em;
+}
+
+.orders-page .order-info .info {
+  width: 100%;
+  font-size: 0.9em;
+}
+
+.orders-page .info .id {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--dark);
+  font-size: 1.1em;
+}
+
+.orders-page .info .status {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.3em;
+}
+
+.orders-page .status .payment-method {
+  font-style: italic;
+}
+
+.orders-page .order .order-product {
+  display: flex;
+  align-items: center;
+  padding: 0 1em 1em 1em;
+}
+
+.orders-page .order-product img {
+  margin-right: 0.5em;
+}
+
+.orders-page .order-product-info {
+  font-size: 0.9em;
   color: var(--shadeDark);
 }
 
-.orders .back-to-cart a:hover {
+.orders-page .order-product-info > * {
+  margin: 0.2em 0;
+}
+
+.orders-page .order-product-info .product-price {
+  color: var(--shadeGreen);
+  font-weight: bold;
+}
+
+.orders-page .order .bottom-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5em 1em 1em 1.5em;
+}
+
+.orders-page .bottom-info .total-items {
   color: var(--dark);
+}
+.orders-page .bottom-info .total-price {
+  color: var(--shadeGreen);
 }

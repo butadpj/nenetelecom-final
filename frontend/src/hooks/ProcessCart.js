@@ -205,7 +205,7 @@ const ProcessCart = () => {
       // Double check if product exist
       if (existingProduct.length > 0) {
         let bagItem = existingProduct[0].id;
-        let bagItemOrder = existingProduct[0].order;
+
         existingProduct[0].quantity -= 1;
 
         // Reduce the product quantity by 1
