@@ -164,7 +164,8 @@ const Product = () => {
                           price,
                           brand,
                           image,
-                          description
+                          description,
+                          variation
                         )
                       }
                     />
