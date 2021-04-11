@@ -28,10 +28,12 @@ const CartItems = () => {
       ) : (
         <>
           {noSelected() && (
-            <HelpText
-              text="Select a product to checkout"
-              icon={<i className="fas fa-check-circle"></i>}
-            />
+            <div>
+              <HelpText
+                text="Select a product to checkout"
+                icon={<i className="fas fa-check-circle"></i>}
+              />
+            </div>
           )}
 
           {cartDisplayProducts.map((item) => {
