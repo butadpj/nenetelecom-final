@@ -1,0 +1,13 @@
+.ecommerce .help-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--shadeLightDark);
+  font-weight: 600;
+  margin: 1em 0 0.5em 0;
+}
+
+.ecommerce .help-text span {
+  margin-right: 0.5em;
+  font-size: 1em;
+}
