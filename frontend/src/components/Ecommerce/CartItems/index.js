@@ -5,6 +5,7 @@ import CartItemsLogic from "./CartItemsLogic";
 import checkIcon from "../../../assets/svgs/check.svg";
 import uncheckIcon from "../../../assets/svgs/uncheck.svg";
 import Loader from "../../../components/Ecommerce/Loader";
+import HelpText from "../../../components/Ecommerce/HelpText";
 
 const CartItems = () => {
   const {
@@ -23,16 +24,14 @@ const CartItems = () => {
       {isLoading ? (
         <Loader />
       ) : cartDisplayProducts.length === 0 ? (
-        <div className="helper">
-          <span>Add something in your cart...</span>
-        </div>
+        <HelpText text="Add something in your cart..." />
       ) : (
         <>
           {noSelected() && (
-            <div className="helper">
-              <span>Select a product to checkout</span>
-              <i className="fas fa-check-circle"></i>
-            </div>
+            <HelpText
+              text="Select a product to checkout"
+              icon={<i className="fas fa-check-circle"></i>}
+            />
           )}
 
           {cartDisplayProducts.map((item) => {

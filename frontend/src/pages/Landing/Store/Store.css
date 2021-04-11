@@ -1,5 +1,5 @@
 .store {
-  background: var(--shadeLight);
+  background: var(--light);
   width: 100%;
   height: fit-content;
   position: relative;
@@ -38,9 +38,15 @@
   color: var(--shadeGreen) !important;
 }
 
-.storeBtn {
+.store .storeBtn {
   display: block;
   margin: 3em auto 0 auto;
   width: fit-content;
   text-align: center;
+}
+
+.store .wave-container svg {
+  position: absolute;
+  z-index: -5;
+  bottom: 0%;
 }
