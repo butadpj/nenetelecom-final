@@ -40,6 +40,30 @@ SECRET_KEY=PUT_YOUR_SECRET_KEY_HERE
 pip install -r requirements.txt
 ```
 
-===============================
+---
 
-### _Project Screenshots_<img src="./public/REACT/images/66a885fc730d35c7fdd513c76d84eebd.gif" alt="drawing" width="50"/>:
+### _Key Features_<img src="./public/REACT/images/66a885fc730d35c7fdd513c76d84eebd.gif" alt="drawing" width="50"/>:
+
+<h4 align="center">Landing Page (Dekstop)</h4>
+<img style="display: block; margin: 0 auto;" src="./public/screenshots/LandingPage-Desktop.png" width=""/>
+
+<h4 align="center">Landing Page (Mobile)</h4>
+<img style="display: block; margin: 0 auto;" src="./public/screenshots/LandingPage-Mobile.png" width=""/>
+
+<h4 align="center">Progressive Web App</h4>
+<img style="display: block; margin: 0 auto;" src="./public/screenshots/StorePWA.png" width=""/>
+
+<h4 align="center">Messenger Plugin</h4>
+<img style="display: block; margin: 0 auto;" src="./public/screenshots/StoreMESSENGER.png" width=""/>
+
+<h4 align="center">User type: Admin</h4>
+<img style="display: block; margin: 0 auto;" src="./public/screenshots/StoreNAVADMIN.png" width=""/>
+
+<h4 align="center">Product Variation</h4>
+<img style="display: block; margin: 0 auto;" src="./public/screenshots/StorePRODUCTDETAIL.png" width=""/>
+
+<h4 align="center">Auth: Login</h4>
+<img style="display: block; margin: 0 auto;" src="./public/screenshots/StoreLOGIN.png" width=""/>
+
+<h4 align="center">Auth: Register</h4>
+<img style="display: block; margin: 0 auto;" src="./public/screenshots/StoreREGISTER.png" width=""/>
