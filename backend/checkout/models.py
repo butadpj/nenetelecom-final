@@ -67,9 +67,15 @@ class OrderProduct(models.Model):
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, blank=True, null=True)
     quantity = models.IntegerField(default=0, null=True, blank=True)
 
+    storage_variation_name = models.CharField(max_length=20, null=True, blank=True)
+    color_variation_name = models.CharField(max_length=20, null=True, blank=True)
+    variation_price = models.DecimalField(max_digits=10, null=True, blank=True, decimal_places=2)
+
     @property
     def total_price(self):
         try:
+            if self.variation_price:
+                return self.variation_price * self.quantity
             return self.product.price * self.quantity
         except:
             pass

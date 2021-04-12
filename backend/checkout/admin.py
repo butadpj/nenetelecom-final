@@ -8,7 +8,7 @@ class OrderAdmin(admin.ModelAdmin):
 
 
 class OrderProductAdmin(admin.ModelAdmin):
-    list_display = ['order', 'product', 'quantity', 'total_price']
+    list_display = ['order', 'product', 'quantity', 'total_price', 'storage_variation_name', 'color_variation_name', 'variation_price']
     readonly_fields=('order', 'product', 'quantity')
 
 admin.site.register(Order, OrderAdmin)

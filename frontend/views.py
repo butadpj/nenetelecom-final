@@ -31,6 +31,7 @@ def process_order(request):
 
     cart_items = []
     
+    # If User is logged in
     if request.user.is_authenticated:
         customer = request.user.customer
         bag = Bag.objects.get(customer=request.user.customer.id)
@@ -48,7 +49,11 @@ def process_order(request):
                         'id': product.id,
                     },
                     'quantity': i.quantity,
-                    'total_price': total_price
+                    'total_price': total_price,
+                    'storage_variation_name': i.storage_variation_name,
+                    'color_variation_name': i.color_variation_name,
+                    'variation_price': i.variation_price,
+
                 }
 
                 cart_items.append(item)
@@ -69,9 +74,13 @@ def process_order(request):
                 order_product = OrderProduct.objects.create(
                     order = order,
                     product = product,
-                    quantity = item['quantity']
+                    quantity = item['quantity'],
+                    storage_variation_name = item['storage_variation_name'],
+                    color_variation_name = item['color_variation_name'],
+                    variation_price = item['variation_price'],
                 )
 
+    # If User is Guest
     else:
         cart = json.loads(request.COOKIES['cart'])
 
@@ -91,7 +100,10 @@ def process_order(request):
                         'id': product.id,
                     },
                     'quantity': cart[i]['quantity'],
-                    'total_price': total_price
+                    'total_price': total_price,
+                    'storage_variation_name': cart[i]['storage_variation_name'],
+                    'color_variation_name': cart[i]['color_variation_name'],
+                    'variation_price': cart[i]['variation_price'],
                 }
 
                 cart_items.append(item)
@@ -118,7 +130,10 @@ def process_order(request):
                 order_product = OrderProduct.objects.create(
                     order = order,
                     product = product,
-                    quantity = item['quantity']
+                    quantity = item['quantity'],
+                    storage_variation_name = item['storage_variation_name'],
+                    color_variation_name = item['color_variation_name'],
+                    variation_price = item['variation_price'],
                 )
         
  

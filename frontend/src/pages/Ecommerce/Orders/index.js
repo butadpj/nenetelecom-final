@@ -104,9 +104,9 @@ const Orders = () => {
                 </section>
                 <section className="order-products">
                   {order_products.map((item) => {
-                    const { product } = item;
+                    const { product, variation_price } = item;
                     let f_price = `₱ ${Number(
-                      product.price
+                      variation_price ? variation_price : product.price
                     ).toLocaleString()}.00`;
 
                     // Handle Error
