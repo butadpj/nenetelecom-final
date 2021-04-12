@@ -67,26 +67,6 @@ body {
   background: var(--shadeLightDark);
 }
 
-@keyframes fadeInOpacityHeight {
-  0% {
-    max-height: 0%;
-    opacity: 0.5;
-  }
-  100% {
-    max-height: 85%;
-    opacity: 1;
-  }
-}
-
-@keyframes fadeOutHeight {
-  0% {
-    max-height: 85%;
-  }
-  100% {
-    max-height: 0%;
-  }
-}
-
 @keyframes fadeInOpacity {
   0% {
     opacity: 0;

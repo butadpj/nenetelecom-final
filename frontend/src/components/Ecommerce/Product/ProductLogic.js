@@ -41,7 +41,7 @@ const ProductLogic = () => {
     setTimeout(() => {
       setShowDetails(false);
       document.body.style.overflow = "auto";
-    }, 360);
+    }, 385);
   };
 
   const createDetails = (product) => {

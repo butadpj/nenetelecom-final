@@ -17,7 +17,7 @@
 }
 
 .ecommerce .product-view-hidden {
-  animation: fadeOutHeight ease-out 0.4s;
+  animation: fadeOutOpacityHeight ease-out 0.4s;
 }
 
 .ecommerce .product-view .detail-header {
@@ -147,4 +147,26 @@
 .ecommerce .add-btn:hover {
   background: var(--light);
   color: var(--shadeLightGreen);
+}
+
+@keyframes fadeInOpacityHeight {
+  0% {
+    max-height: 0%;
+    opacity: 0.5;
+  }
+  100% {
+    max-height: 85%;
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOutOpacityHeight {
+  0% {
+    max-height: 85%;
+    opacity: 1;
+  }
+  100% {
+    max-height: 0%;
+    opacity: 0.3;
+  }
 }
