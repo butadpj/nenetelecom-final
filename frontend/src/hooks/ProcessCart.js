@@ -102,6 +102,13 @@ const ProcessCart = () => {
     selectedStorageVariation,
     selectedColorVariation
   ) => {
+    let storage_var_or_null = selectedStorageVariation
+      ? selectedStorageVariation
+      : null;
+    let color_var_or_null = selectedColorVariation
+      ? selectedColorVariation
+      : null;
+
     // Get any existing product using selected product ID
     let existingProduct = cartItemState.cartProducts.filter(
       (data) => data.product === selectedProduct
@@ -169,8 +176,8 @@ const ProcessCart = () => {
                   product: selectedProduct,
                   quantity: 1,
                   variation_price: variationPrice,
-                  storage_variation_name: selectedStorageVariation,
-                  color_variation_name: selectedColorVariation,
+                  storage_variation_name: storage_var_or_null,
+                  color_variation_name: color_var_or_null,
                 }),
               })
                 .then((res) => res.json())
@@ -199,8 +206,8 @@ const ProcessCart = () => {
               product: selectedProduct,
               quantity: 1,
               variation_price: variationPrice,
-              storage_variation_name: selectedStorageVariation,
-              color_variation_name: selectedColorVariation,
+              storage_variation_name: storage_var_or_null,
+              color_variation_name: color_var_or_null,
             }),
           })
             .then((res) => res.json())
