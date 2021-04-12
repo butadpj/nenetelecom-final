@@ -52,7 +52,6 @@ const Product = () => {
       highlightSearchMatch(input, ".product .product-name");
       highlightSearchMatch(input, ".product .condition");
       highlightSearchMatch(input, ".product .product-price .current");
-      //TODO: CHECK THE LENGTH OF PRODUCT. DISPLAY A NOTICE IF THERES NO PRODUCT MATCHED
       searchedProductList.push(product);
     }
   });
