@@ -90,3 +90,15 @@
 .ecommerce .detail-btn .inner > * {
   margin: 0 0.3em;
 }
+
+.ecommerce .not-found-text {
+  text-align: center;
+  color: var(--shadeDark);
+  padding: 0 1em;
+}
+
+.ecommerce .not-found-text p {
+  margin-top: 1em;
+  font-size: 0.7em;
+  font-style: italic;
+}
