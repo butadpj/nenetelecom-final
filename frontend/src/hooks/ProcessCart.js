@@ -14,9 +14,21 @@ const ProcessCart = () => {
   let bagItemUrl = "/api/bag-item/";
 
   // Process Guest's Cart
-  const guestCart = (selectedProduct, price, action, variationPrice) => {
+  const guestCart = (
+    selectedProduct,
+    price,
+    action,
+    variationPrice,
+    selectedStorageVariation,
+    selectedColorVariation
+  ) => {
     let price_num = parseInt(variationPrice ? variationPrice : price);
-
+    let storage_var_or_null = selectedStorageVariation
+      ? selectedStorageVariation
+      : null;
+    let color_var_or_null = selectedColorVariation
+      ? selectedColorVariation
+      : null;
     if (action.toUpperCase() === "ADD") {
       // Adding product in cookie cart
       if (cart[selectedProduct] == undefined) {
@@ -25,6 +37,8 @@ const ProcessCart = () => {
           total_price: price_num,
           selected: true,
           variation_price: variationPrice,
+          storage_variation_name: selectedStorageVariation,
+          color_variation_name: selectedColorVariation,
         };
       } else {
         // Updating product in cookie cart
@@ -32,6 +46,8 @@ const ProcessCart = () => {
         cart[selectedProduct]["variation_price"] = price_num;
         cart[selectedProduct]["total_price"] =
           price_num * cart[selectedProduct]["quantity"];
+        cart[selectedProduct]["storage_variation_name"] = storage_var_or_null;
+        cart[selectedProduct]["color_variation_name"] = color_var_or_null;
       }
     }
 
@@ -269,7 +285,14 @@ const ProcessCart = () => {
     selectedColorVariation
   ) => {
     if (!isAuthenticated) {
-      guestCart(selectedProduct, price, action, variationPrice);
+      guestCart(
+        selectedProduct,
+        price,
+        action,
+        variationPrice,
+        selectedStorageVariation,
+        selectedColorVariation
+      );
     } else {
       authenticatedCart(
         selectedProduct,
