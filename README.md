@@ -14,7 +14,7 @@
   export DJANGO_SETTINGS_MODULE=nenetelecom.settings.production
   ```
 
-- Execute from **bash script**
+- Or execute it from **bash script**
 
   ```
   bash selectenv.sh
@@ -45,25 +45,39 @@ pip install -r requirements.txt
 ### _Key Features_<img src="./public/REACT/images/66a885fc730d35c7fdd513c76d84eebd.gif" alt="drawing" width="50"/>:
 
 <h4 align="center">Landing Page (Dekstop)</h4>
-<img style="display: block; margin: 0 auto;" src="./public/screenshots/LandingPage-Desktop.png" width=""/>
+<img src="./public/screenshots/LandingPage-Desktop.png" width=""/>
 
 <h4 align="center">Landing Page (Mobile)</h4>
-<img style="display: block; margin: 0 auto;" src="./public/screenshots/LandingPage-Mobile.png" width=""/>
+<p align="center">
+<img  src="./public/screenshots/LandingPage-Mobile.png" width="300"/>
+</p>
 
 <h4 align="center">Progressive Web App</h4>
-<img style="display: block; margin: 0 auto;" src="./public/screenshots/StorePWA.png" width=""/>
+<p align="center">
+<img  src="./public/screenshots/StorePWA.png" width="300"/>
+</p>
 
 <h4 align="center">Messenger Plugin</h4>
-<img style="display: block; margin: 0 auto;" src="./public/screenshots/StoreMESSENGER.png" width=""/>
+<p align="center">
+<img  src="./public/screenshots/StoreMESSENGER.png" width="300"/>
+</p>
 
 <h4 align="center">User type: Admin</h4>
-<img style="display: block; margin: 0 auto;" src="./public/screenshots/StoreNAVADMIN.png" width=""/>
+<p align="center">
+<img  src="./public/screenshots/StoreNAVADMIN.png" width="300"/>
+</p>
 
 <h4 align="center">Product Variation</h4>
-<img style="display: block; margin: 0 auto;" src="./public/screenshots/StorePRODUCTDETAIL.png" width=""/>
+<p align="center">
+<img  src="./public/screenshots/StorePRODUCTDETAIL.png" width="300"/>
+</p>
 
-<h4 align="center">Auth: Login</h4>
-<img style="display: block; margin: 0 auto;" src="./public/screenshots/StoreLOGIN.png" width=""/>
+<h4 align="center">Auth: Login Page</h4>
+<p align="center">
+<img  src="./public/screenshots/StoreLOGIN.png" width="300"/>
+</p>
 
-<h4 align="center">Auth: Register</h4>
-<img style="display: block; margin: 0 auto;" src="./public/screenshots/StoreREGISTER.png" width=""/>
+<h4 align="center">Auth: Register Page</h4>
+<p align="center">
+<img src="./public/screenshots/StoreREGISTER.png" width="300"/>
+</p>
