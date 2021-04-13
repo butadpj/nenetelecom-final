@@ -1,14 +1,8 @@
-import { useContext, useState } from "react";
-import { ProductContext } from "../../../context/ProductContext";
+import React, { useState } from "react";
 
 const ProductLogic = () => {
   const [showDetails, setShowDetails] = useState(false);
   const [detailData, setDetailData] = useState();
-  const [productState] = useContext(ProductContext);
-
-  let products = productState.products;
-  let isLoading = productState.isLoading;
-  let searchInput = productState.productSearchInput;
 
   const handleShowProductDetails = (
     id,
@@ -41,21 +35,29 @@ const ProductLogic = () => {
     setTimeout(() => {
       setShowDetails(false);
       document.body.style.overflow = "auto";
-    }, 385);
+    }, 360);
   };
 
   const createDetails = (product) => {
     setDetailData(product);
   };
 
+  const highlightSearchMatch = (input, queryClassname) => {
+    document.querySelectorAll(`${queryClassname}`).forEach((element) => {
+      let result = element.textContent.replace(
+        new RegExp(input, "gi"),
+        (match) => `<mark>${match}</mark>`
+      );
+      element.innerHTML = result;
+    });
+  };
+
   return {
     handleShowProductDetails,
     handleCloseProductDetails,
-    products,
-    isLoading,
+    highlightSearchMatch,
     showDetails,
     detailData,
-    searchInput,
   };
 };
 

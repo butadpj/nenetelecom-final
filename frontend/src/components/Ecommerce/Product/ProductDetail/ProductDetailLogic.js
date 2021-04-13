@@ -57,6 +57,7 @@ const ProdctDetailLogic = () => {
     let detailPrice = document.querySelector(".ecommerce .detail-price");
     detailPrice.style.color = "var(--shadeLightDark)";
 
+    // Apply active CSS class
     let actives = document.querySelectorAll(
       ".storage-size .option-name.active"
     );
@@ -68,6 +69,15 @@ const ProdctDetailLogic = () => {
 
   const handleSelectedColorVariation = (e, optionName) => {
     setSelectedColorVariation(optionName);
+
+    // Apply active CSS class
+    let actives = document.querySelectorAll(
+      ".color-family .option-name.active"
+    );
+    if (actives.length > 0) {
+      actives[0].classList.remove("active");
+    }
+    e.target.classList.add("active");
   };
 
   return {
