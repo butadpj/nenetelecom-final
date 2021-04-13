@@ -12,15 +12,8 @@ import PanelTab from "../../../../components/Ecommerce/PanelGroup/PanelTab";
 import SearchProductForm from "../../SearchProductForm";
 import EditInfo from "../../../../components/Ecommerce/EditInfo";
 
-const Navbottom = ({ link }) => {
+const Navbottom = React.memo(({ link }) => {
   const {
-    customerFirstName,
-    customerLastName,
-    customerFullName,
-    customerMobileNumber,
-    customerCompleteAddress,
-    customerDisplayPicture,
-    isAuthenticated,
     isSuperUser,
     showSearch,
     showNav,
@@ -33,10 +26,7 @@ const Navbottom = ({ link }) => {
     handleShowTalkSellerModal,
     handleCloseTalkSellerModal,
     showEditInfoModal,
-    handleShowEditInfoModal,
     handleCloseEditInfoModal,
-    guestImg,
-    Button,
   } = NavbottomLogic();
 
   const [state] = useContext(CartItemContext);
@@ -193,6 +183,6 @@ const Navbottom = ({ link }) => {
       ) : null}
     </>
   );
-};
+});
 
 export default Navbottom;

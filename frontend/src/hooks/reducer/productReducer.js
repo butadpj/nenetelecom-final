@@ -6,4 +6,12 @@ export const reducer = (state, action) => {
       productSearchInput: newProductSearchInput,
     };
   }
+
+  if (action.type === "IS_SEARCHING_UPDATE") {
+    return {
+      ...state,
+      isSearching: action.payload,
+    };
+  }
+  throw new Error("You didn't catch some action");
 };

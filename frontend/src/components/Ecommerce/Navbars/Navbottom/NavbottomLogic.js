@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import { getCustomerInfo } from "../../../../hooks/query/getCustomerInfo";
+import { ProductContext } from "../../../../context/ProductContext";
 import { CustomerInfoContext } from "../../../../context/CustomerInfoContext";
 import guestImg from "../../../../assets/svgs/guest_user.svg";
 import Button from "../../../Button";
@@ -13,6 +14,7 @@ const NavbottomLogic = () => {
   const { isAuthenticated, isSuperUser } = getCustomerInfo();
 
   const [state] = useContext(CustomerInfoContext);
+  const [productState, productDispatch] = useContext(ProductContext);
 
   let customerFirstName = state.customerInfo.firstName;
   let customerLastName = state.customerInfo.lastName;
@@ -40,11 +42,20 @@ const NavbottomLogic = () => {
     if (showNav) {
       handleNavClose();
     }
+    productDispatch({
+      type: "IS_SEARCHING_UPDATE",
+      payload: true,
+    });
   };
 
   const handleSearchClose = () => {
     setShowSearch(false);
     document.body.style.overflow = "auto";
+    productDispatch({
+      type: "IS_SEARCHING_UPDATE",
+      payload: false,
+    });
+    productState.productSearchInput = "";
   };
 
   const userSectionHandler = () => {
@@ -134,12 +145,6 @@ const NavbottomLogic = () => {
   };
 
   return {
-    customerFirstName,
-    customerLastName,
-    customerFullName,
-    customerMobileNumber,
-    customerDisplayPicture,
-    isAuthenticated,
     isSuperUser,
     showSearch,
     showNav,
@@ -152,10 +157,7 @@ const NavbottomLogic = () => {
     handleShowTalkSellerModal,
     handleCloseTalkSellerModal,
     showEditInfoModal,
-    handleShowEditInfoModal,
     handleCloseEditInfoModal,
-    guestImg,
-    Button,
   };
 };
 
