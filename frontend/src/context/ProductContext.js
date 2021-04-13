@@ -7,7 +7,9 @@ export const ProductContext = createContext();
 const initialState = {
   products: [],
   isLoading: true,
+  isSearching: false,
   productSearchInput: "",
+  searchedProductList: [],
 };
 
 const ProductContextProvider = (props) => {
@@ -15,7 +17,7 @@ const ProductContextProvider = (props) => {
   const { products, productLoading, productImageLoading } = getProducts();
 
   initialState.products = products;
-  initialState.productSearchInput = "";
+  initialState.searchedProductList = products;
 
   if (!productLoading && !productImageLoading) {
     state.isLoading = false;
