@@ -25,7 +25,7 @@ const CheckoutLogic = () => {
   const [alertModal, setAlertModal] = useState(false);
   const [time, setTime] = useState(4);
 
-  let totalCartPrice = cartItemState.totalCartPrice;
+  let totalCartPrice = Number(cartItemState.totalCartPrice).toLocaleString();
 
   const [customerInfo, setCustomerInfo] = useState({
     firstName: "",
@@ -89,30 +89,6 @@ const CheckoutLogic = () => {
     document.body.style.overflow = "hidden";
     setAlertModal(true);
   };
-
-  // Alert modal timer
-  useEffect(() => {
-    let isMounted = true;
-
-    if (isMounted) {
-      if (alertModal) {
-        let myTimer;
-        if (time === 0) {
-          clearInterval(myTimer);
-          window.location.replace("/store/home");
-        } else {
-          const timer = () => {
-            setTime(time - 1);
-          };
-          myTimer = setInterval(timer, 1000);
-        }
-      }
-    }
-
-    return () => {
-      isMounted = false;
-    };
-  }, [alertModal, time]);
 
   const checkValidity = (input, value) => {
     if (input === "firstName") {
@@ -327,6 +303,34 @@ const CheckoutLogic = () => {
       })
       .catch((err) => console.log(err));
   };
+
+  // Alert modal timer
+  useEffect(() => {
+    let isMounted = true;
+
+    if (isMounted) {
+      if (alertModal) {
+        let myTimer;
+        if (time === 0) {
+          clearInterval(myTimer);
+          window.location.replace("/store/home");
+        } else {
+          const timer = () => {
+            setTime(time - 1);
+          };
+          myTimer = setInterval(timer, 1000);
+        }
+      }
+    }
+
+    return () => {
+      isMounted = false;
+    };
+  }, [alertModal, time]);
+
+  useEffect(() => {
+    document.body.style.overflow = "auto";
+  }, []);
 
   return {
     cartItemState,

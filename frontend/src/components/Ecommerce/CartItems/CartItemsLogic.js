@@ -1,9 +1,8 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 
 import { CartItemContext } from "../../../context/CartItemContext";
 import { ProductContext } from "../../../context/ProductContext";
 import ProcessCart from "../../../hooks/ProcessCart";
-import ProductDetailLogic from "../../../components/Ecommerce/Product/ProductDetail/ProductDetailLogic";
 import { getCustomerInfo } from "../../../hooks/query/getCustomerInfo";
 
 const CartItemsLogic = () => {

@@ -4,7 +4,6 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-whitenoise = "*"
 mysqlclient = "==2.0.3"
 djangorestframework = "==3.12.2"
 Django = "==3.1.8"
@@ -12,12 +11,12 @@ python-decouple = "==3.4"
 django-cleanup = "==5.1.0"
 django-webpush = "==0.3.3"
 Pillow = "==8.1.2"
-six = "*"
 
 [dev-packages]
-uvicorn = "*"
 django-sslserver = "*"
 django-seed = "*"
+uvicorn = "*"
+whitenoise = "*"
 
 [requires]
 python_version = "3.8"
