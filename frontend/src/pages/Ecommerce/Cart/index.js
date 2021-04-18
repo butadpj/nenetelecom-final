@@ -9,7 +9,7 @@ import Button from "../../../components/Button";
 import BackTo from "../../../components/Ecommerce/BackTo";
 
 const Cart = () => {
-  const { f_totalCartPrice } = CartLogic();
+  const { totalCartPrice } = CartLogic();
 
   return (
     <>
@@ -24,7 +24,7 @@ const Cart = () => {
         <div className="checkout-action-wrapper">
           <div className="checkout-action">
             <div className="total-cart-price">
-              <span>Total:</span> ₱{f_totalCartPrice}.00
+              <span>Total:</span> ₱{totalCartPrice}.00
             </div>
             <Link to="/store/checkout">
               <Button type="button" text="Checkout" />
