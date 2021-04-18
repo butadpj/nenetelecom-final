@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 import "./Orders.css";
 import OrdersLogic from "./OrdersLogic";
@@ -10,9 +10,6 @@ const Orders = () => {
   const { orders } = OrdersLogic();
   console.log(orders);
 
-  useEffect(() => {
-    document.body.style.overflow = "auto";
-  }, []);
   return (
     <>
       <section className="orders-page">

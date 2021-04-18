@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { getProductImageData } from "../../../hooks/data/getProductImageData";
-import { getProductVariationData } from "../../../hooks/data/getProductVariationData";
+import { useState } from "react";
+import { getProductImageData } from "../data/getProductImageData";
+import { getProductVariationData } from "../data/getProductVariationData";
 
 const ProductResults = () => {
   const [loading, setLoading] = useState(true);

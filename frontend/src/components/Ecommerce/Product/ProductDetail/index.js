@@ -37,8 +37,6 @@ const ProductDetail = React.memo(
       variationPrice,
     } = ProductDetailLogic();
 
-    let f_price = `₱ ${Number(variationPrice).toLocaleString()}.00`;
-
     return (
       <>
         <ModalWrapper>
@@ -65,7 +63,9 @@ const ProductDetail = React.memo(
                           <span className="variation-name">
                             {selectedStorageVariation} {"> "}
                           </span>
-                          <span className="variation-price">{f_price}</span>
+                          <span className="variation-price">
+                            ₱ {Number(variationPrice).toLocaleString()}.00
+                          </span>
                         </>
                       ) : (
                         <span style={{ color: "var(--shadeLightDark)" }}>

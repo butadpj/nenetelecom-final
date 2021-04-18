@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 import "./Checkout.css";
 import Navbottom from "../../../components/Ecommerce/Navbars/Navbottom";
@@ -34,12 +34,6 @@ const Checkout = () => {
     totalCartPrice,
     isAuthenticated,
   } = CheckoutLogic();
-
-  let f_totalCartPrice = Number(totalCartPrice).toLocaleString();
-
-  useEffect(() => {
-    document.body.style.overflow = "auto";
-  }, []);
 
   return (
     <>
@@ -95,7 +89,7 @@ const Checkout = () => {
                 );
               })}
               <div className="total-cart-price">
-                <span>Total:</span> ₱{f_totalCartPrice}.00
+                <span>Total:</span> ₱{totalCartPrice}.00
               </div>
             </div>
             <div className="billing-info">
