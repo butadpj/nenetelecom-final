@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
 from rest_framework import viewsets, permissions
 
@@ -6,13 +6,17 @@ from backend.store.models import *
 from backend.cart.models import *
 from backend.checkout.models import *
 from .serializers import *
-
+from .paginations import *
 
 
 # Create your views here.
 class ProductView(viewsets.ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
+    pagination_class = ProductPagination
+
+    def get_object(self):
+        return get_object_or_404(Product, id=self.request.query_params.get("id"))
 
 class ProductImageView(viewsets.ModelViewSet):
     queryset = ProductImage.objects.all()
