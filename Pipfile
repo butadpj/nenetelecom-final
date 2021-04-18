@@ -12,10 +12,12 @@ python-decouple = "==3.4"
 django-cleanup = "==5.1.0"
 django-webpush = "==0.3.3"
 Pillow = "==8.1.2"
+six = "*"
 
 [dev-packages]
 uvicorn = "*"
 django-sslserver = "*"
+django-seed = "*"
 
 [requires]
 python_version = "3.8"
