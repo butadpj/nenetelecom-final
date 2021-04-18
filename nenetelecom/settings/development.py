@@ -22,6 +22,7 @@ INSTALLED_APPS = [
     'frontend',
     'rest_framework',
     'webpush',
+    'django_seed',
 ]
 
 WEBPUSH_SETTINGS = {

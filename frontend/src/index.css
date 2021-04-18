@@ -16,7 +16,7 @@
   --shadeRed: rgb(217, 108, 108, 1);
   --shadeLightGreen: rgba(104, 183, 161, 1);
   --shadeLightBlue: rgba(107, 166, 225, 1);
-  --shadeBlue: rgba(61, 94, 127, 1);
+  --shadeBlue: rgb(61, 94, 127);
   --lightShadow: rgba(255, 255, 255, 0.089);
   --darkShadow: rgba(64, 64, 62, 0.26);
 

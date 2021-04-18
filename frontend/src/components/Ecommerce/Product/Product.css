@@ -102,3 +102,53 @@
   font-size: 0.7em;
   font-style: italic;
 }
+
+.ecommerce .scroll-message {
+  text-align: center;
+  color: var(--shadeDark);
+}
+
+.ecommerce .pull-down-message {
+  margin-bottom: 1.5em;
+  font-size: 1.5em;
+}
+
+#css-ldr {
+  animation: animate 1.5s linear infinite;
+  clip: rect(0, 50px, 50px, 25px);
+  height: 50px;
+  width: 50px;
+  position: absolute;
+  left: calc(50% - 25px);
+  top: calc(50% - 25px);
+}
+@keyframes animate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(220deg);
+  }
+}
+#css-ldr:after {
+  animation: animate2 1.5s ease-in-out infinite;
+  clip: rect(0, 50px, 50px, 25px);
+  content: "";
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  position: absolute;
+}
+@keyframes animate2 {
+  0% {
+    box-shadow: inset var(--shadeBlue) 0 0 0 17px;
+    transform: rotate(-140deg);
+  }
+  50% {
+    box-shadow: inset var(--shadeBlue) 0 0 0 2px;
+  }
+  100% {
+    box-shadow: inset var(--shadeBlue) 0 0 0 17px;
+    transform: rotate(140deg);
+  }
+}
