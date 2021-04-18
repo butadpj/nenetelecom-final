@@ -31,6 +31,8 @@
 body {
   font-size: 25px;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  /* Disables pull-to-refresh but allows overscroll glow effects. */
+  overscroll-behavior-y: auto;
 }
 
 /* Scroll bar width */
@@ -512,5 +514,3 @@ body {
     zoom: 33%;
   }
 }
-
-/*# sourceMappingURL=index.css.map */

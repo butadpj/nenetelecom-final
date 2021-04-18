@@ -17,8 +17,6 @@ const CartItems = () => {
     noSelected,
   } = CartItemsLogic();
 
-  console.log(cartDisplayProducts);
-
   return (
     <div className="cart-items">
       {isLoading ? (
