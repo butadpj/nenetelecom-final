@@ -7,6 +7,9 @@ import re
 
 # Create your models here.
 class Product(models.Model):
+    class Meta:
+        ordering = ('-date_posted', )
+
     P = 'Phones'
     T = 'Tablets/iPad'
     A = 'Accessories'
