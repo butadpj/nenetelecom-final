@@ -7,7 +7,7 @@
   display: block;
   max-width: 30rem;
   margin: 0 auto 2em auto;
-  box-shadow: var(--box-shadow);
+  box-shadow: var(--box-shadow-light);
 }
 
 .ecommerce .product .condition {
@@ -94,7 +94,7 @@
 .ecommerce .not-found-text {
   text-align: center;
   color: var(--shadeDark);
-  padding: 0 1em;
+  padding: 1em 1em;
 }
 
 .ecommerce .not-found-text p {

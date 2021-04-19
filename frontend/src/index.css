@@ -22,7 +22,7 @@
 
   --hoverTransition: 0.4s ease-out;
 
-  --box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.603);
+  --box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.411);
   --box-shadow-light: 0px 0px 6px rgba(0, 0, 0, 0.16);
   --E-bg: rgba(227, 232, 236, 1);
   --loader-bg: rgba(255, 255, 255, 0.178);

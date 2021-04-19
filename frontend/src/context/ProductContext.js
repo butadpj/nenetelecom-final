@@ -6,6 +6,13 @@ export const ProductContext = createContext();
 
 const initialState = {
   products: [],
+  infiniteScroll: {
+    products: [],
+    isLoading: true,
+    hasMore: true,
+    offSet: 0,
+    limit: 5,
+  },
   isLoading: true,
   isSearching: false,
   productSearchInput: "",
@@ -14,12 +21,16 @@ const initialState = {
 
 const ProductContextProvider = (props) => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const { products, productLoading, productImageLoading } = getProducts();
+  const {
+    products,
+    productLoading,
+    productImageLoading,
+    productVariationLoading,
+  } = getProducts();
 
-  initialState.products = products;
-  initialState.searchedProductList = products;
+  state.products = products;
 
-  if (!productLoading && !productImageLoading) {
+  if (!productLoading && !productImageLoading && !productVariationLoading) {
     state.isLoading = false;
   }
 
