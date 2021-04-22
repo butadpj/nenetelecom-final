@@ -12,6 +12,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_cleanup.apps.CleanupConfig',
+    'django_filters',
     'backend',
     'backend.api',
     'backend.accounts',
@@ -23,6 +24,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'webpush',
     'django_seed',
+    
 ]
 
 WEBPUSH_SETTINGS = {
@@ -78,6 +80,13 @@ DATABASES = {
         'PORT': ''
     }
 }
+
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': (
+        'django_filters.rest_framework.DjangoFilterBackend',
+    ),
+}
+
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'public')

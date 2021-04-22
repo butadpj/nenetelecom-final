@@ -16,16 +16,15 @@ const Product = React.memo(() => {
     detailData,
     productState,
     loadNextData,
-    loading,
-    hasMore,
-    productResults,
-    setIsRefreshing,
+    refreshData,
     url,
   } = ProductLogic();
 
+  // console.log(productState);
+  //TODO: FIX THE FUCKING REFRESH DATA WHEN PULL DOWN
   return (
     <>
-      {productState.isLoading || loading ? (
+      {productState.isLoading ? (
         <Loader />
       ) : // searchedProductList[] will be diplay if user is currently searching
       productState.isSearching ? (
@@ -151,16 +150,16 @@ const Product = React.memo(() => {
       ) : (
         // products[] will be diplay if user is not searching
         <InfiniteScroll
-          dataLength={productResults.length}
+          dataLength={productState.infiniteScroll.products.length}
           next={() => loadNextData(url)}
-          hasMore={hasMore}
+          hasMore={productState.infiniteScroll.hasMore}
           loader={<Loader />}
           endMessage={
             <h4 className="scroll-message ">Yay! You've seen it all</h4>
           }
           pullDownToRefresh={true}
           pullDownToRefreshThreshold={80}
-          refreshFunction={() => setIsRefreshing(true)}
+          refreshFunction={() => refreshData(url)}
           pullDownToRefreshContent={
             <div className="scroll-message pull-down-message">
               <i className="fas fa-arrow-circle-up"></i>
@@ -172,7 +171,7 @@ const Product = React.memo(() => {
             </h5>
           }
         >
-          {productResults.map((product) => {
+          {productState.infiniteScroll.products.map((product) => {
             const {
               id,
               image,

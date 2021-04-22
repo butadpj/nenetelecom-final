@@ -32,18 +32,12 @@ const NavbarLogic = (navContainer, navLogoContainer, navListContainer) => {
 
   const navDarkApply = (navContainer) => {
     navContainer.style.opacity = "100%";
-    navContainer.style.height = "13vh";
+    navContainer.style.height = "var(--nav-bar-height-extend)";
   };
-  const navLightApply = (navContainer, navListContainer) => {
+
+  const navLightApply = (navContainer) => {
     navContainer.style.opacity = "70%";
-    navContainer.style.height = "8vh";
-
-    if (navListContainer != null) {
-      navListContainer.classList.remove("show");
-    }
-
-    setNavToggleIcon(bars);
-    setShowSideNav(false);
+    navContainer.style.height = "var(--nav-bar-height)";
   };
 
   const handleResize = () => {
@@ -74,15 +68,21 @@ const NavbarLogic = (navContainer, navLogoContainer, navListContainer) => {
     let isMounted = true;
     if (isMounted) {
       if (navContainer) {
-        navContainer.addEventListener("mouseover", () =>
-          navDarkApply(navContainer)
-        );
+        navContainer.addEventListener("mouseover", () => {
+          navDarkApply(navContainer);
+        });
       }
 
       if (navContainer) {
-        navContainer.addEventListener("mouseleave", () =>
-          navLightApply(navContainer, navListContainer)
-        );
+        navContainer.addEventListener("mouseleave", () => {
+          navLightApply(navContainer);
+          // Hide sidebar
+          if (navListContainer != null) {
+            navListContainer.classList.remove("show");
+          }
+          setNavToggleIcon(bars);
+          setShowSideNav(false);
+        });
       }
 
       if (navLogoContainer) {
@@ -101,9 +101,15 @@ const NavbarLogic = (navContainer, navLogoContainer, navListContainer) => {
       }
 
       if (navContainer) {
-        navContainer.removeEventListener("mouseleave", () =>
-          navLightApply(navContainer, navListContainer)
-        );
+        navContainer.removeEventListener("mouseleave", () => {
+          navLightApply(navContainer);
+          // Hide sidebar
+          if (navListContainer != null) {
+            navListContainer.classList.remove("show");
+          }
+          setNavToggleIcon(bars);
+          setShowSideNav(false);
+        });
       }
 
       isMounted = false;
@@ -128,8 +134,7 @@ const NavbarLogic = (navContainer, navLogoContainer, navListContainer) => {
               navContainer.style.position = "relative";
               navContainer.classList.remove("nav-bottom");
               navContainer.classList.add("nav-fade-in");
-              navContainer.style.height = "13vh";
-
+              navContainer.style.height = "var(--nav-bar-height-extend)";
               setIsDark(false);
             }
           }
@@ -141,17 +146,15 @@ const NavbarLogic = (navContainer, navLogoContainer, navListContainer) => {
         } else if (offsetY <= 5 && isMobile == false) {
           navContainer.style.position = "relative";
           if (navLogoContainer) {
-            navLogoContainer.style.display = "none";
+            navLogoContainer.style.display = "block";
           }
         }
         if (offsetY < lastY) {
           //Scroll UP
-          navContainer.style.opacity = "100%";
-          navContainer.style.height = "13vh";
+          navContainer.style.height = "var(--nav-bar-height-extend)";
         } else {
           //Scroll DOWN
-          navContainer.style.opacity = "70%";
-          navContainer.style.height = "8vh";
+          navContainer.style.height = "var(--nav-bar-height)";
         }
       }
     }
@@ -165,19 +168,8 @@ const NavbarLogic = (navContainer, navLogoContainer, navListContainer) => {
   //! ANY DEVICE - Transparent Navbar functionality - END
 
   return {
-    showSideNav,
     navToggleIcon,
     navToggle,
-    navDarkApply,
-    navLightApply,
-    checkOffsetY,
-    handleResize,
-    isMobile,
-    lastY,
-    offsetY,
-    isDark,
-    setIsDark,
-    width,
   };
 };
 
