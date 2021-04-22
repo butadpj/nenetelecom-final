@@ -25,7 +25,7 @@ const Visit = () => {
     <section className="visit" id="visit">
       <div className="circle-top"></div>
       <div className="circle-bottom"></div>
-      <div className="bg-dark">
+      <div className="bg-box">
         <main>
           <div className="call-to-action">
             <h1 className="text-lg">OR VISIT US DIRECTLY</h1>

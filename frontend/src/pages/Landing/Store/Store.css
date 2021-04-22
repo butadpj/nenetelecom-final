@@ -3,20 +3,21 @@
   width: 100%;
   height: fit-content;
   position: relative;
-  zoom: 55%;
   padding-top: 5rem;
   z-index: 4;
+  font-size: 1.5rem;
 }
 
 .store .circle {
-  background: var(--shadeLightGreen);
-  width: 20rem;
-  height: 20rem;
+  background: var(--shadeLightDark);
+  width: 12rem;
+  height: 12rem;
   border-radius: 50%;
   position: absolute;
-  top: 0%;
-  left: 5%;
+  top: 2%;
+  left: 2%;
   transform: translate(-50%, -50%);
+  z-index: -6;
 }
 
 .store header {
@@ -26,16 +27,14 @@
 
 .store .cards {
   display: grid;
-  gap: 4em;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-}
-
-.store .card {
-  border-radius: 0;
+  gap: 2.5em;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  width: 90%;
+  margin: 0 auto;
 }
 
 .store .card-titlee {
-  color: var(--shadeGreen) !important;
+  color: var(--shadeSmoothBlue) !important;
 }
 
 .store .storeBtn {
@@ -43,6 +42,10 @@
   margin: 3em auto 0 auto;
   width: fit-content;
   text-align: center;
+}
+
+.store .storeBtn button {
+  font-size: 0.9em;
 }
 
 .store .wave-container svg {

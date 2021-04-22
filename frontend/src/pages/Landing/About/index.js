@@ -5,7 +5,6 @@ import Title from "../../../components/Title";
 const About = () => {
   return (
     <section className="about" id="about">
-      <div className="bg1"></div>
       <Title
         text1="AB"
         text1Span="OUT"

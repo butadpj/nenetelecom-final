@@ -1,11 +1,16 @@
 header {
-  color: var(--shadeBlue);
+  color: var(--shadeLightBlue);
   width: fit-content;
   text-align: center;
   z-index: 5;
 }
+
+header .header-icon {
+  width: 40%;
+}
+
 header h3 {
-  font-size: 51px;
+  font-size: 1.3em;
   font-weight: bold;
   text-transform: uppercase;
 }
