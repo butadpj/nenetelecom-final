@@ -116,8 +116,46 @@ const ProductLogic = () => {
     }
   };
 
-  const refreshData = () => {
-    console.log("REFRESH DAT");
+  const refreshData = async (url) => {
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+      if (!data.next) {
+        productDispatch({
+          type: "NO_MORE_DATA",
+          payload: false,
+        });
+      }
+      productDispatch({
+        type: "REFRESH_DATA",
+        payload: shuffle([
+          ...productState.infiniteScroll.products,
+          ...mergeProductData(data.results),
+        ]),
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const shuffle = (array) => {
+    let currentIndex = array.length,
+      temporaryValue,
+      randomIndex;
+
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+
+      // And swap it with the current element.
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
+
+    return array;
   };
 
   // Product Search will happen here
@@ -151,31 +189,6 @@ const ProductLogic = () => {
       });
     }
   }, [searchInput]);
-
-  // useEffect(() => {
-  //   if (isRefreshing) {
-  //     setLoading(true);
-  //     const refreshData = async () => {
-  //       try {
-  //         const response = await fetch(url);
-  //         const data = await response.json();
-  //         if (!data.next) {
-  //           setHasMore(false);
-  //         }
-  //         setData(shuffle([...productResults, ...data.results]));
-  //         setLoading(false);
-  //         setIsRefreshing(false);
-  //         setOffSet((prev) => {
-  //           return prev + limit;
-  //         });
-  //       } catch (error) {
-  //         console.error(error);
-  //         setLoading(false);
-  //       }
-  //     };
-  //     refreshData();
-  //   }
-  // }, [isRefreshing]);
 
   useEffect(() => {
     document.body.style.overflow = "auto";

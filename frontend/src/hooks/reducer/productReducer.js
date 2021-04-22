@@ -41,5 +41,16 @@ export const reducer = (state, action) => {
       },
     };
   }
+
+  if (action.type === "REFRESH_DATA") {
+    return {
+      ...state,
+      infiniteScroll: {
+        ...state.infiniteScroll,
+        offSet: state.infiniteScroll.offSet + state.infiniteScroll.limit,
+        products: action.payload,
+      },
+    };
+  }
   throw new Error("You didn't catch some action");
 };

@@ -159,7 +159,7 @@ const Product = React.memo(() => {
           }
           pullDownToRefresh={true}
           pullDownToRefreshThreshold={80}
-          refreshFunction={() => refreshData()}
+          refreshFunction={() => refreshData(url)}
           pullDownToRefreshContent={
             <div className="scroll-message pull-down-message">
               <i className="fas fa-arrow-circle-up"></i>
