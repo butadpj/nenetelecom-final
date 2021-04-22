@@ -1,22 +1,26 @@
 import React from "react";
 import "./MediaLinks.css";
 
-const Media = ({ mediaIcon, mediaText, isLink }) => {
+const Media = ({ mediaIcon, mediaText, mediaLink }) => {
   return (
     <div className="media">
-      <img className="media-icon" src={mediaIcon} alt="Social Media" />
+      <a href={mediaLink} target="_blank">
+        <img
+          className="media-icon"
+          src={mediaIcon}
+          alt="Social Media"
+          width="35"
+        />
+      </a>
+
       <div className="media-text">
-        {isLink ? (
-          <a
-            style={{ textDecoration: "none", color: "var(--dark)" }}
-            href={["https://" + mediaText]}
-            target="_blank"
-          >
-            {mediaText}
-          </a>
-        ) : (
-          mediaText
-        )}
+        <a
+          style={{ textDecoration: "none", color: "var(--dark)" }}
+          href={mediaLink}
+          target="_blank"
+        >
+          {mediaText}
+        </a>
       </div>
     </div>
   );

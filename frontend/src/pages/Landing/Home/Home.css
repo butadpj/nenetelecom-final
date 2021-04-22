@@ -20,7 +20,7 @@
   position: absolute;
   top: 46%;
   left: 50%;
-  transform: translate(-50%, -50%) scale(0.5);
+  transform: translate(-50%, -50%) scale(0.45);
 }
 
 .home .tagline {
@@ -28,12 +28,12 @@
   left: 50%;
   top: 70%;
   transform: translate(-50%, -50%);
-  width: 77%;
+  width: 80%;
 }
 
 .tagline p {
   text-align: center;
   color: var(--light);
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-style: italic;
 }

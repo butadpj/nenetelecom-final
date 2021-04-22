@@ -1,4 +1,16 @@
-.section-title h1 {
+.section-title {
+  text-align: center;
+}
+
+.section-title p {
+  font-weight: bold;
+  color: var(--dark);
+  text-shadow: -0.1em 0.2em var(--darkShadow);
+  margin-left: 1rem;
+  letter-spacing: 0.5rem;
+}
+
+/* .section-title h1 {
   font-size: 1.3em;
 
   color: var(--dark);
@@ -8,4 +20,4 @@
 .section-title h1 span {
   color: var(--light);
   text-shadow: -0.1em 0.2em var(--lightShadow);
-}
+} */

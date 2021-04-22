@@ -6,7 +6,6 @@ import Card from "../../../components/Social/Card";
 const Contact = () => {
   return (
     <section className="contact" id="contact">
-      <div className="bg1"></div>
       <Title
         text1="CONT"
         text1Span="ACT"

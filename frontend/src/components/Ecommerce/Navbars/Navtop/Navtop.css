@@ -5,7 +5,7 @@
   z-index: 10;
   transition: 0.5s ease-in-out;
   position: fixed;
-  box-shadow: 0px 10px 20px #00000033;
+  box-shadow: var(--box-shadow-light);
   color: var(--dark);
 }
 
