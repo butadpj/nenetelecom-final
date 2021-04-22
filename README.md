@@ -14,7 +14,7 @@
   export DJANGO_SETTINGS_MODULE=nenetelecom.settings.production
   ```
 
-- Execute from **bash script**
+- Or execute it from **bash script**
 
   ```
   bash selectenv.sh
