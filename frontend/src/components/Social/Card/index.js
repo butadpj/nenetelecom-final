@@ -13,19 +13,18 @@ const Card = () => {
           mediaClass="phone"
           mediaIcon={phone}
           mediaText={`Smart - 0920 679 6099\nGlobe - 0915 117 1197`}
-          isLink={false}
         />
         <Media
           mediaClass="fb"
           mediaIcon={fb}
-          mediaText="facebook.com/nenetelecom"
-          isLink={true}
+          mediaLink="https://facebook.com/nenetelecom"
+          mediaText="facebook/nenetelecom"
         />
         <Media
           mediaClass="twitter"
           mediaIcon={twitter}
-          mediaText="twitter.com/nenetelecom"
-          isLink={true}
+          mediaLink="https://twitter.com/nenetelecom"
+          mediaText="twitter/nenetelecom"
         />
       </main>
     </div>

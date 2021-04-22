@@ -14,7 +14,7 @@ const SearchProductForm = () => {
         placeholder="Search for a product..."
         value={state.productSearchInput}
         onChange={(event) =>
-          dispatch({ type: "SEARCH_PRODUCT", payload: event.target.value })
+          dispatch({ type: "SEARCH_INPUT", payload: event.target.value })
         }
       />
     </div>

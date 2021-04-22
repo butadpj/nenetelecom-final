@@ -2,9 +2,9 @@ import React from "react";
 
 import "./FilterButton.css";
 
-const FilterButton = ({ name, icon }) => {
+const FilterButton = ({ name, icon, functionality }) => {
   return (
-    <div className={[name + " filter-btn"]}>
+    <div className={[name + " filter-btn"]} onClick={functionality}>
       <p>{name}</p>
       <img src={icon} alt="" />
     </div>

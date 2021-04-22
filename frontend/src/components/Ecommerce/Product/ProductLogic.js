@@ -1,29 +1,24 @@
 import { useState, useEffect, useContext } from "react";
 import { ProductContext } from "../../../context/ProductContext";
 
-import ProductResults from "../../../hooks/InfiniteScrollResults/ProductResults";
+import { getProductImageData } from "../../../hooks/data/getProductImageData";
+import { getProductVariationData } from "../../../hooks/data/getProductVariationData";
 
 const ProductLogic = () => {
   const [showDetails, setShowDetails] = useState(false);
   const [detailData, setDetailData] = useState();
-  const {
-    productResults,
-    loading,
-    hasMore,
-    offSet,
-    limit,
-    setHasMore,
-    setOffSet,
-    setLoading,
-    setData,
-    shuffle,
-    isRefreshing,
-    setIsRefreshing,
-  } = ProductResults();
-  const [productState] = useContext(ProductContext);
-  let url = `/api/products/?limit=${limit}&offset=${offSet}`;
-  let searchInput = productState.productSearchInput;
 
+  const { productImageData } = getProductImageData();
+  const { productVariationData } = getProductVariationData();
+
+  const [productState, productDispatch] = useContext(ProductContext);
+
+  let searchInput = productState.productSearchInput;
+  let filterInput = productState.filterInput;
+  let offSet = productState.infiniteScroll.offSet;
+  let limit = productState.infiniteScroll.limit;
+
+  let url = `/api/products/?limit=${limit}&offset=${offSet}`;
   const handleShowProductDetails = (
     id,
     name,
@@ -72,76 +67,128 @@ const ProductLogic = () => {
     });
   };
 
+  const mergeProductData = (data) => {
+    let productResults = data
+      ? data.map((product) => {
+          let imageArray = [];
+          let variationArray = [];
+          productImageData.forEach((image) => {
+            if (image.product == product.id) {
+              imageArray.push(image.image);
+            }
+          });
+          productVariationData.forEach((variation) => {
+            if (variation.product == product.id) {
+              variationArray.push(variation);
+            }
+          });
+
+          product.image = imageArray;
+          product.variation = variationArray;
+          return product;
+        })
+      : [];
+
+    return productResults;
+  };
+
   const loadNextData = async (url) => {
     try {
       const response = await fetch(url);
       const data = await response.json();
       if (!data.next) {
-        setHasMore(false);
+        productDispatch({
+          type: "NO_MORE_DATA",
+          payload: false,
+        });
+        // setHasMore(false);
       }
-      setData([...productResults, ...data.results]);
-      setLoading(false);
-      setOffSet((prev) => {
-        return prev + limit;
+      productDispatch({
+        type: "SCROLL_PRODUCTS_UPDATE",
+        payload: mergeProductData(data.results),
       });
+      // setData([...productResults, ...data.results]);
+      // setOffSet((prev) => {
+      //   return prev + limit;
+      // });
     } catch (error) {
       console.error(error);
-      setLoading(false);
     }
   };
 
-  let searchResult = []; // Matched search will go here
+  const refreshData = async (url) => {
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+      if (!data.next) {
+        productDispatch({
+          type: "NO_MORE_DATA",
+          payload: false,
+        });
+      }
+      productDispatch({
+        type: "REFRESH_DATA",
+        payload: shuffle([
+          ...productState.infiniteScroll.products,
+          ...mergeProductData(data.results),
+        ]),
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const shuffle = (array) => {
+    let currentIndex = array.length,
+      temporaryValue,
+      randomIndex;
+
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+
+      // And swap it with the current element.
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
+
+    return array;
+  };
+
   // Product Search will happen here
   useEffect(() => {
-    let input = searchInput.toLowerCase().replace(/\s+/g, " ").trim();
-    productState.products.filter((product) => {
-      let name = product.name.toLowerCase().replace(/\s+/g, " ").trim();
-      let brand = product.brand.toLowerCase().replace(/\s+/g, " ").trim();
-      let condition = product.condition
-        .toLowerCase()
-        .replace(/\s+/g, " ")
-        .trim();
-      let price = `${Number(product.price).toLocaleString()}.00`;
-      if (
-        name.includes(input) ||
-        brand.includes(input) ||
-        condition.includes(input) ||
-        price.includes(input)
-      ) {
-        highlightSearchMatch(input, ".product .product-name");
-        highlightSearchMatch(input, ".product .condition");
-        highlightSearchMatch(input, ".product .product-price .current");
-        searchResult.push(product); // Push it to search result
-      }
-    });
-
-    productState.searchedProductList = searchResult; // Put it on searchedProductList
-  }, [searchInput]);
-
-  useEffect(() => {
-    if (isRefreshing) {
-      setLoading(true);
-      const refreshData = async () => {
-        try {
-          const response = await fetch(url);
-          const data = await response.json();
-          if (!data.next) {
-            setHasMore(false);
-          }
-          setData(shuffle([...productResults, ...data.results]));
-          setLoading(false);
-          setIsRefreshing(false);
-          setOffSet((prev) => {
-            return prev + limit;
-          });
-        } catch (error) {
-          console.error(error);
-          setLoading(false);
+    if (searchInput) {
+      let searchResult = []; // Matched search will go here
+      let input = searchInput.toLowerCase().replace(/\s+/g, " ").trim();
+      productState.products.map((product) => {
+        let name = product.name.toLowerCase().replace(/\s+/g, " ").trim();
+        let brand = product.brand.toLowerCase().replace(/\s+/g, " ").trim();
+        let condition = product.condition
+          .toLowerCase()
+          .replace(/\s+/g, " ")
+          .trim();
+        let price = `${Number(product.price).toLocaleString()}.00`;
+        if (
+          name.includes(input) ||
+          brand.includes(input) ||
+          condition.includes(input) ||
+          price.includes(input)
+        ) {
+          highlightSearchMatch(input, ".product .product-name");
+          highlightSearchMatch(input, ".product .condition");
+          highlightSearchMatch(input, ".product .product-price .current");
+          searchResult.push(product); // Push it to search result
         }
-      };
-      refreshData();
+      });
+      productDispatch({
+        type: "SEARCH_PRODUCT_LIST_UPDATE",
+        payload: searchResult,
+      });
     }
-  }, [isRefreshing]);
+  }, [searchInput]);
 
   useEffect(() => {
     document.body.style.overflow = "auto";
@@ -152,17 +199,11 @@ const ProductLogic = () => {
   return {
     handleShowProductDetails,
     handleCloseProductDetails,
-    highlightSearchMatch,
     showDetails,
     detailData,
     productState,
-    offSet,
-    limit,
     loadNextData,
-    loading,
-    hasMore,
-    productResults,
-    setIsRefreshing,
+    refreshData,
     url,
   };
 };

@@ -30,7 +30,7 @@ const Home = () => {
               to="store"
               spy={true}
               smooth={true}
-              offset={-200}
+              offset={0}
               duration={1500}
               className="list-item"
             >
@@ -42,7 +42,7 @@ const Home = () => {
               to="visit"
               spy={true}
               smooth={true}
-              offset={-200}
+              offset={50}
               duration={1500}
               className="list-item"
             >
@@ -54,7 +54,7 @@ const Home = () => {
               to="about"
               spy={true}
               smooth={true}
-              offset={-200}
+              offset={50}
               duration={1500}
               className="list-item"
             >
@@ -66,7 +66,7 @@ const Home = () => {
               to="contact"
               spy={true}
               smooth={true}
-              offset={-200}
+              offset={70}
               duration={1500}
               className="list-item"
             >

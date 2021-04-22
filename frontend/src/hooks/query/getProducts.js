@@ -10,23 +10,31 @@ export const getProducts = () => {
     productVariationLoading,
   } = getProductVariationData();
 
-  let products = productsData.map((product) => {
-    let imageArray = [];
-    let variationArray = [];
-    productImageData.forEach((image) => {
-      if (image.product == product.id) {
-        imageArray.push(image.image);
-      }
-    });
-    productVariationData.forEach((variation) => {
-      if (variation.product == product.id) {
-        variationArray.push(variation);
-      }
-    });
+  let products = productsData
+    ? productsData.map((product) => {
+        let imageArray = [];
+        let variationArray = [];
+        productImageData.forEach((image) => {
+          if (image.product == product.id) {
+            imageArray.push(image.image);
+          }
+        });
+        productVariationData.forEach((variation) => {
+          if (variation.product == product.id) {
+            variationArray.push(variation);
+          }
+        });
 
-    product.image = imageArray;
-    product.variation = variationArray;
-    return product;
-  });
-  return { products, productLoading, productImageLoading };
+        product.image = imageArray;
+        product.variation = variationArray;
+        return product;
+      })
+    : [];
+
+  return {
+    products,
+    productLoading,
+    productImageLoading,
+    productVariationLoading,
+  };
 };

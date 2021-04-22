@@ -1,7 +1,6 @@
 .media-card {
-  width: fit-content;
-  height: fit-content;
   background: var(--light);
-  padding: 3em;
-  font-size: 0.3em;
+  padding: 1em;
+  width: min(95%, 30rem);
+  margin: 0 auto;
 }

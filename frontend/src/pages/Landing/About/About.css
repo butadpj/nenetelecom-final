@@ -1,45 +1,23 @@
 .about {
-  background: var(--dark);
+  background: var(--light);
   position: relative;
   width: 100%;
-  height: 100vh;
-  font-size: 5rem;
-}
-
-.about .bg1 {
-  width: 25%;
-  height: 100%;
-  background: var(--light);
+  padding: 1.5em 0;
+  padding-bottom: 2em;
+  font-size: 3rem;
 }
 
 .about-title {
-  position: absolute;
-  top: 50%;
-  left: 26%;
-  transform: translate(-50%, -50%);
-  letter-spacing: 2.5rem;
-  width: 554px;
-  height: 373px;
-  z-index: 1;
-}
-
-.about-title .title-text-1 {
-  margin-left: 0.5em;
+  margin: 0 auto;
+  font-size: 0.9em;
 }
 
 .about-text {
-  position: absolute;
-  width: 587px;
-  height: 683px;
-  color: var(--light);
-  z-index: 2;
-  top: 50%;
-  left: 75%;
-  transform: translate(-50%, -50%);
-  letter-spacing: 0.62px;
-  font-size: 0.6em;
-  font-weight: 600;
-  line-height: 2em;
-  display: flex;
-  align-items: center;
+  margin: 0 auto;
+  margin-top: 3em;
+  width: min(80%, 45ch);
+  color: var(--dark);
+  font-weight: 400;
+  font-size: 0.55em;
+  letter-spacing: 0.8px;
 }
