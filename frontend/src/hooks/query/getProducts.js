@@ -14,12 +14,12 @@ export const getProducts = () => {
     ? productsData.map((product) => {
         let imageArray = [];
         let variationArray = [];
-        productImageData.forEach((image) => {
+        productImageData.map((image) => {
           if (image.product == product.id) {
             imageArray.push(image.image);
           }
         });
-        productVariationData.forEach((variation) => {
+        productVariationData.map((variation) => {
           if (variation.product == product.id) {
             variationArray.push(variation);
           }
