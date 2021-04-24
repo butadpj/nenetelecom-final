@@ -1,24 +1,26 @@
 import { useState, useEffect, useContext } from "react";
 import { ProductContext } from "../../../context/ProductContext";
 
+import { getProducts } from "../../../hooks/query/getProducts";
 import { getProductImageData } from "../../../hooks/data/getProductImageData";
 import { getProductVariationData } from "../../../hooks/data/getProductVariationData";
 
 const ProductLogic = () => {
   const [showDetails, setShowDetails] = useState(false);
-  const [detailData, setDetailData] = useState();
+  const [detailData, setDetailData] = useState({});
+  const [dataResults, setDataResults] = useState([]);
 
   const { productImageData } = getProductImageData();
   const { productVariationData } = getProductVariationData();
 
   const [productState, productDispatch] = useContext(ProductContext);
-
   let searchInput = productState.productSearchInput;
   let filterInput = productState.filterInput;
   let offSet = productState.infiniteScroll.offSet;
   let limit = productState.infiniteScroll.limit;
 
   let url = `/api/products/?limit=${limit}&offset=${offSet}`;
+
   const handleShowProductDetails = (
     id,
     name,
@@ -67,35 +69,34 @@ const ProductLogic = () => {
     });
   };
 
-  const mergeProductData = (data) => {
-    let productResults = data
+  const mergeImageAndVariationData = (data) => {
+    let mergedProductData = data
       ? data.map((product) => {
           let imageArray = [];
           let variationArray = [];
-          productImageData.forEach((image) => {
+          productImageData.map((image) => {
             if (image.product == product.id) {
               imageArray.push(image.image);
             }
           });
-          productVariationData.forEach((variation) => {
+          productVariationData.map((variation) => {
             if (variation.product == product.id) {
               variationArray.push(variation);
             }
           });
-
           product.image = imageArray;
           product.variation = variationArray;
           return product;
         })
       : [];
-
-    return productResults;
+    return mergedProductData;
   };
 
   const loadNextData = async (url) => {
     try {
       const response = await fetch(url);
       const data = await response.json();
+      setDataResults(data.results);
       if (!data.next) {
         productDispatch({
           type: "NO_MORE_DATA",
@@ -103,12 +104,8 @@ const ProductLogic = () => {
         });
         // setHasMore(false);
       }
-      productDispatch({
-        type: "SCROLL_PRODUCTS_UPDATE",
-        payload: mergeProductData(data.results),
-      });
       // setData([...productResults, ...data.results]);
-      // setOffSet((prev) => {
+      // setOffSet((prev) => {-
       //   return prev + limit;
       // });
     } catch (error) {
@@ -130,7 +127,7 @@ const ProductLogic = () => {
         type: "REFRESH_DATA",
         payload: shuffle([
           ...productState.infiniteScroll.products,
-          ...mergeProductData(data.results),
+          ...mergeImageAndVariationData(data.results),
         ]),
       });
     } catch (error) {
@@ -180,7 +177,7 @@ const ProductLogic = () => {
           highlightSearchMatch(input, ".product .product-name");
           highlightSearchMatch(input, ".product .condition");
           highlightSearchMatch(input, ".product .product-price .current");
-          searchResult.push(product); // Push it to search result
+          searchResult.push(product);
         }
       });
       productDispatch({
@@ -189,6 +186,19 @@ const ProductLogic = () => {
       });
     }
   }, [searchInput]);
+
+  useEffect(() => {
+    if (dataResults.length) {
+      const mergeData = async () => {
+        let newResults = await mergeImageAndVariationData(dataResults);
+        productDispatch({
+          type: "SCROLL_PRODUCTS_UPDATE",
+          payload: newResults,
+        });
+      };
+      mergeData();
+    }
+  }, [dataResults]);
 
   useEffect(() => {
     document.body.style.overflow = "auto";
