@@ -70,7 +70,6 @@ const ProductLogic = () => {
   };
 
   const mergeImageAndVariationData = (data) => {
-    //TODO: FIX PRODUCT IMAGE/VARIATION DATA: Can't access when inside of this function
     let mergedProductData = data
       ? data.map((product) => {
           let imageArray = [];
