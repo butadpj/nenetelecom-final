@@ -21,7 +21,6 @@ const Product = React.memo(() => {
   } = ProductLogic();
 
   // console.log(productState);
-  //TODO: FIX THE FUCKING REFRESH DATA WHEN PULL DOWN
   return (
     <>
       {productState.isLoading ? (
