@@ -10,8 +10,8 @@ const ProcessCart = () => {
 
   let customerBagId;
   customerBag.map((bag) => (customerBagId = bag.id));
-  let bagsUrl = "/api/bags/";
-  let bagItemUrl = "/api/bag-item/";
+  let bagsUrl = "/api/v1/bags/";
+  let bagItemUrl = "/api/v1/bag-item/";
 
   // Process Guest's Cart
   const guestCart = (

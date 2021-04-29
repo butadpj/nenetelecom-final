@@ -1,6 +1,6 @@
 import { useFetch } from "../useFetch";
 
-let productImageUrl = "/api/product-image/";
+let productImageUrl = "product-image";
 
 export const getProductImageData = () => {
   const { loading, data } = useFetch(productImageUrl);
