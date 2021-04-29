@@ -19,7 +19,7 @@ const ProductLogic = () => {
   let offSet = productState.infiniteScroll.offSet;
   let limit = productState.infiniteScroll.limit;
 
-  let url = `/api/products/?limit=${limit}&offset=${offSet}`;
+  let url = `/api/v1/products/?limit=${limit}&offset=${offSet}`;
 
   const handleShowProductDetails = (
     id,

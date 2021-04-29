@@ -5,7 +5,7 @@ import { CartItemContext } from "../../../context/CartItemContext";
 
 import "./BackTo.css";
 
-const BackTo = ({ linkText, link, icon }) => {
+const BackTo = ({ linkText, link, icon, showOrdersLink }) => {
   const { isAuthenticated } = getCustomerInfo();
   const [state] = useContext(CartItemContext);
   let orders = state.orders;
@@ -21,21 +21,23 @@ const BackTo = ({ linkText, link, icon }) => {
             {linkText} {icon}
           </span>
         </div>
-        {isAuthenticated ? (
-          orders.length > 0 ? (
+        {showOrdersLink ? (
+          isAuthenticated ? (
+            orders.length > 0 ? (
+              <div className="view-orders-link">
+                <Link to="/store/my-orders">
+                  <h5>View All Orders {`>`}</h5>
+                </Link>
+              </div>
+            ) : null
+          ) : (
             <div className="view-orders-link">
-              <Link to="/store/my-orders">
-                <h5>View All Orders {`>`}</h5>
-              </Link>
+              <a href="/store/accounts/login">
+                <h5>Login to save orders {`>`}</h5>
+              </a>
             </div>
-          ) : null
-        ) : (
-          <div className="view-orders-link">
-            <a href="/store/accounts/login">
-              <h5>Login to save orders {`>`}</h5>
-            </a>
-          </div>
-        )}
+          )
+        ) : null}
       </div>
     </div>
   );

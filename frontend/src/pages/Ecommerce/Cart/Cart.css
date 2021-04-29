@@ -1,7 +1,6 @@
 .cart {
   width: 100%;
-  position: absolute;
-  top: 7.3rem;
+  padding-top: var(--E-main-padding-s);
   padding-bottom: 5em;
   font-size: 1rem;
 }
