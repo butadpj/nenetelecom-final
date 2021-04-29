@@ -12,6 +12,7 @@ django-cleanup = "==5.1.0"
 django-webpush = "==0.3.3"
 Pillow = "==8.1.2"
 django-filter = "*"
+django-auto-prefetching = "*"
 
 [dev-packages]
 django-sslserver = "*"
