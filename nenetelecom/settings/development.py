@@ -15,6 +15,7 @@ INSTALLED_APPS = [
     'django_filters',
     'backend',
     'backend.api',
+    'backend.api2',
     'backend.accounts',
     'backend.store',
     'backend.cart',
@@ -24,7 +25,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'webpush',
     'django_seed',
-    
+    'django_auto_prefetching',
 ]
 
 WEBPUSH_SETTINGS = {

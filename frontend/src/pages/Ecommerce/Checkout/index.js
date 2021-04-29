@@ -32,9 +32,9 @@ const Checkout = () => {
     validity,
     errorMessage,
     totalCartPrice,
+    f_totalCartPrice,
     isAuthenticated,
   } = CheckoutLogic();
-
   return (
     <>
       <section className="checkout">
@@ -42,6 +42,7 @@ const Checkout = () => {
           linkText="to cart"
           link="/store/cart"
           icon={<i className="fas fa-shopping-cart"></i>}
+          showOrdersLink={true}
         />
         <hr />
         {selectedItems.length === 0 ? (
@@ -89,7 +90,7 @@ const Checkout = () => {
                 );
               })}
               <div className="total-cart-price">
-                <span>Total:</span> ₱{totalCartPrice}.00
+                <span>Total:</span> ₱{f_totalCartPrice}.00
               </div>
             </div>
             <div className="billing-info">

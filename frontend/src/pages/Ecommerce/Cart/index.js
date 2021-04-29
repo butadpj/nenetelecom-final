@@ -18,6 +18,7 @@ const Cart = () => {
           linkText="to store"
           link="/store"
           icon={<i className="fas fa-store-alt"></i>}
+          showOrdersLink={true}
         />
         <hr />
         <CartItems />

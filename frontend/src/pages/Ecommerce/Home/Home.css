@@ -1,7 +1,5 @@
 .ecommerce .products {
-  width: 100%;
-  position: absolute;
-  top: 8rem;
+  padding-top: var(--E-main-padding);
   padding-bottom: 5em;
 }
 

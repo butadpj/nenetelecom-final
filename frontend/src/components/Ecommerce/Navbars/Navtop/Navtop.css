@@ -1,7 +1,6 @@
-.nav-top {
+.ecommerce .nav-top {
   background: var(--light);
   width: 100%;
-  height: auto;
   z-index: 10;
   transition: 0.5s ease-in-out;
   position: fixed;
@@ -9,24 +8,23 @@
   color: var(--dark);
 }
 
-.nav-top .header-wrapper {
+.ecommerce .nav-top .header-wrapper {
   margin: 0 auto;
   width: min(100%, 80rem);
 }
 
-.nav-top .header {
-  height: auto;
+.ecommerce .nav-top .header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 0.4em 0 0.4em;
+  padding: 0 0.4em;
   list-style: none;
 }
 
-.nav-top .header .header-logo {
-  height: 68px;
+.ecommerce .nav-top .header .header-logo {
+  height: 50px;
 }
 
-.nav-top .header .header-logo img {
+.ecommerce .nav-top .header .header-logo img {
   height: 100%;
 }
