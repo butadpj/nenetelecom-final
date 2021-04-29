@@ -46,7 +46,7 @@ const CartItemsLogic = () => {
         (item) => item.product === selectedItem
       );
 
-      fetch(`/api/bag-item/${existingProduct[0].id}/`, {
+      fetch(`/api/v1/bag-item/${existingProduct[0].id}/`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

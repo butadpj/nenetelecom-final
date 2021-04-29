@@ -1,6 +1,6 @@
 import { useFetch } from "../useFetch";
 
-let ordersUrl = "/api/orders/";
+let ordersUrl = "orders";
 
 export const getOrdersData = () => {
   const { loading, data } = useFetch(ordersUrl);

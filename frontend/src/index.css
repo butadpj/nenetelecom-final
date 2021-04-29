@@ -30,6 +30,9 @@
 
   --nav-bar-height: 5vh;
   --nav-bar-height-extend: 8vh;
+
+  --E-main-padding: 7.5rem;
+  --E-main-padding-s: 6.3rem;
 }
 
 body {

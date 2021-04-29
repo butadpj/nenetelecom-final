@@ -13,7 +13,7 @@ const CheckoutLogic = () => {
     customerMobileNumber,
   } = getCustomerInfo();
 
-  const { testPush, newOrderPush } = PushNotif();
+  const { newOrderPush } = PushNotif();
   const { customersData } = getCustomersData();
   const { selectedItems } = CartItemsLogic();
 
@@ -25,7 +25,8 @@ const CheckoutLogic = () => {
   const [alertModal, setAlertModal] = useState(false);
   const [time, setTime] = useState(4);
 
-  let totalCartPrice = Number(cartItemState.totalCartPrice).toLocaleString();
+  let totalCartPrice = cartItemState.totalCartPrice;
+  let f_totalCartPrice = Number(totalCartPrice).toLocaleString();
 
   const [customerInfo, setCustomerInfo] = useState({
     firstName: "",
@@ -353,6 +354,7 @@ const CheckoutLogic = () => {
     validity,
     errorMessage,
     totalCartPrice,
+    f_totalCartPrice,
     isAuthenticated,
   };
 };

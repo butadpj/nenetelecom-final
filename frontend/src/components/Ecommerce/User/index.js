@@ -6,7 +6,7 @@ const User = ({ userName, userImage }) => {
   return (
     <div className="banner-profile">
       <p>{userName}</p>
-      <img src={userImage} alt="user-profile-picture" width="40" height="40" />
+      <img src={userImage} alt="user-profile-picture" width="30" height="30" />
     </div>
   );
 };
