@@ -37,7 +37,7 @@ const CartItems = () => {
           {cartDisplayProducts.map((item) => {
             const {
               id,
-              image,
+              images,
               name,
               brand,
               price,
@@ -55,7 +55,7 @@ const CartItems = () => {
                   <img
                     className="item-image"
                     width="130"
-                    src={image[0]}
+                    src={images[0]}
                     alt=""
                   />
                   <div className="item-info">

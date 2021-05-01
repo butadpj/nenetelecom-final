@@ -6,12 +6,12 @@ from . import views
 router = routers.DefaultRouter()
 router.register('products', views.ProductView)
 router.register('product-image', views.ProductImageView)
-# router.register('product-variation', views.ProductVariationView)
-# router.register('customers', views.CustomerView)
-# router.register('bags', views.BagView)
-# router.register('bag-item', views.BagItemView)
-# router.register('orders', views.OrderView)
-# router.register('order-product', views.OrderProductView)
+router.register('product-variation', views.ProductVariationView)
+router.register('customers', views.CustomerView)
+router.register('bags', views.BagView)
+router.register('bag-item', views.BagItemView)
+router.register('orders', views.OrderView)
+router.register('order-product', views.OrderProductView)
 
 urlpatterns = [
     path('', include(router.urls)),

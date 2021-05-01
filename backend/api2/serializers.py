@@ -3,24 +3,25 @@ from backend.store.models import *
 from backend.cart.models import *
 from backend.checkout.models import *
 
+class ProductVariationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProductVariation
+        # to get all fields and put it into single array
+        fields = [field.name for field in model._meta.fields] 
+        fields.insert(0, 'url') # push url field in index 0
 class ProductSerializer(serializers.HyperlinkedModelSerializer):
+    images = serializers.StringRelatedField(many=True)
+    variations = ProductVariationSerializer(many=True)
     class Meta:
         model = Product
         # to get all fields and put it into single array
         fields = [field.name for field in model._meta.fields] 
         fields.insert(0, 'url') # push url field in index 0
-        depth = 1
-
+        fields.insert(1, 'images') # push url field in index 1
+        fields.insert(2, 'variations') # push url field in index 1
 class ProductImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProductImage
-        # to get all fields and put it into single array
-        fields = [field.name for field in model._meta.fields] 
-        fields.insert(0, 'url') # push url field in index 0
-
-class ProductVariationSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = ProductVariation
         # to get all fields and put it into single array
         fields = [field.name for field in model._meta.fields] 
         fields.insert(0, 'url') # push url field in index 0
