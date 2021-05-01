@@ -119,7 +119,7 @@ const Orders = () => {
                     return (
                       <div className="order-product" key={product.id}>
                         <img
-                          src={product.image[0]}
+                          src={product.images[0]}
                           alt=""
                           className="order-product-image"
                           width="90"

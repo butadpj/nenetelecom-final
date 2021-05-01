@@ -5,5 +5,6 @@ let ordersUrl = "orders";
 export const getOrdersData = () => {
   const { loading, data } = useFetch(ordersUrl);
   let ordersData = data;
-  return { loading, ordersData };
+  let ordersLoading = loading;
+  return { ordersLoading, ordersData };
 };

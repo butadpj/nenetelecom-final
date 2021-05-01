@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 const ImageSliderLogic = ({ images }) => {
   const [current, setCurrent] = useState(0);
