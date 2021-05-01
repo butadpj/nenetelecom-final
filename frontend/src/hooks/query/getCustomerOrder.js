@@ -6,8 +6,8 @@ import { getProducts } from "../query/getProducts";
 export const getCustomerOrder = () => {
   const { djangoCurrentCustomerId } = GetCurrentCustomer();
   const { products } = getProducts();
-  const { ordersData } = getOrdersData();
-  const { orderProductData } = getOrderProductData();
+  const { ordersData, ordersLoading } = getOrdersData();
+  const { orderProductData, orderProductLoading } = getOrderProductData();
 
   let customerOrder = ordersData.filter(
     (data) => data.customer === djangoCurrentCustomerId
@@ -54,5 +54,7 @@ export const getCustomerOrder = () => {
     customerOrderProduct,
     customerOrderDisplay,
     customerOrderProductDisplay,
+    ordersLoading,
+    orderProductLoading,
   };
 };

@@ -59,17 +59,16 @@ def login_page(request):
             username = request.POST.get('username')
             password = request.POST.get('password')
 
-            usernames = {''}
-            mobile_numbers = {''}
+            unames_and_mnumbers = {''}
+
             existed_users = get_user_model().objects.all()
             for user in existed_users:
                 uname = user.username
                 mnumber = user.mobile_number
-                usernames.add(uname)
-                mobile_numbers.add(mnumber)
+                unames_and_mnumbers.add(uname)
+                unames_and_mnumbers.add(mnumber)
 
-
-            if  username not in usernames or username not in mobile_numbers:
+            if username not in unames_and_mnumbers:
                 messages.info(request, 'User does not exist')
             else:
                 messages.info(request, 'Username or password does not match')

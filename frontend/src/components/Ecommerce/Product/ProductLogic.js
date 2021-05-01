@@ -1,17 +1,13 @@
 import { useState, useEffect, useContext } from "react";
 import { ProductContext } from "../../../context/ProductContext";
 
-import { getProducts } from "../../../hooks/query/getProducts";
 import { getProductImageData } from "../../../hooks/data/getProductImageData";
 import { getProductVariationData } from "../../../hooks/data/getProductVariationData";
 
 const ProductLogic = () => {
   const [showDetails, setShowDetails] = useState(false);
   const [detailData, setDetailData] = useState({});
-  const [dataResults, setDataResults] = useState([]);
-
-  const { productImageData } = getProductImageData();
-  const { productVariationData } = getProductVariationData();
+  const [infiniteScrollProducts, setInfiniteScrollProducts] = useState([]);
 
   const [productState, productDispatch] = useContext(ProductContext);
   let searchInput = productState.productSearchInput;
@@ -19,16 +15,16 @@ const ProductLogic = () => {
   let offSet = productState.infiniteScroll.offSet;
   let limit = productState.infiniteScroll.limit;
 
-  let url = `/api/v1/products/?limit=${limit}&offset=${offSet}`;
+  let url = `/api/v2/products/?limit=${limit}&offset=${offSet}`;
 
   const handleShowProductDetails = (
     id,
     name,
     price,
     brand,
-    image,
+    images,
     description,
-    variation
+    variations
   ) => {
     setShowDetails(true);
     document.body.style.overflow = "hidden";
@@ -38,9 +34,9 @@ const ProductLogic = () => {
       name: name,
       price: price,
       brand: brand,
-      image: image,
+      images: images,
       description: description,
-      variation: variation,
+      variations: variations,
     });
   };
 
@@ -69,34 +65,11 @@ const ProductLogic = () => {
     });
   };
 
-  const mergeImageAndVariationData = (data) => {
-    let mergedProductData = data
-      ? data.map((product) => {
-          let imageArray = [];
-          let variationArray = [];
-          productImageData.map((image) => {
-            if (image.product == product.id) {
-              imageArray.push(image.image);
-            }
-          });
-          productVariationData.map((variation) => {
-            if (variation.product == product.id) {
-              variationArray.push(variation);
-            }
-          });
-          product.image = imageArray;
-          product.variation = variationArray;
-          return product;
-        })
-      : [];
-    return mergedProductData;
-  };
-
   const loadNextData = async (url) => {
     try {
       const response = await fetch(url);
       const data = await response.json();
-      setDataResults(data.results);
+      // setInfiniteScrollProducts(data.results);
       if (!data.next) {
         productDispatch({
           type: "NO_MORE_DATA",
@@ -104,6 +77,11 @@ const ProductLogic = () => {
         });
         // setHasMore(false);
       }
+      productDispatch({
+        type: "SCROLL_PRODUCTS_UPDATE",
+        payload: data.results,
+      });
+
       // setData([...productResults, ...data.results]);
       // setOffSet((prev) => {-
       //   return prev + limit;
@@ -125,35 +103,32 @@ const ProductLogic = () => {
       }
       productDispatch({
         type: "REFRESH_DATA",
-        payload: shuffle([
-          ...productState.infiniteScroll.products,
-          ...mergeImageAndVariationData(data.results),
-        ]),
+        payload: data.results,
       });
     } catch (error) {
       console.error(error);
     }
   };
 
-  const shuffle = (array) => {
-    let currentIndex = array.length,
-      temporaryValue,
-      randomIndex;
+  // const shuffle = (array) => {
+  //   let currentIndex = array.length,
+  //     temporaryValue,
+  //     randomIndex;
 
-    // While there remain elements to shuffle...
-    while (0 !== currentIndex) {
-      // Pick a remaining element...
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex -= 1;
+  //   // While there remain elements to shuffle...
+  //   while (0 !== currentIndex) {
+  //     // Pick a remaining element...
+  //     randomIndex = Math.floor(Math.random() * currentIndex);
+  //     currentIndex -= 1;
 
-      // And swap it with the current element.
-      temporaryValue = array[currentIndex];
-      array[currentIndex] = array[randomIndex];
-      array[randomIndex] = temporaryValue;
-    }
+  //     // And swap it with the current element.
+  //     temporaryValue = array[currentIndex];
+  //     array[currentIndex] = array[randomIndex];
+  //     array[randomIndex] = temporaryValue;
+  //   }
 
-    return array;
-  };
+  //   return array;
+  // };
 
   // Product Search will happen here
   useEffect(() => {
@@ -188,19 +163,6 @@ const ProductLogic = () => {
   }, [searchInput]);
 
   useEffect(() => {
-    if (dataResults.length) {
-      const mergeData = async () => {
-        let newResults = await mergeImageAndVariationData(dataResults);
-        productDispatch({
-          type: "SCROLL_PRODUCTS_UPDATE",
-          payload: newResults,
-        });
-      };
-      mergeData();
-    }
-  }, [dataResults]);
-
-  useEffect(() => {
     document.body.style.overflow = "auto";
     document.body.style.overscrollBehaviorY = "contain";
     loadNextData(url);
@@ -215,6 +177,7 @@ const ProductLogic = () => {
     loadNextData,
     refreshData,
     url,
+    infiniteScrollProducts,
   };
 };
 

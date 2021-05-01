@@ -48,7 +48,7 @@ export const reducer = (state, action) => {
       infiniteScroll: {
         ...state.infiniteScroll,
         offSet: state.infiniteScroll.offSet + state.infiniteScroll.limit,
-        products: action.payload,
+        products: [...action.payload, ...state.infiniteScroll.products],
       },
     };
   }

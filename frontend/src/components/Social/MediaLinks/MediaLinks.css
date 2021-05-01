@@ -17,4 +17,5 @@
 .media-text {
   color: var(--dark);
   white-space: pre;
+  order: -1;
 }
