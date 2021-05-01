@@ -102,6 +102,7 @@ const ProcessCart = () => {
     selectedStorageVariation,
     selectedColorVariation
   ) => {
+    console.log(variationPrice);
     let storage_var_or_null = selectedStorageVariation
       ? selectedStorageVariation
       : null;
@@ -129,6 +130,7 @@ const ProcessCart = () => {
             "X-CSRFToken": csrftoken,
           },
           body: JSON.stringify({
+            variation_price: variationPrice,
             quantity: existingProduct[0].quantity,
           }),
         })

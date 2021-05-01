@@ -20,7 +20,6 @@ const Product = React.memo(() => {
     url,
   } = ProductLogic();
 
-  // console.log(productState);
   return (
     <>
       {productState.isLoading ? (
@@ -32,7 +31,7 @@ const Product = React.memo(() => {
           productState.searchedProductList.map((product) => {
             const {
               id,
-              image,
+              images,
               category,
               condition,
               brand,
@@ -40,7 +39,7 @@ const Product = React.memo(() => {
               price,
               description,
               date_posted,
-              variation,
+              variations,
             } = product;
 
             let f_price = Number(price).toLocaleString();
@@ -92,7 +91,7 @@ const Product = React.memo(() => {
                   </div>
                   <img
                     className="product-image"
-                    src={image[0] || defaultImage}
+                    src={images[0] || defaultImage}
                     alt="product-image"
                     onClick={() =>
                       handleShowProductDetails(
@@ -100,9 +99,9 @@ const Product = React.memo(() => {
                         name,
                         price,
                         brand,
-                        image,
+                        images,
                         description,
-                        variation
+                        variations
                       )
                     }
                   />
@@ -126,9 +125,9 @@ const Product = React.memo(() => {
                           name,
                           price,
                           brand,
-                          image,
+                          images,
                           description,
-                          variation
+                          variations
                         )
                       }
                     />
@@ -173,7 +172,7 @@ const Product = React.memo(() => {
           {productState.infiniteScroll.products.map((product) => {
             const {
               id,
-              image,
+              images,
               category,
               condition,
               brand,
@@ -181,7 +180,7 @@ const Product = React.memo(() => {
               price,
               description,
               date_posted,
-              variation,
+              variations,
             } = product;
 
             let f_price = Number(price).toLocaleString();
@@ -233,7 +232,7 @@ const Product = React.memo(() => {
                   </div>
                   <img
                     className="product-image"
-                    src={image[0] || defaultImage}
+                    src={images[0] || defaultImage}
                     alt="product-image"
                     onClick={() =>
                       handleShowProductDetails(
@@ -241,9 +240,9 @@ const Product = React.memo(() => {
                         name,
                         price,
                         brand,
-                        image,
+                        images,
                         description,
-                        variation
+                        variations
                       )
                     }
                   />
@@ -267,9 +266,9 @@ const Product = React.memo(() => {
                           name,
                           price,
                           brand,
-                          image,
+                          images,
                           description,
-                          variation
+                          variations
                         )
                       }
                     />

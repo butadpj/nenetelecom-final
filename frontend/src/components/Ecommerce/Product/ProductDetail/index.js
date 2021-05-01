@@ -14,17 +14,19 @@ const ProductDetail = React.memo(
       name,
       price,
       brand,
-      image,
+      images,
       description,
-      variation,
+      variations,
     } = detailData;
 
-    let storageSizeOption = variation
-      ? variation.filter((option) => option.category == "Storage Size")
+    let storageSizeOption = variations
+      ? variations.filter((option) => option.category == "Storage Size")
       : null;
-    let colorFamilyOption = variation
-      ? variation.filter((option) => option.category == "Color Family")
+    let colorFamilyOption = variations
+      ? variations.filter((option) => option.category == "Color Family")
       : null;
+
+    console.log(storageSizeOption);
 
     const {
       showAddProductModal,
@@ -53,7 +55,7 @@ const ProductDetail = React.memo(
               </div>
             </section>
             <section className="detail-variation">
-              {variation.length ? (
+              {variations.length ? (
                 storageSizeOption.length ? (
                   <div className="category storage-size">
                     <span className="category-name">Storage Size: </span>
@@ -95,7 +97,7 @@ const ProductDetail = React.memo(
                   </div>
                 ) : null
               ) : null}
-              {variation.length ? (
+              {variations.length ? (
                 colorFamilyOption.length ? (
                   <div className="category color-family">
                     <span className="category-name">Color Family: </span>
@@ -131,7 +133,7 @@ const ProductDetail = React.memo(
                 ) : null
               ) : null}
             </section>
-            <ImageSlider images={image} image_default={defaultImage} />
+            <ImageSlider images={images} image_default={defaultImage} />
             <section className="detail-description">
               <span>Product description: </span>
               <p>{description || "*no description*"}</p>

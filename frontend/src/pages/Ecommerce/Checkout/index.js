@@ -55,7 +55,7 @@ const Checkout = () => {
               {selectedItems.map((item) => {
                 const {
                   id,
-                  image,
+                  images,
                   name,
                   brand,
                   price,
@@ -72,7 +72,7 @@ const Checkout = () => {
                       <img
                         className="item-image"
                         width="100"
-                        src={image[0]}
+                        src={images[0]}
                         alt=""
                       />
                       <div className="item-info">
