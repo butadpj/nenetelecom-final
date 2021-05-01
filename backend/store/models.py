@@ -105,7 +105,10 @@ class ProductImage(models.Model):
             pass
 
     def __str__(self):
-        return (f'{self.image.url}')
+        try:
+            return (f'{self.image.url}')
+        except:
+            return ""
 
 class ProductVariation(models.Model):
     S = 'Storage Size'
