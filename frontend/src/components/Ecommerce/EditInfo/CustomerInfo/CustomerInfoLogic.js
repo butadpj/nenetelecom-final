@@ -65,7 +65,7 @@ const CustomerInfoLogic = () => {
     });
 
     setIsLoading(true);
-    fetch(`/api/customers/${djangoCurrentCustomerId}/`, {
+    fetch(`/api/v2/customers/${djangoCurrentCustomerId}/`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -96,13 +96,15 @@ const CustomerInfoLogic = () => {
         );
         hideSaveButton();
       })
-      .catch((err) =>
+      .catch((err) => {
+        console.log(err);
+        setIsLoading(false);
         handleShowAlert(
           "center",
           "danger",
           "An error occured. Try to refresh the page"
-        )
-      );
+        );
+      });
   };
 
   return {
