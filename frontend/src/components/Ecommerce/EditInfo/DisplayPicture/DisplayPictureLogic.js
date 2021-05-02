@@ -43,7 +43,7 @@ const DisplayPictureLogic = () => {
     const formData = new FormData();
     formData.append("display_picture", uploadImage.file, uploadImage.name);
 
-    fetch(`/api/customers/${djangoCurrentCustomerId}/`, {
+    fetch(`/api/v2/customers/${djangoCurrentCustomerId}/`, {
       method: "PATCH",
       headers: {
         "X-CSRFToken": csrftoken,
@@ -68,6 +68,7 @@ const DisplayPictureLogic = () => {
       })
       .catch((err) => {
         console.log(err);
+        setIsLoading(false);
         handleShowAlert(
           "center",
           "danger",
