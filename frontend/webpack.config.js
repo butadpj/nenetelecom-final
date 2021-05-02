@@ -14,10 +14,10 @@ module.exports = {
     new webpack.ProvidePlugin({
       process: "process/browser",
     }),
-    // new HtmlWebpackPlugin({
-    //   minify: false,
-    // }),
-    // new CompressionPlugin(),
+    new HtmlWebpackPlugin({
+      minify: false,
+    }),
+    new CompressionPlugin(),
   ],
   module: {
     rules: [
