@@ -32,6 +32,16 @@
 </head>
 
 <body>
+    <script>
+        // Messenger SDK for webview
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) { return; }
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/messenger.Extensions.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'Messenger'));
+    </script>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="app">
         <!-- React will load here -->
@@ -93,9 +103,9 @@
 
         if (cart == undefined) {
             cart = {}
-            document.cookie = 'cart=' + JSON.stringify(cart) + ';domain=;path=/; Secure; SameSite=Lax'
+            document.cookie = 'cart=' + JSON.stringify(cart) + ';domain=;path=/; HttpOnly; Secure; SameSite=Lax'
         }
-        document.cookie = 'cart=' + JSON.stringify(cart) + ';domain=;path=/; Secure; SameSite=Lax'
+        document.cookie = 'cart=' + JSON.stringify(cart) + ';domain=;path=/; HttpOnly; Secure; SameSite=Lax'
     </script>
 
     <!-- Service worker will load here -->
