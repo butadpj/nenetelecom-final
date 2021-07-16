@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
+from django.views.decorators.clickjacking import xframe_options_exempt
+
 import json
 
 from backend.cart.models import *
@@ -8,6 +10,7 @@ from backend.store.models import *
 from backend.checkout.models import *
 
 # Create your views here.
+@xframe_options_exempt
 def index(request):
     return render(request, 'REACT/main/index.html')
 

@@ -5,9 +5,12 @@ from .forms import UserForm
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from backend.store.models import Customer
+from django.views.decorators.clickjacking import xframe_options_exempt
+
 import json
 
 # Create your views here.
+@xframe_options_exempt
 def register_page(request):
     if request.user.is_authenticated:
         return redirect('/store/')
@@ -49,7 +52,7 @@ def register_page(request):
         context = {'form': form, 'usernames': json.dumps(usernames), 'mobile_numbers': json.dumps(mobile_numbers) }
         return render(request, 'DJANGO/accounts/register.html', context)
 
-
+@xframe_options_exempt
 def login_page(request):
     if request.user.is_authenticated:
         return redirect('/store/')
